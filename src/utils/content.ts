@@ -14,26 +14,23 @@ export function articlePath(slug: string): string {
   return `/blog/${slug}`;
 }
 
-export function defaultImage(cluster: ClusterId): string {
-  const map: Record<ClusterId, string> = {
-    definition: "/images/sources.jpg",
-    uses: "/images/og-default.jpg",
-    safety: "/images/safety.jpg",
-    "side-effects": "/images/safety.jpg",
-    pregnancy: "/images/womens-health.jpg",
-    "womens-health": "/images/womens-health.jpg",
-    faq: "/images/sources.jpg",
-    interactions: "/images/safety.jpg",
-    emergency: "/images/emergency.jpg",
-    evidence: "/images/sources.jpg",
-  };
-  return map[cluster];
+export function defaultImage(_cluster: ClusterId): string {
+  return "/images/og-default.jpg";
 }
 
-export function wordCount(article: Article): number {
-  const text = article.blocks
+export function articlePlainText(article: Pick<Article, "blocks" | "faqs" | "h1" | "excerpt" | "title">): string {
+  const blockText = article.blocks
     .map((b) => [b.text, ...(b.items ?? [])].filter(Boolean).join(" "))
     .join(" ");
+  const faqText = (article.faqs ?? []).map((item) => `${item.q} ${item.a}`).join(" ");
+  return `${article.title} ${article.h1} ${article.excerpt} ${blockText} ${faqText}`;
+}
+
+export function wordCount(article: Pick<Article, "blocks" | "faqs" | "h1" | "excerpt" | "title">): number {
+  return articlePlainText(article).trim().split(/\s+/).filter(Boolean).length;
+}
+
+export function countWords(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length;
 }
 
@@ -41,10 +38,7 @@ export function readingMinutes(article: Article): number {
   return Math.max(6, Math.round(wordCount(article) / 180));
 }
 
-export function makeArticle(
-  article: Omit<Article, "image" | "publishedAt" | "updatedAt"> &
-    Partial<Pick<Article, "image" | "publishedAt" | "updatedAt">>,
-): Article {
+export function makeArticle(article: Omit<Article, "publishedAt" | "updatedAt" | "image"> & Partial<Article>): Article {
   return {
     publishedAt: "2026-01-20",
     updatedAt: "2026-03-18",

@@ -6,7 +6,7 @@ export const references: Record<string, Reference> = {
     title: "Cytotec (misoprostol) prescribing information",
     source: "U.S. Food and Drug Administration",
     url: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2012/019268s047lbl.pdf",
-    note: "النشرة الرسمية تتضمن الاستطباب المعتمد لتحذير الحمل والآثار الضارة وموانع الاستخدام.",
+    note: "النشرة الرسمية تتضمن الاستطباب المعتمد وتحذير الحمل والآثار الضارة وموانع الاستخدام.",
   },
   dailyMed: {
     id: "dailyMed",
@@ -107,3 +107,5 @@ export const references: Record<string, Reference> = {
     note: "هيئة تنظيمية أوروبية لنشرات الأدوية وتقييم المنافع والمخاطر.",
   },
 };
+
+export const referenceList = Object.values(references);

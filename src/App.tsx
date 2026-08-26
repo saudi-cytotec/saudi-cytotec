@@ -1,5 +1,6 @@
 import { useLayoutEffect } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AdminApp } from "./admin/AdminApp";
 import { Layout } from "./components/Layout";
 import { staticPages } from "./data/pages";
 import { ArticlePage } from "./pages/ArticlePage";
@@ -25,6 +26,7 @@ export default function App() {
     <>
       <ScrollToTop />
       <Routes>
+        <Route path="/admin/*" element={<AdminApp />} />
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           {staticPages.map((page) => (
@@ -33,10 +35,9 @@ export default function App() {
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/cluster/:slug" element={<ClusterPage />} />
           <Route path="/blog/:slug" element={<ArticlePage />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/sitemap" element={<SitemapPage />} />
           <Route path="/search" element={<SearchPage />} />
-          <Route path="/index.html" element={<Navigate to="/" replace />} />
+          <Route path="/sitemap" element={<SitemapPage />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

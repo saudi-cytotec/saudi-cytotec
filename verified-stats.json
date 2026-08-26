@@ -1,0 +1,11 @@
+{
+  "actualBodyWordCount": 2830,
+  "pipelineWordCount": 2830,
+  "paragraphs": 38,
+  "h2": 15,
+  "h3": 6,
+  "validationOk": true,
+  "publishingAllowed": true,
+  "missingWords": 0,
+  "functionUsed": "bodyWordCount(testArticle.blocks)"
+}

@@ -1,18 +1,20 @@
 import { useMemo, useState } from "react";
+import { useCatalog } from "../cms/CatalogContext";
 import { ArticleCard } from "../components/ArticleCard";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CategoryCard } from "../components/CategoryCard";
+import { ConsultCTA } from "../components/ConsultCTA";
 import { Seo } from "../components/Seo";
-import { articles } from "../data/articles";
 import { clusters } from "../data/site";
 
 export function BlogIndex() {
+  const { articles } = useCatalog();
   const [q, setQ] = useState("");
   const filtered = useMemo(() => {
     const value = q.trim();
     if (!value) return articles;
     return articles.filter((article) => `${article.title} ${article.excerpt} ${article.h1}`.includes(value));
-  }, [q]);
+  }, [q, articles]);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
@@ -24,7 +26,7 @@ export function BlogIndex() {
       <Breadcrumbs items={[{ name: "المقالات", path: "/blog" }]} />
       <h1 className="mt-5 text-4xl font-bold text-teal-deep">المقالات التعليمية</h1>
       <p className="mt-3 max-w-3xl leading-8 text-ink-soft">
-        مئة مقال مستقل يغطي أسئلة بحثية مختلفة. المقالات للتعليم العام، ولا تتضمن تعليمات علاج فردية أو مسارات شراء.
+        مقالات مستقلة تغطي أسئلة بحثية مختلفة. المقالات للتعليم العام، ولا تتضمن تعليمات علاج فردية أو مسارات شراء.
       </p>
       <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {clusters.map((cluster) => (
@@ -56,6 +58,7 @@ export function BlogIndex() {
           </div>
         )}
       </div>
+      <ConsultCTA />
     </div>
   );
 }

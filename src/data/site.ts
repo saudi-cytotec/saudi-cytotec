@@ -41,6 +41,8 @@ export const moreNav: NavItem[] = [
   { to: "/sitemap", label: "خريطة الموقع" },
 ];
 
+const OG = "/images/og-default.jpg";
+
 export const clusters: Cluster[] = [
   {
     id: "definition",
@@ -49,7 +51,7 @@ export const clusters: Cluster[] = [
     shortTitle: "التعريف",
     description:
       "شرح تعليمي للمادة الفعالة والاسم التجاري، وآلية العمل، والأشكال الصيدلانية، وحدود المعلومات العامة.",
-    image: "/images/sources.jpg",
+    image: OG,
   },
   {
     id: "uses",
@@ -58,7 +60,7 @@ export const clusters: Cluster[] = [
     shortTitle: "الاستخدامات",
     description:
       "الاستطبابات المعتمدة والاستخدامات السريرية تحت إشراف طبي، ومعنى الاستخدام خارج النشرة، ولماذا لا يُعامل الدواء كعلاج منزلي.",
-    image: "/images/og-default.jpg",
+    image: OG,
   },
   {
     id: "safety",
@@ -67,7 +69,7 @@ export const clusters: Cluster[] = [
     shortTitle: "الأمان",
     description:
       "تحذيرات الحمل، الإشراف الطبي، قراءة النشرة، التنظيم الدوائي، ومخاطر المصادر غير الموثوقة.",
-    image: "/images/safety.jpg",
+    image: OG,
   },
   {
     id: "side-effects",
@@ -76,7 +78,7 @@ export const clusters: Cluster[] = [
     shortTitle: "الآثار الجانبية",
     description:
       "الآثار الشائعة والنادرة، النزيف، الحمى، أعراض الجهاز الهضمي، ومتى تتحول الأعراض إلى حالة طارئة.",
-    image: "/images/safety.jpg",
+    image: OG,
   },
   {
     id: "pregnancy",
@@ -85,7 +87,7 @@ export const clusters: Cluster[] = [
     shortTitle: "الحمل",
     description:
       "معلومات تعليمية عن الحمل المبكر، متابعة الحمل، النزيف، والأدوية، مع التأكيد أن العلاج فردي لدى الطبيب.",
-    image: "/images/womens-health.jpg",
+    image: OG,
   },
   {
     id: "womens-health",
@@ -94,7 +96,7 @@ export const clusters: Cluster[] = [
     shortTitle: "صحة المرأة",
     description:
       "مقالات عن الدورة، ألم الحوض، فقر الدم، الفحوصات الدورية، والصحة النفسية المرتبطة بالصحة الإنجابية.",
-    image: "/images/womens-health.jpg",
+    image: OG,
   },
   {
     id: "faq",
@@ -103,7 +105,7 @@ export const clusters: Cluster[] = [
     shortTitle: "الأسئلة الشائعة",
     description:
       "تصحيح المفاهيم الشائعة، وحدود الإنترنت، والفرق بين الاسم التجاري والمادة الفعالة، وطرق التحقق من المعلومة.",
-    image: "/images/sources.jpg",
+    image: OG,
   },
   {
     id: "interactions",
@@ -112,7 +114,7 @@ export const clusters: Cluster[] = [
     shortTitle: "الموانع",
     description:
       "موانع الاستخدام، الحساسية، اعتبارات القلب والكبد والكلى والرضاعة، وكيفية مناقشة التاريخ الدوائي.",
-    image: "/images/safety.jpg",
+    image: OG,
   },
   {
     id: "emergency",
@@ -121,7 +123,7 @@ export const clusters: Cluster[] = [
     shortTitle: "الطوارئ",
     description:
       "علامات النزيف الخطير، الحمى، الألم الحاد، الإغماء، وما ينبغي ذكره في قسم الطوارئ.",
-    image: "/images/emergency.jpg",
+    image: OG,
   },
   {
     id: "evidence",
@@ -129,8 +131,8 @@ export const clusters: Cluster[] = [
     title: "الأدلة والمصادر والمعلومات الطبية المتقدمة",
     shortTitle: "المصادر",
     description:
-      "كيف تُقيَّم الأدلة، النشرات الرسمية، هيئات التنظيم، وحدود الدراسات والقصص الشخصية.",
-    image: "/images/sources.jpg",
+      "كيف تُقيَّم الأدلة، النشرات الرسمية، هيئات التنظيم، وحدود الدراسات والقصص الشخصية.",
+    image: OG,
   },
 ];
 

@@ -31,7 +31,7 @@ export function getArticle(slug: string) {
 
 export function relatedArticles(article: Article, all: Article[]) {
   const picked = article.related
-    .map((slug) => bySlug.get(slug))
+    .map((slug) => bySlug.get(slug) ?? all.find((item) => item.slug === slug))
     .filter((item): item is Article => Boolean(item));
   if (picked.length >= 3) return picked.slice(0, 3);
   const extras = all.filter(

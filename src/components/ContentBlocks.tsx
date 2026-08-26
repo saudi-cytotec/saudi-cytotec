@@ -23,7 +23,7 @@ export function ContentBlocks({ blocks }: { blocks: ContentBlock[] }) {
                 ? "border-gold bg-[#f6efe3]"
                 : "border-sage bg-[#eef5f0]";
           return (
-            <aside key={i} className={`my-5 rounded-2xl border-r-4 px-4 py-3 leading-8 ${tone}`}>
+            <aside key={i} className={`my-5 rounded-2xl border-r-4 px-4 py-3 leading-[2.05] ${tone}`}>
               {block.text}
             </aside>
           );

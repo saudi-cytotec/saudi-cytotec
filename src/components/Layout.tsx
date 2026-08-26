@@ -1,18 +1,20 @@
 import { Outlet } from "react-router-dom";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
+import { WhatsAppFloat } from "./WhatsAppFloat";
 
 export function Layout() {
   return (
-    <div className="min-h-screen bg-cream text-ink">
-      <a className="skip-link" href="#main">
+    <>
+      <a href="#content" className="skip-link">
         تخطي إلى المحتوى
       </a>
       <Header />
-      <main id="main">
+      <main id="content">
         <Outlet />
       </main>
       <Footer />
-    </div>
+      <WhatsAppFloat />
+    </>
   );
 }

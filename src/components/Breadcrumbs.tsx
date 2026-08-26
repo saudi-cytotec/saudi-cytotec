@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { JsonLd } from "./Seo";
 import { SITE } from "../data/site";
+import { JsonLd } from "./Seo";
 
 export interface Crumb {
   name: string;
@@ -10,7 +10,7 @@ export interface Crumb {
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
   const all = [{ name: "الرئيسية", path: "/" }, ...items];
   return (
-    <>
+    <nav aria-label="مسار التنقل" className="text-sm text-ink-soft">
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -23,22 +23,20 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
           })),
         }}
       />
-      <nav aria-label="مسار التنقل" className="text-sm text-ink-soft">
-        <ol className="flex flex-wrap items-center gap-2">
-          {all.map((item, i) => (
-            <li key={item.path} className="flex items-center gap-2">
-              {i > 0 ? <span aria-hidden="true">/</span> : null}
-              {i === all.length - 1 ? (
-                <span className="text-ink">{item.name}</span>
-              ) : (
-                <Link to={item.path} className="hover:text-teal">
-                  {item.name}
-                </Link>
-              )}
-            </li>
-          ))}
-        </ol>
-      </nav>
-    </>
+      <ol className="flex flex-wrap items-center gap-1">
+        {all.map((item, i) => (
+          <li key={item.path} className="flex items-center gap-1">
+            {i > 0 ? <span className="opacity-50">/</span> : null}
+            {i === all.length - 1 ? (
+              <span className="text-ink">{item.name}</span>
+            ) : (
+              <Link to={item.path} className="hover:text-teal">
+                {item.name}
+              </Link>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
   );
 }

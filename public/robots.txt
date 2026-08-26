@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 
 Disallow: /search
+Disallow: /admin
+Disallow: /api
 
 Sitemap: https://saudiersaa.com/sitemap.xml

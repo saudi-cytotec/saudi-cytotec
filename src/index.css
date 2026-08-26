@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
-  --font-article: "Noto Naskh Arabic", "IBM Plex Sans Arabic", serif;
+  --font-sans: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --font-article: "Noto Naskh Arabic", "IBM Plex Sans Arabic", "Noto Sans Arabic", serif;
   --color-ink: #15202b;
   --color-ink-soft: #3d4f5f;
   --color-teal: #0f4c5c;
@@ -31,8 +31,16 @@ body {
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.9;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
 }
 
 ::selection {
@@ -44,35 +52,50 @@ a {
   color: inherit;
 }
 
+.article-prose {
+  font-family: var(--font-article);
+  font-size: 1.0625rem;
+  max-width: 40rem;
+  word-spacing: 0.02em;
+}
+
+@media (min-width: 768px) {
+  .article-prose {
+    font-size: 1.125rem;
+  }
+}
+
 .article-prose p {
-  margin: 0 0 1.05rem;
-  line-height: 2.05;
+  margin: 0 0 1.2rem;
+  line-height: 2.15;
 }
 
 .article-prose h2 {
-  margin: 2.2rem 0 0.85rem;
-  font-size: 1.45rem;
-  line-height: 1.55;
+  margin: 2.4rem 0 0.9rem;
+  font-family: var(--font-sans);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  line-height: 1.5;
   color: var(--color-teal-deep);
   font-weight: 700;
 }
 
 .article-prose h3 {
-  margin: 1.5rem 0 0.65rem;
-  font-size: 1.15rem;
-  line-height: 1.6;
+  margin: 1.7rem 0 0.7rem;
+  font-family: var(--font-sans);
+  font-size: clamp(1.12rem, 2vw, 1.28rem);
+  line-height: 1.55;
   color: var(--color-teal);
   font-weight: 700;
 }
 
 .article-prose ul {
-  margin: 0 0 1.1rem;
-  padding-inline-start: 1.2rem;
+  margin: 0 0 1.2rem;
+  padding-inline-start: 1.25rem;
 }
 
 .article-prose li {
-  margin-bottom: 0.45rem;
-  line-height: 1.95;
+  margin-bottom: 0.5rem;
+  line-height: 2.05;
 }
 
 .skip-link {
