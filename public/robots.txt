@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /search
+
+Sitemap: https://saudiersaa.com/sitemap.xml

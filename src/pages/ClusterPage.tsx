@@ -1,0 +1,44 @@
+import { Link, useParams } from "react-router-dom";
+import { ArticleCard } from "../components/ArticleCard";
+import { Breadcrumbs } from "../components/Breadcrumbs";
+import { Seo } from "../components/Seo";
+import { articles } from "../data/articles";
+import { clusters } from "../data/site";
+
+export function ClusterPage() {
+  const { slug } = useParams();
+  const cluster = clusters.find((item) => item.slug === slug);
+  if (!cluster) {
+    return (
+      <div className="mx-auto max-w-3xl px-4 py-20 text-center">
+        <Seo title="المجموعة غير موجودة" description="تعذر العثور على مجموعة المقالات." path="/blog" noindex />
+        <h1 className="text-3xl font-bold">المجموعة غير موجودة</h1>
+        <Link to="/blog" className="mt-6 inline-block text-teal">
+          العودة إلى المقالات
+        </Link>
+      </div>
+    );
+  }
+  const list = articles.filter((article) => article.cluster === cluster.id);
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-8">
+      <Seo title={cluster.title} description={cluster.description} path={`/blog/cluster/${cluster.slug}`} image={cluster.image} />
+      <Breadcrumbs
+        items={[
+          { name: "المقالات", path: "/blog" },
+          { name: cluster.title, path: `/blog/cluster/${cluster.slug}` },
+        ]}
+      />
+      <div className="mt-6 overflow-hidden rounded-3xl">
+        <img src={cluster.image} alt="" className="h-64 w-full object-cover" />
+      </div>
+      <h1 className="mt-6 text-4xl font-bold text-teal-deep">{cluster.title}</h1>
+      <p className="mt-3 max-w-3xl leading-8 text-ink-soft">{cluster.description}</p>
+      <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {list.map((article) => (
+          <ArticleCard key={article.slug} article={article} />
+        ))}
+      </div>
+    </div>
+  );
+}

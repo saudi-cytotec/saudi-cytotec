@@ -1,0 +1,16 @@
+export const pathLabels: Record<string, string> = {
+  "/what-is-cytotec": "ما هو سايتوتك؟",
+  "/misoprostol": "ميزوبروستول",
+  "/medical-uses": "الاستخدامات الطبية",
+  "/safety": "الأمان والتحذيرات",
+  "/side-effects": "الآثار الجانبية",
+  "/faq": "الأسئلة الشائعة",
+  "/womens-health": "صحة المرأة",
+  "/early-pregnancy": "الحمل المبكر",
+  "/when-to-see-doctor": "متى تراجعين الطبيب",
+  "/medical-sources": "المصادر الطبية",
+  "/about": "من نحن",
+  "/contact": "اتصل بنا",
+  "/privacy": "سياسة الخصوصية",
+  "/medical-disclaimer": "إخلاء المسؤولية الطبية",
+};
