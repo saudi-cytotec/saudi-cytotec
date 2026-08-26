@@ -1,11 +1,24 @@
 {
-  "actualBodyWordCount": 2830,
-  "pipelineWordCount": 2830,
-  "paragraphs": 38,
-  "h2": 15,
-  "h3": 6,
-  "validationOk": true,
-  "publishingAllowed": true,
-  "missingWords": 0,
-  "functionUsed": "bodyWordCount(testArticle.blocks)"
+  "totalArticles": 100,
+  "passingArticles": 100,
+  "failingArticles": 0,
+  "minArticle": {
+    "slug": "trusted-sources-further-reading",
+    "cluster": "evidence",
+    "wordCount": 2024,
+    "paragraphs": 24,
+    "h2": 10,
+    "h3": 8,
+    "passes": true
+  },
+  "failingSample": [],
+  "testArticle": {
+    "slug": "cytotec-uses-warnings",
+    "wordCount": 2830,
+    "pipelineWordCount": 2830,
+    "paragraphs": 38,
+    "h2": 15,
+    "h3": 6,
+    "passes": true
+  }
 }

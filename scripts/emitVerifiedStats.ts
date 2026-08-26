@@ -4,33 +4,48 @@ import type { Plugin } from "vite";
 import { articles } from "../src/data/articles";
 import { testArticle, testGeneration } from "../src/cms/testArticle";
 import { bodyStructure, bodyWordCount, MIN_BODY_WORDS } from "../src/utils/bodyWordCount";
-import { validateArticle } from "../src/utils/validation";
 
 export function emitVerifiedStats(): Plugin {
   return {
     name: "emit-verified-stats",
     buildStart() {
-      const words = bodyWordCount(testArticle.blocks);
-      const structure = bodyStructure(testArticle.blocks);
-      const validation = validateArticle(
-        testArticle,
-        articles.map((article) => article.slug),
-        articles.map((article) => article.title),
-      );
+      const all = articles.map((article) => {
+        const s = bodyStructure(article.blocks);
+        return {
+          slug: article.slug,
+          cluster: article.cluster,
+          wordCount: s.wordCount,
+          paragraphs: s.paragraphs,
+          h2: s.h2,
+          h3: s.h3,
+          passes: s.wordCount >= MIN_BODY_WORDS,
+        };
+      });
+      const failing = all.filter((a) => !a.passes).sort((a, b) => a.wordCount - b.wordCount);
+      const min = all.reduce((m, a) => (a.wordCount < m.wordCount ? a : m), all[0]);
+      const testWords = bodyWordCount(testArticle.blocks);
+      const testStructure = bodyStructure(testArticle.blocks);
       const report = {
-        actualBodyWordCount: words,
-        pipelineWordCount: testGeneration.wordCount,
-        paragraphs: structure.paragraphs,
-        h2: structure.h2,
-        h3: structure.h3,
-        validationOk: validation.ok,
-        publishingAllowed: validation.ok && words >= MIN_BODY_WORDS,
-        missingWords: Math.max(0, MIN_BODY_WORDS - words),
-        functionUsed: "bodyWordCount(testArticle.blocks)",
+        totalArticles: all.length,
+        passingArticles: all.length - failing.length,
+        failingArticles: failing.length,
+        minArticle: min,
+        failingSample: failing.slice(0, 8),
+        testArticle: {
+          slug: testArticle.slug,
+          wordCount: testWords,
+          pipelineWordCount: testGeneration.wordCount,
+          paragraphs: testStructure.paragraphs,
+          h2: testStructure.h2,
+          h3: testStructure.h3,
+          passes: testWords >= MIN_BODY_WORDS,
+        },
       };
       fs.writeFileSync(path.resolve("verified-stats.json"), `${JSON.stringify(report, null, 2)}\n`);
-      if (words < MIN_BODY_WORDS) {
-        throw new Error(`bodyWordCount failed: ${words} < ${MIN_BODY_WORDS}`);
+      if (failing.length > 0) {
+        throw new Error(
+          `Body word count gate failed for ${failing.length} article(s). Min ${min.slug}=${min.wordCount}.`,
+        );
       }
     },
   };
