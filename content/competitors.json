@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-29",
+  "sources": [
+    { "name": "taxiporteu.com", "type": "awareness platform", "url": "https://taxiporteu.com/" },
+    { "name": "femseha.com", "type": "doctor-branded platform", "url": "https://femseha.com/" },
+    { "name": "sehaher.com", "type": "doctor-branded platform", "url": "https://sehaher.com/" },
+    { "name": "cytotec-saudi.com", "type": "transactional seller", "url": "https://cytotec-saudi.com/" },
+    { "name": "hayatannas.com", "type": "transactional seller", "url": "https://hayatannas.com/" }
+  ],
+  "gaps": [
+    {
+      "keyword": "سايتوتك في السعودية",
+      "competitor": "cytotec-saudi.com / hayatannas.com / legacy saudiersaa WP pages",
+      "competitorUrl": "https://cytotec-saudi.com/",
+      "searchIntent": "mixed — mostly transactional (buy/source), some informational",
+      "contentQuality": "thin, unsourced, phone-number funnels; legacy WP pages carry seller phone numbers",
+      "missingInformation": "regulatory status (SFDA), prescription-only rationale, warnings, what a licensed pathway looks like",
+      "ourOpportunity": "Own the informational slice: regulator-anchored, referenced, no funnel. /what-is-cytotec + cluster A",
+      "priority": "P0"
+    },
+    {
+      "keyword": "حبوب سايتوتك للبيع",
+      "competitor": "hayatannas.com, cytotec-saudi.com, sehaher.com transactional titles",
+      "competitorUrl": "https://hayatannas.com/",
+      "searchIntent": "transactional",
+      "contentQuality": "spam-tier: fake reviews, wholesale phone numbers, secrecy promises",
+      "missingInformation": "why unlicensed channels are dangerous, how to recognise them, official reporting channels",
+      "ourOpportunity": "Safety-first interception content (risks of unlicensed sources) + reporting pathway. No transactional content.",
+      "priority": "P0"
+    },
+    {
+      "keyword": "أعراض الحمل خارج الرحم",
+      "competitor": "femseha.com overview; seller sites keyword-stuff",
+      "competitorUrl": "https://femseha.com/articles",
+      "searchIntent": "informational + urgent",
+      "contentQuality": "single overview article; no early-sign vs emergency separation",
+      "missingInformation": "which symptoms are emergencies, why ultrasound matters, what to say in the ED",
+      "ourOpportunity": "P0 cluster C (12 topics): sign vs emergency separation, ED pathway, follow-up. No competitor owns this in Arabic.",
+      "priority": "P0"
+    },
+    {
+      "keyword": "تكيس المبايض / أعراض تكيس المبايض",
+      "competitor": "femseha.com touches it; legacy saudiersaa WP page exists (redirected to /womens-health)",
+      "competitorUrl": "https://femseha.com/womens-health",
+      "searchIntent": "informational",
+      "contentQuality": "articles exist but without per-article references",
+      "missingInformation": "diagnosis pathway, what PCOS means for fertility, lifestyle vs medical care, when to see a doctor",
+      "ourOpportunity": "Cluster D (14 topics) — the largest mapped cluster; referenced, non-promotional, Saudi care context",
+      "priority": "P0"
+    },
+    {
+      "keyword": "أعراض الحمل المبكر",
+      "competitor": "sehaher.com pregnancy section, femseha.com",
+      "competitorUrl": "https://sehaher.com/pregnancy",
+      "searchIntent": "informational",
+      "contentQuality": "decent coverage, no reference lists visible",
+      "missingInformation": "symptom timelines, what is normal vs warning sign, when to book care",
+      "ourOpportunity": "Cluster E (14 topics) — pair each symptom article with its warning-sign counterpart",
+      "priority": "P1"
+    },
+    {
+      "keyword": "تأخر الدورة الشهرية",
+      "competitor": "sehaher.com dedicated hub (/delayed-period)",
+      "competitorUrl": "https://sehaher.com/delayed-period",
+      "searchIntent": "informational",
+      "contentQuality": "hub exists; articles are opaque-ID URLs",
+      "missingInformation": "structured causes, when delay needs evaluation, pregnancy-test guidance",
+      "ourOpportunity": "Keyword-carrying slugs + structured cause taxonomy + evaluation triggers. Cluster E/F topics",
+      "priority": "P1"
+    },
+    {
+      "keyword": "تنظيم الأدوية في السعودية SFDA",
+      "competitor": "none of the reviewed sites publishes regulator-anchored Arabic content",
+      "competitorUrl": "",
+      "searchIntent": "informational",
+      "contentQuality": "absent",
+      "missingInformation": "entire regulatory context: prescription status, vigilance reporting, pharmacy-only channels",
+      "ourOpportunity": "saudi-drug-regulation-context (already published) + cluster A topic #7. Genuinely differentiated.",
+      "priority": "P0"
+    },
+    {
+      "keyword": "مخاطر أدوية غير موثوقة من الإنترنت",
+      "competitor": "taxiporteu.com seller-pattern checker",
+      "competitorUrl": "https://taxiporteu.com/",
+      "searchIntent": "informational / safety",
+      "contentQuality": "strong on framing, no article-level schema or per-article references visible",
+      "missingInformation": "GCC-specific reporting channels per country, medicine-authentication basics",
+      "ourOpportunity": "GCC-aware safety article (already in map #11) with per-country official reporting bodies",
+      "priority": "P0"
+    },
+    {
+      "keyword": "متى أذهب للطوارئ في الحمل",
+      "competitor": "taxiporteu.com six-point checklist",
+      "competitorUrl": "https://taxiporteu.com/",
+      "searchIntent": "informational + urgent",
+      "contentQuality": "good framing, single page",
+      "missingInformation": "per-symptom decision support (bleeding, fever, pain, dizziness), what to say in the ED",
+      "ourOpportunity": "Existing emergency cluster (10 articles) + cluster I (8 topics) — the deepest Arabic emergency coverage",
+      "priority": "P0"
+    },
+    {
+      "keyword": "السونار والحمل",
+      "competitor": "sehaher.com /ultrasound section",
+      "competitorUrl": "https://sehaher.com/ultrasound",
+      "searchIntent": "informational",
+      "contentQuality": "present, opaque URLs",
+      "missingInformation": "what ultrasound can and cannot answer, why location of pregnancy matters",
+      "ourOpportunity": "Ultrasound topics inside cluster C/E — answer 'why ultrasound' honestly",
+      "priority": "P2"
+    },
+    {
+      "keyword": "الخصوبة / تأخر الحمل",
+      "competitor": "femseha.com fertility-adjacent articles",
+      "competitorUrl": "https://femseha.com/articles",
+      "searchIntent": "informational",
+      "contentQuality": "symptom-focused, funnel to consultation",
+      "missingInformation": "evidence-based fertility basics, when evaluation is indicated, referral pathway",
+      "ourOpportunity": "Cluster F (12 topics) — educational, no funnel, referenced",
+      "priority": "P1"
+    },
+    {
+      "keyword": "مراجعة طبية للمحتوى الصحي",
+      "competitor": "sehaher.com medical-review policy (honest)",
+      "competitorUrl": "https://sehaher.com/medical-review",
+      "searchIntent": "informational",
+      "contentQuality": "rare honesty: states when review did NOT happen",
+      "missingInformation": "process transparency on saudiersaa equivalent pages",
+      "ourOpportunity": "Editorial policy + About + per-article review-status signal without fabricating credentials",
+      "priority": "P1"
+    }
+  ]
+}

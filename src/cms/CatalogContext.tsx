@@ -1,29 +1,38 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import type { Article, ContentMapItem, ManagedArticle, SiteSettings } from "../types";
+import type { Article, ContentMapItem, ManagedArticle, NotFoundEntry, RedirectRule, SiteSettings } from "../types";
 import { defaultSettings } from "./defaults";
-import { loadState, saveState, type CmsState } from "./storage";
+import { effectiveRedirectRules, loadState, saveState, type CmsState } from "./storage";
 
 interface CatalogValue {
   articles: Article[];
   managed: ManagedArticle[];
   map: ContentMapItem[];
   settings: SiteSettings;
+  redirectRules: RedirectRule[];
+  notFoundLog: NotFoundEntry[];
   ready: boolean;
   upsertArticle: (article: ManagedArticle) => void;
   removeArticle: (id: string) => void;
   setMap: (items: ContentMapItem[]) => void;
   upsertMapItem: (item: ContentMapItem) => void;
   setSettings: (settings: SiteSettings) => void;
+  setRedirectRules: (rules: RedirectRule[]) => void;
+  recordNotFound: (path: string) => void;
+  markNotFoundHandled: (path: string, handledBy: string) => void;
 }
 
 const CatalogContext = createContext<CatalogValue | null>(null);
 
+const EMPTY: CmsState = {
+  articles: [],
+  map: [],
+  settings: defaultSettings,
+  redirectRules: null,
+  notFoundLog: [],
+};
+
 export function CatalogProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<CmsState>({
-    articles: [],
-    map: [],
-    settings: defaultSettings,
-  });
+  const [state, setState] = useState<CmsState>(EMPTY);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -42,6 +51,8 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
       managed: state.articles,
       map: state.map,
       settings: state.settings,
+      redirectRules: effectiveRedirectRules(state),
+      notFoundLog: state.notFoundLog,
       ready,
       upsertArticle: (article) => {
         setState((current) => {
@@ -71,6 +82,27 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
         });
       },
       setSettings: (settings) => setState((current) => ({ ...current, settings })),
+      setRedirectRules: (rules) => setState((current) => ({ ...current, redirectRules: rules })),
+      recordNotFound: (path) =>
+        setState((current) => {
+          const log = [...current.notFoundLog];
+          const existing = log.find((entry) => entry.path === path);
+          const now = new Date().toISOString().slice(0, 10);
+          if (existing) {
+            existing.count += 1;
+            existing.lastSeen = now;
+          } else {
+            log.unshift({ path, firstSeen: now, lastSeen: now, count: 1, handled: false });
+          }
+          return { ...current, notFoundLog: log.slice(0, 200) };
+        }),
+      markNotFoundHandled: (path, handledBy) =>
+        setState((current) => ({
+          ...current,
+          notFoundLog: current.notFoundLog.map((entry) =>
+            entry.path === path ? { ...entry, handled: true, handledBy } : entry,
+          ),
+        })),
     };
   }, [state, ready]);
 

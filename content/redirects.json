@@ -1,0 +1,410 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-29",
+  "wwwToApex": true,
+  "rules": [
+    {
+      "source": "/cytotec-saudi-arabia/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy WordPress article — replaced by the educational cornerstone.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/https-saudiersaa-com-cytotec-saudi-arabia/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Mangled duplicate of the legacy WordPress article.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy WordPress article — same topic as the cornerstone page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy WordPress article — trailing-slash variant.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك_في_السعوديه/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy WordPress article — educational replacement for the same query.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سياسة-التحرير/",
+      "destination": "/about",
+      "statusCode": 301,
+      "reason": "Legacy editorial-policy page — covered by the About page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سياسة-التحرير",
+      "destination": "/about",
+      "statusCode": 301,
+      "reason": "Legacy editorial-policy page — trailing-slash variant.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/about.html",
+      "destination": "/about",
+      "statusCode": 301,
+      "reason": "Legacy static HTML About page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "statusCode": 301,
+      "reason": "Legacy static HTML Contact page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/privacy-policy.html",
+      "destination": "/privacy",
+      "statusCode": 301,
+      "reason": "Legacy static HTML Privacy page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/category-care.html",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy static HTML health-care category page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/الرئيسية/",
+      "destination": "/",
+      "statusCode": 301,
+      "reason": "Legacy WordPress homepage slug.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/الرئيسية",
+      "destination": "/",
+      "statusCode": 301,
+      "reason": "Legacy WordPress homepage slug — trailing-slash variant.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/من-نحن/",
+      "destination": "/about",
+      "statusCode": 301,
+      "reason": "Legacy About page (Arabic slug).",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/من-نحن",
+      "destination": "/about",
+      "statusCode": 301,
+      "reason": "Legacy About page — trailing-slash variant.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/مرحبا-بكم-في-موقعنا-الجديد/",
+      "destination": "/",
+      "statusCode": 301,
+      "reason": "Legacy welcome page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/اتفاقية-الاستخدام/",
+      "destination": "/privacy",
+      "statusCode": 301,
+      "reason": "Legacy terms-of-use page — closest live equivalent is the privacy page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/اتفاقية-الاستخدام",
+      "destination": "/privacy",
+      "statusCode": 301,
+      "reason": "Legacy terms-of-use page — trailing-slash variant.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك-السعوديه/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era article — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك-السعوديه",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era article — trailing-slash variant.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك-السعوديهجرعة",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era article (mangled slug).",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك-في-السعودية/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era article — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك-في-السعودية",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era article — trailing-slash variant.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك-في-الامارات/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era UAE page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك-في-الامارات",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era UAE page — trailing-slash variant.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك-في-الكويت/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era Kuwait page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك-في-الكويت",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era Kuwait page — trailing-slash variant.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك_في_البحرين/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era Bahrain page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك_الرياض/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era city page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك_في_الرياض/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era city page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك_في_الرياض-2/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era duplicate city page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك_في_جدة/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era city page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك_الشرقية/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era region page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك_في_السعودية/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era article — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك_في_السعودية-2/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era duplicate article.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/سايتوتك_في_الكويت/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era Kuwait page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/حبوب_سايتوتك_الرياض/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era city page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/حبوب_سايتوتك_للبيع_في_الرياض/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/حبوب-سايتوتك-للبيع-في-مكه-السعودية",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/حبوب_سايتوتك_صيدليه/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era pharmacy page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/صيدليه-سايتوتك",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era pharmacy page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/صيدليه-حياة-الناس/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy seller-era pharmacy page — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/الحمل-خارج-الرحم-والعوامل-المؤدية-لذلك/",
+      "destination": "/when-to-see-doctor",
+      "statusCode": 301,
+      "reason": "Legacy ectopic-pregnancy article — best live equivalent is the emergency-warning page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/ما-هو-تكيس-المبايض-وطرق-علاجه/",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy PCOS article — closest live equivalent is the women's health page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/ما-هي-أنواع-حبوب-الاجهاض-المتوفرة-في-السوق/",
+      "destination": "/misoprostol",
+      "statusCode": 301,
+      "reason": "Legacy seller-era article — educational replacement about the active substance.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/بعض-المعلومات-عن-الإجهاض/",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy general article — educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/ماهي-طريقه-تنزيل-الدوره-الشهريه-قبل-الموعد/",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy menstrual-health article — closest live equivalent.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/طريقه-استخدام-حبوب-سايتوتك/",
+      "destination": "/medical-uses",
+      "statusCode": 301,
+      "reason": "Legacy usage article — replaced by the supervised-use education page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/تعرفي-علي-الطريقه-الصحيحه-لاستخدام-سايتوتك/",
+      "destination": "/medical-uses",
+      "statusCode": 301,
+      "reason": "Legacy usage article — replaced by the supervised-use education page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/كيفيه-حساب-موعد-التبويض/",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy fertility article — closest live equivalent.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/نقص-الحديد-أسبابه-وماهي-أعراضه/",
+      "destination": "/blog/anemia-womens-health",
+      "statusCode": 301,
+      "reason": "Legacy anemia article — replaced by the published anemia article.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/حبوب-سايتوتك-للبيع.*",
+      "destination": null,
+      "statusCode": 410,
+      "isRegex": true,
+      "reason": "Legacy seller-spam URL family with embedded phone numbers — gone, no educational replacement.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/(?:2018|2019|2020|2021)/(.*)",
+      "destination": null,
+      "statusCode": 410,
+      "isRegex": true,
+      "reason": "2018–2021 Blogger-era auto-scraped content (unrelated to the current medical platform). No replacement exists.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/feed",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy feed endpoint — gone.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/feed/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy feed endpoint — gone.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/(.*)/feed",
+      "destination": null,
+      "statusCode": 410,
+      "isRegex": true,
+      "reason": "Legacy per-page feed endpoints — gone.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/(.*)/feed/",
+      "destination": null,
+      "statusCode": 410,
+      "isRegex": true,
+      "reason": "Legacy per-page feed endpoints — gone.",
+      "createdAt": "2026-08-29"
+    }
+  ]
+}

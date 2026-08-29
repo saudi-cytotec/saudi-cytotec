@@ -74,7 +74,7 @@ export interface NavItem {
   label: string;
 }
 
-export type ArticleStatus = "draft" | "review" | "published";
+export type ArticleStatus = "draft" | "review" | "published" | "scheduled";
 export type SearchIntent = "informational" | "navigational" | "commercial" | "transactional";
 export type ArticleType =
   | "pillar"
@@ -100,20 +100,74 @@ export interface ManagedArticle extends Article {
   source: "static" | "cms";
   internalLinks: string[];
   hasDisclaimer: boolean;
+  /** Scheduled publish date (YYYY-MM-DD) when status === "scheduled". */
+  publishAt?: string;
+  /** Editorial author byline; empty = platform editorial team. */
+  author?: string;
 }
 
+/** Editorial workflow states for the 100-topic content map. */
+export type MapStatus = "IDEA" | "RESEARCH" | "OUTLINE" | "DRAFT" | "REVIEW" | "READY" | "PUBLISHED" | "UPDATED";
+
+export type MapPriority = "P0" | "P1" | "P2" | "P3";
+
 export interface ContentMapItem {
+  /** Stable topic id, e.g. "C-015". */
   id: string;
-  title: string;
+  /** Strategy cluster letter, e.g. "C" (Ectopic pregnancy). */
+  cluster: string;
+  topic: string;
   primaryKeyword: string;
   secondaryKeywords: string[];
   searchIntent: SearchIntent;
-  cluster: ClusterId;
-  articleType: ArticleType;
-  proposedSlug: string;
-  internalLinks: string[];
-  status: "planned" | "draft" | "review" | "published" | "conflict";
+  /** SA | AE | KW | BH | GCC | neutral */
+  country: string;
+  /** Real local-intent notes (e.g. "SA screening pathway"); never doorway pages. */
+  cityRelevance: string[];
+  priority: MapPriority;
+  /** Live URL when published; proposed URL when planned. */
+  targetUrl: string;
+  /** Parent / pillar article or hub path. */
+  parent: string;
+  related: string[];
+  status: MapStatus;
   notes?: string;
+}
+
+export interface RedirectRule {
+  source: string;
+  destination: string | null;
+  statusCode: 301 | 410;
+  isRegex?: boolean;
+  reason: string;
+  createdAt: string;
+}
+
+export interface RedirectRegistry {
+  version: number;
+  updatedAt: string;
+  wwwToApex: boolean;
+  rules: RedirectRule[];
+}
+
+export interface CompetitorGap {
+  keyword: string;
+  competitor: string;
+  competitorUrl: string;
+  searchIntent: string;
+  contentQuality: string;
+  missingInformation: string;
+  ourOpportunity: string;
+  priority: string;
+}
+
+export interface NotFoundEntry {
+  path: string;
+  firstSeen: string;
+  lastSeen: string;
+  count: number;
+  handled: boolean;
+  handledBy?: string;
 }
 
 export interface SiteSettings {

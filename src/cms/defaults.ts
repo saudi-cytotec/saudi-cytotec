@@ -1,6 +1,7 @@
 import { articles } from "../data/articles";
 import { SITE } from "../data/site";
 import type { ContentMapItem, ManagedArticle, SearchIntent, SiteSettings } from "../types";
+import { contentMap } from "./registrySource";
 import { testArticle } from "./testArticle";
 
 function intentFor(cluster: ManagedArticle["cluster"]): SearchIntent {
@@ -44,16 +45,7 @@ export const defaultSettings: SiteSettings = {
 };
 
 export function seedContentMap(): ContentMapItem[] {
-  return staticManaged.map((article) => ({
-    id: `map-${article.slug}`,
-    title: article.title,
-    primaryKeyword: article.primaryKeyword,
-    secondaryKeywords: article.secondaryKeywords,
-    searchIntent: article.searchIntent,
-    cluster: article.cluster,
-    articleType: article.articleType,
-    proposedSlug: article.slug,
-    internalLinks: article.internalLinks,
-    status: "published",
-  }));
+  // The 100-topic map committed in content/map.json is the source of truth.
+  // Local (uncommitted) edits in the admin overlay these rows in storage.
+  return [...contentMap];
 }

@@ -10,7 +10,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-3">
-            <img src="/images/logo.png" alt="" className="h-12 w-12 rounded-2xl object-cover" />
+            <img src="/images/logo.png" alt="" width={48} height={48} className="h-12 w-12 rounded-2xl object-cover" />
             <strong className="text-lg">{SITE.name}</strong>
           </div>
           <p className="mt-4 max-w-xl text-sm leading-8 text-white/75">

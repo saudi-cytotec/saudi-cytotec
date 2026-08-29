@@ -97,6 +97,10 @@ export function Home() {
             <img
               src="/images/hero-doctor.jpg"
               alt="طبيبة سعودية بحجاب في عيادة صحة المرأة"
+              width={1200}
+              height={900}
+              fetchPriority="high"
+              decoding="async"
               className="h-full w-full object-cover"
               loading="eager"
             />

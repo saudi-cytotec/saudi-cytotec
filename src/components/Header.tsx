@@ -30,7 +30,7 @@ export function Header() {
       </div>
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
         <Link to="/" className="flex min-w-0 items-center gap-3">
-          <img src="/images/logo.png" alt="" className="h-12 w-12 rounded-2xl object-cover ring-1 ring-line" />
+          <img src="/images/logo.png" alt="" width={48} height={48} className="h-12 w-12 rounded-2xl object-cover ring-1 ring-line" />
           <span className="min-w-0">
             <span className="block truncate text-lg font-bold text-brand-deep">{SITE.name}</span>
             <span className="block text-xs text-ink-soft">معلومات طبية تعليمية</span>
