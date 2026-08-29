@@ -24,10 +24,10 @@ export function logoutRequest() {
 }
 
 export function generateRequest(payload: Record<string, unknown>) {
-  return api<{ article?: Record<string, unknown>; error?: string; configured?: boolean }>("/api/generate", {
-    method: "POST",
-    body: JSON.stringify(payload),
-  });
+  return api<{ article?: Record<string, unknown>; research?: Record<string, unknown>; outline?: Record<string, unknown>; error?: string; configured?: boolean }>(
+    "/api/generate",
+    { method: "POST", body: JSON.stringify(payload) },
+  );
 }
 
 export function publishRequest(article: unknown, schedule = false) {
@@ -49,5 +49,46 @@ export function publishRequest(article: unknown, schedule = false) {
 export function unpublishRequest(slug: string) {
   return api<{ ok?: boolean; error?: string }>(`/api/publish?slug=${encodeURIComponent(slug)}`, {
     method: "DELETE",
+  });
+}
+
+export function statusRequest() {
+  return api<{
+    environment: string;
+    repo: { OWNER: string; REPO: string; BRANCH: string };
+    configured: Record<string, boolean>;
+    capabilities: Record<string, boolean>;
+  }>("/api/status");
+}
+
+export function saveFileRequest(path: string, content: string, message?: string) {
+  return api<{ ok?: boolean; path?: string; commit?: string; note?: string; error?: string; blocker?: string }>("/api/save-file", {
+    method: "POST",
+    body: JSON.stringify({ path, content, message }),
+  });
+}
+
+export function syncRedirectsRequest(rules: unknown[], wwwToApex: boolean) {
+  return api<{ ok?: boolean; rules?: number; commit?: string; note?: string; error?: string; blocker?: string }>("/api/sync-redirects", {
+    method: "POST",
+    body: JSON.stringify({ rules, wwwToApex }),
+  });
+}
+
+export function uploadImageRequest(name: string, data: string) {
+  return api<{ ok?: boolean; url?: string; commit?: string; note?: string; error?: string; blocker?: string }>("/api/upload-image", {
+    method: "POST",
+    body: JSON.stringify({ name, data }),
+  });
+}
+
+export function notFoundLogRequest() {
+  return api<{ ok?: boolean; entries?: unknown[]; blocker?: string }>("/api/not-found");
+}
+
+export function notFoundSyncRequest(entries: unknown[]) {
+  return api<{ ok?: boolean; entries?: number; note?: string; error?: string; blocker?: string }>("/api/not-found", {
+    method: "POST",
+    body: JSON.stringify({ entries }),
   });
 }

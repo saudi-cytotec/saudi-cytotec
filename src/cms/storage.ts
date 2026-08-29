@@ -1,9 +1,10 @@
-import type { ContentMapItem, ManagedArticle, SiteSettings } from "../types";
+import type { ContentMapItem, ManagedArticle, NotFoundEntry, RedirectRule, SiteSettings } from "../types";
 import { defaultSettings, generatedDrafts, seedContentMap, staticManaged } from "./defaults";
 import { committedArticles } from "./contentSource";
+import { redirectRegistry } from "./registrySource";
 
-const KEY = "saudiersaa-cms-v2";
-const MIGRATED_FROM = "saudiersaa-cms-v1";
+const KEY = "saudiersaa-cms-v3";
+const MIGRATED_FROM = ["saudiersaa-cms-v2", "saudiersaa-cms-v1"];
 
 /**
  * Content architecture
@@ -31,6 +32,10 @@ export interface CmsState {
   articles: ManagedArticle[];
   map: ContentMapItem[];
   settings: SiteSettings;
+  /** Local overlay of the redirect registry (uncommitted edits). */
+  redirectRules: RedirectRule[] | null;
+  /** 404 hits seen in this browser (the 404 Monitor). */
+  notFoundLog: NotFoundEntry[];
 }
 
 function baseline(): ManagedArticle[] {
@@ -54,21 +59,27 @@ function emptyState(): CmsState {
     articles: baseArticles(),
     map: seedContentMap(),
     settings: defaultSettings,
+    redirectRules: null,
+    notFoundLog: [],
   };
 }
 
-function migrateV1(): Partial<CmsState> | null {
+function migrateLegacy(): Partial<CmsState> | null {
   if (typeof window === "undefined") return null;
-  try {
-    const raw = window.localStorage.getItem(MIGRATED_FROM);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as Partial<CmsState>;
-    // Carry the author's work forward, then drop the old key.
-    window.localStorage.removeItem(MIGRATED_FROM);
-    return parsed;
-  } catch {
-    return null;
+  for (const key of MIGRATED_FROM) {
+    try {
+      const raw = window.localStorage.getItem(key);
+      if (!raw) continue;
+      const parsed = JSON.parse(raw) as Partial<CmsState>;
+      // Only drafts/edits are worth carrying forward from v2; the content map
+      // shape changed entirely and must come from content/map.json.
+      window.localStorage.removeItem(key);
+      return { articles: parsed.articles ?? [], map: undefined, settings: parsed.settings };
+    } catch {
+      continue;
+    }
   }
+  return null;
 }
 
 function readLocal(): Partial<CmsState> | null {
@@ -76,10 +87,23 @@ function readLocal(): Partial<CmsState> | null {
   try {
     const raw = window.localStorage.getItem(KEY);
     if (raw) return JSON.parse(raw) as Partial<CmsState>;
-    return migrateV1();
+    return migrateLegacy();
   } catch {
     return null;
   }
+}
+
+const MAP_STATUSES = new Set(["IDEA", "RESEARCH", "OUTLINE", "DRAFT", "REVIEW", "READY", "PUBLISHED", "UPDATED"]);
+
+function sanitizeMapRows(rows: unknown): ContentMapItem[] {
+  if (!Array.isArray(rows)) return [];
+  return rows.filter(
+    (row): row is ContentMapItem =>
+      Boolean(row) &&
+      typeof (row as ContentMapItem).id === "string" &&
+      typeof (row as ContentMapItem).topic === "string" &&
+      MAP_STATUSES.has((row as ContentMapItem).status),
+  );
 }
 
 export function loadState(): CmsState {
@@ -89,12 +113,16 @@ export function loadState(): CmsState {
 
   const localRows = (local.articles ?? []).filter((row) => row && row.id && row.slug);
   const localIds = new Set(localRows.map((row) => row.id));
+  const localMap = sanitizeMapRows(local.map);
+  const mapById = new Map(localMap.map((row) => [row.id, row]));
 
   return {
     // Local edits win over the bundle; anything not touched locally comes from it.
     articles: [...localRows, ...base.articles.filter((item) => !localIds.has(item.id))],
-    map: local.map?.length ? local.map : base.map,
+    map: base.map.map((row) => mapById.get(row.id) ?? row),
     settings: { ...base.settings, ...(local.settings ?? {}) },
+    redirectRules: Array.isArray(local.redirectRules) ? (local.redirectRules as RedirectRule[]) : null,
+    notFoundLog: Array.isArray(local.notFoundLog) ? (local.notFoundLog as NotFoundEntry[]) : [],
   };
 }
 
@@ -119,10 +147,21 @@ export function saveState(state: CmsState) {
   try {
     window.localStorage.setItem(
       KEY,
-      JSON.stringify({ articles: dirty, map: state.map, settings: state.settings } satisfies CmsState),
+      JSON.stringify({
+        articles: dirty,
+        map: state.map,
+        settings: state.settings,
+        redirectRules: state.redirectRules,
+        notFoundLog: state.notFoundLog,
+      } satisfies CmsState),
     );
   } catch {
     // Storage full or unavailable (private mode). Edits stay in memory for this
     // session; publishing still works because it goes through the API.
   }
+}
+
+/** The effective redirect registry: local (uncommitted) overlay over committed. */
+export function effectiveRedirectRules(state: CmsState): RedirectRule[] {
+  return state.redirectRules ?? redirectRegistry.rules;
 }
