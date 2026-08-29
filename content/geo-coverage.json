@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-29",
+  "policy": "No thin city pages. No duplicate city pages. No doorway pages. City-level pages are created only when real local search intent exists AND the page carries unique useful information; for this educational platform the answer is the same in every city, so cities appear in-content only. Country-level content exists only where the health system genuinely differs, citing that country's own official sources.",
+  "countries": [
+    {
+      "code": "SA",
+      "name": "السعودية",
+      "priority": "PRIMARY",
+      "regulator": "الهيئة العامة للغذاء والدواء (SFDA)",
+      "healthLine": "937",
+      "emergency": "997",
+      "contextTopics": ["saudi-drug-regulation-context", "map:#7", "map:#48", "map:#54", "map:#75"],
+      "note": "Drug regulation, prescription-only dispensing, vigilance reporting (المركز الوطني للتيقظ والسلامة الدوائية)."
+    },
+    {
+      "code": "AE",
+      "name": "الإمارات",
+      "priority": "SECONDARY",
+      "regulator": "وزارة الصحة ووقاية المجتمع (MOHAP) وهيئات الصحة المحلية",
+      "healthLine": "8001717",
+      "emergency": "998/999",
+      "contextTopics": ["map:#49", "map:#96"],
+      "note": "Federal MOHAP + local health authorities (DOH Abu Dhabi, DHA Dubai). Only UAE official sources are cited."
+    },
+    {
+      "code": "KW",
+      "name": "الكويت",
+      "priority": "SECONDARY",
+      "regulator": "وزارة الصحة",
+      "healthLine": "151",
+      "emergency": "112",
+      "contextTopics": ["map:#93"],
+      "note": "Kuwait MOH regulation; only Kuwaiti official sources are cited."
+    },
+    {
+      "code": "BH",
+      "name": "البحرين",
+      "priority": "SECONDARY",
+      "regulator": "الهيئة الوطنية لتنظيم المهن والخدمات الصحية (NHRA)",
+      "healthLine": "6639 9900",
+      "emergency": "999",
+      "contextTopics": ["map:#94"],
+      "note": "NHRA regulation; only Bahraini official sources are cited."
+    }
+  ],
+  "cities": [
+    { "city": "الرياض", "country": "SA", "hasPage": false, "coverage": "in-content mentions + Saudi care-pathway context" },
+    { "city": "جدة", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "مكة المكرمة", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "المدينة المنورة", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "الدمام", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "الخبر", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "الظهران", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "الطائف", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "تبوك", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "أبها", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "خميس مشيط", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "جازان", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "نجران", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "الأحساء", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "حائل", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "بريدة", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "ينبع", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "الجبيل", "country": "SA", "hasPage": false, "coverage": "in-content mentions" },
+    { "city": "دبي", "country": "AE", "hasPage": false, "coverage": "UAE country context" },
+    { "city": "أبوظبي", "country": "AE", "hasPage": false, "coverage": "UAE country context" },
+    { "city": "الشارقة", "country": "AE", "hasPage": false, "coverage": "UAE country context" },
+    { "city": "مدينة الكويت", "country": "KW", "hasPage": false, "coverage": "Kuwait country context" },
+    { "city": "حولي", "country": "KW", "hasPage": false, "coverage": "Kuwait country context" },
+    { "city": "السالمية", "country": "KW", "hasPage": false, "coverage": "Kuwait country context" },
+    { "city": "المنامة", "country": "BH", "hasPage": false, "coverage": "Bahrain country context" },
+    { "city": "الرفاع", "country": "BH", "hasPage": false, "coverage": "Bahrain country context" },
+    { "city": "المحرق", "country": "BH", "hasPage": false, "coverage": "Bahrain country context" }
+  ]
+}
