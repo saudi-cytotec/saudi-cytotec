@@ -40,7 +40,7 @@ export function NotFoundScreen() {
     };
     setRedirectRules([...redirectRules, rule]);
     markNotFoundHandled(path, `redirect:${destination}`);
-    setNote(`أُضيفت القاعدة ${path} → ${destination}. لا تنسي «حفظ ومزامنة vercel.json» من تبويب مدير إعادة التوجيه.`);
+    setNote(`أُضيفت القاعدة ${path} → ${destination}. لا تنسي «حفظ ومزامنة القواعد» من تبويب مدير إعادة التوجيه.`);
   }
 
   const open = notFoundLog.filter((entry) => !entry.handled);

@@ -85,7 +85,7 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   report("Schema", violations.length === 0, violations.length ? `FORBIDDEN: ${violations.join(", ")}` : `types in bundle: ${unique.join(", ")}`);
 }
 
-// 4. Redirects
+// 4. Redirects — registry fully mirrored: 301s in vercel.json, 410s in middleware.js
 {
   const registry = JSON.parse(fs.readFileSync(REDIRECTS, "utf8"));
   const sitemapUrls = locs(fs.readFileSync(SITEMAP, "utf8")).map((url) => url.replace("https://saudiersaa.com", ""));
@@ -93,12 +93,32 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   const loops = registry.rules.filter((rule) => rule.destination && sources.has(rule.destination));
   const badStatus = registry.rules.filter((rule) => ![301, 410].includes(rule.statusCode));
   const missingTargets = registry.rules.filter((rule) => rule.statusCode === 301 && rule.destination && !sitemapUrls.includes(rule.destination) && !rule.destination.startsWith("/blog/cluster"));
+
   const vercel = JSON.parse(fs.readFileSync(VERCEL, "utf8"));
-  const vercelCount = vercel.redirects?.length ?? 0;
+  const edgeRules = vercel.redirects ?? [];
+  const edge410 = edgeRules.filter((rule) => rule.statusCode === 410).length;
+  const encoded = (src) => {
+    let out = "";
+    for (const ch of src) out += ch.codePointAt(0) > 127 ? encodeURIComponent(ch) : ch;
+    return out;
+  };
+  const edgeSet = new Set(edgeRules.map((rule) => rule.source));
+  const missing301 = registry.rules.filter((rule) => rule.statusCode === 301 && !edgeSet.has(encoded(rule.source)));
+
+  const middlewareSource = fs.readFileSync(path.join(ROOT, "middleware.js"), "utf8");
+  const missing410 = registry.rules.filter((rule) => rule.statusCode === 410 && !middlewareSource.includes(encoded(rule.source)));
+
+  const ok =
+    loops.length === 0 &&
+    badStatus.length === 0 &&
+    missingTargets.length === 0 &&
+    edge410 === 0 &&
+    missing301.length === 0 &&
+    missing410.length === 0;
   report(
     "Redirects",
-    loops.length === 0 && badStatus.length === 0 && missingTargets.length === 0,
-    `${registry.rules.length} registry rules, ${vercelCount} edge rules${loops.length ? `, LOOPS: ${loops.map((r) => r.source).join(", ")}` : ""}${badStatus.length ? `, bad status` : ""}${missingTargets.length ? `, missing targets: ${missingTargets.map((r) => r.source + "→" + r.destination).join(", ")}` : ""}`,
+    ok,
+    `${registry.rules.length} registry rules · ${edgeRules.length} edge 301 rules · ${registry.rules.filter((r) => r.statusCode === 410).length} middleware 410s${loops.length ? `, LOOPS: ${loops.map((r) => r.source).join(", ")}` : ""}${edge410 ? `, 410s leaked into vercel.json: ${edge410}` : ""}${missing301.length ? `, 301s missing at edge: ${missing301.map((r) => r.source).join(", ")}` : ""}${missing410.length ? `, 410s missing in middleware: ${missing410.map((r) => r.source).join(", ")}` : ""}`,
   );
 }
 

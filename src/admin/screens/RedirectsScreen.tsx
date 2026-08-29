@@ -67,12 +67,12 @@ export function RedirectsScreen() {
       <div className="flex flex-wrap items-end justify-between gap-3">
         <h1 className="text-3xl font-bold text-brand-deep">مدير إعادة التوجيه</h1>
         <button type="button" disabled={busy} onClick={commit} className="rounded-full bg-brand px-4 py-2 text-sm text-white disabled:opacity-60">
-          {busy ? "جارٍ الالتزام..." : "حفظ ومزامنة vercel.json"}
+          {busy ? "جارٍ الالتزام..." : "حفظ ومزامنة القواعد"}
         </button>
       </div>
 
       <p className="max-w-3xl text-sm leading-7 text-ink-soft">
-        المصدر الرسمي: <span dir="ltr">content/redirects.json</span> — تُولَّد منه قواعد الحافة في <span dir="ltr">vercel.json</span> (58 قاعدة حالياً). الحفظ يلتزم الملفين معاً في Commit واحد ذري ويفعّل إعادة النشر. القاعدة: 301 فقط لبديل مكافئ حقيقي؛ و410 للمحتوى الملغى؛ ولا تحويل عام لكل 404 إلى الرئيسية.
+        المصدر الرسمي: <span dir="ltr">content/redirects.json</span> — تُولَّد منه قواعد الحافة 301 في <span dir="ltr">vercel.json</span> وقواعد 410 في <span dir="ltr">middleware.js</span> (إعادة توجيه 410 حقيقية قبل تحويل SPA). الحفظ يلتزم الملفات معاً في Commit واحد ذري ويفعّل إعادة النشر. القاعدة: 301 فقط لبديل مكافئ حقيقي؛ و410 للمحتوى الملغى؛ ولا تحويل عام لكل 404 إلى الرئيسية.
       </p>
 
       {problems.length ? (
