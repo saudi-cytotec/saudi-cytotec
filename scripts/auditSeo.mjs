@@ -7,7 +7,7 @@
  *   1. Sitemap parity — no live URL lost vs docs/url-baseline.txt
  *   2. Robots — public content allowed, /admin /api /search excluded, sitemap declared
  *   3. Forbidden schema types — Drug/Product/Offer/Review/AggregateRating absent
- *   4. Redirect registry — no loops, destinations exist, statuses 301/410
+ *   4. Redirect registry — no loops, destinations exist, statuses 301/410, valid vercel.json
  *   5. Content map — 100 topics, unique ids/urls, valid cross-references
  *   6. Bundle SEO shell — title, description, canonical, robots meta present
  *   7. Internal links from article data — no broken related/cornerstone targets
@@ -94,11 +94,13 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   const badStatus = registry.rules.filter((rule) => ![301, 410].includes(rule.statusCode));
   const missingTargets = registry.rules.filter((rule) => rule.statusCode === 301 && rule.destination && !sitemapUrls.includes(rule.destination) && !rule.destination.startsWith("/blog/cluster"));
   const vercel = JSON.parse(fs.readFileSync(VERCEL, "utf8"));
-  const vercelCount = vercel.redirects?.length ?? 0;
+  const vercelRules = vercel.redirects ?? [];
+  const vercelBad = vercelRules.filter((r) => !r.source || !r.destination || !r.source.startsWith("/") || r.statusCode === 410);
+
   report(
     "Redirects",
-    loops.length === 0 && badStatus.length === 0 && missingTargets.length === 0,
-    `${registry.rules.length} registry rules, ${vercelCount} edge rules${loops.length ? `, LOOPS: ${loops.map((r) => r.source).join(", ")}` : ""}${badStatus.length ? `, bad status` : ""}${missingTargets.length ? `, missing targets: ${missingTargets.map((r) => r.source + "→" + r.destination).join(", ")}` : ""}`,
+    loops.length === 0 && badStatus.length === 0 && missingTargets.length === 0 && vercelBad.length === 0,
+    `${registry.rules.length} registry rules, ${vercelRules.length} edge rules${loops.length ? `, LOOPS: ${loops.map((r) => r.source).join(", ")}` : ""}${badStatus.length ? `, bad status` : ""}${missingTargets.length ? `, missing targets: ${missingTargets.map((r) => r.source + "→" + r.destination).join(", ")}` : ""}${vercelBad.length ? `, invalid vercel rules: ${vercelBad.length}` : ""}`,
   );
 }
 

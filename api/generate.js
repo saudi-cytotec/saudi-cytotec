@@ -39,6 +39,34 @@ Hard rules:
 - Do not repeat the same sentence or idea in different words.
 - Return valid JSON only, with no markdown fences.`;
 
+function safeParseJson(rawText) {
+  if (!rawText || typeof rawText !== "string") return {};
+  let text = rawText.trim();
+  if (text.startsWith("```")) {
+    text = text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
+  }
+  try {
+    return JSON.parse(text);
+  } catch {
+    const start = text.indexOf("{");
+    const end = text.lastIndexOf("}");
+    if (start !== -1 && end > start) {
+      const jsonSub = text.slice(start, end + 1);
+      try {
+        return JSON.parse(jsonSub);
+      } catch {
+        const sanitized = jsonSub.replace(/,\s*([}\]])/g, "$1");
+        try {
+          return JSON.parse(sanitized);
+        } catch {
+          return {};
+        }
+      }
+    }
+    return {};
+  }
+}
+
 async function openaiJson(key, messages, maxTokens = 8000) {
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -52,14 +80,13 @@ async function openaiJson(key, messages, maxTokens = 8000) {
     }),
   });
   if (!response.ok) {
-    // Never propagate the upstream body: it can echo request details.
     const err = new Error("openai_failed");
     err.status = response.status;
     throw err;
   }
   const payload = await response.json();
   const text = payload.choices?.[0]?.message?.content || "{}";
-  return JSON.parse(text);
+  return safeParseJson(text);
 }
 
 function normalizeBlocks(raw) {
@@ -179,7 +206,6 @@ Structure requirements:
   } catch (err) {
     const status = err && err.status === 401 ? 502 : 502;
     return json(res, status, {
-      // Deliberately generic: no upstream detail, no key material.
       error: "تعذر إكمال التوليد من مزود الذكاء الاصطناعي. لم يُحفظ شيء.",
       configured: true,
       stage,
@@ -194,9 +220,6 @@ Structure requirements:
   return json(res, 200, {
     configured: true,
     stage,
-    // `publishAllowed` is always true. Publishing is an editorial decision;
-    // only a technically broken page (empty slug/body) is blocked, and that is
-    // enforced by validateArticle, not by the generator.
     publishAllowed: true,
     result: {
       title: str(result.title),

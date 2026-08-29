@@ -76,18 +76,25 @@ function main() {
   const redirects = [];
   if (registry.wwwToApex) {
     redirects.push({
-      source: "https://www.saudiersaa.com/(.*)",
-      destination: "https://saudiersaa.com/$1",
+      source: "/:path*",
+      has: [
+        {
+          type: "host",
+          value: "www.saudiersaa.com",
+        },
+      ],
+      destination: "https://saudiersaa.com/:path*",
       permanent: true,
     });
   }
   for (const rule of registry.rules) {
-    const entry = {
-      source: encodePath(rule.source),
-      ...(rule.statusCode === 301 ? { destination: rule.destination } : {}),
-      statusCode: rule.statusCode,
-    };
-    redirects.push(entry);
+    if (rule.statusCode === 301 && rule.destination) {
+      redirects.push({
+        source: encodePath(rule.source),
+        destination: rule.destination,
+        statusCode: 301,
+      });
+    }
   }
 
   const next = { ...current, redirects };

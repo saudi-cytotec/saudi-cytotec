@@ -109,17 +109,25 @@ export default async function handler(req, res) {
   const redirects = [];
   if (registry.wwwToApex) {
     redirects.push({
-      source: "https://www.saudiersaa.com/(.*)",
-      destination: "https://saudiersaa.com/$1",
+      source: "/:path*",
+      has: [
+        {
+          type: "host",
+          value: "www.saudiersaa.com",
+        },
+      ],
+      destination: "https://saudiersaa.com/:path*",
       permanent: true,
     });
   }
   for (const rule of rules) {
-    redirects.push({
-      source: encodePath(rule.source),
-      ...(rule.statusCode === 301 ? { destination: rule.destination } : {}),
-      statusCode: rule.statusCode,
-    });
+    if (rule.statusCode === 301 && rule.destination) {
+      redirects.push({
+        source: encodePath(rule.source),
+        destination: rule.destination,
+        statusCode: 301,
+      });
+    }
   }
   config.redirects = redirects;
 
