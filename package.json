@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/emitRedirects.mjs && node scripts/emitStrategyMd.mjs",
     "build": "vite build",
+    "postbuild": "node scripts/stampBuild.mjs && node scripts/urlParity.mjs && node scripts/auditSeo.mjs",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "audit": "node scripts/auditSeo.mjs"
   },
   "dependencies": {
     "clsx": "2.1.1",
