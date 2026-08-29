@@ -35,7 +35,7 @@ export function Contact() {
       </div>
       <CareReferral />
       {sent ? (
-        <div className="mt-8 rounded-3xl border border-sage bg-[#eef5f0] p-5 leading-8">
+        <div className="mt-8 rounded-3xl border border-brand bg-brand-soft p-5 leading-8">
           تم استلام رسالتك محلياً في هذا المتصفح لأغراض العرض. إن كان لديك تصحيح لمصدر طبي، أرسليه أيضاً عبر البريد.
         </div>
       ) : (

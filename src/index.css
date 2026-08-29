@@ -25,9 +25,9 @@
      per-file rewrite. Keep these in sync with the canonical tokens above. */
   --color-teal: var(--color-brand);
   --color-teal-deep: var(--color-brand-deep);
-  --color-sage: #5a7ba6;
+  --color-sage: #4a6a94;
   --color-gold: var(--color-accent);
-  --color-clay: #e0455f;
+  --color-clay: #d11a3a;
 }
 
 html {

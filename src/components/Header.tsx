@@ -50,7 +50,7 @@ export function Header() {
         </form>
         <button
           type="button"
-          className="rounded-full border border-line px-3 py-2 text-sm md:hidden"
+          className="rounded-full border border-line px-3 py-2 text-sm lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label="فتح قائمة التنقل"
@@ -58,7 +58,7 @@ export function Header() {
           القائمة
         </button>
       </div>
-      <nav className="hidden border-t border-line/70 md:block" aria-label="التنقل الرئيسي">
+      <nav className="hidden border-t border-line/70 lg:block" aria-label="التنقل الرئيسي">
         <div className="mx-auto flex max-w-6xl items-center gap-1 px-4 py-2">
           {mainNav.map((item) => (
             <NavLink
@@ -97,7 +97,7 @@ export function Header() {
         </div>
       </nav>
       {open ? (
-        <div className="border-t border-line bg-paper px-4 py-4 md:hidden">
+        <div className="border-t border-line bg-paper px-4 py-4 lg:hidden">
           <form onSubmit={onSearch} className="mb-3">
             <input
               value={q}
