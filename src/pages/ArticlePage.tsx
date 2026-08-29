@@ -9,7 +9,7 @@ import { JsonLd, Seo } from "../components/Seo";
 import { SITE } from "../data/site";
 import { relatedArticles as pickRelated } from "../data/articles";
 import { clusterPath, getCluster, readingMinutes } from "../utils/content";
-import { ConsultCTA } from "../components/ConsultCTA";
+import { CareReferral } from "../components/CareReferral";
 import { NotFound } from "./NotFound";
 
 export function ArticlePage() {
@@ -36,8 +36,20 @@ export function ArticlePage() {
         data={[
           {
             "@context": "https://schema.org",
-            "@type": "MedicalWebPage",
+            // Article is the type Google can surface as a rich result;
+            // MedicalWebPage alone has no rich-result treatment. Both describe
+            // the same node truthfully. Drug/Product/Offer/Review/AggregateRating
+            // are deliberately never emitted: this site sells nothing and
+            // publishes no ratings.
+            "@type": ["Article", "MedicalWebPage"],
             headline: article.h1,
+            author: { "@type": "Organization", name: SITE.name, url: SITE.domain },
+            publisher: {
+              "@type": "Organization",
+              name: SITE.name,
+              url: SITE.domain,
+              logo: { "@type": "ImageObject", url: `${SITE.domain}/images/logo.png` },
+            },
             description: article.metaDescription,
             datePublished: article.publishedAt,
             dateModified: article.updatedAt,
@@ -92,7 +104,7 @@ export function ArticlePage() {
         </section>
       ) : null}
       <div className="mt-12 max-w-3xl">
-        <ConsultCTA />
+        <CareReferral />
       </div>
       <ReferencesList ids={article.references} />
       <div className="mt-8 flex flex-wrap gap-3 text-sm">

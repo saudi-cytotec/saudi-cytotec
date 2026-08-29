@@ -4,8 +4,13 @@ import { CategoryCard } from "../components/CategoryCard";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { JsonLd, Seo } from "../components/Seo";
 import { useCatalog } from "../cms/CatalogContext";
-import { CONTACT_PHONE_DISPLAY, WHATSAPP_MESSAGE } from "../data/contact";
+import { HEALTH_LINES } from "../data/contact";
+
 import { SITE, clusters } from "../data/site";
+
+const SA = HEALTH_LINES.find((c) => c.code === "sa");
+const SA_MOH = SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value ?? "937";
+const SA_EMS = SA?.lines.find((l) => l.label.includes("الإسعاف"))?.value ?? "997";
 
 export function Home() {
   const { articles } = useCatalog();
@@ -15,7 +20,7 @@ export function Home() {
   return (
     <div className="mx-auto max-w-6xl space-y-14 px-4 py-10">
       <Seo
-        title="سايتوتك في السعودية: فهم الدواء قبل أي قرار صحي"
+        title="صحة المرأة والحمل: معلومات طبية موثّقة بالعربية"
         description={SITE.description}
         path="/"
       />
@@ -39,8 +44,8 @@ export function Home() {
             contactPoint: [
               {
                 "@type": "ContactPoint",
-                telephone: "+966538159747",
-                contactType: "customer support",
+                contactType: "editorial",
+                email: "info@saudiersaa.com",
                 availableLanguage: ["ar"],
               },
             ],
@@ -62,36 +67,33 @@ export function Home() {
       <section className="overflow-hidden rounded-[2rem] border border-line bg-paper shadow-sm">
         <div className="grid md:grid-cols-[1.1fr_1fr]">
           <div className="p-8 md:p-12">
-            <p className="text-sm font-semibold text-sage">محتوى تعليمي عربي موثّق بالمراجع</p>
-            <h1 className="mt-3 text-4xl font-bold leading-[1.35] text-teal-deep md:text-5xl">
-              سايتوتك في السعودية: فهم الدواء قبل أي قرار صحي
+            <p className="text-sm font-semibold text-accent">محتوى تعليمي عربي موثّق بالمراجع</p>
+            <h1 className="mt-3 text-4xl font-bold leading-[1.35] text-brand-deep md:text-5xl">
+              صحة المرأة والحمل: معلومات طبية موثّقة بالعربية
             </h1>
             <p className="mt-5 max-w-xl text-[1.05rem] leading-9 text-ink-soft">
-              مقالات تشرح سايتوتك وميزوبروستول بلغة واضحة: التعريف، الاستخدامات تحت الإشراف، الأمان، الآثار الجانبية،
-              ومتى تجب مراجعة الطبيب. مع استشارة طبية خاصة عبر واتساب من فريق مختص.
+              منصة تعليمية عربية للصحة الإنجابية وصحة المرأة: مقالات موثّقة بالمراجع تشرح الحمل
+              خارج الرحم، تكيس المبايض، الخصوبة، سلامة الأدوية أثناء الحمل، والطوارئ النسائية — بلغة
+              واضحة، وبلا تشخيص أو وصف دوائي.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <a
-                href={WHATSAPP_MESSAGE}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-bold text-white shadow-md"
-              >
-                <svg viewBox="0 0 32 32" fill="currentColor" className="h-5 w-5" aria-hidden="true">
-                  <path d="M16.02 4C9.4 4 4 9.4 4 16.02c0 2.11.55 4.17 1.6 5.99L4 28l6.15-1.6a11.94 11.94 0 0 0 5.87 1.5h.01c6.62 0 12.02-5.4 12.02-12.02 0-3.21-1.25-6.23-3.52-8.5A11.93 11.93 0 0 0 16.02 4z" />
-                </svg>
-                <span dir="ltr" className="font-mono">{CONTACT_PHONE_DISPLAY}</span>
-              </a>
-              <Link to="/what-is-cytotec" className="rounded-full bg-teal px-5 py-2.5 text-sm font-semibold text-white">
-                ابدئي من التعريف
+              <Link to="/blog" className="rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-white shadow-md transition hover:brightness-110">
+                تصفّحي المقالات
               </Link>
-              <Link to="/blog" className="rounded-full border border-line px-5 py-2.5 text-sm font-semibold">
-                فهرس المقالات
+              <Link to="/what-is-cytotec" className="rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white">
+                ابدئي من الأساسيات
+              </Link>
+              <Link to="/medical-sources" className="rounded-full border border-line bg-paper px-5 py-2.5 text-sm font-semibold">
+                المصادر الطبية
               </Link>
             </div>
-            <p className="mt-3 text-xs text-ink-soft">استشارة عبر واتساب — رد سريع وخصوصية تامة.</p>
+            <p className="mt-4 text-xs leading-6 text-ink-soft">
+              للحالات العاجلة: الإسعاف <span dir="ltr" className="font-mono font-bold">{SA_EMS}</span> في السعودية ·
+              مركز وزارة الصحة <span dir="ltr" className="font-mono font-bold">{SA_MOH}</span>. هذا الموقع لا يقدّم
+              استشارة فردية ولا يصرف أدوية.
+            </p>
           </div>
-          <div className="relative min-h-72 bg-[#e8f2ee]">
+          <div className="relative min-h-72 bg-brand-soft">
             <img
               src="/images/hero-doctor.jpg"
               alt="طبيبة سعودية بحجاب في عيادة صحة المرأة"

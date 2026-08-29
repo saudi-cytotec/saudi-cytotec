@@ -1,0 +1,126 @@
+/// <reference types="vite/client" />
+import type { ContentBlock, ManagedArticle } from "../types";
+import { staticToManaged } from "./defaults";
+import { isValidShortSlug } from "../utils/slug";
+
+/**
+ * Build-time content source.
+ *
+ * Every JSON file under /content/published is bundled into the app by Vite at
+ * build time. Because it is part of the bundle, a published article:
+ *   - exists in the deployed output (not in one visitor's browser),
+ *   - is reachable at a stable URL,
+ *   - appears in the generated sitemap,
+ *   - is crawlable without JavaScript-dependent state.
+ *
+ * Files are written by api/publish.js as a Git commit, which triggers a Vercel
+ * redeploy. That is the whole publishing pipeline: commit -> build -> live.
+ */
+const modules = import.meta.glob("../../content/published/*.json", { eager: true });
+
+const BLOCK_TYPES = new Set(["p", "h2", "h3", "ul", "callout"]);
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
+  if (!isRecord(raw)) {
+    console.warn(`[content] skipped ${fileName}: not an object`);
+    return null;
+  }
+
+  const slug = typeof raw.slug === "string" ? raw.slug.trim() : "";
+  if (!isValidShortSlug(slug).ok) {
+    console.warn(`[content] skipped ${fileName}: invalid slug "${slug}"`);
+    return null;
+  }
+
+  const blocks: ContentBlock[] = Array.isArray(raw.blocks)
+    ? raw.blocks
+        .filter((block): block is Record<string, unknown> => isRecord(block))
+        .filter((block) => typeof block.type === "string" && BLOCK_TYPES.has(block.type))
+        .map((block) => ({
+          type: block.type as ContentBlock["type"],
+          text: typeof block.text === "string" ? block.text : undefined,
+          items: Array.isArray(block.items)
+            ? (block.items as unknown[]).filter((i): i is string => typeof i === "string")
+            : undefined,
+          tone: ["info", "warning", "emergency"].includes(String(block.tone))
+            ? (block.tone as ContentBlock["tone"])
+            : undefined,
+        }))
+    : [];
+
+  if (!blocks.length) {
+    console.warn(`[content] skipped ${fileName}: no valid content blocks`);
+    return null;
+  }
+
+  const title = typeof raw.title === "string" ? raw.title.trim() : "";
+  if (!title) {
+    console.warn(`[content] skipped ${fileName}: missing title`);
+    return null;
+  }
+
+  // Route through the same normaliser used for the static articles so committed
+  // content gets identical default fields (canonical, og tags, image, etc.).
+  const asStatic = {
+    slug,
+    title,
+    h1: typeof raw.h1 === "string" && raw.h1.trim() ? raw.h1 : title,
+    metaTitle: typeof raw.metaTitle === "string" && raw.metaTitle ? raw.metaTitle : title,
+    metaDescription: typeof raw.metaDescription === "string" ? raw.metaDescription : "",
+    cluster: raw.cluster,
+    excerpt: typeof raw.excerpt === "string" ? raw.excerpt : "",
+    publishedAt: typeof raw.publishedAt === "string" ? raw.publishedAt : new Date().toISOString().slice(0, 10),
+    updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : new Date().toISOString().slice(0, 10),
+    image: typeof raw.image === "string" ? raw.image : "",
+    imageAlt: typeof raw.imageAlt === "string" ? raw.imageAlt : "",
+    related: Array.isArray(raw.related) ? raw.related.filter((v): v is string => typeof v === "string") : [],
+    cornerstones: Array.isArray(raw.cornerstones)
+      ? raw.cornerstones.filter((v): v is string => typeof v === "string")
+      : [],
+    references: Array.isArray(raw.references) ? raw.references.filter((v): v is string => typeof v === "string") : [],
+    blocks,
+    faqs: Array.isArray(raw.faqs)
+      ? raw.faqs
+          .filter((f): f is Record<string, unknown> => isRecord(f))
+          .filter((f) => typeof f.q === "string" && typeof f.a === "string")
+          .map((f) => ({ q: f.q as string, a: f.a as string }))
+      : [],
+  } as unknown as Parameters<typeof staticToManaged>[0];
+
+  const managed = staticToManaged(asStatic);
+
+  return {
+    ...managed,
+    // Committed content is live by definition: it is in the deployed bundle.
+    status: "published",
+    source: "cms",
+    id: typeof raw.id === "string" && raw.id ? raw.id : `cms-${slug}`,
+    slugLocked: true,
+    canonical: typeof raw.canonical === "string" && raw.canonical ? raw.canonical : managed.canonical,
+    primaryKeyword:
+      typeof raw.primaryKeyword === "string" && raw.primaryKeyword ? raw.primaryKeyword : managed.primaryKeyword,
+    seoTitle: typeof raw.seoTitle === "string" && raw.seoTitle ? raw.seoTitle : managed.seoTitle,
+    metaDescription: typeof raw.metaDescription === "string" ? raw.metaDescription : managed.metaDescription,
+    internalLinks: Array.isArray(raw.internalLinks)
+      ? raw.internalLinks.filter((v): v is string => typeof v === "string")
+      : managed.internalLinks,
+    references: Array.isArray(raw.references) ? (raw.references as string[]) : managed.references,
+  };
+}
+
+function load(): ManagedArticle[] {
+  const out: ManagedArticle[] = [];
+  for (const [path, mod] of Object.entries(modules)) {
+    const payload = (mod as { default?: unknown }).default ?? mod;
+    const article = sanitize(payload, path);
+    if (article) out.push(article);
+  }
+  // Newest first for "latest" listings.
+  return out.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+}
+
+export const committedArticles: ManagedArticle[] = load();

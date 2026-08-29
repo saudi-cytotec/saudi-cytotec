@@ -29,3 +29,25 @@ export function generateRequest(payload: Record<string, unknown>) {
     body: JSON.stringify(payload),
   });
 }
+
+export function publishRequest(article: unknown, schedule = false) {
+  return api<{
+    ok?: boolean;
+    slug?: string;
+    url?: string;
+    scheduled?: boolean;
+    publishAt?: string;
+    error?: string;
+    blocker?: string;
+    note?: string;
+  }>(`/api/publish${schedule ? "?schedule=1" : ""}`, {
+    method: "POST",
+    body: JSON.stringify({ article }),
+  });
+}
+
+export function unpublishRequest(slug: string) {
+  return api<{ ok?: boolean; error?: string }>(`/api/publish?slug=${encodeURIComponent(slug)}`, {
+    method: "DELETE",
+  });
+}
