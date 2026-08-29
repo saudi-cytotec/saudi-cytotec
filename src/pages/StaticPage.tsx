@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Breadcrumbs } from "../components/Breadcrumbs";
-import { ConsultCTA } from "../components/ConsultCTA";
+import { CareReferral } from "../components/CareReferral";
 import { ContentBlocks } from "../components/ContentBlocks";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { Seo } from "../components/Seo";
@@ -19,7 +19,7 @@ export function StaticPage({ page }: { page: StaticPageType }) {
         <ContentBlocks blocks={page.blocks} />
       </div>
       <div className="max-w-3xl">
-        <ConsultCTA />
+        <CareReferral />
       </div>
       <Link to="/blog" className="mt-6 inline-block text-sm font-semibold text-teal">
         تصفحي المقالات المرتبطة

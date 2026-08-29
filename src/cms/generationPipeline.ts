@@ -5,6 +5,8 @@ import { composeLongform, expandLongform, type GenerationRequest } from "./longf
 export type { GenerationRequest };
 
 export interface GenerationResult {
+  /** Whether the body reached the recommended depth. Advisory only. */
+  meetsRecommendedDepth?: boolean;
   ok: boolean;
   completed: boolean;
   publishAllowed: boolean;
@@ -53,25 +55,28 @@ export function runGenerationPipeline(input: GenerationRequest): GenerationResul
   };
 }
 
-export function enforceBodyMinimum(blocks: ContentBlock[], input: GenerationRequest): GenerationResult {
+export function reportBodyDepth(blocks: ContentBlock[], input: GenerationRequest): GenerationResult {
   const hasBody = blocks.some((block) => !isDisclaimerBlock(block) && (block.text || block.items?.length));
   if (!hasBody) return runGenerationPipeline(input);
-  let working = blocks;
-  let expansions = 0;
-  let stats = bodyStructure(working);
-  while (stats.wordCount < MIN_BODY_WORDS && expansions < 6) {
-    const next = expandLongform(working, input, MIN_BODY_WORDS - stats.wordCount, expansions);
-    if (next.length === working.length) break;
-    working = next;
-    expansions += 1;
-    stats = bodyStructure(working);
-  }
+  // Deliberately no expansion loop here.
+  //
+  // The previous implementation re-generated content in a loop until a word
+  // count was reached. That produces repetition and filler, which is a defect
+  // in medical content: a reader who gets the same caution three times learns
+  // nothing and trusts the page less. Depth is an editorial decision.
+  //
+  // We report the gap and let the editor decide.
+  const working = blocks;
+  const expansions = 0;
+  const stats = bodyStructure(working);
   const missingWords = Math.max(0, MIN_BODY_WORDS - stats.wordCount);
-  const ok = stats.wordCount >= MIN_BODY_WORDS;
+  const meetsDepth = stats.wordCount >= MIN_BODY_WORDS;
   return {
-    ok,
-    completed: ok,
-    publishAllowed: ok,
+    ok: true,
+    completed: true,
+    // Publishing is never gated on depth. Only a technically broken page
+    // (invalid slug, empty body) is blocked, by validateArticle.
+    publishAllowed: true,
     wordCount: stats.wordCount,
     missingWords,
     paragraphs: stats.paragraphs,
@@ -79,7 +84,10 @@ export function enforceBodyMinimum(blocks: ContentBlock[], input: GenerationRequ
     h3: stats.h3,
     expansions,
     blocks: working,
-    error: ok ? undefined : `فشل التوليد: متن المقال ${stats.wordCount} كلمة. النشر ممنوع.`,
+    meetsRecommendedDepth: meetsDepth,
+    error: meetsDepth
+      ? undefined
+      : `تنبيه تحريري: المتن ${stats.wordCount} كلمة، وأقل من العمق المقترح (${MIN_BODY_WORDS}). لا يمنع النشر — وسّعي المحتوى بمعلومات حقيقية لا بتكرار.`,
   };
 }
 

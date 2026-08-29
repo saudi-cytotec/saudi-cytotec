@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, NavLink, Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
-import { enforceBodyMinimum, runGenerationPipeline } from "../cms/generationPipeline";
+import { reportBodyDepth, runGenerationPipeline } from "../cms/generationPipeline";
 import { useCatalog } from "../cms/CatalogContext";
 import { TEST_REPORT_LINE, testArticleReport } from "../cms/testArticle";
 import { Seo } from "../components/Seo";
@@ -10,7 +10,7 @@ import type { ArticleType, ClusterId, ContentMapItem, ManagedArticle, SearchInte
 import { bodyWordCount } from "../utils/bodyWordCount";
 import { isValidShortSlug, suggestSlug } from "../utils/slug";
 import { validateArticle } from "../utils/validation";
-import { generateRequest, loginRequest, logoutRequest, sessionCheck } from "./api";
+import { generateRequest, loginRequest, logoutRequest, publishRequest, sessionCheck } from "./api";
 import { applyTopicDefaults, blocksFromGenerated, emptyArticle, type GeneratorInput } from "./articleFactory";
 
 const nav = [
@@ -239,11 +239,35 @@ function EditorScreen({ mode }: { mode: "create" | "edit" }) {
   function patch(next: Partial<ManagedArticle>) {
     setArticle((current) => applyTopicDefaults({ ...current, ...next, updatedAt: new Date().toISOString().slice(0, 10) }));
   }
-  function save(status?: ManagedArticle["status"]) {
+  const [publishNote, setPublishNote] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  async function save(status?: ManagedArticle["status"]) {
     const next = { ...article, status: status ?? article.status };
+    // Only a technically broken page is refused. Word count, SEO length and
+    // reference count are advisory and never block publishing.
+    if (status === "published" && !validation.ok) {
+      setPublishNote("لا يمكن النشر: " + validation.items.filter((i) => i.blocking && !i.ok).map((i) => i.detail).join(" · "));
+      return;
+    }
     if (status === "published") {
-      if (!validation.ok || bodyWordCount(next.blocks) < 2000) return;
       if (next.source === "cms") next.slugLocked = true;
+      setBusy(true);
+      setPublishNote(null);
+      const res = await publishRequest(next);
+      setBusy(false);
+      if (!res.ok) {
+        const msg = res.data?.error || res.data?.blocker || "تعذر النشر.";
+        // A missing token is an infrastructure gap, not a lost article: the
+        // edit is still saved locally and can be published once configured.
+        setPublishNote(`${msg} — حُفظ المقال محلياً ويمكن إعادة محاولة النشر.`);
+      } else {
+        setPublishNote(
+          res.data?.scheduled
+            ? `تمت الجدولة لتاريخ ${res.data.publishAt}.`
+            : "تم النشر إلى المستودع. ستظهر الصفحة بعد اكتمال إعادة النشر.",
+        );
+      }
     }
     upsertArticle(next);
     setArticle(next);
@@ -277,22 +301,30 @@ function EditorScreen({ mode }: { mode: "create" | "edit" }) {
           <button
             type="button"
             onClick={() => {
-              const expanded = enforceBodyMinimum(article.blocks, { topic: article.title || article.h1, primaryKeyword: article.primaryKeyword, cluster: article.cluster });
+              const expanded = reportBodyDepth(article.blocks, { topic: article.title || article.h1, primaryKeyword: article.primaryKeyword, cluster: article.cluster });
               patch({ blocks: expanded.blocks, hasDisclaimer: true, status: "draft" });
             }}
             className="rounded-full border border-line px-4 py-2 text-sm"
+            title="يعرض عمق المتن الحالي. لا يضيف حشواً تلقائياً."
           >
-            توسيع حتى 2000 كلمة
+            فحص عمق المتن
           </button>
           <button type="button" onClick={() => save("review")} className="rounded-full border border-line px-4 py-2 text-sm">إرسال للمراجعة</button>
-          <button type="button" disabled={!validation.ok} onClick={() => save("published")} className="rounded-full bg-teal px-4 py-2 text-sm text-white disabled:cursor-not-allowed disabled:opacity-50">نشر</button>
+          <button type="button" disabled={!validation.ok || busy} onClick={() => save("published")} className="rounded-full bg-teal px-4 py-2 text-sm text-white disabled:cursor-not-allowed disabled:opacity-50">{busy ? "جارٍ النشر..." : "نشر"}</button>
           <Link to={`/admin/preview/${article.id}`} className="rounded-full border border-line px-4 py-2 text-sm">معاينة</Link>
           {article.source === "cms" ? (
             <button type="button" className="rounded-full border border-clay px-4 py-2 text-sm text-clay" onClick={() => { removeArticle(article.id); navigate("/admin/articles"); }}>حذف</button>
           ) : null}
         </div>
       </div>
-      <ValidationPanel article={article} />
+      <div className="space-y-4">
+        {publishNote ? (
+          <p role="status" className="rounded-2xl border border-line bg-brand-soft p-3 text-sm leading-7 text-brand-deep">
+            {publishNote}
+          </p>
+        ) : null}
+        <ValidationPanel article={article} />
+      </div>
     </div>
   );
 }
@@ -544,7 +576,7 @@ function GeneratorScreen() {
       setPipelineNote("واجهة OpenAI غير متاحة هنا. اكتمل التوليد عبر خط الأنابيب البرمجي مع العدّ والتوسيع.");
     }
     const enforced = incoming.blocks.length
-      ? enforceBodyMinimum(incoming.blocks, { topic: form.topic, primaryKeyword: form.primaryKeyword, cluster: form.cluster })
+      ? reportBodyDepth(incoming.blocks, { topic: form.topic, primaryKeyword: form.primaryKeyword, cluster: form.cluster })
       : runGenerationPipeline({ topic: form.topic, primaryKeyword: form.primaryKeyword, cluster: form.cluster });
     const article = applyTopicDefaults({ ...incoming, blocks: enforced.blocks, hasDisclaimer: true, status: "draft" });
     if (!enforced.ok) {

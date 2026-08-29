@@ -3,7 +3,7 @@ import { useCatalog } from "../cms/CatalogContext";
 import { ArticleCard } from "../components/ArticleCard";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CategoryCard } from "../components/CategoryCard";
-import { ConsultCTA } from "../components/ConsultCTA";
+import { CareReferral } from "../components/CareReferral";
 import { Seo } from "../components/Seo";
 import { clusters } from "../data/site";
 
@@ -58,7 +58,7 @@ export function BlogIndex() {
           </div>
         )}
       </div>
-      <ConsultCTA />
+      <CareReferral />
     </div>
   );
 }

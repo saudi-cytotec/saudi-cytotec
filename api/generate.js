@@ -1,24 +1,58 @@
 import { json, requireAdmin } from "./_lib/session.js";
 import { MIN_BODY_WORDS, bodyStructure, bodyWordCount } from "./_lib/bodyCount.js";
 
-const MAX_PASSES = 5;
+/**
+ * Content Engine
+ * --------------
+ * Stages, requested individually via `body.stage`:
+ *
+ *   research  -> topic framing, search intent, primary/secondary keywords,
+ *                related entities, audience, likely competitor gaps
+ *   outline   -> H1, H2/H3 tree, FAQ seeds, internal-link suggestions,
+ *                schema recommendation
+ *   draft     -> full Arabic article body as typed content blocks + metadata
+ *
+ * Design rules:
+ *  - The API key is read from process.env and is NEVER logged or returned.
+ *  - No stage blocks publishing. Word count is reported as `advisory`, and the
+ *    caller decides. See src/utils/validation.ts for the blocking policy.
+ *  - There is deliberately no "pad until word count is reached" loop: that
+ *    produces repetition, which is a medical-content quality defect. If a draft
+ *    comes back short, we say so and the editor expands it substantively.
+ */
 
-async function openaiJson(key, messages) {
+const ALLOWED_STAGES = new Set(["research", "outline", "draft"]);
+const MAX_TOPIC = 200;
+const MAX_KEYWORD = 80;
+
+const SYSTEM_PROMPT = `You write formal, conservative Arabic medical education for a Gulf
+audience (Saudi Arabia, UAE, Kuwait, Bahrain).
+
+Hard rules:
+- Educational and general only. No dosing instructions, no regimens, no
+  step-by-step self-treatment, no home protocols.
+- Never tell the reader how to obtain, buy, or source any medicine.
+- Never include phone numbers, WhatsApp handles, or vendor details.
+- Do not invent studies, statistics, doctor names, institutions, or citations.
+  If you are not confident a source exists, omit it.
+- Do not present one country's law as another country's law.
+- Do not repeat the same sentence or idea in different words.
+- Return valid JSON only, with no markdown fences.`;
+
+async function openaiJson(key, messages, maxTokens = 8000) {
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-    },
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "gpt-4.1-mini",
-      temperature: 0.35,
-      max_tokens: 8000,
+      model: process.env.OPENAI_MODEL || "gpt-4.1-mini",
+      temperature: 0.3,
+      max_tokens: maxTokens,
       response_format: { type: "json_object" },
       messages,
     }),
   });
   if (!response.ok) {
+    // Never propagate the upstream body: it can echo request details.
     const err = new Error("openai_failed");
     err.status = response.status;
     throw err;
@@ -30,7 +64,22 @@ async function openaiJson(key, messages) {
 
 function normalizeBlocks(raw) {
   if (!Array.isArray(raw)) return [];
-  return raw.filter((block) => block && ["p", "h2", "h3", "ul", "callout"].includes(block.type));
+  return raw
+    .filter((block) => block && ["p", "h2", "h3", "ul", "callout"].includes(block.type))
+    .map((block) => ({
+      type: block.type,
+      text: typeof block.text === "string" ? block.text : undefined,
+      items: Array.isArray(block.items) ? block.items.filter((i) => typeof i === "string") : undefined,
+      tone: ["info", "warning", "emergency"].includes(block.tone) ? block.tone : undefined,
+    }));
+}
+
+function str(value, fallback = "") {
+  return typeof value === "string" && value.trim() ? value.trim() : fallback;
+}
+
+function strArray(value, limit = 12) {
+  return Array.isArray(value) ? value.filter((v) => typeof v === "string" && v.trim()).slice(0, limit) : [];
 }
 
 export default async function handler(req, res) {
@@ -41,83 +90,156 @@ export default async function handler(req, res) {
   const key = process.env.OPENAI_API_KEY;
   if (!key) {
     return json(res, 503, {
-      error: "أضيفي OPENAI_API_KEY من إعدادات بيئة Vercel. المفتاح لا يُوضع في الشيفرة.",
+      error: "OPENAI_API_KEY غير مُعدّ. أضيفيه من إعدادات بيئة Vercel. المفتاح لا يُوضع في الشيفرة.",
       configured: false,
+      blocker: "EXTERNAL: Vercel environment variable",
     });
   }
 
   const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
-  const topic = String(body.topic || "").slice(0, 200);
-  const keyword = String(body.primaryKeyword || topic).slice(0, 80);
+  const stage = ALLOWED_STAGES.has(body.stage) ? body.stage : "draft";
+  const topic = str(body.topic).slice(0, MAX_TOPIC);
+  const keyword = str(body.primaryKeyword, topic).slice(0, MAX_KEYWORD);
+  const cluster = str(body.cluster, "safety").slice(0, 40);
+  const country = str(body.country, "").slice(0, 40);
+  const existingSlugs = strArray(body.existingSlugs, 400);
 
-  const system = `You write formal Arabic medical education. Educational only. No dosing, no purchase, no phone numbers, no home protocols. Do not invent studies. Do not repeat the same sentence. Return JSON only.`;
+  if (!topic) return json(res, 400, { error: "الحقل topic مطلوب." });
 
-  let article = {};
-  let blocks = [];
-  let passes = 0;
-
-  try {
-    article = await openaiJson(key, [
-      { role: "system", content: system },
-      {
-        role: "user",
-        content: `Write a long educational article in Arabic about: ${topic}
+  const context = `Topic: ${topic}
 Primary keyword: ${keyword}
-Cluster: ${body.cluster || "safety"}
-Return JSON:
-{"title":"","h1":"","excerpt":"","seoTitle":"","metaDescription":"","blocks":[{"type":"p|h2|h3|ul|callout","text":"","items":[],"tone":"info|warning|emergency"}],"faqs":[{"q":"","a":""}]}
-Requirements for blocks:
-- At least 8 H2, 3 H3, 16 paragraphs
-- Each paragraph 80-140 Arabic words of new information
-- Cover definition, approved uses, supervised contexts, pregnancy warning, side effects, when to seek care, Saudi regulation, limits of online info
-- Do not put disclaimer text inside counted paragraphs; add one final disclaimer paragraph separately
-- Do not pad by repeating`,
-      },
-    ]);
-    blocks = normalizeBlocks(article.blocks);
-    passes = 1;
+Cluster: ${cluster}
+${country ? `Country context: ${country}` : "Country context: general Gulf (do not assert a specific country's law)"}
+${existingSlugs.length ? `Existing article slugs on the site (use for internal-link suggestions): ${existingSlugs.slice(0, 60).join(", ")}` : ""}`;
 
-    while (bodyWordCount(blocks) < MIN_BODY_WORDS && passes < MAX_PASSES) {
-      const missing = MIN_BODY_WORDS - bodyWordCount(blocks);
-      const expansion = await openaiJson(key, [
-        { role: "system", content: system },
-        {
-          role: "user",
-          content: `The article body currently has ${bodyWordCount(blocks)} words and needs ${missing} more REAL Arabic words.
-Topic: ${topic}
-Already used H2 titles: ${blocks.filter((b) => b.type === "h2").map((b) => b.text).join(" | ")}
-Add NEW sections only. No repeated sentences. No disclaimer padding.
-Return JSON: {"blocks":[{"type":"p|h2|h3|ul|callout","text":"","items":[],"tone":"info|warning|emergency"}]}
-Add 2-3 new H2 sections with long original paragraphs until about ${missing + 80} words are added.`,
-        },
-      ]);
-      blocks = [...blocks, ...normalizeBlocks(expansion.blocks)];
-      passes += 1;
-    }
-  } catch {
-    return json(res, 502, {
-      error: "تعذر إكمال التوليد من المزود. لم يُحفظ المقال مكتملاً.",
+  const prompts = {
+    research: `${context}
+
+Produce editorial research for planning an original Arabic educational article.
+Return JSON:
+{"searchIntent":"informational|navigational|commercial|transactional",
+ "audience":"",
+ "primaryKeyword":"",
+ "secondaryKeywords":[],
+ "longTailQuestions":[],
+ "entities":[],
+ "synonyms":[],
+ "countryModifiers":[],
+ "competitorGaps":[],
+ "contentAngle":"",
+ "risksToAvoid":[]}
+
+Do not scrape or restate any competitor's text. Describe gaps, not their content.`,
+
+    outline: `${context}
+
+Produce a structural outline only (no body paragraphs).
+Return JSON:
+{"h1":"",
+ "seoTitle":"",
+ "metaDescription":"",
+ "excerpt":"",
+ "outline":[{"h2":"","h3":[],"purpose":""}],
+ "faqSeeds":[{"q":"","a":""}],
+ "internalLinkSuggestions":[{"slug":"","reason":""}],
+ "schemaRecommendation":{"primary":"Article|MedicalWebPage|FAQPage","rationale":""},
+ "sourceCategories":[]}
+
+Rules:
+- Only recommend "Article" or "MedicalWebPage" or "FAQPage" as schema.
+- NEVER recommend Drug, Product, Offer, Review or AggregateRating schema; this
+  site does not sell anything and has no ratings.`,
+
+    draft: `${context}
+
+Write a complete original Arabic educational article.
+Return JSON:
+{"title":"","h1":"","excerpt":"","seoTitle":"","metaDescription":"",
+ "primaryKeyword":"","secondaryKeywords":[],
+ "blocks":[{"type":"p|h2|h3|ul|callout","text":"","items":[],"tone":"info|warning|emergency"}],
+ "faqs":[{"q":"","a":""}],
+ "internalLinkSuggestions":[{"slug":"","reason":""}],
+ "sourceCategories":[]}
+
+Structure requirements:
+- 6-9 H2 sections, each with real substance; 2-4 H3 where genuinely useful.
+- Every paragraph must add new information. No restating earlier paragraphs.
+- Include, where relevant: what the condition/topic is, who is affected,
+  warning signs, when to seek licensed care, follow-up, and the limits of
+  online information.
+- Do NOT pad to reach a word count. Shorter and accurate beats long and padded.`,
+  };
+
+  let result;
+  try {
+    result = await openaiJson(key, [
+      { role: "system", content: SYSTEM_PROMPT },
+      { role: "user", content: prompts[stage] },
+    ]);
+  } catch (err) {
+    const status = err && err.status === 401 ? 502 : 502;
+    return json(res, status, {
+      // Deliberately generic: no upstream detail, no key material.
+      error: "تعذر إكمال التوليد من مزود الذكاء الاصطناعي. لم يُحفظ شيء.",
       configured: true,
-      completed: false,
-      publishAllowed: false,
+      stage,
     });
   }
 
+  const blocks = normalizeBlocks(result.blocks);
   const stats = bodyStructure(blocks);
-  const ok = stats.wordCount >= MIN_BODY_WORDS;
-  article.blocks = blocks;
+  const words = bodyWordCount(blocks);
+  const meetsDepth = words >= MIN_BODY_WORDS;
 
-  return json(res, ok ? 200 : 422, {
-    article,
+  return json(res, 200, {
     configured: true,
-    completed: ok,
-    publishAllowed: ok,
-    wordCount: stats.wordCount,
-    missingWords: Math.max(0, MIN_BODY_WORDS - stats.wordCount),
-    paragraphs: stats.paragraphs,
-    h2: stats.h2,
-    h3: stats.h3,
-    expansions: Math.max(0, passes - 1),
-    error: ok ? undefined : `فشل التوليد: المتن ${stats.wordCount} كلمة بعد ${passes} تمريرات. النشر ممنوع.`,
+    stage,
+    // `publishAllowed` is always true. Publishing is an editorial decision;
+    // only a technically broken page (empty slug/body) is blocked, and that is
+    // enforced by validateArticle, not by the generator.
+    publishAllowed: true,
+    result: {
+      title: str(result.title),
+      h1: str(result.h1),
+      excerpt: str(result.excerpt),
+      seoTitle: str(result.seoTitle),
+      metaDescription: str(result.metaDescription),
+      primaryKeyword: str(result.primaryKeyword, keyword),
+      secondaryKeywords: strArray(result.secondaryKeywords),
+      searchIntent: str(result.searchIntent),
+      audience: str(result.audience),
+      longTailQuestions: strArray(result.longTailQuestions),
+      entities: strArray(result.entities),
+      synonyms: strArray(result.synonyms),
+      countryModifiers: strArray(result.countryModifiers),
+      competitorGaps: strArray(result.competitorGaps),
+      contentAngle: str(result.contentAngle),
+      risksToAvoid: strArray(result.risksToAvoid),
+      outline: Array.isArray(result.outline) ? result.outline : [],
+      blocks,
+      faqs: Array.isArray(result.faqs)
+        ? result.faqs.filter((f) => f && f.q && f.a).slice(0, 12)
+        : [],
+      internalLinkSuggestions: Array.isArray(result.internalLinkSuggestions)
+        ? result.internalLinkSuggestions.slice(0, 12)
+        : [],
+      schemaRecommendation: result.schemaRecommendation || {
+        primary: "MedicalWebPage",
+        rationale: "Educational medical page; no product or rating data exists.",
+      },
+      sourceCategories: strArray(result.sourceCategories),
+    },
+    metrics: {
+      wordCount: words,
+      paragraphs: stats.paragraphs,
+      h2: stats.h2,
+      h3: stats.h3,
+      meetsRecommendedDepth: meetsDepth,
+      recommendedDepth: MIN_BODY_WORDS,
+      missingWords: Math.max(0, MIN_BODY_WORDS - words),
+    },
+    advisory: meetsDepth
+      ? undefined
+      : `المسودة ${words} كلمة، وأقل من العمق المقترح (${MIN_BODY_WORDS}). هذا تنبيه تحريري فقط ولا يمنع النشر — وسّعي المحتوى بمعلومات حقيقية لا بتكرار.`,
   });
 }

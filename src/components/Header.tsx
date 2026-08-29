@@ -17,11 +17,13 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/80 bg-paper/92 backdrop-blur-md">
-      <div className="bg-teal-deep text-cream">
+    <header className="sticky top-0 z-40 border-b border-line/80 bg-paper/95 backdrop-blur-md">
+      {/* Red identity accent strip */}
+      <div className="h-1 w-full bg-accent" aria-hidden="true" />
+      <div className="bg-brand-deep text-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2 text-xs sm:text-sm">
           <p>محتوى تعليمي عام — ليس استشارة طبية فردية</p>
-          <Link to="/medical-disclaimer" className="underline decoration-gold/70 underline-offset-4">
+          <Link to="/medical-disclaimer" className="underline decoration-accent/80 underline-offset-4">
             إخلاء المسؤولية
           </Link>
         </div>
@@ -30,7 +32,7 @@ export function Header() {
         <Link to="/" className="flex min-w-0 items-center gap-3">
           <img src="/images/logo.png" alt="" className="h-12 w-12 rounded-2xl object-cover ring-1 ring-line" />
           <span className="min-w-0">
-            <span className="block truncate text-lg font-bold text-teal-deep">{SITE.name}</span>
+            <span className="block truncate text-lg font-bold text-brand-deep">{SITE.name}</span>
             <span className="block text-xs text-ink-soft">معلومات طبية تعليمية</span>
           </span>
         </Link>
@@ -43,7 +45,7 @@ export function Header() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="ابحث عن موضوع تعليمي..."
-            className="w-full rounded-full border border-line bg-cream px-4 py-2 text-sm outline-none ring-teal/30 focus:ring-2"
+            className="w-full rounded-full border border-line bg-cream px-4 py-2 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand/25"
           />
         </form>
         <button
@@ -51,6 +53,7 @@ export function Header() {
           className="rounded-full border border-line px-3 py-2 text-sm md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
+          aria-label="فتح قائمة التنقل"
         >
           القائمة
         </button>
@@ -62,7 +65,7 @@ export function Header() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `rounded-full px-3 py-1.5 text-sm ${isActive ? "bg-teal text-white" : "text-ink-soft hover:bg-sand/70"}`
+                `rounded-full px-3 py-1.5 text-sm ${isActive ? "bg-brand text-white" : "text-ink-soft hover:bg-brand-soft"}`
               }
             >
               {item.label}
@@ -71,7 +74,7 @@ export function Header() {
           <div className="relative">
             <button
               type="button"
-              className="rounded-full px-3 py-1.5 text-sm text-ink-soft hover:bg-sand/70"
+              className="rounded-full px-3 py-1.5 text-sm text-ink-soft hover:bg-brand-soft"
               onClick={() => setMore((v) => !v)}
             >
               المزيد

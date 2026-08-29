@@ -42,9 +42,14 @@ export function emitVerifiedStats(): Plugin {
         },
       };
       fs.writeFileSync(path.resolve("verified-stats.json"), `${JSON.stringify(report, null, 2)}\n`);
+      // Report only. This used to `throw`, which failed the entire production
+      // build whenever any article was under the recommended word count. A
+      // length recommendation must never take the site offline, so it is now a
+      // warning and the build proceeds.
       if (failing.length > 0) {
-        throw new Error(
-          `Body word count gate failed for ${failing.length} article(s). Min ${min.slug}=${min.wordCount}.`,
+        console.warn(
+          `[content] ${failing.length} article(s) below the recommended ${MIN_BODY_WORDS} words ` +
+            `(shortest: ${min.slug}=${min.wordCount}). Advisory only — build continues.`,
         );
       }
     },

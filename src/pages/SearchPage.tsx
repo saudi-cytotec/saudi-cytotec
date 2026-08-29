@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { useCatalog } from "../cms/CatalogContext";
 import { ArticleCard } from "../components/ArticleCard";
 import { Breadcrumbs } from "../components/Breadcrumbs";
-import { ConsultCTA } from "../components/ConsultCTA";
+import { CareReferral } from "../components/CareReferral";
 import { Seo } from "../components/Seo";
 
 export function SearchPage() {
@@ -30,7 +30,7 @@ export function SearchPage() {
           </div>
         )}
       </div>
-      <ConsultCTA />
+      <CareReferral />
     </div>
   );
 }

@@ -1,0 +1,5 @@
+node_modules
+dist
+verified-stats.json
+*.log
+.DS_Store

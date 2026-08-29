@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useCatalog } from "../cms/CatalogContext";
 import { ArticleCard } from "../components/ArticleCard";
 import { Breadcrumbs } from "../components/Breadcrumbs";
-import { ConsultCTA } from "../components/ConsultCTA";
+import { CareReferral } from "../components/CareReferral";
 import { Seo } from "../components/Seo";
 import { clusters } from "../data/site";
 import { clusterPath } from "../utils/content";
@@ -38,7 +38,7 @@ export function ClusterPage() {
           <ArticleCard key={article.slug} article={article} />
         ))}
       </div>
-      <ConsultCTA />
+      <CareReferral />
     </div>
   );
 }

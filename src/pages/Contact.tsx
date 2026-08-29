@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Breadcrumbs } from "../components/Breadcrumbs";
-import { ConsultCTA } from "../components/ConsultCTA";
+import { CareReferral } from "../components/CareReferral";
 import { Seo } from "../components/Seo";
-import { CONTACT_PHONE_DISPLAY } from "../data/contact";
-import { SITE } from "../data/site";
+import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
+
+const SA = HEALTH_LINES.find((c) => c.code === "sa");
 
 export function Contact() {
   const [sent, setSent] = useState(false);
@@ -22,12 +23,17 @@ export function Contact() {
         للاستشارة الطبية راجعي جهة صحية مرخصة.
       </p>
       <p className="mt-3 text-sm">
-        البريد التحريري: <a href={`mailto:${SITE.email}`} className="text-teal">{SITE.email}</a>
+        البريد التحريري: <a href={`mailto:${EDITORIAL_EMAIL}`} className="text-teal">{EDITORIAL_EMAIL}</a>
       </p>
-      <p className="mt-2 text-sm">
-        واتساب الاستشارة: <span dir="ltr" className="font-mono">{CONTACT_PHONE_DISPLAY}</span>
-      </p>
-      <ConsultCTA />
+      <div className="mt-4 rounded-2xl border border-line bg-cream/70 p-4 text-sm leading-7">
+        <p className="font-bold text-brand-deep">لستِ في المكان الصحيح للاستشارة الطبية.</p>
+        <p className="mt-1 text-ink-soft">
+          للإسعاف في السعودية <span dir="ltr" className="font-mono font-bold">{SA?.lines.find((l) => l.label.includes("الإسعاف"))?.value}</span>، ولمركز اتصال
+          وزارة الصحة <span dir="ltr" className="font-mono font-bold">{SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value}</span>. للأرقام الرسمية في الإمارات
+          والكويت والبحرين راجعي القسم أدناه.
+        </p>
+      </div>
+      <CareReferral />
       {sent ? (
         <div className="mt-8 rounded-3xl border border-sage bg-[#eef5f0] p-5 leading-8">
           تم استلام رسالتك محلياً في هذا المتصفح لأغراض العرض. إن كان لديك تصحيح لمصدر طبي، أرسليه أيضاً عبر البريد.
