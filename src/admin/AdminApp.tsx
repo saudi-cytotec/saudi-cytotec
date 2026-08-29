@@ -7,7 +7,7 @@ import { Seo } from "../components/Seo";
 import { referenceList } from "../data/references";
 import { clusters } from "../data/site";
 import type { ArticleType, ClusterId, ContentMapItem, ManagedArticle, SearchIntent } from "../types";
-import { bodyWordCount } from "../utils/bodyWordCount";
+import { MIN_BODY_WORDS, bodyWordCount } from "../utils/bodyWordCount";
 import { isValidShortSlug, suggestSlug } from "../utils/slug";
 import { validateArticle } from "../utils/validation";
 import { generateRequest, loginRequest, logoutRequest, publishRequest, sessionCheck } from "./api";
@@ -360,7 +360,11 @@ function ValidationPanel({ article }: { article: ManagedArticle }) {
       <h2 className="text-lg font-bold text-teal-deep">التحقق قبل النشر</h2>
       <p className={`mt-3 text-2xl font-bold ${words >= 2000 ? "text-sage" : "text-clay"}`}>Word count: {words}</p>
       <p className="text-xs text-ink-soft">المتن فقط — بدون عنوان أو وصف أو إخلاء أو أسئلة أو تنقل</p>
-      {result.missingWords > 0 ? <p className="text-sm text-clay">ناقص {result.missingWords} كلمة حقيقية.</p> : null}
+      {result.missingWords > 0 ? (
+        <p className="text-sm text-clay">
+          أقل من العمق المقترح ({MIN_BODY_WORDS} كلمة) بـ {result.missingWords} كلمة — يُنصح بالتوسيع، ولا يمنع النشر.
+        </p>
+      ) : null}
       <p className="mt-2 text-xs text-ink-soft">{slug.reason}</p>
       <ul className="mt-4 space-y-2 text-sm">
         {result.items.map((item) => (
@@ -370,9 +374,9 @@ function ValidationPanel({ article }: { article: ManagedArticle }) {
           </li>
         ))}
       </ul>
-      {!result.ok || words < 2000
-        ? <p className="mt-4 text-sm font-semibold text-clay">النشر محظور حتى اكتمال التحقق.</p>
-        : <p className="mt-4 text-sm font-semibold text-sage">جاهز للنشر بعد المراجعة.</p>}
+      {!result.ok
+        ? <p className="mt-4 text-sm font-semibold text-clay">النشر محظور حتى إصلاح الأخطاء التقنية فقط (لا يشمل عمق المقال).</p>
+        : <p className="mt-4 text-sm font-semibold text-sage">جاهز للنشر بعد المراجعة — عمق المقال لا يمنع النشر.</p>}
     </aside>
   );
 }
@@ -580,13 +584,16 @@ function GeneratorScreen() {
       : runGenerationPipeline({ topic: form.topic, primaryKeyword: form.primaryKeyword, cluster: form.cluster });
     const article = applyTopicDefaults({ ...incoming, blocks: enforced.blocks, hasDisclaimer: true, status: "draft" });
     if (!enforced.ok) {
-      setError(enforced.error || "فشل التوليد لأن المتن أقل من 2000 كلمة.");
+      setError(enforced.error || "فشل التوليد — لا يوجد محتوى كافٍ في المتن. جرّبي مرة أخرى.");
       setDraft(article);
       return setBusy(false);
     }
     setDraft(article);
     upsertArticle(article);
-    setPipelineNote(`اكتمل بعد ${enforced.expansions} توسيع(ات). Word count: ${enforced.wordCount}`);
+    setPipelineNote(
+      `اكتمل التوليد. Word count: ${enforced.wordCount}` +
+        (enforced.missingWords > 0 ? ` — أقل من العمق المقترح (${MIN_BODY_WORDS}) ولا يمنع النشر.` : "")
+    );
     setBusy(false);
   }
 
@@ -598,7 +605,7 @@ function GeneratorScreen() {
     <div className="grid gap-6 xl:grid-cols-[1fr_320px]">
       <div>
         <h1 className="text-3xl font-bold text-teal-deep">مولّد المقالات</h1>
-        <p className="mt-2 text-sm leading-7 text-ink-soft">بعد كل توليد يُحسب متن المقال فقط. إن نقص عن 2000 يُوسَّع تلقائياً. إن بقي ناقصاً يُرفض اكتماله ويُمنع النشر.</p>
+        <p className="mt-2 text-sm leading-7 text-ink-soft">بعد كل توليد يُحسب متن المقال فقط. العمق المقترح 2000 كلمة؛ إن نقص يُعرض تنبيه تحريري ولا يمنع النشر.</p>
         <div className="mt-5 grid gap-3 md:grid-cols-2">
           <Field label="موضوع المقال"><input className={inputClass()} value={form.topic} onChange={(e) => setForm({ ...form, topic: e.target.value })} /></Field>
           <Field label="الكلمة الأساسية"><input className={inputClass()} value={form.primaryKeyword} onChange={(e) => setForm({ ...form, primaryKeyword: e.target.value, proposedSlug: suggestSlug(e.target.value) })} /></Field>
