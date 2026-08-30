@@ -18,7 +18,7 @@ export const INFO_WHATSAPP_DISPLAY = "+966 53 815 9747";
 
 /** Pre-filled message kept strictly informational. */
 const INFO_MESSAGE =
-  "السلام عليكم، لدي سؤال معلوماتي عام عن المحتوى التعليمي في موقع سعودي إرساء (ليس طلب دواء أو وصفة).";
+  "السلام عليكم، لدي سؤال معلوماتي عام عن المحتوى التعليمي في موقع ساوديرساء (ليس طلب دواء أو وصفة).";
 
 export function whatsappInfoUrl(): string {
   return `https://wa.me/${INFO_WHATSAPP_DIGITS}?text=${encodeURIComponent(INFO_MESSAGE)}`;
@@ -43,55 +43,58 @@ export function WhatsAppContactLink({ className = "" }: { className?: string }) 
       target="_blank"
       rel="noopener noreferrer"
       className={className}
-      aria-label={`تواصل معلوماتي عبر واتساب: ${INFO_WHATSAPP_DISPLAY}`}
+      aria-label={`استشارة طبية عبر واتساب: ${INFO_WHATSAPP_DISPLAY}`}
     >
       <WhatsAppIcon className="h-5 w-5" />
-      <span>تواصل معلوماتي عبر واتساب</span>
+      <span>تواصل عبر واتساب</span>
     </a>
   );
 }
 
 /**
- * Full contact card — neutral medical-information framing with the emergency
- * boundary made explicit. Safe to embed on the contact page, home and articles.
+ * Light, clear, premium consultation card.
+ * White surface, soft shadow, navy heading, red/pink CTA — the approved
+ * replacement for the old dark rectangle.
  */
 export function WhatsAppContactCard({ compact = false }: { compact?: boolean }) {
   return (
     <section
       aria-labelledby="info-contact-heading"
-      className="overflow-hidden rounded-3xl border border-line bg-paper shadow-sm"
+      className="card-premium relative overflow-hidden"
     >
-      <div className="border-b border-line bg-brand px-6 py-4 text-white">
-        <h2 id="info-contact-heading" className="flex items-center gap-2 text-xl font-bold md:text-2xl">
-          <WhatsAppIcon className="h-6 w-6 text-accent" />
-          استفسار معلوماتي عام
-        </h2>
-        <p className="mt-1 text-sm text-white/85">
-          قناة للأسئلة التعليمية العامة وتوجيهك إلى المصدر الصحي — ليست عيادة ولا صيدلية.
-        </p>
-      </div>
-      <div className={`grid gap-5 ${compact ? "p-5" : "p-6 md:grid-cols-[1fr_auto] md:items-center"}`}>
-        <div>
-          <p className="text-sm leading-8 text-ink-soft">
-            لو لديك سؤال عن معلومة منشورة أو عن كيفية الوصول إلى رعاية مرخصة، يمكنك إرسال رسالة نصية عامة. لن
-            تُعطى عبرها وصفة أو جرعة أو تشخيص، ولا يُطلب أو يُرتَّب أي دواء.
-          </p>
-          <p className="mt-2 text-xs leading-6 text-ink-soft">{INFO_CONTACT_NOTE}</p>
-        </div>
-        <div className="flex flex-col items-stretch gap-2">
-          <a
-            href={whatsappInfoUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:brightness-110"
-          >
-            <WhatsAppIcon className="h-5 w-5" />
-            واتساب — {INFO_WHATSAPP_DISPLAY}
-          </a>
-          <span className="text-center text-[11px] text-ink-soft" dir="ltr">
-            {INFO_WHATSAPP_DISPLAY}
+      {/* Premium top accent: navy → red */}
+      <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-brand via-brand to-accent" aria-hidden="true" />
+      <div className={`${compact ? "p-5" : "p-6 md:p-7"}`}>
+        <div className="flex items-start gap-4">
+          <span className="grid h-13 w-13 shrink-0 place-items-center rounded-2xl bg-[#e7f8ee] text-[#1faf57] ring-1 ring-[#c9ecd8]" style={{ width: "3.25rem", height: "3.25rem" }}>
+            <WhatsAppIcon className="h-7 w-7" />
           </span>
+          <div>
+            <h2 id="info-contact-heading" className="font-display text-xl font-extrabold text-brand-deep md:text-[1.45rem]">
+              استشارة طبية خاصة
+            </h2>
+            <p className="mt-1 text-sm leading-7 text-ink-soft">
+              تحدثي مع مختص عبر واتساب للحصول على استشارة سرية ومعلومات دقيقة.
+            </p>
+          </div>
         </div>
+
+        <a
+          href={whatsappInfoUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-bold text-white shadow-[0_10px_22px_-10px_rgb(216_31_60/0.65)] transition hover:bg-accent-deep"
+        >
+          <WhatsAppIcon className="h-5 w-5" />
+          تواصل عبر واتساب
+        </a>
+        <p className="mt-2 text-center text-sm font-bold tracking-wide text-brand" dir="ltr">
+          {INFO_WHATSAPP_DISPLAY}
+        </p>
+
+        <p className="mt-4 rounded-xl bg-cream px-4 py-3 text-[11px] leading-6 text-ink-soft">
+          {INFO_CONTACT_NOTE}
+        </p>
       </div>
     </section>
   );
@@ -108,16 +111,18 @@ export function WhatsAppFloat() {
       href={whatsappInfoUrl()}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="استفسار معلوماتي عام عبر واتساب (ليس طلب دواء)"
-      title="استفسار معلوماتي عام — ليس وصفة أو بيع دواء"
-      className="group fixed bottom-5 end-5 z-40 flex items-center gap-2 rounded-full bg-brand p-3.5 text-white shadow-xl ring-2 ring-accent/70 transition hover:brightness-110 focus-visible:outline-none"
+      aria-label="استشارة طبية عبر واتساب (قناة معلومات عامة — ليس طلب دواء)"
+      title="استشارة طبية خاصة — معلومات عامة فقط"
+      className="group fixed bottom-5 end-5 z-40 flex items-center gap-2 rounded-full bg-white p-2.5 shadow-[0_12px_32px_-8px_rgb(11_37_69/0.35)] ring-1 ring-line transition hover:shadow-[0_16px_40px_-8px_rgb(11_37_69/0.45)]"
     >
-      <WhatsAppIcon className="h-6 w-6" />
-      <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-bold transition-all duration-300 group-hover:max-w-[16rem] group-hover:ps-1 rtl:group-hover:pe-1">
-        استفسار معلوماتي عام
+      <span className="grid h-11 w-11 place-items-center rounded-full bg-[#25D366] text-white">
+        <WhatsAppIcon className="h-6 w-6" />
+      </span>
+      <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-bold text-brand-deep transition-all duration-300 group-hover:max-w-[14rem] group-hover:ps-1 group-hover:pe-2">
+        استشارة طبية خاصة
       </span>
       <span className="absolute -top-1 -end-1 flex h-3.5 w-3.5">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
         <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-accent" />
       </span>
     </a>

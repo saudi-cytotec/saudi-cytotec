@@ -18,25 +18,28 @@ export const DISCLAIMER_SHORT =
 export const EMERGENCY_NOTE =
   "إذا ظهر نزيف شديد، إغماء، ألم بطني حاد، حمى مرتفعة، أو ضيق تنفس، اطلبي رعاية طبية طارئة فوراً.";
 
+export const BRAND_NAME_EN = "saudiersaa";
+export const BRAND_TAGLINE = "مدونة سايتوتك التوعوية في السعودية";
+
 export const mainNav: NavItem[] = [
   { to: "/", label: "الرئيسية" },
-  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
-  { to: "/medical-uses", label: "الاستخدامات الطبية" },
-  { to: "/safety", label: "الأمان" },
-  { to: "/side-effects", label: "الآثار الجانبية" },
-  { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب" },
   { to: "/blog", label: "المقالات" },
+  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
   { to: "/faq", label: "الأسئلة الشائعة" },
+  { to: "/about", label: "عن سايتوتك" },
+  { to: "/womens-health", label: "الصحة النسائية" },
+  { to: "/contact", label: "تواصل معنا" },
 ];
 
 export const moreNav: NavItem[] = [
+  { to: "/medical-uses", label: "الاستخدامات الطبية" },
+  { to: "/safety", label: "الأمان والتحذيرات" },
+  { to: "/side-effects", label: "الآثار الجانبية" },
+  { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب" },
   { to: "/misoprostol", label: "ميزوبروستول" },
-  { to: "/womens-health", label: "صحة المرأة" },
   { to: "/early-pregnancy", label: "الحمل المبكر" },
   { to: "/medical-sources", label: "المصادر الطبية" },
   { to: "/service-areas", label: "مناطق التغطية" },
-  { to: "/about", label: "من نحن" },
-  { to: "/contact", label: "اتصل بنا" },
   { to: "/medical-disclaimer", label: "إخلاء المسؤولية" },
   { to: "/privacy", label: "الخصوصية" },
   { to: "/sitemap", label: "خريطة الموقع" },

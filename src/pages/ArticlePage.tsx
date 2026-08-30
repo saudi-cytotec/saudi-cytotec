@@ -10,6 +10,7 @@ import { SITE } from "../data/site";
 import { relatedArticles as pickRelated } from "../data/articles";
 import { clusterPath, getCluster, readingMinutes } from "../utils/content";
 import { CareReferral } from "../components/CareReferral";
+import { LOGO_SRC } from "../components/Logo";
 import { NotFound } from "./NotFound";
 
 export function ArticlePage() {
@@ -67,7 +68,7 @@ export function ArticlePage() {
               "@type": "Organization",
               name: SITE.name,
               url: SITE.domain,
-              logo: { "@type": "ImageObject", url: `${SITE.domain}/images/logo.png` },
+              logo: { "@type": "ImageObject", url: `${SITE.domain}${LOGO_SRC}` },
             },
             description: article.metaDescription,
             datePublished: article.publishedAt,
@@ -97,15 +98,21 @@ export function ArticlePage() {
           { name: article.title, path: `/blog/${article.slug}` },
         ]}
       />
-      <p className="mt-6 text-sm font-semibold text-sage">{cluster.title}</p>
-      <h1 className="mt-2 max-w-3xl text-4xl font-bold leading-[1.35] text-teal-deep">{article.h1}</h1>
-      <p className="mt-4 max-w-3xl text-lg leading-9 text-ink-soft">{article.excerpt}</p>
-      <p className="mt-3 text-sm text-ink-soft">
-        نُشر في {article.publishedAt} · آخر تحديث {article.updatedAt} · قراءة تقريبية {readingMinutes(article)} دقائق
-      </p>
+      <div className="mt-6">
+        <p className="inline-flex items-center gap-2 rounded-full bg-sky-soft px-3.5 py-1.5 text-xs font-bold text-brand">
+          {cluster.title}
+        </p>
+        <h1 className="mt-3 max-w-3xl font-display text-3xl font-extrabold leading-[1.4] text-brand-deep sm:text-4xl">
+          {article.h1}
+        </h1>
+        <p className="mt-4 max-w-3xl text-lg leading-9 text-ink-soft">{article.excerpt}</p>
+        <p className="mt-3 text-sm text-ink-soft">
+          نُشر في {article.publishedAt} · آخر تحديث {article.updatedAt} · قراءة تقريبية {readingMinutes(article)} دقائق
+        </p>
+      </div>
 
       {bannerSrc ? (
-        <figure className="mt-6 max-w-4xl overflow-hidden rounded-3xl border border-line bg-brand-soft shadow-sm">
+        <figure className="card-premium mt-7 max-w-4xl overflow-hidden">
           <img
             src={bannerSrc}
             alt={bannerAlt}
@@ -116,7 +123,7 @@ export function ArticlePage() {
             className="aspect-[16/9] w-full object-cover"
           />
           {article.imageAlt ? (
-            <figcaption className="px-4 py-2 text-xs text-ink-soft">{article.imageAlt}</figcaption>
+            <figcaption className="px-4 py-2.5 text-xs text-ink-soft">{article.imageAlt}</figcaption>
           ) : null}
         </figure>
       ) : null}

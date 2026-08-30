@@ -2,40 +2,43 @@
 
 @theme {
   --font-sans: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --font-display: "Cairo", "IBM Plex Sans Arabic", "Noto Sans Arabic", sans-serif;
   --font-article: "Noto Naskh Arabic", "IBM Plex Sans Arabic", "Noto Sans Arabic", serif;
 
-  /* ── Canonical brand tokens: Deep Medical Teal + Gold + Warm Cream ────
-     This is the approved visual direction: a professional Arabic medical
-     identity built around a trustworthy deep teal-green (clinical, calm),
-     a refined antique-gold accent (premium editorial highlights), and a warm
-     ivory/cream ground — matching the approved logo, hero and OG artwork.
-     Red is deliberately NOT a brand colour; it is reserved for emergency /
-     danger surfaces only. */
-  --color-brand: #0f5d56;        /* primary deep teal (buttons, links)   */
-  --color-brand-deep: #0b423d;   /* header / footer deep teal            */
-  --color-brand-soft: #e7f1ee;   /* tinted teal surfaces                 */
-  --color-accent: #c9a24b;       /* antique gold — highlights / CTAs     */
-  --color-accent-soft: #f8f1dd;  /* warm gold-tinted surfaces            */
+  /* ── Canonical brand tokens: Navy + Red/Pink + White + Light Blue ─────
+     The approved visual identity (see approved homepage reference):
+     deep navy as the primary institutional colour, a red/pink
+     consultation accent, white surfaces, and subtle cool light-blue
+     backgrounds for a clean, premium medical look. */
+  --color-brand: #16356b;         /* primary navy (buttons, links, headings) */
+  --color-brand-deep: #0b2545;    /* top bar / footer / dark surfaces        */
+  --color-brand-soft: #e9f0fa;    /* navy-tinted surfaces                    */
+  --color-sky: #1d5db8;           /* secondary blue (logo blue, icons)       */
+  --color-sky-soft: #e5eefb;      /* blue-tinted surfaces                    */
+
+  --color-accent: #d81f3c;        /* red/pink — consultation CTA / highlights */
+  --color-accent-deep: #b01229;   /* red hover state                         */
+  --color-accent-soft: #fbe9ee;   /* red-tinted surfaces                     */
 
   /* ── Warning / danger (safety surfaces only — never branding) ───────── */
-  --color-warn: #b7791f;         /* amber for medical caution callouts   */
-  --color-warn-soft: #fdf3e2;    /* amber-tinted surface                 */
-  --color-clay: #b23a48;         /* emergency red (danger)               */
+  --color-warn: #b7791f;          /* amber for medical caution callouts   */
+  --color-warn-soft: #fdf3e2;     /* amber-tinted surface                 */
+  --color-clay: #c03221;          /* emergency red (danger)               */
 
-  /* ── Ink / neutrals (warm clinical) ─────────────────────────────────── */
-  --color-ink: #14262b;
-  --color-ink-soft: #48605f;
-  --color-cream: #f4f7f4;        /* page background: warm clinical white */
-  --color-paper: #ffffff;        /* cards & surfaces                     */
-  --color-line: #d9e2df;         /* borders                              */
-  --color-sand: #e2ebe8;         /* hover fills, muted chips             */
+  /* ── Ink / neutrals (cool clinical) ─────────────────────────────────── */
+  --color-ink: #1b2a44;
+  --color-ink-soft: #5a6b87;
+  --color-cream: #f5f8fc;         /* page background: subtle light blue   */
+  --color-paper: #ffffff;         /* cards & surfaces                     */
+  --color-line: #dce5f1;          /* borders                              */
+  --color-sand: #edf2f9;          /* hover fills, muted chips             */
 
   /* ── Legacy aliases ───────────────────────────────────────────────────
-     Existing components use the teal/sage/gold/clay names. They resolve to
-     the approved palette so the whole site re-skins consistently. */
+     Older components use teal/sage/gold names; they resolve to the
+     approved navy/red palette so the whole site re-skins consistently. */
   --color-teal: var(--color-brand);
   --color-teal-deep: var(--color-brand-deep);
-  --color-sage: #3f7d72;
+  --color-sage: #46649c;
   --color-gold: var(--color-accent);
 }
 
@@ -82,6 +85,22 @@ a {
   border-radius: 4px;
 }
 
+/* Premium display headings (Cairo) used by hero + section titles. */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Light premium card base used across the redesign. */
+.card-premium {
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: 1.25rem;
+  box-shadow:
+    0 1px 2px rgb(11 37 69 / 0.04),
+    0 8px 24px -12px rgb(11 37 69 / 0.12);
+}
+
 .article-prose {
   font-family: var(--font-article);
   font-size: 1.0625rem;
@@ -102,7 +121,7 @@ a {
 
 .article-prose h2 {
   margin: 2.4rem 0 0.9rem;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: clamp(1.35rem, 2.4vw, 1.75rem);
   line-height: 1.5;
   color: var(--color-brand-deep);
@@ -112,7 +131,7 @@ a {
 
 .article-prose h3 {
   margin: 1.7rem 0 0.7rem;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: clamp(1.12rem, 2vw, 1.28rem);
   line-height: 1.55;
   color: var(--color-brand);
