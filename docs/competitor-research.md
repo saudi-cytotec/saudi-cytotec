@@ -50,10 +50,10 @@ No other competitor was used. Findings below are structural only; no wording, cl
 
 ### Original saudiersaa implementation
 
-- Created `/service-areas` as a Saudi regional hub, not a mass city-page factory.
-- Regions: Central (Riyadh, Qassim, Hail), Western (Jeddah, Makkah, Madinah, Taif), Eastern (Dammam, Khobar, Qatif, Al Ahsa, Jubail), Southern/Other (Abha, Jazan, Najran, Tabuk).
-- Each city mention carries a distinct healthcare-access note, official numbers, and links back to topic/safety/FAQ/resource pages.
-- No standalone city URL is created unless future CMS content supplies genuinely distinct local healthcare/resource information.
+- Reused `/service-areas` as the authoritative Saudi hub for the query family around `سايتوتك في السعودية`.
+- Added 12 priority city pages through the existing CMS build path, each with distinct healthcare-access context rather than a swapped-name template.
+- The hub links to all priority cities and back into safety, FAQ, emergency, and source content.
+- Each city page carries unique value such as pilgrimage/visitor context, inter-city movement, or distance-to-care planning — never delivery, pricing, or purchase language.
 
 ## Competitor 3 — cytotecsa.com
 

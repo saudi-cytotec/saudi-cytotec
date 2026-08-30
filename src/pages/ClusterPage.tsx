@@ -40,7 +40,7 @@ export function ClusterPage() {
       <div className="mt-6 flex flex-wrap gap-2 text-sm">
         <Link to="/topics" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-teal hover:bg-cream">كل المحاور</Link>
         <Link to="/faq" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-teal hover:bg-cream">أسئلة شائعة</Link>
-        <Link to="/service-areas" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-teal hover:bg-cream">المناطق والمدن</Link>
+        <Link to="/service-areas" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-teal hover:bg-cream">سايتوتك في السعودية</Link>
         <Link to="/medical-sources" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-teal hover:bg-cream">المراجع الطبية</Link>
       </div>
       {questions.length ? (

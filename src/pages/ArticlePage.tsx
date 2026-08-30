@@ -18,7 +18,7 @@ function labelForTarget(path: string, articles: { slug: string; title: string }[
   if (!path.startsWith("/")) return articles.find((item) => item.slug === path)?.title ?? "مقال مرتبط";
   const staticPage = staticPages.find((item) => item.path === path);
   if (staticPage) return staticPage.title;
-  if (path === "/service-areas") return "المناطق والمدن";
+  if (path === "/service-areas") return "سايتوتك في السعودية";
   if (path === "/topics") return "محاور المحتوى";
   const cluster = clusters.find((item) => `/blog/cluster/${item.slug}` === path);
   return cluster?.shortTitle ?? "صفحة مرتبطة";
@@ -26,8 +26,9 @@ function labelForTarget(path: string, articles: { slug: string; title: string }[
 
 export function ArticlePage() {
   const { slug } = useParams();
-  const { articles } = useCatalog();
+  const { articles, managed } = useCatalog();
   const article = articles.find((item) => item.slug === slug);
+  const managedArticle = managed.find((item) => item.slug === slug);
   if (!article) return <NotFound />;
   const cluster = getCluster(article.cluster);
   const related = pickRelated(article, articles);
@@ -39,14 +40,14 @@ export function ArticlePage() {
   return (
     <article className="mx-auto max-w-6xl px-4 py-8">
       <Seo
-        title={article.metaTitle}
-        description={article.metaDescription}
+        title={managedArticle?.seoTitle || article.metaTitle}
+        description={managedArticle?.metaDescription || article.metaDescription}
         path={`/blog/${article.slug}`}
         type="article"
         publishedAt={article.publishedAt}
         updatedAt={article.updatedAt}
         image={article.image}
-        keywords={article.title}
+        keywords={managedArticle ? [managedArticle.primaryKeyword, ...managedArticle.secondaryKeywords].filter(Boolean).join(", ") : article.title}
       />
       <JsonLd
         data={[
@@ -66,7 +67,7 @@ export function ArticlePage() {
               url: SITE.domain,
               logo: { "@type": "ImageObject", url: `${SITE.domain}/images/logo.png` },
             },
-            description: article.metaDescription,
+            description: managedArticle?.metaDescription || article.metaDescription,
             datePublished: article.publishedAt,
             dateModified: article.updatedAt,
             inLanguage: "ar",
@@ -136,7 +137,7 @@ export function ArticlePage() {
           أسئلة شائعة مرتبطة
         </Link>
         <Link to="/service-areas" className="rounded-full border border-line px-3 py-1 hover:bg-paper">
-          مسارات الرعاية حسب المنطقة
+          سايتوتك في السعودية
         </Link>
       </div>
       {(previous || next) ? (

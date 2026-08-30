@@ -103,12 +103,29 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
     canonical: typeof raw.canonical === "string" && raw.canonical ? raw.canonical : managed.canonical,
     primaryKeyword:
       typeof raw.primaryKeyword === "string" && raw.primaryKeyword ? raw.primaryKeyword : managed.primaryKeyword,
+    secondaryKeywords: Array.isArray(raw.secondaryKeywords)
+      ? raw.secondaryKeywords.filter((v): v is string => typeof v === "string")
+      : managed.secondaryKeywords,
+    searchIntent:
+      typeof raw.searchIntent === "string" && raw.searchIntent
+        ? (raw.searchIntent as ManagedArticle["searchIntent"])
+        : managed.searchIntent,
+    articleType:
+      typeof raw.articleType === "string" && raw.articleType
+        ? (raw.articleType as ManagedArticle["articleType"])
+        : managed.articleType,
     seoTitle: typeof raw.seoTitle === "string" && raw.seoTitle ? raw.seoTitle : managed.seoTitle,
+    ogTitle: typeof raw.ogTitle === "string" && raw.ogTitle ? raw.ogTitle : managed.ogTitle,
+    ogDescription:
+      typeof raw.ogDescription === "string" && raw.ogDescription ? raw.ogDescription : managed.ogDescription,
+    description: typeof raw.description === "string" && raw.description ? raw.description : managed.description,
     metaDescription: typeof raw.metaDescription === "string" ? raw.metaDescription : managed.metaDescription,
     internalLinks: Array.isArray(raw.internalLinks)
       ? raw.internalLinks.filter((v): v is string => typeof v === "string")
       : managed.internalLinks,
     references: Array.isArray(raw.references) ? (raw.references as string[]) : managed.references,
+    hasDisclaimer: raw.hasDisclaimer === false ? false : managed.hasDisclaimer,
+    author: typeof raw.author === "string" ? raw.author : managed.author,
   };
 }
 

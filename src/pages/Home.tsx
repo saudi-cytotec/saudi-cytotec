@@ -85,7 +85,7 @@ export function Home() {
                 ما هو سايتوتك؟
               </Link>
               <Link to="/service-areas" className="rounded-full border border-line bg-paper px-5 py-2.5 text-sm font-semibold">
-                المناطق والمدن
+                سايتوتك في السعودية
               </Link>
             </div>
             <p className="mt-4 text-xs leading-6 text-ink-soft">
@@ -124,7 +124,7 @@ export function Home() {
               ["/safety", "الأمان والتحذيرات", "تحذير الحمل والتنظيم ومصادر الدواء غير الموثوقة."],
               ["/when-to-see-doctor", "متى تراجعين الطبيب", "علامات تستدعي عيادة أو طوارئ دون تأخير."],
               ["/faq", "الأسئلة الشائعة", "إجابات حسب القصد وروابط للمقالات والمصادر."],
-              ["/service-areas", "المناطق والمدن", "تنظيم جغرافي مسؤول بلا صفحات مدينة رقيقة."],
+              ["/service-areas", "سايتوتك في السعودية", "مركز سعودي يربط المدن ذات الأولوية بصفحات معلوماتية آمنة."],
               ["/medical-sources", "المراجع الطبية", "مصادر رسمية لفهم الادعاءات والتحذيرات."],
               ["/topics", "محاور المحتوى", "خريطة الموضوعات والعلاقات التحريرية."],
             ] as const
@@ -171,7 +171,7 @@ export function Home() {
             {[
               ["هل سايتوتك هو نفسه ميزوبروستول؟", "/faq#definition"],
               ["متى يصبح النزيف حالة طارئة؟", "/when-to-see-doctor"],
-              ["هل توجد معلومات حسب المدينة؟", "/service-areas"],
+              ["هل توجد معلومات عن سايتوتك حسب المدينة داخل السعودية؟", "/service-areas"],
               ["كيف أتحقق من مصدر طبي؟", "/blog/how-to-verify-medical-information"],
             ].map(([label, to]) => (
               <Link key={to} to={to} className="rounded-2xl bg-cream px-4 py-3 text-sm font-semibold text-brand-deep hover:bg-brand-soft">
