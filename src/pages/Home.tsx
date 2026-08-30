@@ -19,8 +19,12 @@ import { JsonLd, Seo } from "../components/Seo";
 import { WhatsAppContactCard } from "../components/WhatsAppContact";
 import { useCatalog } from "../cms/CatalogContext";
 import { HEALTH_LINES } from "../data/contact";
-import { LOGO_SRC, LOGO_ALT } from "../components/Logo";
+import { LOGO_SRC } from "../components/Logo";
 import { SITE, clusters } from "../data/site";
+
+/** Homepage hero banner — the EXACT approved asset (public/images/Bannerrr.png). */
+const HERO_BANNER_SRC = "/images/Bannerrr.png";
+const HERO_BANNER_ALT = "بانر سعودي إرساء — معلومات طبية موثوقة عن صحة المرأة في السعودية";
 
 const SA = HEALTH_LINES.find((c) => c.code === "sa");
 const SA_MOH = SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value ?? "937";
@@ -48,7 +52,7 @@ const CORNERSTONES = [
   { to: "/when-to-see-doctor", title: "متى تراجعين الطبيب", text: "علامات تستدعي عيادة أو طوارئ دون تأخير." },
 ];
 
-/** Hero brand panel: the EXACT supplied logo on a dark premium card. */
+/** Hero banner panel: the EXACT approved homepage banner (Bannerrr.png) on a dark premium card. */
 function HeroBrandPanel() {
   const [missing, setMissing] = useState(false);
   return (
@@ -67,8 +71,10 @@ function HeroBrandPanel() {
             <Wordmark tone="light" className="text-center" />
           ) : (
             <img
-              src={LOGO_SRC}
-              alt={LOGO_ALT}
+              src={HERO_BANNER_SRC}
+              alt={HERO_BANNER_ALT}
+              width={1536}
+              height={1024}
               loading="eager"
               decoding="async"
               className="max-h-[17rem] w-auto object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)] sm:max-h-[20rem]"
@@ -116,7 +122,7 @@ export function Home() {
         title="صحة المرأة والحمل: معلومات طبية موثّقة بالعربية"
         description={SITE.description}
         path="/"
-        image="/images/hero.jpg"
+        image="/images/Bannerrr.png"
       />
       <JsonLd
         data={[
@@ -210,7 +216,7 @@ export function Home() {
             </p>
           </div>
 
-          {/* Brand panel (end / left in RTL) — the exact supplied logo */}
+          {/* Brand panel (end / left in RTL) — the exact approved homepage banner */}
           <HeroBrandPanel />
         </div>
         <HeroWaves />

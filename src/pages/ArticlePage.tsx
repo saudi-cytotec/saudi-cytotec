@@ -10,6 +10,7 @@ import { SITE } from "../data/site";
 import { relatedArticles as pickRelated } from "../data/articles";
 import { clusterPath, getCluster, readingMinutes } from "../utils/content";
 import { CareReferral } from "../components/CareReferral";
+import { ArticleWhatsAppBanner } from "../components/WhatsAppContact";
 import { LOGO_SRC } from "../components/Logo";
 import { NotFound } from "./NotFound";
 
@@ -127,6 +128,9 @@ export function ArticlePage() {
           ) : null}
         </figure>
       ) : null}
+
+      {/* Approved WhatsApp info banner — the whole banner opens the informational channel. */}
+      <ArticleWhatsAppBanner />
 
       <div className="mt-6 max-w-3xl">
         <DisclaimerBanner />
