@@ -8,7 +8,8 @@ export type ClusterId =
   | "faq"
   | "interactions"
   | "emergency"
-  | "evidence";
+  | "evidence"
+  | "geographic";
 
 export interface Reference {
   id: string;

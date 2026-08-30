@@ -127,6 +127,14 @@ export const clusters: Cluster[] = [
     description:
       "كيف تُقيَّم الأدلة، النشرات الرسمية، هيئات التنظيم، وحدود الدراسات والقصص الشخصية.",
   },
+  {
+    id: "geographic",
+    slug: "almojazat-aljograyiya",
+    title: "المحتوى الجغرافي حسب المناطق والمدن",
+    shortTitle: "المدن والمناطق",
+    description:
+      "مقالات تعليمية للنساء في مختلف مناطق المملكة العربية السعودية، مع التركيز على الوصول الآمن للرعاية الصحية في كل منطقة.",
+  },
 ];
 
 export const cornerstonePaths = [

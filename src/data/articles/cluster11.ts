@@ -16,7 +16,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {
@@ -133,7 +133,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {
@@ -229,7 +229,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {
@@ -317,7 +317,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {
@@ -409,7 +409,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {
@@ -497,7 +497,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {
@@ -585,7 +585,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {
@@ -669,7 +669,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {
@@ -745,7 +745,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {
@@ -821,7 +821,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {
@@ -897,7 +897,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {
@@ -973,7 +973,7 @@ export const cluster11 = [
       "/what-is-cytotec",
       "/safety",
       "/when-to-see-doctor",
-      "/cytotec-saudi-arabia"
+      "/safety"
     ],
     blocks: [
       {

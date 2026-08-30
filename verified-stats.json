@@ -1,17 +1,90 @@
 {
-  "totalArticles": 100,
+  "totalArticles": 120,
   "passingArticles": 100,
-  "failingArticles": 0,
+  "failingArticles": 20,
   "minArticle": {
-    "slug": "trusted-sources-further-reading",
-    "cluster": "evidence",
-    "wordCount": 2024,
-    "paragraphs": 24,
-    "h2": 10,
-    "h3": 8,
-    "passes": true
+    "slug": "cytotec-albahah",
+    "cluster": "safety",
+    "wordCount": 140,
+    "paragraphs": 5,
+    "h2": 2,
+    "h3": 0,
+    "passes": false
   },
-  "failingSample": [],
+  "failingSample": [
+    {
+      "slug": "cytotec-albahah",
+      "cluster": "safety",
+      "wordCount": 140,
+      "paragraphs": 5,
+      "h2": 2,
+      "h3": 0,
+      "passes": false
+    },
+    {
+      "slug": "cytotec-eastern-region",
+      "cluster": "safety",
+      "wordCount": 144,
+      "paragraphs": 5,
+      "h2": 4,
+      "h3": 0,
+      "passes": false
+    },
+    {
+      "slug": "cytotec-najran",
+      "cluster": "safety",
+      "wordCount": 150,
+      "paragraphs": 5,
+      "h2": 2,
+      "h3": 0,
+      "passes": false
+    },
+    {
+      "slug": "cytotec-sakaka",
+      "cluster": "safety",
+      "wordCount": 151,
+      "paragraphs": 5,
+      "h2": 2,
+      "h3": 0,
+      "passes": false
+    },
+    {
+      "slug": "cytotec-jizan",
+      "cluster": "safety",
+      "wordCount": 159,
+      "paragraphs": 5,
+      "h2": 2,
+      "h3": 0,
+      "passes": false
+    },
+    {
+      "slug": "cytotec-southern-region",
+      "cluster": "safety",
+      "wordCount": 163,
+      "paragraphs": 6,
+      "h2": 5,
+      "h3": 0,
+      "passes": false
+    },
+    {
+      "slug": "cytotec-central-region",
+      "cluster": "safety",
+      "wordCount": 166,
+      "paragraphs": 5,
+      "h2": 4,
+      "h3": 0,
+      "passes": false
+    },
+    {
+      "slug": "cytotec-arar",
+      "cluster": "safety",
+      "wordCount": 171,
+      "paragraphs": 5,
+      "h2": 2,
+      "h3": 0,
+      "passes": false
+    }
+  ],
   "testArticle": {
     "slug": "cytotec-uses-warnings",
     "wordCount": 2830,

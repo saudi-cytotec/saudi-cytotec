@@ -9,6 +9,7 @@ import { cluster07 } from "./cluster07";
 import { cluster08 } from "./cluster08";
 import { cluster09 } from "./cluster09";
 import { cluster10 } from "./cluster10";
+import { cluster11 } from "./cluster11";
 
 export const articles: Article[] = [
   ...cluster01,
@@ -21,6 +22,7 @@ export const articles: Article[] = [
   ...cluster08,
   ...cluster09,
   ...cluster10,
+  ...cluster11,
 ];
 
 const bySlug = new Map(articles.map((article) => [article.slug, article]));
