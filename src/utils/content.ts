@@ -14,10 +14,6 @@ export function articlePath(slug: string): string {
   return `/blog/${slug}`;
 }
 
-export function defaultImage(_cluster: ClusterId): string {
-  return "/images/og-default.jpg";
-}
-
 export function articlePlainText(article: Pick<Article, "blocks" | "faqs" | "h1" | "excerpt" | "title">): string {
   const blockText = article.blocks
     .map((b) => [b.text, ...(b.items ?? [])].filter(Boolean).join(" "))
@@ -38,11 +34,15 @@ export function readingMinutes(article: Article): number {
   return Math.max(6, Math.round(wordCount(article) / 180));
 }
 
-export function makeArticle(article: Omit<Article, "publishedAt" | "updatedAt" | "image"> & Partial<Article>): Article {
+export function makeArticle(
+  article: Omit<Article, "publishedAt" | "updatedAt"> & Partial<Article>,
+): Article {
   return {
     publishedAt: "2026-01-20",
     updatedAt: "2026-03-18",
-    image: article.image ?? defaultImage(article.cluster),
+    // Do NOT inject a default image. The article only has an image when an
+    // editor (or the article spec) explicitly selects one; otherwise the UI
+    // renders a clean no-image state and no og:image meta is emitted.
     ...article,
   };
 }

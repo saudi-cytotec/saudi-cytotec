@@ -40,6 +40,7 @@ interface Entry {
 
 const EXTRA_ROUTES: Entry[] = [
   { loc: "/contact", changefreq: "yearly", priority: "0.5" },
+  { loc: "/service-areas", changefreq: "monthly", priority: "0.6" },
   { loc: "/sitemap", changefreq: "monthly", priority: "0.4" },
 ];
 
@@ -96,21 +97,25 @@ export function emitSitemap(): Plugin {
 
       push({ loc: "/blog", changefreq: "weekly", priority: "0.8" });
 
-      // Articles shipped in the bundle.
-      for (const article of articles) {
+      // Articles published through the CMS (committed JSON) come FIRST: a
+      // committed file overrides its static twin in the bundle (see
+      // src/cms/storage.ts), so the content that actually ships also owns the
+      // sitemap entry and its lastmod. Pushing static first would silently
+      // keep a stale lastmod for any re-published article.
+      for (const row of readCommittedSlugs()) {
         push({
-          loc: `/blog/${article.slug}`,
-          lastmod: article.updatedAt,
+          loc: `/blog/${row.slug}`,
+          lastmod: row.updatedAt,
           changefreq: "monthly",
           priority: "0.6",
         });
       }
 
-      // Articles published through the CMS (committed JSON).
-      for (const row of readCommittedSlugs()) {
+      // Articles shipped in the bundle (static .ts files).
+      for (const article of articles) {
         push({
-          loc: `/blog/${row.slug}`,
-          lastmod: row.updatedAt,
+          loc: `/blog/${article.slug}`,
+          lastmod: article.updatedAt,
           changefreq: "monthly",
           priority: "0.6",
         });

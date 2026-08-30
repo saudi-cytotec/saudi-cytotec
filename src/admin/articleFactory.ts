@@ -1,6 +1,5 @@
 import { SITE } from "../data/site";
 import type { ArticleType, ClusterId, ContentBlock, ManagedArticle, SearchIntent } from "../types";
-import { defaultImage } from "../utils/content";
 import { suggestSlug } from "../utils/slug";
 
 export function emptyArticle(partial?: Partial<ManagedArticle>): ManagedArticle {
@@ -16,8 +15,12 @@ export function emptyArticle(partial?: Partial<ManagedArticle>): ManagedArticle 
     excerpt: "",
     publishedAt: new Date().toISOString().slice(0, 10),
     updatedAt: new Date().toISOString().slice(0, 10),
-    image: defaultImage("definition"),
-    imageAlt: "عنصر بصري تعليمي صغير",
+    // New articles start with NO image — editor must explicitly select one.
+    image: "",
+    imageAlt: "",
+    bannerImage: "",
+    bannerImageAlt: "",
+    ogImage: "",
     related: [],
     cornerstones: ["/medical-disclaimer", "/safety"],
     references: ["fdaLabel", "sfda"],
@@ -48,11 +51,21 @@ export function applyTopicDefaults(article: ManagedArticle): ManagedArticle {
     slug,
     seoTitle: article.seoTitle || article.title.slice(0, 70),
     metaTitle: article.metaTitle || article.title,
-    ogTitle: article.ogTitle || article.title,
+    ogTitle: article.ogTitle || article.metaTitle || article.title,
     ogDescription: article.ogDescription || article.metaDescription,
-    canonical: `${SITE.domain}/blog/${slug}`,
+    canonical:
+      article.canonical && /^https?:\/\/[^/]+\/.+/.test(article.canonical)
+        ? article.canonical
+        : `${SITE.domain}/blog/${slug}`,
     description: article.description || article.excerpt,
-    image: defaultImage(article.cluster),
+    // Preserve the editor's chosen images verbatim. NEVER auto-assign a
+    // cluster/default image — absence of an image is a valid state (no
+    // thumbnail, no hero figure, no og:image meta).
+    image: article.image || "",
+    imageAlt: article.imageAlt || "",
+    bannerImage: article.bannerImage || "",
+    bannerImageAlt: article.bannerImageAlt || "",
+    ogImage: article.ogImage || "",
   };
 }
 

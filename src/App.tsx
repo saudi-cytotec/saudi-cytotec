@@ -10,6 +10,7 @@ import { Contact } from "./pages/Contact";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { SearchPage } from "./pages/SearchPage";
+import { ServiceAreas } from "./pages/ServiceAreas";
 import { SitemapPage } from "./pages/SitemapPage";
 import { StaticPage } from "./pages/StaticPage";
 
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/blog/:slug" element={<ArticlePage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/sitemap" element={<SitemapPage />} />
+          <Route path="/service-areas" element={<ServiceAreas />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Route>

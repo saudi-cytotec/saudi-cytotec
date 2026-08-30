@@ -18,30 +18,32 @@ export const DISCLAIMER_SHORT =
 export const EMERGENCY_NOTE =
   "إذا ظهر نزيف شديد، إغماء، ألم بطني حاد، حمى مرتفعة، أو ضيق تنفس، اطلبي رعاية طبية طارئة فوراً.";
 
+export const BRAND_NAME_EN = "saudiersaa";
+export const BRAND_TAGLINE = "مدونة سايتوتك التوعوية في السعودية";
+
 export const mainNav: NavItem[] = [
   { to: "/", label: "الرئيسية" },
-  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
-  { to: "/medical-uses", label: "الاستخدامات الطبية" },
-  { to: "/safety", label: "الأمان" },
-  { to: "/side-effects", label: "الآثار الجانبية" },
-  { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب" },
   { to: "/blog", label: "المقالات" },
+  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
   { to: "/faq", label: "الأسئلة الشائعة" },
+  { to: "/about", label: "عن سايتوتك" },
+  { to: "/womens-health", label: "الصحة النسائية" },
+  { to: "/contact", label: "تواصل معنا" },
 ];
 
 export const moreNav: NavItem[] = [
+  { to: "/medical-uses", label: "الاستخدامات الطبية" },
+  { to: "/safety", label: "الأمان والتحذيرات" },
+  { to: "/side-effects", label: "الآثار الجانبية" },
+  { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب" },
   { to: "/misoprostol", label: "ميزوبروستول" },
-  { to: "/womens-health", label: "صحة المرأة" },
   { to: "/early-pregnancy", label: "الحمل المبكر" },
   { to: "/medical-sources", label: "المصادر الطبية" },
-  { to: "/about", label: "من نحن" },
-  { to: "/contact", label: "اتصل بنا" },
+  { to: "/service-areas", label: "مناطق التغطية" },
   { to: "/medical-disclaimer", label: "إخلاء المسؤولية" },
   { to: "/privacy", label: "الخصوصية" },
   { to: "/sitemap", label: "خريطة الموقع" },
 ];
-
-const OG = "/images/og-default.jpg";
 
 export const clusters: Cluster[] = [
   {
@@ -51,7 +53,6 @@ export const clusters: Cluster[] = [
     shortTitle: "التعريف",
     description:
       "شرح تعليمي للمادة الفعالة والاسم التجاري، وآلية العمل، والأشكال الصيدلانية، وحدود المعلومات العامة.",
-    image: OG,
   },
   {
     id: "uses",
@@ -60,7 +61,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الاستخدامات",
     description:
       "الاستطبابات المعتمدة والاستخدامات السريرية تحت إشراف طبي، ومعنى الاستخدام خارج النشرة، ولماذا لا يُعامل الدواء كعلاج منزلي.",
-    image: OG,
   },
   {
     id: "safety",
@@ -69,7 +69,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الأمان",
     description:
       "تحذيرات الحمل، الإشراف الطبي، قراءة النشرة، التنظيم الدوائي، ومخاطر المصادر غير الموثوقة.",
-    image: OG,
   },
   {
     id: "side-effects",
@@ -78,7 +77,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الآثار الجانبية",
     description:
       "الآثار الشائعة والنادرة، النزيف، الحمى، أعراض الجهاز الهضمي، ومتى تتحول الأعراض إلى حالة طارئة.",
-    image: OG,
   },
   {
     id: "pregnancy",
@@ -87,7 +85,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الحمل",
     description:
       "معلومات تعليمية عن الحمل المبكر، متابعة الحمل، النزيف، والأدوية، مع التأكيد أن العلاج فردي لدى الطبيب.",
-    image: OG,
   },
   {
     id: "womens-health",
@@ -96,7 +93,6 @@ export const clusters: Cluster[] = [
     shortTitle: "صحة المرأة",
     description:
       "مقالات عن الدورة، ألم الحوض، فقر الدم، الفحوصات الدورية، والصحة النفسية المرتبطة بالصحة الإنجابية.",
-    image: OG,
   },
   {
     id: "faq",
@@ -105,7 +101,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الأسئلة الشائعة",
     description:
       "تصحيح المفاهيم الشائعة، وحدود الإنترنت، والفرق بين الاسم التجاري والمادة الفعالة، وطرق التحقق من المعلومة.",
-    image: OG,
   },
   {
     id: "interactions",
@@ -114,7 +109,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الموانع",
     description:
       "موانع الاستخدام، الحساسية، اعتبارات القلب والكبد والكلى والرضاعة، وكيفية مناقشة التاريخ الدوائي.",
-    image: OG,
   },
   {
     id: "emergency",
@@ -123,7 +117,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الطوارئ",
     description:
       "علامات النزيف الخطير، الحمى، الألم الحاد، الإغماء، وما ينبغي ذكره في قسم الطوارئ.",
-    image: OG,
   },
   {
     id: "evidence",
@@ -132,7 +125,6 @@ export const clusters: Cluster[] = [
     shortTitle: "المصادر",
     description:
       "كيف تُقيَّم الأدلة، النشرات الرسمية، هيئات التنظيم، وحدود الدراسات والقصص الشخصية.",
-    image: OG,
   },
 ];
 

@@ -40,8 +40,18 @@ export interface Article {
   excerpt: string;
   publishedAt: string;
   updatedAt: string;
-  image: string;
-  imageAlt: string;
+  /**
+   * Card / featured-thumbnail image (also the hero when no bannerImage).
+   * Empty string means NO image has been selected — the UI must not invent
+   * a default. Keep controls available so editors can still assign one.
+   */
+  image?: string;
+  imageAlt?: string;
+  /** Optional large hero/banner shown at the top of the public page. */
+  bannerImage?: string;
+  bannerImageAlt?: string;
+  /** Open Graph / social-sharing image. Only emitted when explicitly set. */
+  ogImage?: string;
   related: string[];
   cornerstones: string[];
   references: string[];
@@ -55,7 +65,6 @@ export interface Cluster {
   title: string;
   shortTitle: string;
   description: string;
-  image: string;
 }
 
 export interface StaticPage {
@@ -74,7 +83,7 @@ export interface NavItem {
   label: string;
 }
 
-export type ArticleStatus = "draft" | "review" | "published" | "scheduled";
+export type ArticleStatus = "draft" | "review" | "published" | "scheduled" | "archived";
 export type SearchIntent = "informational" | "navigational" | "commercial" | "transactional";
 export type ArticleType =
   | "pillar"
@@ -175,7 +184,12 @@ export interface SiteSettings {
   domain: string;
   email: string;
   description: string;
-  defaultOgImage: string;
+  /**
+   * Historical field preserved to keep stored settings backward-compatible.
+   * No default OG image is ever emitted: og:image/twitter:image only render
+   * when an editor explicitly selects an image on a page/article.
+   */
+  defaultOgImage?: string;
   indexPublic: boolean;
 }
 
