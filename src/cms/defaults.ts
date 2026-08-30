@@ -40,7 +40,9 @@ export const defaultSettings: SiteSettings = {
   domain: SITE.domain,
   email: SITE.email,
   description: SITE.description,
-  defaultOgImage: "/images/og-default.jpg",
+  // Intentionally empty: no default OG image. og:image / twitter:image are only
+  // emitted when an editor explicitly selects an image for a page/article.
+  defaultOgImage: "",
   indexPublic: true,
 };
 

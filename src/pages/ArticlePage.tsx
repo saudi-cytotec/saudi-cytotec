@@ -22,13 +22,16 @@ export function ArticlePage() {
   const cluster = getCluster(article.cluster);
   const related = pickRelated(article, articles);
 
-  // Effective images: explicit OG → featured → banner → cluster default.
+  // Effective images: editor selection ONLY. No fallbacks to placeholders,
+  // cluster defaults, or invented artwork. The absence of an image is a valid
+  // state: no hero figure and no og:image / twitter:image meta are emitted.
+  // Precedence: explicit OG image > banner/hero > featured (image).
   const managed = article as typeof article & {
     ogTitle?: string;
     ogDescription?: string;
     canonical?: string;
   };
-  const ogImage = article.ogImage || article.image || cluster.image || "/images/og-default.jpg";
+  const ogImage = article.ogImage || article.bannerImage || article.image || "";
   const bannerSrc = article.bannerImage || article.image || "";
   const bannerAlt = article.bannerImageAlt || article.imageAlt || article.title;
   // A committed CMS article may carry its own canonical; only use it when it

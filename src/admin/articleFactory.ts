@@ -1,6 +1,5 @@
 import { SITE } from "../data/site";
 import type { ArticleType, ClusterId, ContentBlock, ManagedArticle, SearchIntent } from "../types";
-import { defaultImage } from "../utils/content";
 import { suggestSlug } from "../utils/slug";
 
 export function emptyArticle(partial?: Partial<ManagedArticle>): ManagedArticle {
@@ -16,8 +15,9 @@ export function emptyArticle(partial?: Partial<ManagedArticle>): ManagedArticle 
     excerpt: "",
     publishedAt: new Date().toISOString().slice(0, 10),
     updatedAt: new Date().toISOString().slice(0, 10),
-    image: defaultImage("definition"),
-    imageAlt: "عنصر بصري تعليمي صغير",
+    // New articles start with NO image — editor must explicitly select one.
+    image: "",
+    imageAlt: "",
     bannerImage: "",
     bannerImageAlt: "",
     ogImage: "",
@@ -58,13 +58,11 @@ export function applyTopicDefaults(article: ManagedArticle): ManagedArticle {
         ? article.canonical
         : `${SITE.domain}/blog/${slug}`,
     description: article.description || article.excerpt,
-    // Preserve the editor's chosen images. Only fall back to the cluster
-    // default when no image has ever been set — otherwise a saved featured /
-    // banner / OG image would be silently wiped on every keystroke.
-    image: article.image || defaultImage(article.cluster),
+    // Preserve the editor's chosen images verbatim. NEVER auto-assign a
+    // cluster/default image — absence of an image is a valid state (no
+    // thumbnail, no hero figure, no og:image meta).
+    image: article.image || "",
     imageAlt: article.imageAlt || "",
-    // Banner/OG are optional overrides; when blank the public page falls back
-    // to the featured image, so leave them empty rather than forcing a value.
     bannerImage: article.bannerImage || "",
     bannerImageAlt: article.bannerImageAlt || "",
     ogImage: article.ogImage || "",

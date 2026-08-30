@@ -303,9 +303,9 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
           <div className="space-y-5">
             <ImageField
               label="الصورة البارزة (Featured / thumbnail)"
-              hint="تظهر في بطاقات المقالات وبشكل افتراضي أعلى المقال."
-              value={article.image}
-              altValue={article.imageAlt}
+              hint="اختيارية — إن تُركت فارغة لن تظهر أي صورة في البطاقات أو أعلى المقال ولن تُصدر أي og:image."
+              value={article.image || ""}
+              altValue={article.imageAlt || ""}
               onPick={(file, alt) => patch({ image: file, imageAlt: article.imageAlt || alt })}
               onUrl={(url) => patch({ image: url })}
               onAlt={(alt) => patch({ imageAlt: alt })}
@@ -321,7 +321,7 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
             />
             <ImageField
               label="صورة المشاركة الاجتماعية (OG image)"
-              hint="تظهر عند مشاركة الرابط على واتساب وتويتر وفيسبوك. إن تُركت فارغة تُستخدم الصورة البارزة."
+              hint="تظهر عند مشاركة الرابط على واتساب وتويتر وفيسبوك. إن تُركت فارغة (ولم تُحدّد صورة بارزة) لن تُصدر أي og:image/twitter:image."
               value={article.ogImage || ""}
               altValue=""
               hideAlt
