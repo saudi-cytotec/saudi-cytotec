@@ -5,15 +5,12 @@ import { mediaLibrary } from "../../data/media";
 import { referenceList } from "../../data/references";
 import { clusters } from "../../data/site";
 import type { ArticleFaq, ArticleStatus, ClusterId, ManagedArticle } from "../../types";
-import { bodyWordCount, MIN_BODY_WORDS } from "../../utils/bodyWordCount";
 import { buildLinkGraph } from "../../utils/internalLinks";
-import { isValidShortSlug, suggestSlug } from "../../utils/slug";
-import { validateArticle } from "../../utils/validation";
+import { suggestSlug } from "../../utils/slug";
+import { checkArticleIntegrity } from "../../utils/validation";
 import { applyTopicDefaults, emptyArticle } from "../articleFactory";
 import { publishRequest, unpublishRequest } from "../api";
-import { Badge, Field, inputClass, Section, Td, Th } from "../ui";
-
-type AssistantVerdict = "PASS" | "WARNING" | "ERROR";
+import { Badge, Field, inputClass, Section } from "../ui";
 
 function serializeBlocks(article: ManagedArticle) {
   return article.blocks
@@ -48,8 +45,8 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
   }, [mode, existing]);
 
   const others = managed.filter((item) => item.id !== article.id);
-  const validation = useMemo(
-    () => validateArticle(article, others.map((item) => item.slug), others.map((item) => item.title)),
+  const integrity = useMemo(
+    () => checkArticleIntegrity(article, others.map((item) => item.slug)),
     [article, others],
   );
   const graph = useMemo(() => buildLinkGraph(managed), [managed]);
@@ -70,9 +67,10 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
     setPublishNote(null);
     setPublishError(null);
     const next = { ...article, status: status ?? article.status, ...(schedule && scheduleDate ? { publishAt: scheduleDate } : {}) };
-    if (status === "published" && !validation.ok) {
-      const errors = validation.items.filter((i) => i.blocking && !i.ok).map((i) => i.label);
-      setPublishError("لا يمكن النشر قبل إصلاح الأخطاء التقنية: " + errors.join("، ") + ".");
+    // Only a technically broken record is refused (no working URL, no title, or
+    // empty body). This is data integrity, NOT SEO/content-quality validation.
+    if ((status === "published" || schedule) && !integrity.ok) {
+      setPublishError("تعذر الحفظ: " + integrity.problems.map((p) => p.message).join(" · "));
       return;
     }
     if ((status === "published" || (status === "scheduled" && schedule)) && next.source === "cms") {
@@ -117,11 +115,8 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
   if (!ready) return <p>جاري تحميل المقال...</p>;
   if (mode === "edit" && !existing) return <p>المقال غير موجود.</p>;
 
-  const verdict: AssistantVerdict = !validation.ok ? "ERROR" : validation.items.some((i) => !i.ok) ? "WARNING" : "PASS";
-  const words = bodyWordCount(article.blocks);
-
   return (
-    <div className="grid gap-6 xl:grid-cols-[1fr_340px]">
+    <div className="mx-auto max-w-4xl space-y-4">
       <div className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h1 className="text-3xl font-bold text-brand-deep">{mode === "create" ? "إنشاء مقال" : "تحرير مقال"}</h1>
@@ -188,6 +183,20 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
         <Field label="الملخص (Excerpt)">
           <textarea className={inputClass()} rows={2} value={article.excerpt} onChange={(e) => patch({ excerpt: e.target.value, description: e.target.value })} />
         </Field>
+
+        <Section title="SEO والمشاركة الاجتماعية" hint="عنوان ووصف المشاركة يُستخدمان في Open Graph وتويتر. الكانونيال يُترك للحقل التلقائي إلا لدمج صفحتين.">
+          <div className="grid gap-4 md:grid-cols-2">
+            <Field label="عنوان المشاركة (OG title)" hint="يُستخدم عند المشاركة — افتراضياً عنوان SEO.">
+              <input className={inputClass()} value={article.ogTitle} onChange={(e) => patch({ ogTitle: e.target.value })} placeholder={article.metaTitle || article.title} />
+            </Field>
+            <Field label="وصف المشاركة (OG description)">
+              <input className={inputClass()} value={article.ogDescription} onChange={(e) => patch({ ogDescription: e.target.value })} placeholder={article.metaDescription} />
+            </Field>
+          </div>
+          <Field label="الرابط القانوني (Canonical URL)" hint="اتركه فارغاً للكانونيكال التلقائي الذاتي. عدّله فقط عند دمج المحتوى في رابط آخر.">
+            <input dir="ltr" className={inputClass()} value={article.canonical} onChange={(e) => patch({ canonical: e.target.value })} placeholder={`https://saudiersaa.com/blog/${article.slug}`} />
+          </Field>
+        </Section>
 
         <Field label="جسم المقال" hint={"الصيغة: ## لعنوان H2 · ### لـ H3 · > لتنبيه · - لقائمة نقطية · سطر فارغ للفصل."}>
           <textarea
@@ -282,27 +291,57 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
           ) : null}
         </Section>
 
-        <Section title="الصورة الرئيسية">
-          <div className="grid gap-2 md:grid-cols-4">
-            {mediaLibrary.map((item) => (
-              <button
-                key={item.file}
-                type="button"
-                className={`rounded-2xl border p-2 text-xs ${article.image === item.file ? "border-brand ring-2 ring-brand/30" : "border-line"}`}
-                onClick={() => patch({ image: item.file, imageAlt: article.imageAlt || item.alt })}
-              >
-                <img src={item.file} alt={item.alt} loading="lazy" className="h-20 w-full rounded-xl object-cover" />
-                <span className="mt-1 block truncate font-mono" dir="ltr">
-                  {item.file.replace("/images/", "")}
-                </span>
-              </button>
-            ))}
+        <Section
+          title="الصور والمشاركة"
+          hint="كل حقل مستقل وينعكس فعلياً على الصفحة العامة: الصورة البارزة في البطاقات، البانر أعلى المقال، وصورة المشاركة على الشبكات."
+        >
+          <div className="space-y-5">
+            <ImageField
+              label="الصورة البارزة (Featured / thumbnail)"
+              hint="اختيارية — إن تُركت فارغة لن تظهر أي صورة في البطاقات أو أعلى المقال ولن تُصدر أي og:image."
+              value={article.image || ""}
+              altValue={article.imageAlt || ""}
+              onPick={(file, alt) => patch({ image: file, imageAlt: article.imageAlt || alt })}
+              onUrl={(url) => patch({ image: url })}
+              onAlt={(alt) => patch({ imageAlt: alt })}
+            />
+            <ImageField
+              label="صورة البانر / البطل أعلى المقال (Banner / Hero)"
+              hint="اختيارية — إن تُركت فارغة تُستخدم الصورة البارزة. يُنصح بنسبة 16:9."
+              value={article.bannerImage || ""}
+              altValue={article.bannerImageAlt || ""}
+              onPick={(file, alt) => patch({ bannerImage: file, bannerImageAlt: article.bannerImageAlt || alt })}
+              onUrl={(url) => patch({ bannerImage: url })}
+              onAlt={(alt) => patch({ bannerImageAlt: alt })}
+            />
+            <ImageField
+              label="صورة المشاركة الاجتماعية (OG image)"
+              hint="تظهر عند مشاركة الرابط على واتساب وتويتر وفيسبوك. إن تُركت فارغة (ولم تُحدّد صورة بارزة) لن تُصدر أي og:image/twitter:image."
+              value={article.ogImage || ""}
+              altValue=""
+              hideAlt
+              onPick={(file) => patch({ ogImage: file })}
+              onUrl={(url) => patch({ ogImage: url })}
+              onAlt={() => {}}
+            />
           </div>
-          <div className="mt-3">
-            <Field label="نص بديل للصورة (ALT)">
-              <input className={inputClass()} value={article.imageAlt} onChange={(e) => patch({ imageAlt: e.target.value })} />
-            </Field>
-          </div>
+        </Section>
+
+        <Section
+          title="مقالات ذات صلة"
+          hint="تظهر في قسم «مقالات ذات صلة» أسفل المقال — روابط داخلية حقيقية لمحتوى منشور."
+        >
+          <RelatedPicker
+            article={article}
+            all={managed.filter((item) => item.slug !== article.slug)}
+            onToggle={(slug) =>
+              patch({
+                related: article.related.includes(slug)
+                  ? article.related.filter((s) => s !== slug)
+                  : [...article.related, slug],
+              })
+            }
+          />
         </Section>
 
         <div className="flex flex-wrap items-center gap-2">
@@ -324,6 +363,24 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
               {busy ? "جارٍ..." : "إلغاء النشر"}
             </button>
           ) : null}
+          {article.status !== "archived" ? (
+            <button
+              type="button"
+              onClick={() => {
+                const archived: ManagedArticle = { ...article, status: "archived" };
+                upsertArticle(archived);
+                setArticle(archived);
+                setPublishNote("أُرشف المقال: لم يعد معروضاً على الموقع العام. يمكنك إعادة نشره لاحقاً.");
+              }}
+              className="rounded-full border border-line px-4 py-2 text-sm text-ink-soft"
+            >
+              أرشفة
+            </button>
+          ) : (
+            <button type="button" onClick={() => save("draft")} className="rounded-full border border-brand px-4 py-2 text-sm text-brand">
+              إلغاء الأرشفة
+            </button>
+          )}
           <div className="ms-auto flex flex-wrap items-center gap-2">
             <input type="date" value={scheduleDate} onChange={(e) => setScheduleDate(e.target.value)} className="rounded-full border border-line px-3 py-2 text-sm" />
             <button
@@ -336,7 +393,7 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
             </button>
             <button
               type="button"
-              disabled={!validation.ok || busy}
+              disabled={busy}
               onClick={() => save("published")}
               className="rounded-full bg-brand px-4 py-2 text-sm text-white disabled:cursor-not-allowed disabled:opacity-50"
             >
@@ -362,63 +419,141 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
         {publishError ? <p role="alert" className="rounded-2xl bg-accent-soft p-3 text-sm text-clay">{publishError}</p> : null}
         {publishNote ? <p role="status" className="rounded-2xl bg-brand-soft p-3 text-sm leading-7 text-brand-deep">{publishNote}</p> : null}
       </div>
-
-      <aside className="h-fit space-y-4">
-        <SEOAssistant verdict={verdict} words={words} article={article} />
-      </aside>
     </div>
   );
 }
 
-function SEOAssistant({ verdict, words, article }: { verdict: AssistantVerdict; words: number; article: ManagedArticle }) {
-  const { managed } = useCatalog();
-  const others = managed.filter((item) => item.id !== article.id);
-  const result = validateArticle(article, others.map((i) => i.slug), others.map((i) => i.title));
-  const slug = isValidShortSlug(article.slug);
-  const tone = verdict === "PASS" ? "ok" : verdict === "WARNING" ? "warn" : "bad";
+/* ── Reusable image control: media-library picker + custom URL + alt ─────── */
+function ImageField({
+  label,
+  hint,
+  value,
+  altValue,
+  onPick,
+  onUrl,
+  onAlt,
+  hideAlt = false,
+}: {
+  label: string;
+  hint?: string;
+  value: string;
+  altValue: string;
+  onPick: (file: string, alt: string) => void;
+  onUrl: (url: string) => void;
+  onAlt: (alt: string) => void;
+  hideAlt?: boolean;
+}) {
+  const [url, setUrl] = useState("");
+  const isExternal = (v: string) => /^https?:\/\//.test(v);
   return (
-    <div className="rounded-3xl border border-line bg-paper p-5">
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-bold text-brand-deep">مساعد SEO</h2>
-        <Badge tone={tone}>{verdict}</Badge>
-      </div>
-      <p className="mt-3 text-2xl font-bold text-brand-deep">
-        {words} <span className="text-sm font-normal text-ink-soft">كلمة في المتن</span>
-      </p>
-      <p className="text-xs text-ink-soft">المتن فقط — بدون عنوان أو وصف أو إخلاء أو أسئلة.</p>
-      {result.missingWords > 0 ? (
-        <p className="mt-2 text-xs text-clay">
-          أقل من العمق المقترح ({MIN_BODY_WORDS}) بـ {result.missingWords} كلمة — <strong>تحذير لا يمنع النشر</strong>.
-        </p>
-      ) : null}
-      <p className="mt-2 text-xs text-ink-soft">{slug.reason}</p>
+    <div className="rounded-2xl border border-line p-4">
+      <p className="text-sm font-bold text-brand-deep">{label}</p>
+      {hint ? <p className="mt-1 text-xs leading-6 text-ink-soft">{hint}</p> : null}
 
-      <table className="mt-4 w-full text-sm">
-        <thead>
-          <tr>
-            <Th>التحقق</Th>
-            <Th>النتيجة</Th>
-          </tr>
-        </thead>
-        <tbody>
-          {result.items.map((item) => (
-            <tr key={item.id} className="border-t border-line">
-              <Td>
-                <span className={item.ok ? "text-sage" : item.blocking ? "text-clay font-bold" : "text-[#a06a12]"}>
-                  {item.ok ? "✓" : item.blocking ? "✕" : "△"} {item.label}
-                </span>
-                <span className="block text-xs text-ink-soft">{item.detail}</span>
-              </Td>
-              <Td>
-                <Badge tone={item.ok ? "ok" : item.blocking ? "bad" : "warn"}>{item.ok ? "PASS" : item.blocking ? "ERROR" : "WARNING"}</Badge>
-              </Td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <p className="mt-4 rounded-2xl bg-cream p-3 text-xs leading-6 text-ink-soft">
-        <strong>ERROR</strong> (تقني) يمنع النشر فقط: رابط غير صالح أو مكرر، عنوان أو متن فارغ. كل ما عداه <strong>WARNING</strong> استشاري لا يمنع النشر.
+      <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-6">
+        {mediaLibrary.map((item) => {
+          const active = value === item.file;
+          return (
+            <button
+              key={item.file}
+              type="button"
+              title={item.alt}
+              className={`overflow-hidden rounded-xl border p-1 text-[10px] ${active ? "border-brand ring-2 ring-brand/30" : "border-line"}`}
+              onClick={() => onPick(item.file, item.alt)}
+            >
+              <img src={item.file} alt={item.alt} loading="lazy" className="h-14 w-full rounded-lg object-cover" />
+              <span className="mt-1 block truncate font-mono text-[9px]" dir="ltr">
+                {item.file.replace("/images/", "").slice(0, 14)}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <input
+          dir="ltr"
+          value={value}
+          onChange={(e) => onUrl(e.target.value)}
+          placeholder="/images/... أو رفع سابق أو رابط https"
+          className={`${inputClass()} flex-1 font-mono text-xs`}
+        />
+        {value && !isExternal(value) ? (
+          <img src={value} alt={altValue || label} className="h-10 w-16 rounded-lg border border-line object-cover" loading="lazy" />
+        ) : null}
+        {value ? (
+          <button type="button" onClick={() => onUrl("")} className="rounded-full border border-clay px-3 py-1 text-xs text-clay">
+            مسح
+          </button>
+        ) : null}
+      </div>
+      <p className="mt-1 text-[11px] text-ink-soft">
+        أو الصقي رابط صورة رُفعت:{" "}
+        <input
+          dir="ltr"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          onBlur={() => url.trim() && onUrl(url.trim())}
+          placeholder="https://…  أو  /images/uploads/x.jpg"
+          className="ms-1 w-56 rounded-full border border-line px-2 py-0.5 font-mono text-[11px]"
+        />
       </p>
+
+      {!hideAlt ? (
+        <div className="mt-2">
+          <label className="text-xs font-semibold text-ink-soft">النص البديل (ALT) — وصف للصورة لقارئات الشاشة وSEO</label>
+          <input className={`${inputClass()} mt-1`} value={altValue} onChange={(e) => onAlt(e.target.value)} placeholder="وصف دقيق ومختصر لمحتوى الصورة" />
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+/* ── Related-articles multi-select (internal linking) ───────────────────── */
+function RelatedPicker({
+  article,
+  all,
+  onToggle,
+}: {
+  article: ManagedArticle;
+  all: ManagedArticle[];
+  onToggle: (slug: string) => void;
+}) {
+  const [q, setQ] = useState("");
+  const slugSet = new Set(all.map((a) => a.slug));
+  // Keep currently-selected values even if they point at a slug not in the list.
+  const selected = article.related.filter((s) => !slugSet.has(s));
+  const rows = all
+    .filter((a) => (q ? a.title.includes(q) || a.slug.includes(q) : true))
+    .slice(0, 40);
+  return (
+    <div>
+      <input
+        className={inputClass()}
+        placeholder="ابحثي عن مقال لإضافته كرابط داخلي..."
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+      />
+      {selected.length ? (
+        <p className="mt-2 text-xs text-clay">قيم محفوظة لا تطابق مقالاً حالياً: {selected.join("، ")}</p>
+      ) : null}
+      <div className="mt-3 grid max-h-64 gap-1 overflow-y-auto rounded-2xl border border-line p-2 sm:grid-cols-2">
+        {rows.map((item) => {
+          const checked = article.related.includes(item.slug);
+          return (
+            <label key={item.id} className="flex items-start gap-2 rounded-xl px-2 py-1 text-sm hover:bg-cream">
+              <input type="checkbox" checked={checked} onChange={() => onToggle(item.slug)} />
+              <span className="min-w-0">
+                <span className="block truncate">{item.title}</span>
+                <span className="block truncate font-mono text-[10px] text-ink-soft" dir="ltr">
+                  /blog/{item.slug} · {item.status}
+                </span>
+              </span>
+            </label>
+          );
+        })}
+      </div>
+      <p className="mt-2 text-xs text-ink-soft">{article.related.length} مقال مرتبط محدد.</p>
     </div>
   );
 }

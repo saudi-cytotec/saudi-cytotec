@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useCatalog } from "../../cms/CatalogContext";
-import { validateArticle } from "../../utils/validation";
 import { Badge } from "../ui";
 
 export function PreviewScreen() {
@@ -8,15 +7,12 @@ export function PreviewScreen() {
   const { managed } = useCatalog();
   const article = managed.find((item) => item.id === id);
   if (!article) return <p>لا توجد معاينة.</p>;
-  const others = managed.filter((item) => item.id !== article.id);
-  const result = validateArticle(article, others.map((i) => i.slug), others.map((i) => i.title));
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
       <div className="rounded-3xl border border-line bg-paper p-8">
         <div className="flex items-center gap-2 text-sm">
           <Badge tone="info">معاينة تحريرية</Badge>
-          <Badge tone={result.ok ? "ok" : "bad"}>{result.ok ? "جاهزة للنشر" : "أخطاء تقنية"}</Badge>
         </div>
         <h1 className="mt-2 text-4xl font-bold leading-[1.35] text-brand-deep">{article.h1 || article.title}</h1>
         <p className="mt-4 text-lg leading-9 text-ink-soft">{article.excerpt}</p>

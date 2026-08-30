@@ -18,22 +18,25 @@ export const DISCLAIMER_SHORT =
 export const EMERGENCY_NOTE =
   "إذا ظهر نزيف شديد، إغماء، ألم بطني حاد، حمى مرتفعة، أو ضيق تنفس، اطلبي رعاية طبية طارئة فوراً.";
 
+export const BRAND_NAME_EN = "saudiersaa";
+export const BRAND_TAGLINE = "مدونة سايتوتك التوعوية في السعودية";
+
 export const mainNav: NavItem[] = [
   { to: "/", label: "الرئيسية" },
   { to: "/topics", label: "محاور المحتوى" },
+  { to: "/blog", label: "المقالات" },
   { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
   { to: "/safety", label: "الأمان" },
   { to: "/early-pregnancy", label: "الحمل المبكر" },
-  { to: "/blog", label: "المقالات" },
   { to: "/faq", label: "الأسئلة الشائعة" },
   { to: "/service-areas", label: "المناطق" },
 ];
 
 export const moreNav: NavItem[] = [
-  { to: "/misoprostol", label: "ميزوبروستول" },
   { to: "/medical-uses", label: "الاستخدامات الطبية" },
   { to: "/side-effects", label: "الآثار الجانبية" },
   { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب" },
+  { to: "/misoprostol", label: "ميزوبروستول" },
   { to: "/womens-health", label: "صحة المرأة" },
   { to: "/medical-sources", label: "المصادر الطبية" },
   { to: "/about", label: "من نحن" },
@@ -51,7 +54,6 @@ export const clusters: Cluster[] = [
     shortTitle: "التعريف",
     description:
       "شرح تعليمي للمادة الفعالة والاسم التجاري، وآلية العمل، والأشكال الصيدلانية، وحدود المعلومات العامة.",
-    image: "/images/sources.jpg",
   },
   {
     id: "uses",
@@ -60,7 +62,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الاستخدامات",
     description:
       "الاستطبابات المعتمدة والاستخدامات السريرية تحت إشراف طبي، ومعنى الاستخدام خارج النشرة، ولماذا لا يُعامل الدواء كعلاج منزلي.",
-    image: "/images/hero-doctor.jpg",
   },
   {
     id: "safety",
@@ -69,7 +70,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الأمان",
     description:
       "تحذيرات الحمل، الإشراف الطبي، قراءة النشرة، التنظيم الدوائي، ومخاطر المصادر غير الموثوقة.",
-    image: "/images/safety.jpg",
   },
   {
     id: "side-effects",
@@ -78,7 +78,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الآثار الجانبية",
     description:
       "الآثار الشائعة والنادرة، النزيف، الحمى، أعراض الجهاز الهضمي، ومتى تتحول الأعراض إلى حالة طارئة.",
-    image: "/images/emergency.jpg",
   },
   {
     id: "pregnancy",
@@ -87,7 +86,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الحمل",
     description:
       "معلومات تعليمية عن الحمل المبكر، متابعة الحمل، النزيف، والأدوية، مع التأكيد أن العلاج فردي لدى الطبيب.",
-    image: "/images/hero.jpg",
   },
   {
     id: "womens-health",
@@ -96,7 +94,6 @@ export const clusters: Cluster[] = [
     shortTitle: "صحة المرأة",
     description:
       "مقالات عن الدورة، ألم الحوض، فقر الدم، الفحوصات الدورية، والصحة النفسية المرتبطة بالصحة الإنجابية.",
-    image: "/images/womens-health.jpg",
   },
   {
     id: "faq",
@@ -105,7 +102,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الأسئلة الشائعة",
     description:
       "تصحيح المفاهيم الشائعة، وحدود الإنترنت، والفرق بين الاسم التجاري والمادة الفعالة، وطرق التحقق من المعلومة.",
-    image: "/images/sources.jpg",
   },
   {
     id: "interactions",
@@ -114,7 +110,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الموانع",
     description:
       "موانع الاستخدام، الحساسية، اعتبارات القلب والكبد والكلى والرضاعة، وكيفية مناقشة التاريخ الدوائي.",
-    image: "/images/safety.jpg",
   },
   {
     id: "emergency",
@@ -123,7 +118,6 @@ export const clusters: Cluster[] = [
     shortTitle: "الطوارئ",
     description:
       "علامات النزيف الخطير، الحمى، الألم الحاد، الإغماء، وما ينبغي ذكره في قسم الطوارئ.",
-    image: "/images/emergency.jpg",
   },
   {
     id: "evidence",
@@ -132,7 +126,6 @@ export const clusters: Cluster[] = [
     shortTitle: "المصادر",
     description:
       "كيف تُقيَّم الأدلة، النشرات الرسمية، هيئات التنظيم، وحدود الدراسات والقصص الشخصية.",
-    image: "/images/sources.jpg",
   },
 ];
 

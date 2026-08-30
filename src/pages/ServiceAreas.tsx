@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
-import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CareReferral } from "../components/CareReferral";
-import { ContactCta } from "../components/ContactCta";
+import { DisclaimerBanner } from "../components/DisclaimerBanner";
+import { PageHero } from "../components/PageHero";
 import { JsonLd, Seo } from "../components/Seo";
+import { WhatsAppContactCard } from "../components/WhatsAppContact";
 import { serviceAreaLinks, serviceRegions } from "../data/serviceAreas";
 import { SITE } from "../data/site";
 
 export function ServiceAreas() {
   const cities = serviceRegions.flatMap((region) => region.cities.map((city) => city.name));
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8">
+    <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
       <Seo
         title="المناطق والمدن في السعودية"
         description="دليل مناطق السعودية للوصول إلى معلومات صحة المرأة وسلامة الأدوية ومتى تجب مراجعة الرعاية المرخصة، دون صفحات مدينة مكررة أو وعود بيع."
         path="/service-areas"
+        image="/images/hero.jpg"
       />
       <JsonLd
         data={{
@@ -25,30 +27,36 @@ export function ServiceAreas() {
           about: cities.map((name) => ({ "@type": "City", name })),
         }}
       />
-      <Breadcrumbs items={[{ name: "المناطق والمدن", path: "/service-areas" }]} />
-      <section className="mt-5 rounded-[2rem] border border-line bg-paper p-7 shadow-sm">
-        <p className="text-sm font-bold text-accent">اكتشاف جغرافي مسؤول</p>
-        <h1 className="mt-2 max-w-3xl text-4xl font-bold leading-[1.35] text-teal-deep">المناطق والمدن في السعودية: معلومات صحية لا صفحات بيع</h1>
-        <p className="mt-4 max-w-3xl leading-8 text-ink-soft">
-          نعرض المدن لتسهيل الوصول إلى المسار الصحيح: قراءة معلومات موثوقة، معرفة علامات الخطر، ثم التواصل مع جهة صحية مرخصة عند الحاجة. لا ننشئ صفحات مدينة رقيقة، ولا نعد بتوفر دواء أو توصيل أو أسعار.
+      <PageHero
+        crumbs={[{ name: "المناطق والمدن", path: "/service-areas" }]}
+        title="المناطق والمدن في السعودية: معلومات صحية لا صفحات بيع"
+        description="نعرض المدن لتسهيل الوصول إلى المسار الصحيح: قراءة معلومات موثوقة، معرفة علامات الخطر، ثم التواصل مع جهة صحية مرخصة عند الحاجة. لا ننشئ صفحات مدينة رقيقة، ولا نعد بتوفر دواء أو توصيل أو أسعار."
+      />
+
+      <div className="max-w-3xl"><DisclaimerBanner /></div>
+
+      <section className="card-premium p-6">
+        <h2 className="font-display text-2xl font-extrabold text-brand-deep">اكتشاف جغرافي مسؤول</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-8 text-ink-soft">
+          اقتبسنا من المنافسين فكرة تنظيم المدن وتعدد مسارات الاكتشاف، ثم أزلنا التكرار التجاري. هذه الصفحة تربط المدينة بالموضوع، الأمان، الأسئلة، والمصدر الرسمي — لا بسعر أو طلب.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           {serviceAreaLinks.map((link) => (
-            <Link key={link.to} to={link.to} className="rounded-full border border-line bg-cream px-4 py-2 text-sm font-semibold text-brand-deep hover:bg-brand-soft">
+            <Link key={link.to} to={link.to} className="rounded-full border border-line bg-cream px-4 py-2 text-sm font-semibold text-brand-deep transition hover:bg-brand-soft">
               {link.label}
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="mt-10 grid gap-5 md:grid-cols-2">
+      <section className="grid gap-5 md:grid-cols-2">
         {serviceRegions.map((region) => (
-          <article key={region.id} className="rounded-3xl border border-line bg-paper p-6 shadow-sm">
-            <h2 className="text-2xl font-bold text-teal-deep">{region.title}</h2>
+          <article key={region.id} className="card-premium p-6">
+            <h2 className="font-display text-2xl font-extrabold text-brand-deep">{region.title}</h2>
             <p className="mt-2 leading-8 text-ink-soft">{region.description}</p>
             <div className="mt-5 grid gap-3">
               {region.cities.map((city) => (
-                <div key={city.slug} className="rounded-2xl border border-line bg-cream/60 p-4">
+                <div key={city.slug} className="rounded-2xl border border-line bg-cream/70 p-4">
                   <h3 className="font-bold text-brand-deep">{city.name}</h3>
                   <p className="mt-1 text-sm leading-7 text-ink-soft">{city.note}</p>
                   <p className="mt-2 text-xs text-ink-soft">أرقام مفيدة: {city.resources.join(" · ")}</p>
@@ -59,8 +67,8 @@ export function ServiceAreas() {
         ))}
       </section>
 
-      <section className="mt-10 rounded-3xl border border-line bg-paper p-6">
-        <h2 className="text-2xl font-bold text-teal-deep">أسئلة محلية شائعة</h2>
+      <section className="card-premium p-6">
+        <h2 className="font-display text-2xl font-extrabold text-brand-deep">أسئلة محلية شائعة</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl bg-cream p-4">
             <h3 className="font-bold text-brand-deep">لماذا لا توجد صفحة منفصلة لكل مدينة؟</h3>
@@ -73,8 +81,10 @@ export function ServiceAreas() {
         </div>
       </section>
 
-      <CareReferral />
-      <ContactCta topic="سؤال عن منطقة أو مدينة" />
+      <div className="grid gap-6 lg:grid-cols-2">
+        <WhatsAppContactCard compact />
+        <CareReferral />
+      </div>
     </div>
   );
 }

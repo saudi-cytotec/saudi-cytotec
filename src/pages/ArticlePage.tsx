@@ -11,6 +11,8 @@ import { clusters, SITE } from "../data/site";
 import { relatedArticles as pickRelated } from "../data/articles";
 import { clusterPath, getCluster, readingMinutes } from "../utils/content";
 import { CareReferral } from "../components/CareReferral";
+import { ArticleWhatsAppBanner } from "../components/WhatsAppContact";
+import { LOGO_SRC } from "../components/Logo";
 import { NotFound } from "./NotFound";
 
 function labelForTarget(path: string, articles: { slug: string; title: string }[]) {
@@ -36,6 +38,25 @@ export function ArticlePage() {
   const previous = indexInCluster > 0 ? clusterArticles[indexInCluster - 1] : null;
   const next = indexInCluster >= 0 && indexInCluster < clusterArticles.length - 1 ? clusterArticles[indexInCluster + 1] : null;
 
+  // Effective images: editor selection ONLY. No fallbacks to placeholders,
+  // cluster defaults, or invented artwork. The absence of an image is a valid
+  // state: no hero figure and no og:image / twitter:image meta are emitted.
+  // Precedence: explicit OG image > banner/hero > featured (image).
+  const managed = article as typeof article & {
+    ogTitle?: string;
+    ogDescription?: string;
+    canonical?: string;
+  };
+  const ogImage = article.ogImage || article.bannerImage || article.image || "";
+  const bannerSrc = article.bannerImage || article.image || "";
+  const bannerAlt = article.bannerImageAlt || article.imageAlt || article.title;
+  // A committed CMS article may carry its own canonical; only use it when it
+  // points at our own domain, otherwise keep the self-canonical.
+  const canonical =
+    managed.canonical && managed.canonical.startsWith(SITE.domain)
+      ? managed.canonical
+      : undefined;
+
   return (
     <article className="mx-auto max-w-6xl px-4 py-8">
       <Seo
@@ -45,8 +66,11 @@ export function ArticlePage() {
         type="article"
         publishedAt={article.publishedAt}
         updatedAt={article.updatedAt}
-        image={article.image}
-        keywords={article.title}
+        image={ogImage}
+        ogTitle={managed.ogTitle}
+        ogDescription={managed.ogDescription}
+        canonical={canonical}
+        keywords={(article as { primaryKeyword?: string }).primaryKeyword || article.title}
       />
       <JsonLd
         data={[
@@ -64,7 +88,7 @@ export function ArticlePage() {
               "@type": "Organization",
               name: SITE.name,
               url: SITE.domain,
-              logo: { "@type": "ImageObject", url: `${SITE.domain}/images/logo.png` },
+              logo: { "@type": "ImageObject", url: `${SITE.domain}${LOGO_SRC}` },
             },
             description: article.metaDescription,
             datePublished: article.publishedAt,
@@ -94,12 +118,39 @@ export function ArticlePage() {
           { name: article.title, path: `/blog/${article.slug}` },
         ]}
       />
-      <p className="mt-6 text-sm font-semibold text-sage">{cluster.title}</p>
-      <h1 className="mt-2 max-w-3xl text-4xl font-bold leading-[1.35] text-teal-deep">{article.h1}</h1>
-      <p className="mt-4 max-w-3xl text-lg leading-9 text-ink-soft">{article.excerpt}</p>
-      <p className="mt-3 text-sm text-ink-soft">
-        نُشر في {article.publishedAt} · آخر تحديث {article.updatedAt} · قراءة تقريبية {readingMinutes(article)} دقائق
-      </p>
+      <div className="mt-6">
+        <p className="inline-flex items-center gap-2 rounded-full bg-sky-soft px-3.5 py-1.5 text-xs font-bold text-brand">
+          {cluster.title}
+        </p>
+        <h1 className="mt-3 max-w-3xl font-display text-3xl font-extrabold leading-[1.4] text-brand-deep sm:text-4xl">
+          {article.h1}
+        </h1>
+        <p className="mt-4 max-w-3xl text-lg leading-9 text-ink-soft">{article.excerpt}</p>
+        <p className="mt-3 text-sm text-ink-soft">
+          نُشر في {article.publishedAt} · آخر تحديث {article.updatedAt} · قراءة تقريبية {readingMinutes(article)} دقائق
+        </p>
+      </div>
+
+      {bannerSrc ? (
+        <figure className="card-premium mt-7 max-w-4xl overflow-hidden">
+          <img
+            src={bannerSrc}
+            alt={bannerAlt}
+            width={1200}
+            height={article.bannerImage ? 675 : 900}
+            loading="eager"
+            decoding="async"
+            className="aspect-[16/9] w-full object-cover"
+          />
+          {article.imageAlt ? (
+            <figcaption className="px-4 py-2.5 text-xs text-ink-soft">{article.imageAlt}</figcaption>
+          ) : null}
+        </figure>
+      ) : null}
+
+      {/* Approved WhatsApp info banner — the whole banner opens the informational channel. */}
+      <ArticleWhatsAppBanner />
+
       <div className="mt-6 max-w-3xl">
         <DisclaimerBanner />
       </div>
@@ -132,12 +183,8 @@ export function ArticlePage() {
             {labelForTarget(path, articles)}
           </Link>
         ))}
-        <Link to="/faq" className="rounded-full border border-line px-3 py-1 hover:bg-paper">
-          أسئلة شائعة مرتبطة
-        </Link>
-        <Link to="/service-areas" className="rounded-full border border-line px-3 py-1 hover:bg-paper">
-          مسارات الرعاية حسب المنطقة
-        </Link>
+        <Link to="/faq" className="rounded-full border border-line px-3 py-1 hover:bg-paper">أسئلة شائعة مرتبطة</Link>
+        <Link to="/service-areas" className="rounded-full border border-line px-3 py-1 hover:bg-paper">مسارات الرعاية حسب المنطقة</Link>
       </div>
       {(previous || next) ? (
         <nav className="mt-8 grid gap-3 md:grid-cols-2" aria-label="المقال السابق والتالي داخل المحور">

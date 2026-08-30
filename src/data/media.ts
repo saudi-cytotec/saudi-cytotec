@@ -16,20 +16,33 @@ export interface MediaItem {
 
 export const mediaLibrary: MediaItem[] = [
   {
-    file: "/images/logo.png",
-    alt: "شعار منصة سعودي إرساء",
-    width: 512,
-    height: 512,
-    role: "الشعار — أيقونة الموقع وأيقونة أبل",
+    file: "/images/لوجو.png",
+    alt: "شعار saudiersaa — مدونة سايتوتك التوعوية في السعودية",
+    width: 1536,
+    height: 1024,
+    role: "الشعار المعتمد — الهيدر والفوتر",
+  },
+  {
+    file: "/images/Bannerrr.png",
+    alt: "بانر الصفحة الرئيسية المعتمد — معلومات طبية موثوقة عن صحة المرأة",
+    width: 1536,
+    height: 1024,
+    role: "صورة البطل في الصفحة الرئيسية (LCP)",
+  },
+  {
+    file: "/images/saudiersaa-article-whatsapp-banner.png.png",
+    alt: "بانر واتساب المعتمد للمقالات — قناة معلومات عامة",
+    width: 1717,
+    height: 916,
+    role: "بانر واتساب أعلى المقالات",
   },
   {
     file: "/images/hero-doctor.jpg",
     alt: "طبيبة سعودية بحجاب في عيادة صحة المرأة",
     width: 1200,
     height: 900,
-    role: "صورة البطل في الصفحة الرئيسية (LCP)",
+    role: "صورة سياقية — صفحات الفئات",
   },
-
   {
     file: "/images/article-mark.svg",
     alt: "",

@@ -43,7 +43,9 @@ export function IndexabilityScreen() {
   const graph = useMemo(() => buildLinkGraph(managed), [managed]);
 
   const computed = useMemo(() => {
-    const published = managed.filter((a) => a.status === "published");
+    // Keep in sync with CatalogProvider: status matching is case-insensitive so
+    // a published article can never be miscounted as non-public here.
+    const published = managed.filter((a) => String(a.status).toLowerCase() === "published");
     // No public page carries noindex today; this count stays at zero unless an
     // editor explicitly flags a page (which the publishing policy prevents).
     const notIndexed = 0;

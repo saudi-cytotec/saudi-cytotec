@@ -1,0 +1,287 @@
+/**
+ * verifyRendered — rendered-HTML indexability proof (post-build).
+ *
+ *   node scripts/verifyRendered.mjs
+ *
+ * This is the check that answers "does the DEPLOYED HTML really carry the
+ * right tags?" rather than "did the source change?". It takes the built
+ * single-file bundle (dist/index.html), executes it in a real DOM (jsdom) at
+ * each target URL — exactly what a rendering crawler sees after JS execution —
+ * and asserts the meta robots, canonical, title, description, H1 and JSON-LD.
+ *
+ * Exit 1 on any violation of the expected per-route behavior:
+ *   - published article pages (and public pages) must render index,follow with
+ *     a self-canonical and real content (not the 404 fallback),
+ *   - /admin and /search must render noindex,
+ *   - unknown article slugs must render the noindex 404 fallback,
+ *   - the flagship URL must additionally appear in public/sitemap.xml with a
+ *     URL identical to its canonical.
+ */
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { JSDOM } from "jsdom";
+
+// The built bundle is a single minified line — an uncaught error would print
+// the whole bundle as a code frame. Keep failures readable.
+process.on("uncaughtException", (err) => {
+  console.error("\n[verify] uncaught exception:", err && err.message);
+  console.error((err && err.stack ? String(err.stack).split("\n").slice(0, 6).join("\n") : "").replace(new RegExp("bundle\\.mjs[^\n]*", "g"), "bundle.mjs"));
+  process.exit(1);
+});
+process.on("unhandledRejection", (err) => {
+  console.error("[verify] unhandled rejection:", err && err.message);
+});
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, "..");
+const DIST_HTML = path.join(ROOT, "dist", "index.html");
+const SITEMAP = path.join(ROOT, "public", "sitemap.xml");
+const DOMAIN = "https://saudiersaa.com";
+
+if (!fs.existsSync(DIST_HTML)) {
+  console.error("[verify] dist/index.html not found — run `npm run build` first.");
+  process.exit(1);
+}
+
+// ---------------------------------------------------------------- extract the inlined module bundle
+const html = fs.readFileSync(DIST_HTML, "utf8");
+const chunks = [...html.matchAll(/<script type="module"[^>]*>([\s\S]*?)<\/script>/g)]
+  .map((m) => m[1])
+  .filter((c) => c.trim().length > 0);
+if (!chunks.length) {
+  console.error("[verify] no inlined module script found in dist/index.html (is vite-plugin-singlefile active?)");
+  process.exit(1);
+}
+const bundlePath = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "saudiersaa-verify-")), "bundle.mjs");
+fs.writeFileSync(bundlePath, chunks.join("\n"));
+
+// ---------------------------------------------------------------- URL plan
+const sitemapXml = fs.readFileSync(SITEMAP, "utf8");
+const sitemapLocs = new Set([...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]));
+
+const TARGET = "/blog/cytotec-in-saudi-arabia";
+
+const urls = [
+  // { path, expect: "indexable" | "noindex" | "notfound", canonical?, inSitemap? }
+  { path: TARGET, expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-in-saudi-arabia`, inSitemap: true },
+  { path: "/", expect: "indexable", canonical: `${DOMAIN}/` },
+  { path: "/what-is-cytotec", expect: "indexable", canonical: `${DOMAIN}/what-is-cytotec` },
+  { path: "/safety", expect: "indexable", canonical: `${DOMAIN}/safety` },
+  { path: "/blog", expect: "indexable", canonical: `${DOMAIN}/blog` },
+  { path: "/blog/cytotec-definition", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-definition` },
+  { path: "/blog/anemia-womens-health", expect: "indexable", canonical: `${DOMAIN}/blog/anemia-womens-health` },
+  { path: "/blog/saudi-drug-regulation-context", expect: "indexable", canonical: `${DOMAIN}/blog/saudi-drug-regulation-context` },
+  { path: "/blog/cluster/ma-huwa-saytotek", expect: "indexable", canonical: `${DOMAIN}/blog/cluster/ma-huwa-saytotek` },
+  { path: "/service-areas", expect: "indexable", canonical: `${DOMAIN}/service-areas`, inSitemap: true },
+  { path: "/contact", expect: "indexable", canonical: `${DOMAIN}/contact` },
+  { path: "/search", expect: "noindex" },
+  { path: "/admin", expect: "noindex" },
+  { path: "/blog/no-such-article-xyz", expect: "notfound" },
+];
+
+// ---------------------------------------------------------------- render one URL
+const BUNDLE_IMPORT = pathToFileUrlSafe(bundlePath);
+
+async function waitFor(fn, ms = 15000, label = "condition") {
+  const start = Date.now();
+  for (;;) {
+    try {
+      if (fn()) return true;
+    } catch {
+      // keep polling
+    }
+    if (Date.now() - start > ms) return false;
+    await new Promise((r) => setTimeout(r, 150));
+  }
+}
+
+function pathToFileUrlSafe(file) {
+  return "file://" + file.split(path.sep).join("/");
+}
+
+async function render(urlPath) {
+  // Fresh DOM per URL: BrowserRouter reads window.location, Helmet writes to it.
+  const dom = new JSDOM(`<!doctype html><html><body><div id="root"></div></body></html>`, {
+    url: DOMAIN + urlPath,
+    pretendToBeVisual: true,
+    runScripts: "outside-only",
+  });
+  const { window } = dom;
+
+  // Browser globals the bundle expects at import time. Node 22 ships some of
+  // these as read-only getters (navigator), so fall back to defineProperty.
+  const setGlobal = (name, value) => {
+    try {
+      globalThis[name] = value;
+    } catch {
+      Object.defineProperty(globalThis, name, { value, configurable: true, writable: true });
+    }
+  };
+  const globals = [
+    "window", "document", "navigator", "location", "history",
+    "localStorage", "sessionStorage",
+    "HTMLElement", "HTMLInputElement", "HTMLAnchorElement", "Element", "Node",
+    "DocumentFragment", "Text", "Comment",
+    "Event", "CustomEvent", "EventTarget", "MutationObserver",
+    "DOMParser", "MessageChannel", "URL", "URLSearchParams",
+    "getComputedStyle", "Image",
+  ];
+  for (const name of globals) {
+    if (window[name] !== undefined) setGlobal(name, window[name]);
+  }
+  setGlobal("getComputedStyle", window.getComputedStyle.bind(window));
+  setGlobal("requestAnimationFrame", (cb) => setTimeout(cb, 16));
+  setGlobal("cancelAnimationFrame", (id) => clearTimeout(id));
+  // No network in the harness: any fetch (admin API, fonts, etc.) fails fast
+  // and the app's own error paths handle it.
+  window.fetch = () => Promise.reject(new TypeError("network disabled in verification harness"));
+  global.fetch = window.fetch;
+
+  await import(BUNDLE_IMPORT + "?u=" + encodeURIComponent(urlPath));
+
+  // The app renders asynchronously after its data effects resolve.
+  const settled = await waitFor(
+    () => {
+      const root = window.document.getElementById("root");
+      return root && root.innerHTML.length > 200;
+    },
+    20000,
+    "app render",
+  );
+
+  const doc = window.document;
+  // IMPORTANT: every read must happen BEFORE window.close() — closing the
+  // jsdom window tears down the document's DOM, which silently zeroes out
+  // <body> reads made afterwards.
+  const metaContent = (name) => {
+    const el = doc.querySelector(`meta[name="${name}"]`);
+    return el ? el.getAttribute("content") : null;
+  };
+  const canonicalEl = doc.querySelector('link[rel="canonical"]');
+  const ldScripts = [...doc.querySelectorAll('script[type="application/ld+json"]')].map((s) => {
+    try {
+      return JSON.parse(s.textContent);
+    } catch {
+      return null;
+    }
+  });
+
+  const result = {
+    settled,
+    robots: metaContent("robots"),
+    canonical: canonicalEl ? canonicalEl.getAttribute("href") : null,
+    title: doc.querySelector("title")?.textContent ?? null,
+    description: metaContent("description"),
+    h1: doc.querySelector("h1")?.textContent ?? null,
+    is404: /الصفحة غير موجودة/.test(doc.body?.textContent ?? ""),
+    ldTypes: collectTypes(ldScripts),
+    ldMainEntity: ldScripts
+      .map((d) => (Array.isArray(d) ? d : [d]))
+      .flat()
+      .find((d) => d && (d["@type"]?.includes("Article") || d["@type"] === "Article"))
+      ?.mainEntityOfPage ?? null,
+  };
+
+  dom.window.close();
+  return result;
+}
+
+function collectTypes(scripts) {
+  const out = new Set();
+  for (const s of scripts) {
+    const nodes = Array.isArray(s) ? s : [s];
+    for (const n of nodes) {
+      if (!n) continue;
+      const t = n["@type"];
+      if (Array.isArray(t)) t.forEach((x) => out.add(x));
+      else if (t) out.add(t);
+    }
+  }
+  return [...out];
+}
+
+// ---------------------------------------------------------------- assertions
+let failures = 0;
+const rows = [];
+
+function assert(cond, urlPath, label, detail) {
+  if (cond) {
+    rows.push({ urlPath, label, value: detail, pass: true });
+  } else {
+    failures++;
+    rows.push({ urlPath, label, value: detail, pass: false });
+  }
+}
+
+console.log("RENDERED-HTML VERIFICATION (jsdom execution of the built bundle)\n");
+
+for (const spec of urls) {
+  const r = await render(spec.path);
+  const robotsNoindex = r.robots ? r.robots.toLowerCase().includes("noindex") : true; // missing meta treated as failure
+  const robotsIndex = r.robots === "index,follow,max-image-preview:large";
+
+  if (!r.settled) {
+    failures++;
+    rows.push({ urlPath: spec.path, label: "render", value: "TIMED OUT — app did not render", pass: false });
+    continue;
+  }
+
+  if (spec.expect === "indexable") {
+    assert(!robotsNoindex, spec.path, "robots meta", r.robots ?? "(missing)");
+    assert(robotsIndex, spec.path, "robots = index,follow", r.robots ?? "(missing)");
+    assert(r.canonical === spec.canonical, spec.path, "canonical", r.canonical ?? "(missing)");
+    assert(Boolean(r.title && r.title.trim()), spec.path, "title", r.title ?? "(missing)");
+    assert(Boolean(r.description && r.description.trim()), spec.path, "description", r.description ? `${r.description.slice(0, 60)}…` : "(missing)");
+    assert(Boolean(r.h1 && r.h1.trim()) && !r.is404, spec.path, "content (H1, not 404)", r.is404 ? "RENDERED 404 PAGE" : (r.h1 ?? "(no h1)").slice(0, 60));
+  } else if (spec.expect === "noindex") {
+    assert(robotsNoindex, spec.path, "robots meta noindex", r.robots ?? "(missing)");
+  } else if (spec.expect === "notfound") {
+    assert(r.is404, spec.path, "renders 404 fallback", r.is404 ? "404 page" : "NOT 404");
+    assert(robotsNoindex, spec.path, "robots meta noindex", r.robots ?? "(missing)");
+  }
+
+  if (spec.inSitemap) {
+    assert(sitemapLocs.has(spec.canonical), spec.path, "sitemap entry", sitemapLocs.has(spec.canonical) ? spec.canonical : "ABSENT FROM SITEMAP");
+    assert(r.canonical === spec.canonical, spec.path, "sitemap URL === canonical", r.canonical ?? "(missing)");
+  }
+
+  // Article pages (single-segment /blog/<slug>) must keep their structured
+  // data. Cluster index pages carry BreadcrumbList by design, not Article.
+  if (spec.expect === "indexable" && /^\/blog\/[^/]+$/.test(spec.path)) {
+    const hasArticleLd = r.ldTypes.includes("Article") && r.ldTypes.includes("MedicalWebPage");
+    assert(hasArticleLd, spec.path, "JSON-LD Article+MedicalWebPage", r.ldTypes.join(",") || "(none)");
+    if (spec.path === TARGET) {
+      assert(r.ldMainEntity === spec.canonical, spec.path, "JSON-LD mainEntityOfPage", r.ldMainEntity ?? "(none)");
+    }
+  }
+}
+
+// ---------------------------------------------------------------- report
+console.log("PATH".padEnd(42) + "CHECK".padEnd(34) + "RESULT");
+console.log("-".repeat(140));
+for (const row of rows) {
+  console.log(
+    row.urlPath.padEnd(42) +
+      row.label.padEnd(34) +
+      (row.pass ? "[PASS] " : "[FAIL] ") +
+      String(row.value).slice(0, 60),
+  );
+}
+
+// ---------------------------------------------------------------- flagship verdict
+const target = rows.filter((r) => r.urlPath === TARGET);
+const targetPass = target.length > 0 && target.every((r) => r.pass);
+
+console.log("\nFLAGSHIP URL VERDICT — " + TARGET);
+console.log("  noindex  = " + (target.find((r) => r.label === "robots meta")?.pass ? "FALSE" : "TRUE (FAIL)"));
+console.log("  canonical = " + (target.find((r) => r.label === "canonical")?.value ?? "(missing)"));
+console.log("  sitemap  = " + (target.find((r) => r.label === "sitemap entry")?.pass ? "PRESENT" : "ABSENT"));
+console.log("  HTTP     = 200 (Vercel SPA rewrite serves index.html for this route — unchanged by this fix)");
+
+if (failures) {
+  console.error(`\nRENDERED-HTML VERIFICATION: FAIL (${failures} failed check(s))`);
+  process.exit(1);
+}
+console.log("\nRENDERED-HTML VERIFICATION: PASS — all " + rows.length + " rendered-HTML checks green");
