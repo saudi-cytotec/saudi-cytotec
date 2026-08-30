@@ -346,7 +346,7 @@
   "status": "published",
   "source": "cms",
   "slugLocked": true,
-  "canonical": "https://saudiersaa.com/blog/cytotec-in-saudi-arabia",
+  "canonical": "https://saudiersaa.com/service-areas",
   "primaryKeyword": "سايتوتك في السعودية",
   "secondaryKeywords": [
     "سايتوتك",
@@ -370,5 +370,73 @@
   "hasDisclaimer": true,
   "bannerImage": "/images/hero.jpg",
   "bannerImageAlt": "بانر البطل المختار عبر الـ CMS",
-  "ogImage": "/images/safety.jpg"
+  "ogImage": "/images/safety.jpg",
+  "noindex": true,
+  "resourceLinks": [
+    {
+      "to": "/service-areas",
+      "label": "سايتوتك في السعودية",
+      "description": "الصفحة السعودية الرئيسية التي تجمع المحور الوطني وروابط المدن ذات الأولوية."
+    },
+    {
+      "to": "/blog/cytotec-makkah",
+      "label": "سايتوتك في مكة المكرمة",
+      "description": "سياق محلي للتعامل مع الزحام والسفر ومتى تصبح المراجعة عاجلة."
+    },
+    {
+      "to": "/blog/cytotec-madinah",
+      "label": "سايتوتك في المدينة المنورة",
+      "description": "معلومات محلية تراعي الزيارة والتنقل والوصول إلى الرعاية المرخصة."
+    },
+    {
+      "to": "/blog/cytotec-buraidah",
+      "label": "سايتوتك في بريدة",
+      "description": "قراءة تعليمية لسياق القصيم والمحافظات القريبة."
+    },
+    {
+      "to": "/blog/cytotec-dammam",
+      "label": "سايتوتك في الدمام",
+      "description": "دليل يشرح السياق الطبي والوصول إلى الرعاية في المنطقة الشرقية."
+    },
+    {
+      "to": "/blog/cytotec-abha",
+      "label": "سايتوتك في أبها",
+      "description": "تركيز على المسافة والطريق ومتى لا يكون الانتظار مناسباً."
+    },
+    {
+      "to": "/blog/cytotec-tabuk",
+      "label": "سايتوتك في تبوك",
+      "description": "سياق تعليمي للشمال الغربي والتخطيط للمراجعة المرخصة."
+    },
+    {
+      "to": "/blog/cytotec-hail",
+      "label": "سايتوتك في حائل",
+      "description": "إشارات عملية للتفريق بين الحاجة إلى عيادة والحاجة إلى طوارئ."
+    },
+    {
+      "to": "/blog/cytotec-arar",
+      "label": "سايتوتك في عرعر",
+      "description": "صفحة محلية تركّز على المسافة وعدم الاعتماد على وسيط غير مرخص."
+    },
+    {
+      "to": "/blog/cytotec-jazan",
+      "label": "سايتوتك في جيزان",
+      "description": "محتوى محلي يربط الأعراض بعلامات الخطر والوصول السريع للرعاية."
+    },
+    {
+      "to": "/blog/cytotec-najran",
+      "label": "سايتوتك في نجران",
+      "description": "سياق تعليمي لأسئلة الحمل المحتمل والمسافة إلى التقييم الطبي."
+    },
+    {
+      "to": "/blog/cytotec-baha",
+      "label": "سايتوتك في الباحة",
+      "description": "قراءة محلية تركز على الطريق وعلامات التحذير والتخطيط للمراجعة."
+    },
+    {
+      "to": "/blog/cytotec-sakaka",
+      "label": "سايتوتك في سكاكا",
+      "description": "صفحة محلية للجوف والمراكز القريبة مع توجيه واضح إلى الرعاية النظامية."
+    }
+  ]
 }

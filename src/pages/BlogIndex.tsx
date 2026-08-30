@@ -43,7 +43,7 @@ export function BlogIndex() {
             activeCluster === "all" ? "bg-brand text-white" : "bg-white text-brand-deep ring-1 ring-line hover:bg-brand-soft"
           }`}
         >
-          الكل ({articles.length})
+          الكل ({articles.filter((article) => !article.noindex).length})
         </button>
         {clusters.map((cluster) => {
           const count = articles.filter((a) => a.cluster === cluster.id).length;

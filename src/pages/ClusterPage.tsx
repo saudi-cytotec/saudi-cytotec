@@ -24,7 +24,8 @@ export function ClusterPage() {
       </div>
     );
   }
-  const list = articles.filter((article) => article.cluster === cluster.id);
+
+  const list = articles.filter((article) => article.cluster === cluster.id && !article.noindex);
   const questions = faqGroups.flatMap((group) => group.items).filter((item) =>
     item.links.some((link) => link.to === clusterPath(cluster) || list.some((article) => link.to === `/blog/${article.slug}` || link.to === article.slug)),
   ).slice(0, 3);
@@ -42,7 +43,7 @@ export function ClusterPage() {
         description={cluster.description}
       >
         <div className="mt-5 flex flex-wrap items-center gap-3">
-          <span className={`inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white ring-1 ring-white/20`}>
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white ring-1 ring-white/20">
             <span className={`grid h-6 w-6 place-items-center rounded-full ${soft} ${color}`}>
               <Icon className="h-4 w-4" />
             </span>
@@ -54,6 +55,7 @@ export function ClusterPage() {
       <div className="flex flex-wrap gap-2 text-sm">
         <Link to="/topics" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-brand hover:bg-cream">كل المحاور</Link>
         <Link to="/faq" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-brand hover:bg-cream">أسئلة شائعة</Link>
+        <Link to="/service-areas" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-brand hover:bg-cream">سايتوتك في السعودية</Link>
         <Link to="/service-areas" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-brand hover:bg-cream">المناطق والمدن</Link>
         <Link to="/medical-sources" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-brand hover:bg-cream">المراجع الطبية</Link>
       </div>
@@ -63,7 +65,9 @@ export function ClusterPage() {
           <h2 className="font-display text-xl font-extrabold text-brand-deep">أسئلة شائعة داخل هذا المحور</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-3">
             {questions.map((item) => (
-              <Link key={item.q} to="/faq" className="rounded-2xl bg-cream p-4 text-sm font-semibold leading-7 text-brand-deep hover:bg-brand-soft">{item.q}</Link>
+              <Link key={item.q} to="/faq" className="rounded-2xl bg-cream p-4 text-sm font-semibold leading-7 text-brand-deep hover:bg-brand-soft">
+                {item.q}
+              </Link>
             ))}
           </div>
         </section>

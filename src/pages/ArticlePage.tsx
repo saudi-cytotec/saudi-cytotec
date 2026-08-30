@@ -13,6 +13,7 @@ import { clusterPath, getCluster, readingMinutes } from "../utils/content";
 import { CareReferral } from "../components/CareReferral";
 import { ArticleWhatsAppBanner } from "../components/WhatsAppContact";
 import { LOGO_SRC } from "../components/Logo";
+import type { ManagedArticle } from "../types";
 import { NotFound } from "./NotFound";
 
 function labelForTarget(path: string, articles: { slug: string; title: string }[]) {
@@ -28,89 +29,83 @@ function labelForTarget(path: string, articles: { slug: string; title: string }[
 
 export function ArticlePage() {
   const { slug } = useParams();
-  const { articles } = useCatalog();
+  const { articles, managed } = useCatalog();
   const article = articles.find((item) => item.slug === slug);
+  const managedArticle = managed.find((item) => item.slug === slug) as ManagedArticle | undefined;
   if (!article) return <NotFound />;
+
   const cluster = getCluster(article.cluster);
-  const related = pickRelated(article, articles);
+  const related = pickRelated(article, articles.filter((item) => !item.noindex));
   const clusterArticles = articles.filter((item) => item.cluster === article.cluster);
   const indexInCluster = clusterArticles.findIndex((item) => item.slug === article.slug);
   const previous = indexInCluster > 0 ? clusterArticles[indexInCluster - 1] : null;
   const next = indexInCluster >= 0 && indexInCluster < clusterArticles.length - 1 ? clusterArticles[indexInCluster + 1] : null;
 
-  // Effective images: editor selection ONLY. No fallbacks to placeholders,
-  // cluster defaults, or invented artwork. The absence of an image is a valid
-  // state: no hero figure and no og:image / twitter:image meta are emitted.
-  // Precedence: explicit OG image > banner/hero > featured (image).
-  const managed = article as typeof article & {
-    ogTitle?: string;
-    ogDescription?: string;
-    canonical?: string;
-  };
+  const seoTitle = managedArticle?.seoTitle || article.metaTitle;
+  const seoDescription = managedArticle?.metaDescription || article.metaDescription;
+  const keywordMeta = managedArticle ? [managedArticle.primaryKeyword, ...managedArticle.secondaryKeywords].filter(Boolean).join(", ") : article.title;
   const ogImage = article.ogImage || article.bannerImage || article.image || "";
   const bannerSrc = article.bannerImage || article.image || "";
   const bannerAlt = article.bannerImageAlt || article.imageAlt || article.title;
-  // A committed CMS article may carry its own canonical; only use it when it
-  // points at our own domain, otherwise keep the self-canonical.
-  const canonical =
-    managed.canonical && managed.canonical.startsWith(SITE.domain)
-      ? managed.canonical
-      : undefined;
+  const canonical = managedArticle?.canonical?.startsWith(SITE.domain)
+    ? managedArticle.canonical
+    : `${SITE.domain}/blog/${article.slug}`;
+  const noindex = managedArticle?.noindex === true || article.noindex === true;
+  const resourceLinks = managedArticle?.resourceLinks ?? [];
+  const isSaudiHubShadow = article.slug === "cytotec-in-saudi-arabia";
 
   return (
     <article className="mx-auto max-w-6xl px-4 py-8">
       <Seo
-        title={article.metaTitle}
-        description={article.metaDescription}
+        title={seoTitle}
+        description={seoDescription}
         path={`/blog/${article.slug}`}
         type="article"
         publishedAt={article.publishedAt}
         updatedAt={article.updatedAt}
         image={ogImage}
-        ogTitle={managed.ogTitle}
-        ogDescription={managed.ogDescription}
+        ogTitle={managedArticle?.ogTitle}
+        ogDescription={managedArticle?.ogDescription}
         canonical={canonical}
-        keywords={(article as { primaryKeyword?: string }).primaryKeyword || article.title}
+        keywords={keywordMeta}
+        noindex={noindex}
       />
-      <JsonLd
-        data={[
-          {
-            "@context": "https://schema.org",
-            // Article is the type Google can surface as a rich result;
-            // MedicalWebPage alone has no rich-result treatment. Both describe
-            // the same node truthfully. Drug/Product/Offer/Review/AggregateRating
-            // are deliberately never emitted: this site sells nothing and
-            // publishes no ratings.
-            "@type": ["Article", "MedicalWebPage"],
-            headline: article.h1,
-            author: { "@type": "Organization", name: SITE.name, url: SITE.domain },
-            publisher: {
-              "@type": "Organization",
-              name: SITE.name,
-              url: SITE.domain,
-              logo: { "@type": "ImageObject", url: `${SITE.domain}${LOGO_SRC}` },
+      {!noindex ? (
+        <JsonLd
+          data={[
+            {
+              "@context": "https://schema.org",
+              "@type": ["Article", "MedicalWebPage"],
+              headline: article.h1,
+              author: { "@type": "Organization", name: SITE.name, url: SITE.domain },
+              publisher: {
+                "@type": "Organization",
+                name: SITE.name,
+                url: SITE.domain,
+                logo: { "@type": "ImageObject", url: `${SITE.domain}${LOGO_SRC}` },
+              },
+              description: seoDescription,
+              datePublished: article.publishedAt,
+              dateModified: article.updatedAt,
+              inLanguage: "ar",
+              mainEntityOfPage: canonical,
             },
-            description: article.metaDescription,
-            datePublished: article.publishedAt,
-            dateModified: article.updatedAt,
-            inLanguage: "ar",
-            mainEntityOfPage: `${SITE.domain}/blog/${article.slug}`,
-          },
-          ...(article.faqs?.length
-            ? [
-                {
-                  "@context": "https://schema.org",
-                  "@type": "FAQPage",
-                  mainEntity: article.faqs.map((item) => ({
-                    "@type": "Question",
-                    name: item.q,
-                    acceptedAnswer: { "@type": "Answer", text: item.a },
-                  })),
-                },
-              ]
-            : []),
-        ]}
-      />
+            ...(article.faqs?.length
+              ? [
+                  {
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    mainEntity: article.faqs.map((item) => ({
+                      "@type": "Question",
+                      name: item.q,
+                      acceptedAnswer: { "@type": "Answer", text: item.a },
+                    })),
+                  },
+                ]
+              : []),
+          ]}
+        />
+      ) : null}
       <Breadcrumbs
         items={[
           { name: "المقالات", path: "/blog" },
@@ -118,6 +113,7 @@ export function ArticlePage() {
           { name: article.title, path: `/blog/${article.slug}` },
         ]}
       />
+
       <div className="mt-6">
         <p className="inline-flex items-center gap-2 rounded-full bg-sky-soft px-3.5 py-1.5 text-xs font-bold text-brand">
           {cluster.title}
@@ -142,21 +138,57 @@ export function ArticlePage() {
             decoding="async"
             className="aspect-[16/9] w-full object-cover"
           />
-          {article.imageAlt ? (
-            <figcaption className="px-4 py-2.5 text-xs text-ink-soft">{article.imageAlt}</figcaption>
-          ) : null}
+          {article.imageAlt ? <figcaption className="px-4 py-2.5 text-xs text-ink-soft">{article.imageAlt}</figcaption> : null}
         </figure>
       ) : null}
 
-      {/* Approved WhatsApp info banner — the whole banner opens the informational channel. */}
       <ArticleWhatsAppBanner />
 
       <div className="mt-6 max-w-3xl">
         <DisclaimerBanner />
       </div>
+      {isSaudiHubShadow ? (
+        <section className="mt-6 max-w-3xl rounded-3xl border border-brand/20 bg-brand-soft p-5">
+          <p className="text-xs font-bold text-brand">تنبيه هيكلي</p>
+          <h2 className="mt-1 text-xl font-bold text-brand-deep">الصفحة السعودية الرئيسية لهذا الموضوع أصبحت هنا</h2>
+          <p className="mt-2 text-sm leading-7 text-ink-soft">
+            للحفاظ على مسار واحد واضح وغير مكرر، تعتمد بنية الموقع الآن على صفحة <strong>سايتوتك في السعودية</strong>
+            ضمن <strong>المناطق والمدن</strong> بوصفها المركز الأساسي، بينما تبقى هذه الصفحة مرجعاً انتقالياً لمن يصل إليها
+            عبر رابط قديم.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3 text-sm">
+            <Link to="/service-areas" className="rounded-full bg-accent px-5 py-2.5 font-bold text-white transition hover:brightness-110">
+              الانتقال إلى الصفحة الرئيسية
+            </Link>
+            <Link to="/faq" className="rounded-full border border-line bg-paper px-5 py-2.5 font-semibold text-brand-deep hover:bg-cream">
+              أسئلة شائعة
+            </Link>
+          </div>
+        </section>
+      ) : null}
       <div className="mt-10">
         <ContentBlocks blocks={article.blocks} />
       </div>
+
+      {resourceLinks.length ? (
+        <section className="mt-12 rounded-3xl border border-line bg-paper p-6 shadow-sm">
+          <h2 className="text-2xl font-bold text-teal-deep">{isSaudiHubShadow ? "الصفحة الرئيسية وروابط المدن" : "روابط مرتبطة مفيدة"}</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-ink-soft">
+            {isSaudiHubShadow
+              ? "إذا وصلتِ إلى هذا الرابط مباشرة، فابدئي من الصفحة السعودية الرئيسية ثم انتقلي إلى المدينة الأقرب لسؤالك أو إلى صفحات الأمان والطوارئ والمراجع."
+              : "الروابط التالية تساعدك على الانتقال بين الصفحة السعودية الرئيسية، والدليل الجغرافي، والموضوعات المرتبطة بسؤالك."}
+          </p>
+          <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {resourceLinks.map((item) => (
+              <Link key={item.to} to={item.to} className="rounded-2xl bg-cream p-4 hover:bg-brand-soft">
+                <h3 className="font-bold text-brand-deep">{item.label}</h3>
+                {item.description ? <p className="mt-2 text-sm leading-7 text-ink-soft">{item.description}</p> : null}
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       {article.faqs?.length ? (
         <section className="mt-12 max-w-3xl">
           <h2 className="text-2xl font-bold text-teal-deep">أسئلة متكررة</h2>
@@ -170,6 +202,7 @@ export function ArticlePage() {
           </div>
         </section>
       ) : null}
+
       <div className="mt-12 max-w-3xl">
         <CareReferral />
       </div>
@@ -183,15 +216,31 @@ export function ArticlePage() {
             {labelForTarget(path, articles)}
           </Link>
         ))}
-        <Link to="/faq" className="rounded-full border border-line px-3 py-1 hover:bg-paper">أسئلة شائعة مرتبطة</Link>
-        <Link to="/service-areas" className="rounded-full border border-line px-3 py-1 hover:bg-paper">مسارات الرعاية حسب المنطقة</Link>
+        <Link to="/faq" className="rounded-full border border-line px-3 py-1 hover:bg-paper">
+          أسئلة شائعة مرتبطة
+        </Link>
+        <Link to="/service-areas" className="rounded-full border border-line px-3 py-1 hover:bg-paper">
+          المناطق والمدن
+        </Link>
       </div>
+
       {(previous || next) ? (
         <nav className="mt-8 grid gap-3 md:grid-cols-2" aria-label="المقال السابق والتالي داخل المحور">
-          {previous ? <Link to={`/blog/${previous.slug}`} className="rounded-2xl border border-line bg-paper p-4 text-sm hover:bg-cream">السابق في المحور: <strong>{previous.title}</strong></Link> : <span />}
-          {next ? <Link to={`/blog/${next.slug}`} className="rounded-2xl border border-line bg-paper p-4 text-sm hover:bg-cream">التالي في المحور: <strong>{next.title}</strong></Link> : null}
+          {previous ? (
+            <Link to={`/blog/${previous.slug}`} className="rounded-2xl border border-line bg-paper p-4 text-sm hover:bg-cream">
+              السابق في المحور: <strong>{previous.title}</strong>
+            </Link>
+          ) : (
+            <span />
+          )}
+          {next ? (
+            <Link to={`/blog/${next.slug}`} className="rounded-2xl border border-line bg-paper p-4 text-sm hover:bg-cream">
+              التالي في المحور: <strong>{next.title}</strong>
+            </Link>
+          ) : null}
         </nav>
       ) : null}
+
       <section className="mt-14">
         <h2 className="mb-5 text-2xl font-bold text-teal-deep">مقالات ذات صلة</h2>
         <RelatedArticles articles={related} />

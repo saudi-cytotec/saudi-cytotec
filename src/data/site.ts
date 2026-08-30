@@ -29,7 +29,7 @@ export const mainNav: NavItem[] = [
   { to: "/safety", label: "الأمان" },
   { to: "/early-pregnancy", label: "الحمل المبكر" },
   { to: "/faq", label: "الأسئلة الشائعة" },
-  { to: "/service-areas", label: "المناطق" },
+  { to: "/service-areas", label: "في السعودية" },
 ];
 
 export const moreNav: NavItem[] = [

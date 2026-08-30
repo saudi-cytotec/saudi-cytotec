@@ -23,7 +23,7 @@ export function SitemapPage() {
             </li>
           ))}
           <li className="mb-2"><Link to="/topics" className="text-teal hover:underline">محاور المحتوى</Link></li>
-          <li className="mb-2"><Link to="/service-areas" className="text-teal hover:underline">المناطق والمدن</Link></li>
+          <li className="mb-2"><Link to="/service-areas" className="text-teal hover:underline">سايتوتك في السعودية</Link></li>
           <li className="mb-2"><Link to="/blog" className="text-teal hover:underline">المقالات</Link></li>
           <li className="mb-2"><Link to="/contact" className="text-teal hover:underline">اتصل بنا</Link></li>
         </ul>
@@ -43,7 +43,7 @@ export function SitemapPage() {
       <section className="mt-10">
         <h2 className="text-2xl font-bold text-teal">المقالات</h2>
         <ul className="mt-3 columns-1 gap-8 md:columns-2">
-          {articles.map((article) => (
+          {articles.filter((article) => !article.noindex).map((article) => (
             <li key={article.slug} className="mb-2 break-inside-avoid">
               <Link to={`/blog/${article.slug}`} className="text-sm leading-7 text-teal hover:underline">
                 {article.title}

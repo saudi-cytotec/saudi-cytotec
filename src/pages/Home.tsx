@@ -22,7 +22,6 @@ import { HEALTH_LINES } from "../data/contact";
 import { LOGO_SRC } from "../components/Logo";
 import { SITE, clusters } from "../data/site";
 
-/** Homepage hero banner — the EXACT approved asset (public/images/Bannerrr.png). */
 const HERO_BANNER_SRC = "/images/Bannerrr.png";
 const HERO_BANNER_ALT = "بانر سعودي إرساء — معلومات طبية موثوقة عن صحة المرأة في السعودية";
 
@@ -46,6 +45,8 @@ const FEATURES = [
 ];
 
 const CORNERSTONES = [
+  { to: "/service-areas", title: "سايتوتك في السعودية", text: "المحور الوطني الرئيسي وروابط المدن ذات الأولوية." },
+  { to: "/service-areas#cities", title: "المناطق والمدن", text: "دليل الصفحات المحلية ومسارات الوصول إلى الرعاية." },
   { to: "/topics", title: "محاور المحتوى", text: "بوابة تربط المجموعات والـ 100 موضوع." },
   { to: "/what-is-cytotec", title: "ما هو سايتوتك؟", text: "تعريف تعليمي للاسم التجاري والمادة الفعالة." },
   { to: "/medical-uses", title: "الاستخدامات الطبية", text: "الاستطبابات والإشراف السريري وحدود الاستخدام." },
@@ -53,21 +54,17 @@ const CORNERSTONES = [
   { to: "/side-effects", title: "الآثار الجانبية", text: "التمييز بين العرض الشائع والعلامة الطارئة." },
   { to: "/when-to-see-doctor", title: "متى تراجعين الطبيب", text: "علامات تستدعي عيادة أو طوارئ دون تأخير." },
   { to: "/faq", title: "الأسئلة الشائعة", text: "إجابات حسب القصد وروابط لمقالات أعمق." },
-  { to: "/service-areas", title: "المناطق والمدن", text: "تنظيم جغرافي مسؤول بلا صفحات مدينة رقيقة." },
 ];
 
-/** Hero banner panel: the EXACT approved homepage banner (Bannerrr.png) on a dark premium card. */
 function HeroBrandPanel() {
   const [missing, setMissing] = useState(false);
   return (
     <div className="relative">
-      {/* Floating hexagon badges (decorative, approved reference motif) */}
       <HexBadge className="absolute -top-6 -start-5 hidden text-white/80 lg:grid" Icon={IconVenus} />
       <HexBadge className="absolute top-10 -end-6 hidden text-white/80 lg:grid" Icon={IconCross} />
       <HexBadge className="absolute -bottom-8 start-10 hidden text-white/80 lg:grid" Icon={IconHeartPulse} />
 
       <div className="relative overflow-hidden rounded-[1.75rem] bg-brand-deep p-8 shadow-[0_28px_60px_-24px_rgb(11_37_69/0.55)] ring-1 ring-white/10 sm:p-10">
-        {/* soft glow */}
         <span className="pointer-events-none absolute -top-16 -start-16 h-56 w-56 rounded-full bg-sky/25 blur-3xl" aria-hidden="true" />
         <span className="pointer-events-none absolute -bottom-20 -end-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
         <div className="relative flex min-h-[16rem] items-center justify-center sm:min-h-[19rem]">
@@ -99,7 +96,6 @@ function HexBadge({ className = "", Icon }: { className?: string; Icon: typeof I
   );
 }
 
-/** Decorative wave bands along the hero bottom edge (white / red / navy). */
 function HeroWaves() {
   return (
     <svg
@@ -117,8 +113,9 @@ function HeroWaves() {
 
 export function Home() {
   const { articles } = useCatalog();
-  const featured = articles.slice(0, 3);
-  const latest = articles.slice(3, 9);
+  const publicArticles = articles.filter((article) => !article.noindex);
+  const featured = publicArticles.slice(0, 3);
+  const latest = publicArticles.slice(3, 9);
 
   return (
     <div className="mx-auto max-w-7xl space-y-12 px-4 py-8 md:space-y-16 md:py-10">
@@ -169,11 +166,9 @@ export function Home() {
         ]}
       />
 
-      {/* ── Hero: light premium panel, approved reference layout ───────── */}
       <section className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#f2f8fe] via-[#e7f0fc] to-[#d9e8f9] ring-1 ring-line/60">
         <div className="pointer-events-none absolute -top-24 -end-24 h-80 w-80 rounded-full bg-sky/10 blur-3xl" aria-hidden="true" />
         <div className="relative grid items-center gap-10 px-6 pb-20 pt-10 sm:px-10 sm:pt-14 lg:grid-cols-2 lg:gap-8 lg:px-12">
-          {/* Copy (start / right in RTL) */}
           <div>
             <h1 className="font-display text-4xl font-extrabold leading-[1.35] text-brand-deep sm:text-[2.9rem] sm:leading-[1.3]">
               مدونة سايتوتك التوعوية
@@ -184,7 +179,6 @@ export function Home() {
               الخصوصية والمصداقية — محتوى تعليمي عام لا يغني عن استشارة الطبيب المرخص.
             </p>
 
-            {/* Trust row */}
             <ul className="mt-7 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-4">
               {HERO_TRUST.map(({ Icon, label }) => (
                 <li key={label} className="flex flex-col items-center gap-2 rounded-2xl bg-white/70 px-2 py-3 text-center ring-1 ring-line/70 backdrop-blur-sm">
@@ -205,22 +199,20 @@ export function Home() {
                 <IconArrowLeft className="h-4.5 w-4.5" />
               </Link>
               <Link
-                to="/what-is-cytotec"
+                to="/service-areas"
                 className="inline-flex items-center rounded-full border border-brand/25 bg-white/60 px-6 py-3.5 text-sm font-bold text-brand transition hover:border-brand/50 hover:bg-white"
               >
-                ابدئي من الأساسيات
+                سايتوتك في السعودية
               </Link>
             </div>
 
             <p className="mt-6 max-w-xl rounded-2xl border border-line/70 bg-white/60 px-4 py-2.5 text-xs leading-6 text-ink-soft backdrop-blur-sm">
               للحالات العاجلة: الإسعاف <span dir="ltr" className="font-mono font-bold text-brand-deep">{SA_EMS}</span> في
-              السعودية · مركز وزارة الصحة{" "}
-              <span dir="ltr" className="font-mono font-bold text-brand-deep">{SA_MOH}</span>. هذا الموقع لا يقدّم
-              استشارة فردية ولا يصرف أدوية.
+              السعودية · مركز وزارة الصحة <span dir="ltr" className="font-mono font-bold text-brand-deep">{SA_MOH}</span>.
+              هذا الموقع لا يقدّم استشارة فردية ولا يصرف أدوية.
             </p>
           </div>
 
-          {/* Brand panel (end / left in RTL) — the exact approved homepage banner */}
           <HeroBrandPanel />
         </div>
         <HeroWaves />
@@ -228,7 +220,6 @@ export function Home() {
 
       <DisclaimerBanner />
 
-      {/* ── Credibility features + light premium WhatsApp card ─────────── */}
       <section className="grid items-stretch gap-6 lg:grid-cols-[1fr_24rem]">
         <div className="card-premium grid grid-cols-2 divide-line p-2 sm:grid-cols-3 lg:grid-cols-5 lg:divide-x">
           {FEATURES.map(({ Icon, color, soft, title, text }) => (
@@ -244,26 +235,18 @@ export function Home() {
         <WhatsAppContactCard compact />
       </section>
 
-      {/* ── Categories ─────────────────────────────────────────────────── */}
       <section>
         <div className="mb-8 text-center">
-          <h2 className="font-display text-2xl font-extrabold text-brand-deep sm:text-[1.8rem]">
-            تصفح المقالات حسب الفئة
-          </h2>
+          <h2 className="font-display text-2xl font-extrabold text-brand-deep sm:text-[1.8rem]">تصفح المقالات حسب الفئة</h2>
           <span className="mx-auto mt-3 block h-1 w-16 rounded-full bg-accent" aria-hidden="true" />
         </div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-5">
           {clusters.map((cluster) => (
-            <CategoryCard
-              key={cluster.id}
-              cluster={cluster}
-              count={articles.filter((a) => a.cluster === cluster.id).length}
-            />
+            <CategoryCard key={cluster.id} cluster={cluster} count={publicArticles.filter((a) => a.cluster === cluster.id).length} />
           ))}
         </div>
       </section>
 
-      {/* ── Featured articles ──────────────────────────────────────────── */}
       <section>
         <div className="mb-6 flex items-end justify-between">
           <div>
@@ -282,9 +265,8 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── Cornerstone pages (compact strip) ──────────────────────────── */}
       <section className="card-premium p-2">
-        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
           {CORNERSTONES.map(({ to, title, text }) => (
             <Link key={to} to={to} className="group flex items-start gap-3 rounded-2xl p-4 transition hover:bg-brand-soft/60">
               <span className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-brand ring-1 ring-line transition group-hover:bg-brand group-hover:text-white">
@@ -299,7 +281,6 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── More reading ───────────────────────────────────────────────── */}
       <section>
         <div className="mb-6">
           <h2 className="font-display text-2xl font-extrabold text-brand-deep">قراءات إضافية</h2>

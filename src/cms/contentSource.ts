@@ -63,8 +63,6 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
     return null;
   }
 
-  // Route through the same normaliser used for the static articles so committed
-  // content gets identical default fields (canonical, og tags, image, etc.).
   const asStatic = {
     slug,
     title,
@@ -92,13 +90,13 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
           .filter((f) => typeof f.q === "string" && typeof f.a === "string")
           .map((f) => ({ q: f.q as string, a: f.a as string }))
       : [],
+    noindex: raw.noindex === true,
   } as unknown as Parameters<typeof staticToManaged>[0];
 
   const managed = staticToManaged(asStatic);
 
   return {
     ...managed,
-    // Committed content is live by definition: it is in the deployed bundle.
     status: "published",
     source: "cms",
     id: typeof raw.id === "string" && raw.id ? raw.id : `cms-${slug}`,
@@ -106,9 +104,22 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
     canonical: typeof raw.canonical === "string" && raw.canonical ? raw.canonical : managed.canonical,
     primaryKeyword:
       typeof raw.primaryKeyword === "string" && raw.primaryKeyword ? raw.primaryKeyword : managed.primaryKeyword,
+    secondaryKeywords: Array.isArray(raw.secondaryKeywords)
+      ? raw.secondaryKeywords.filter((v): v is string => typeof v === "string")
+      : managed.secondaryKeywords,
+    searchIntent:
+      typeof raw.searchIntent === "string" && raw.searchIntent
+        ? (raw.searchIntent as ManagedArticle["searchIntent"])
+        : managed.searchIntent,
+    articleType:
+      typeof raw.articleType === "string" && raw.articleType
+        ? (raw.articleType as ManagedArticle["articleType"])
+        : managed.articleType,
     seoTitle: typeof raw.seoTitle === "string" && raw.seoTitle ? raw.seoTitle : managed.seoTitle,
     ogTitle: typeof raw.ogTitle === "string" && raw.ogTitle ? raw.ogTitle : managed.ogTitle,
-    ogDescription: typeof raw.ogDescription === "string" && raw.ogDescription ? raw.ogDescription : managed.ogDescription,
+    ogDescription:
+      typeof raw.ogDescription === "string" && raw.ogDescription ? raw.ogDescription : managed.ogDescription,
+    description: typeof raw.description === "string" && raw.description ? raw.description : managed.description,
     image: asStatic.image || managed.image,
     imageAlt: asStatic.imageAlt || managed.imageAlt,
     bannerImage: asStatic.bannerImage || managed.bannerImage || "",
@@ -118,7 +129,20 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
     internalLinks: Array.isArray(raw.internalLinks)
       ? raw.internalLinks.filter((v): v is string => typeof v === "string")
       : managed.internalLinks,
+    resourceLinks: Array.isArray(raw.resourceLinks)
+      ? raw.resourceLinks
+          .filter((item): item is Record<string, unknown> => isRecord(item))
+          .filter((item) => typeof item.to === "string" && typeof item.label === "string")
+          .map((item) => ({
+            to: item.to as string,
+            label: item.label as string,
+            description: typeof item.description === "string" ? item.description : undefined,
+          }))
+      : managed.resourceLinks,
     references: Array.isArray(raw.references) ? (raw.references as string[]) : managed.references,
+    hasDisclaimer: raw.hasDisclaimer === false ? false : managed.hasDisclaimer,
+    noindex: raw.noindex === true,
+    author: typeof raw.author === "string" ? raw.author : managed.author,
   };
 }
 
@@ -129,7 +153,6 @@ function load(): ManagedArticle[] {
     const article = sanitize(payload, path);
     if (article) out.push(article);
   }
-  // Newest first for "latest" listings.
   return out.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 }
 

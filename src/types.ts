@@ -30,6 +30,12 @@ export interface ArticleFaq {
   a: string;
 }
 
+export interface ResourceLink {
+  to: string;
+  label: string;
+  description?: string;
+}
+
 export interface Article {
   slug: string;
   title: string;
@@ -57,6 +63,8 @@ export interface Article {
   references: string[];
   blocks: ContentBlock[];
   faqs?: ArticleFaq[];
+  resourceLinks?: ResourceLink[];
+  noindex?: boolean;
 }
 
 export interface Cluster {

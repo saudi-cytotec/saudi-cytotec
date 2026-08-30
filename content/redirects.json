@@ -1,20 +1,34 @@
 {
-  "version": 1,
-  "updatedAt": "2026-08-29",
+  "version": 2,
+  "updatedAt": "2026-08-30",
   "wwwToApex": true,
   "rules": [
     {
-      "source": "/cytotec-saudi-arabia/",
-      "destination": "/what-is-cytotec",
+      "source": "/blog/cytotec-in-saudi-arabia/",
+      "destination": "/service-areas",
       "statusCode": 301,
-      "reason": "Legacy WordPress article — replaced by the educational cornerstone.",
+      "reason": "Trailing-slash variant of the legacy Saudi blog URL now resolves to the single authoritative Saudi hub.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/blog/cytotec-in-saudi-arabia",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy Saudi blog URL now resolves to the single authoritative Saudi hub.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/cytotec-saudi-arabia/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
       "createdAt": "2026-08-29"
     },
     {
       "source": "/https-saudiersaa-com-cytotec-saudi-arabia/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
-      "reason": "Mangled duplicate of the legacy WordPress article.",
+      "reason": "Mangled duplicate of the legacy Saudi geographic query.",
       "createdAt": "2026-08-29"
     },
     {
@@ -33,9 +47,9 @@
     },
     {
       "source": "/سايتوتك_في_السعوديه/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
-      "reason": "Legacy WordPress article — educational replacement for the same query.",
+      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
       "createdAt": "2026-08-29"
     },
     {
@@ -131,37 +145,37 @@
     },
     {
       "source": "/سايتوتك-السعوديه/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
-      "reason": "Legacy seller-era article — educational replacement.",
+      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
       "createdAt": "2026-08-29"
     },
     {
       "source": "/سايتوتك-السعوديه",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
-      "reason": "Legacy seller-era article — trailing-slash variant.",
+      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
       "createdAt": "2026-08-29"
     },
     {
       "source": "/سايتوتك-السعوديهجرعة",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
-      "reason": "Legacy seller-era article (mangled slug).",
+      "reason": "Legacy Saudi geographic query (mangled slug) now maps to the Saudi hub.",
       "createdAt": "2026-08-29"
     },
     {
       "source": "/سايتوتك-في-السعودية/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
-      "reason": "Legacy seller-era article — educational replacement.",
+      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
       "createdAt": "2026-08-29"
     },
     {
       "source": "/سايتوتك-في-السعودية",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
-      "reason": "Legacy seller-era article — trailing-slash variant.",
+      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
       "createdAt": "2026-08-29"
     },
     {
@@ -236,16 +250,16 @@
     },
     {
       "source": "/سايتوتك_في_السعودية/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
-      "reason": "Legacy seller-era article — educational replacement.",
+      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
       "createdAt": "2026-08-29"
     },
     {
       "source": "/سايتوتك_في_السعودية-2/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
-      "reason": "Legacy seller-era duplicate article.",
+      "reason": "Legacy duplicate Saudi geographic query now maps to the Saudi hub.",
       "createdAt": "2026-08-29"
     },
     {

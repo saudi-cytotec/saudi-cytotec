@@ -1,7 +1,7 @@
 {
-  "version": 2,
+  "version": 3,
   "updatedAt": "2026-08-30",
-  "policy": "No thin city pages, no duplicate city templates, and no doorway pages. Saudi city discovery is handled by /service-areas with regional grouping, healthcare-access notes, official numbers, and links to safety/topic/FAQ/resource pages. A standalone city page may exist only when the CMS supplies genuinely distinct local healthcare-resource information.",
+  "policy": "The authoritative Saudi geographic hub is /service-areas, titled \"سايتوتك في السعودية\". City pages are allowed only when they add genuinely distinct healthcare-access context such as travel, pilgrimage, distance to care, or regional referral planning. No city page may include sales, prices, delivery, providers, fake reviews, or unsafe dosing instructions.",
   "countries": [
     {
       "code": "SA",
@@ -10,32 +10,143 @@
       "regulator": "الهيئة العامة للغذاء والدواء (SFDA)",
       "healthLine": "937",
       "emergency": "997",
-      "contextTopics": ["/service-areas", "/blog/saudi-drug-regulation-context", "/safety", "/when-to-see-doctor"],
-      "note": "Saudi service-area architecture uses regional discovery and official care pathways, never delivery/availability promises."
+      "contextTopics": [
+        "/service-areas",
+        "/safety",
+        "/when-to-see-doctor",
+        "/blog/saudi-drug-regulation-context"
+      ],
+      "note": "Saudi GEO coverage is now handled by one national hub plus unique educational city pages for priority cities."
     }
   ],
   "regions": [
-    { "id": "central", "name": "Central", "cities": ["Riyadh", "Qassim", "Hail"] },
-    { "id": "western", "name": "Western", "cities": ["Jeddah", "Makkah", "Madinah", "Taif"] },
-    { "id": "eastern", "name": "Eastern", "cities": ["Dammam", "Khobar", "Qatif", "Al Ahsa", "Jubail"] },
-    { "id": "southern-other", "name": "Southern/Other", "cities": ["Abha", "Jazan", "Najran", "Tabuk"] }
+    {
+      "id": "western",
+      "name": "Western",
+      "cities": [
+        "Makkah",
+        "Madinah"
+      ]
+    },
+    {
+      "id": "central",
+      "name": "Central",
+      "cities": [
+        "Buraidah",
+        "Hail"
+      ]
+    },
+    {
+      "id": "eastern",
+      "name": "Eastern",
+      "cities": [
+        "Dammam"
+      ]
+    },
+    {
+      "id": "southern",
+      "name": "Southern",
+      "cities": [
+        "Abha",
+        "Jazan",
+        "Najran",
+        "Al Baha"
+      ]
+    },
+    {
+      "id": "northern",
+      "name": "Northern",
+      "cities": [
+        "Tabuk",
+        "Arar",
+        "Sakaka"
+      ]
+    }
   ],
   "cities": [
-    { "city": "Riyadh", "country": "SA", "region": "central", "hasPage": false, "coverage": "Included in /service-areas with Riyadh-specific healthcare-access note; no standalone page without distinct local resources." },
-    { "city": "Qassim", "country": "SA", "region": "central", "hasPage": false, "coverage": "Regional healthcare-access note; links to Saudi regulator and safety pages." },
-    { "city": "Hail", "country": "SA", "region": "central", "hasPage": false, "coverage": "Emergency-access framing for distance and urgent symptoms." },
-    { "city": "Jeddah", "country": "SA", "region": "western", "hasPage": false, "coverage": "Healthcare-discovery note; no delivery/availability claims." },
-    { "city": "Makkah", "country": "SA", "region": "western", "hasPage": false, "coverage": "Emergency-first note for acute symptoms." },
-    { "city": "Madinah", "country": "SA", "region": "western", "hasPage": false, "coverage": "Official 937/997 pathway note." },
-    { "city": "Taif", "country": "SA", "region": "western", "hasPage": false, "coverage": "Urgent-care planning note." },
-    { "city": "Dammam", "country": "SA", "region": "eastern", "hasPage": false, "coverage": "Eastern-region healthcare-access note." },
-    { "city": "Khobar", "country": "SA", "region": "eastern", "hasPage": false, "coverage": "Licensed-care pathway note; no sales funnel." },
-    { "city": "Qatif", "country": "SA", "region": "eastern", "hasPage": false, "coverage": "Qatif/Safwa context within regional hub only." },
-    { "city": "Al Ahsa", "country": "SA", "region": "eastern", "hasPage": false, "coverage": "Hofuf/Mubarraz context; medical information unchanged by city." },
-    { "city": "Jubail", "country": "SA", "region": "eastern", "hasPage": false, "coverage": "Distance/planning note for urgent symptoms." },
-    { "city": "Abha", "country": "SA", "region": "southern-other", "hasPage": false, "coverage": "Southern-region urgent-care planning note." },
-    { "city": "Jazan", "country": "SA", "region": "southern-other", "hasPage": false, "coverage": "Emergency-first note for coastal/surrounding governorates." },
-    { "city": "Najran", "country": "SA", "region": "southern-other", "hasPage": false, "coverage": "Distance-to-care note; no duplicate page." },
-    { "city": "Tabuk", "country": "SA", "region": "southern-other", "hasPage": false, "coverage": "Northern-city care-access note within Southern/Other grouping." }
+    {
+      "city": "Makkah",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-makkah",
+      "coverage": "Unique page for pilgrimage/visitor context, crowding, and emergency-first care planning."
+    },
+    {
+      "city": "Madinah",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-madinah",
+      "coverage": "Unique page for visit-related care planning, short stays, and licensed-care routing."
+    },
+    {
+      "city": "Buraidah",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-buraidah",
+      "coverage": "Unique page for Qassim-region travel between nearby governorates and timely review."
+    },
+    {
+      "city": "Dammam",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-dammam",
+      "coverage": "Unique page for Eastern Province movement between Dammam/Khobar/Dhahran and urgent evaluation."
+    },
+    {
+      "city": "Abha",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-abha",
+      "coverage": "Unique page for Asir travel distance, symptom escalation, and licensed-care preparation."
+    },
+    {
+      "city": "Tabuk",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-tabuk",
+      "coverage": "Unique page for long-distance care planning and the time-sensitive nature of danger signs."
+    },
+    {
+      "city": "Hail",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-hail",
+      "coverage": "Unique page focused on avoiding overnight delay and distinguishing stable symptoms from emergencies."
+    },
+    {
+      "city": "Arar",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-arar",
+      "coverage": "Unique page for northern-distance planning and emergency routing over non-licensed shortcuts."
+    },
+    {
+      "city": "Jazan",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-jazan",
+      "coverage": "Unique page for city/coastal-governorate readers with urgent-care and symptom-triage framing."
+    },
+    {
+      "city": "Najran",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-najran",
+      "coverage": "Unique page for early planning where referral distance may matter."
+    },
+    {
+      "city": "Al Baha",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-baha",
+      "coverage": "Unique page for route/time planning and symptom escalation in Al Baha and nearby governorates."
+    },
+    {
+      "city": "Sakaka",
+      "country": "SA",
+      "hasPage": true,
+      "path": "/blog/cytotec-sakaka",
+      "coverage": "Unique page for Al Jawf readers travelling from nearby centers and needing early licensed review."
+    }
   ]
 }

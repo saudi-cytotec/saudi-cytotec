@@ -61,11 +61,13 @@ fs.writeFileSync(bundlePath, chunks.join("\n"));
 const sitemapXml = fs.readFileSync(SITEMAP, "utf8");
 const sitemapLocs = new Set([...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]));
 
-const TARGET = "/blog/cytotec-in-saudi-arabia";
+const TARGET = "/service-areas";
+const SHADOW = "/blog/cytotec-in-saudi-arabia";
 
 const urls = [
   // { path, expect: "indexable" | "noindex" | "notfound", canonical?, inSitemap? }
-  { path: TARGET, expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-in-saudi-arabia`, inSitemap: true },
+  { path: TARGET, expect: "indexable", canonical: `${DOMAIN}/service-areas`, inSitemap: true },
+  { path: SHADOW, expect: "noindex", canonical: `${DOMAIN}/service-areas`, inSitemap: false },
   { path: "/", expect: "indexable", canonical: `${DOMAIN}/` },
   { path: "/what-is-cytotec", expect: "indexable", canonical: `${DOMAIN}/what-is-cytotec` },
   { path: "/safety", expect: "indexable", canonical: `${DOMAIN}/safety` },
@@ -74,7 +76,6 @@ const urls = [
   { path: "/blog/anemia-womens-health", expect: "indexable", canonical: `${DOMAIN}/blog/anemia-womens-health` },
   { path: "/blog/saudi-drug-regulation-context", expect: "indexable", canonical: `${DOMAIN}/blog/saudi-drug-regulation-context` },
   { path: "/blog/cluster/ma-huwa-saytotek", expect: "indexable", canonical: `${DOMAIN}/blog/cluster/ma-huwa-saytotek` },
-  { path: "/service-areas", expect: "indexable", canonical: `${DOMAIN}/service-areas`, inSitemap: true },
   { path: "/contact", expect: "indexable", canonical: `${DOMAIN}/contact` },
   { path: "/search", expect: "noindex" },
   { path: "/admin", expect: "noindex" },
@@ -237,6 +238,9 @@ for (const spec of urls) {
     assert(Boolean(r.h1 && r.h1.trim()) && !r.is404, spec.path, "content (H1, not 404)", r.is404 ? "RENDERED 404 PAGE" : (r.h1 ?? "(no h1)").slice(0, 60));
   } else if (spec.expect === "noindex") {
     assert(robotsNoindex, spec.path, "robots meta noindex", r.robots ?? "(missing)");
+    if (spec.canonical) {
+      assert(r.canonical === spec.canonical, spec.path, "canonical", r.canonical ?? "(missing)");
+    }
   } else if (spec.expect === "notfound") {
     assert(r.is404, spec.path, "renders 404 fallback", r.is404 ? "404 page" : "NOT 404");
     assert(robotsNoindex, spec.path, "robots meta noindex", r.robots ?? "(missing)");
