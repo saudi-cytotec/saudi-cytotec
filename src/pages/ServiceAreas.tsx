@@ -1,6 +1,6 @@
-import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CareReferral } from "../components/CareReferral";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
+import { PageHero } from "../components/PageHero";
 import { JsonLd, Seo } from "../components/Seo";
 import { WhatsAppContactCard } from "../components/WhatsAppContact";
 import geo from "../../content/geo-coverage.json";
@@ -29,7 +29,7 @@ export function ServiceAreas() {
   const byCountry = (code: string) => cities.filter((c) => c.country === code);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8">
+    <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
       <Seo
         title="مناطق التغطية والوصول إلى الرعاية في السعودية والخليج"
         description="صفحة مرجعية واحدة توضّح أن المعلومة الطبية التعليمية واحدة في كل مدن السعودية والخليج، مع أرقام الطوارئ والخطوط الصحية الرسمية لكل دولة — بلا صفحات مداخل مكررة."
@@ -47,50 +47,34 @@ export function ServiceAreas() {
             "صفحة مرجعية للتغطية الجغرافية وأرقام الرعاية الرسمية في السعودية والإمارات والكويت والبحرين.",
         }}
       />
-      <Breadcrumbs items={[{ name: "مناطق التغطية", path: "/service-areas" }]} />
-      <h1 className="mt-5 max-w-3xl text-4xl font-bold leading-[1.35] text-teal-deep">
-        مناطق التغطية: المعلومة الطبية لا تتغير بتغيّر المدينة
-      </h1>
-      <p className="mt-4 max-w-3xl text-lg leading-9 text-ink-soft">
-        هذه المنصة تعليمية؛ المعلومة الطبية الموثّقة واحدة سواء كنتِ في الرياض أو جدة أو الدمام أو أي مدينة خليجية.
-        لذلك لا ننشئ عشرات الصفحات المتكررة لكل مدينة (صفحات المداخل)، ونوفّر بدلاً منها صفحة مرجعية واحدة توجّهك
-        إلى الجهة الرسمية الصحيحة في دولتك.
-      </p>
+      <PageHero
+        crumbs={[{ name: "مناطق التغطية", path: "/service-areas" }]}
+        title="مناطق التغطية: المعلومة الطبية لا تتغير بتغيّر المدينة"
+        description="هذه المنصة تعليمية؛ المعلومة الطبية الموثّقة واحدة سواء كنتِ في الرياض أو جدة أو الدمام أو أي مدينة خليجية. لذلك لا ننشئ صفحات متكررة لكل مدينة، ونوفّر بدلاً منها صفحة مرجعية واحدة توجّهك إلى الجهة الرسمية الصحيحة في دولتك."
+      />
 
-      <figure className="mt-6 max-w-4xl overflow-hidden rounded-3xl border border-line bg-brand-soft shadow-sm">
-        <img
-          src="/images/hero.jpg"
-          alt="مرفق رعاية صحية سعودي بتصميم عربي وألوان طبية هادئة"
-          width={1200}
-          height={675}
-          loading="eager"
-          decoding="async"
-          className="aspect-[16/9] w-full object-cover"
-        />
-      </figure>
-
-      <div className="mt-6 max-w-3xl">
+      <div className="max-w-3xl">
         <DisclaimerBanner />
       </div>
 
-      <div className="mt-10 grid gap-5 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {countries.map((country) => {
           const list = byCountry(country.code);
           return (
             <section
               key={country.code}
-              className={`rounded-3xl border p-6 shadow-sm ${country.code === "SA" ? "border-brand bg-brand-soft/60" : "border-line bg-paper"}`}
+              className={`card-premium p-6 ${country.code === "SA" ? "ring-2 ring-brand/25" : ""}`}
             >
               <div className="flex items-center justify-between gap-2">
-                <h2 className="text-xl font-bold text-brand-deep">{country.name}</h2>
-                <span className="rounded-full bg-paper px-2 py-0.5 text-[11px] font-semibold text-sage ring-1 ring-line">
+                <h2 className="font-display text-xl font-extrabold text-brand-deep">{country.name}</h2>
+                <span className="rounded-full bg-sky-soft px-2.5 py-1 text-[11px] font-bold text-brand ring-1 ring-line">
                   {country.priority === "PRIMARY" ? "السوق الأساسي" : "تغطية ثانوية"}
                 </span>
               </div>
-              <dl className="mt-3 space-y-1 text-sm">
+              <dl className="mt-4 space-y-2 text-sm">
                 <div className="flex flex-wrap gap-x-3">
                   <dt className="text-ink-soft">الجهة التنظيمية:</dt>
-                  <dd className="font-semibold">{country.regulator}</dd>
+                  <dd className="font-bold text-brand-deep">{country.regulator}</dd>
                 </div>
                 <div className="flex flex-wrap gap-x-3">
                   <dt className="text-ink-soft">الخط الصحي:</dt>
@@ -118,8 +102,8 @@ export function ServiceAreas() {
       </div>
 
       {sa ? (
-        <div className="mt-8 rounded-3xl border border-line bg-paper p-6">
-          <h2 className="text-lg font-bold text-brand-deep">لماذا لا توجد صفحة لكل مدينة؟</h2>
+        <div className="card-premium p-6">
+          <h2 className="font-display text-lg font-extrabold text-brand-deep">لماذا لا توجد صفحة لكل مدينة؟</h2>
           <p className="mt-2 max-w-3xl text-sm leading-8 text-ink-soft">
             صفحات المداخل (city doorway pages) التي تكرّر النص ذاته مع تغيير اسم المدينة لا تضيف قيمة للقارئ وقد
             تُعامَل كمحتوى منخفض الجودة. بدلاً من ذلك نذكر المدن داخل المحتوى ذي الصلة، ونضع المعلومة العملية
@@ -128,10 +112,10 @@ export function ServiceAreas() {
         </div>
       ) : null}
 
-      <div className="mt-10 max-w-3xl">
+      <div className="max-w-3xl">
         <WhatsAppContactCard compact />
       </div>
-      <div className="mt-8 max-w-3xl">
+      <div className="max-w-3xl">
         <CareReferral />
       </div>
     </div>

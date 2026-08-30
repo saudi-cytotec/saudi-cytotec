@@ -9,8 +9,8 @@
   "excerpt": "الاسم الأكثر بحثاً في الموقع يستحق إجابة منهجية: المادة الفعالة، الاستطباب المعتمد، التنظيم السعودي، ومخاطر المصادر غير الموثوقة.",
   "publishedAt": "2026-03-18",
   "updatedAt": "2026-08-30",
-  "image": "/images/og-default.jpg",
-  "imageAlt": "عنصر بصري تعليمي عن سايتوتك في السعودية",
+  "image": "/images/hero-doctor.jpg",
+  "imageAlt": "صورة مميزة مختارة عبر الـ CMS",
   "related": [
     "cytotec-definition",
     "saudi-drug-regulation-context",
@@ -24,7 +24,13 @@
     "/medical-sources",
     "/when-to-see-doctor"
   ],
-  "references": ["fdaLabel", "sfda", "moh", "whoEml", "medlinePlus"],
+  "references": [
+    "fdaLabel",
+    "sfda",
+    "moh",
+    "whoEml",
+    "medlinePlus"
+  ],
   "blocks": [
     {
       "type": "p",
@@ -342,7 +348,11 @@
   "slugLocked": true,
   "canonical": "https://saudiersaa.com/blog/cytotec-in-saudi-arabia",
   "primaryKeyword": "سايتوتك في السعودية",
-  "secondaryKeywords": ["سايتوتك", "ميزوبروستول", "تنظيم الدواء السعودية"],
+  "secondaryKeywords": [
+    "سايتوتك",
+    "ميزوبروستول",
+    "تنظيم الدواء السعودية"
+  ],
   "searchIntent": "informational",
   "articleType": "pillar",
   "seoTitle": "سايتوتك في السعودية: معلومات موثقة قبل أي قرار",
@@ -357,5 +367,8 @@
     "/medical-sources",
     "/when-to-see-doctor"
   ],
-  "hasDisclaimer": true
+  "hasDisclaimer": true,
+  "bannerImage": "/images/hero.jpg",
+  "bannerImageAlt": "بانر البطل المختار عبر الـ CMS",
+  "ogImage": "/images/safety.jpg"
 }
