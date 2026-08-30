@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { BrandLogo } from "./Logo";
+import { WhatsAppContactLink } from "./WhatsAppContact";
 import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
 
 const SA = HEALTH_LINES.find((c) => c.code === "sa");
@@ -10,7 +12,9 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-3">
-            <img src="/images/logo.png" alt="" width={48} height={48} className="h-12 w-12 rounded-2xl object-cover" />
+            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/95 ring-1 ring-white/20">
+              <BrandLogo className="h-9 w-9" tone="teal" />
+            </span>
             <strong className="text-lg">{SITE.name}</strong>
           </div>
           <p className="mt-4 max-w-xl text-sm leading-8 text-white/75">
@@ -23,6 +27,9 @@ export function Footer() {
               الإسعاف <span dir="ltr" className="font-mono">{SA?.lines.find((l) => l.label.includes("الإسعاف"))?.value}</span>{" "}
               · وزارة الصحة السعودية{" "}
               <span dir="ltr" className="font-mono">{SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value}</span>
+            </p>
+            <p className="mt-3">
+              <WhatsAppContactLink className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-1.5 text-xs font-bold text-brand-deep transition hover:brightness-105" />
             </p>
             <p className="mt-2 text-xs text-white/75">
               ملاحظات تحريرية فقط:{" "}

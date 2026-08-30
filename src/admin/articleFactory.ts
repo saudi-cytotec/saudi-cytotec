@@ -18,6 +18,9 @@ export function emptyArticle(partial?: Partial<ManagedArticle>): ManagedArticle 
     updatedAt: new Date().toISOString().slice(0, 10),
     image: defaultImage("definition"),
     imageAlt: "عنصر بصري تعليمي صغير",
+    bannerImage: "",
+    bannerImageAlt: "",
+    ogImage: "",
     related: [],
     cornerstones: ["/medical-disclaimer", "/safety"],
     references: ["fdaLabel", "sfda"],
@@ -48,11 +51,23 @@ export function applyTopicDefaults(article: ManagedArticle): ManagedArticle {
     slug,
     seoTitle: article.seoTitle || article.title.slice(0, 70),
     metaTitle: article.metaTitle || article.title,
-    ogTitle: article.ogTitle || article.title,
+    ogTitle: article.ogTitle || article.metaTitle || article.title,
     ogDescription: article.ogDescription || article.metaDescription,
-    canonical: `${SITE.domain}/blog/${slug}`,
+    canonical:
+      article.canonical && /^https?:\/\/[^/]+\/.+/.test(article.canonical)
+        ? article.canonical
+        : `${SITE.domain}/blog/${slug}`,
     description: article.description || article.excerpt,
-    image: defaultImage(article.cluster),
+    // Preserve the editor's chosen images. Only fall back to the cluster
+    // default when no image has ever been set — otherwise a saved featured /
+    // banner / OG image would be silently wiped on every keystroke.
+    image: article.image || defaultImage(article.cluster),
+    imageAlt: article.imageAlt || "",
+    // Banner/OG are optional overrides; when blank the public page falls back
+    // to the featured image, so leave them empty rather than forcing a value.
+    bannerImage: article.bannerImage || "",
+    bannerImageAlt: article.bannerImageAlt || "",
+    ogImage: article.ogImage || "",
   };
 }
 

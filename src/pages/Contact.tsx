@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CareReferral } from "../components/CareReferral";
 import { Seo } from "../components/Seo";
+import { WhatsAppContactCard } from "../components/WhatsAppContact";
 import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
 
 const SA = HEALTH_LINES.find((c) => c.code === "sa");
@@ -33,7 +34,12 @@ export function Contact() {
           والكويت والبحرين راجعي القسم أدناه.
         </p>
       </div>
-      <CareReferral />
+      <div className="mt-8">
+        <WhatsAppContactCard />
+      </div>
+      <div className="mt-8">
+        <CareReferral />
+      </div>
       {sent ? (
         <div className="mt-8 rounded-3xl border border-brand bg-brand-soft p-5 leading-8">
           تم استلام رسالتك محلياً في هذا المتصفح لأغراض العرض. إن كان لديك تصحيح لمصدر طبي، أرسليه أيضاً عبر البريد.

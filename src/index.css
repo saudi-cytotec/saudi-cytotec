@@ -4,30 +4,39 @@
   --font-sans: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
   --font-article: "Noto Naskh Arabic", "IBM Plex Sans Arabic", "Noto Sans Arabic", serif;
 
-  /* ── Canonical brand tokens: Red + Deep Blue + White ───────────────── */
-  --color-brand: #0a3568;        /* primary deep blue   */
-  --color-brand-deep: #062345;   /* header / footer     */
-  --color-brand-soft: #e8eef7;   /* tinted surfaces     */
-  --color-accent: #c8102e;       /* medical red         */
-  --color-accent-soft: #fdeaec;  /* red tinted surfaces */
+  /* ── Canonical brand tokens: Deep Medical Teal + Gold + Warm Cream ────
+     This is the approved visual direction: a professional Arabic medical
+     identity built around a trustworthy deep teal-green (clinical, calm),
+     a refined antique-gold accent (premium editorial highlights), and a warm
+     ivory/cream ground — matching the approved logo, hero and OG artwork.
+     Red is deliberately NOT a brand colour; it is reserved for emergency /
+     danger surfaces only. */
+  --color-brand: #0f5d56;        /* primary deep teal (buttons, links)   */
+  --color-brand-deep: #0b423d;   /* header / footer deep teal            */
+  --color-brand-soft: #e7f1ee;   /* tinted teal surfaces                 */
+  --color-accent: #c9a24b;       /* antique gold — highlights / CTAs     */
+  --color-accent-soft: #f8f1dd;  /* warm gold-tinted surfaces            */
 
-  /* ── Ink / neutrals ────────────────────────────────────────────────── */
-  --color-ink: #101a2b;
-  --color-ink-soft: #46586f;
-  --color-cream: #f5f7fb;        /* page background: cool clinical white */
-  --color-paper: #ffffff;        /* cards & surfaces                    */
-  --color-line: #d7dfeb;         /* borders                             */
-  --color-sand: #dde5f0;         /* hover fills, muted chips            */
+  /* ── Warning / danger (safety surfaces only — never branding) ───────── */
+  --color-warn: #b7791f;         /* amber for medical caution callouts   */
+  --color-warn-soft: #fdf3e2;    /* amber-tinted surface                 */
+  --color-clay: #b23a48;         /* emergency red (danger)               */
+
+  /* ── Ink / neutrals (warm clinical) ─────────────────────────────────── */
+  --color-ink: #14262b;
+  --color-ink-soft: #48605f;
+  --color-cream: #f4f7f4;        /* page background: warm clinical white */
+  --color-paper: #ffffff;        /* cards & surfaces                     */
+  --color-line: #d9e2df;         /* borders                              */
+  --color-sand: #e2ebe8;         /* hover fills, muted chips             */
 
   /* ── Legacy aliases ───────────────────────────────────────────────────
-     Existing components use the old teal/sage/gold names. They are re-pointed
-     at the new palette so the whole site re-skins consistently without a
-     per-file rewrite. Keep these in sync with the canonical tokens above. */
+     Existing components use the teal/sage/gold/clay names. They resolve to
+     the approved palette so the whole site re-skins consistently. */
   --color-teal: var(--color-brand);
   --color-teal-deep: var(--color-brand-deep);
-  --color-sage: #4a6a94;
+  --color-sage: #3f7d72;
   --color-gold: var(--color-accent);
-  --color-clay: #d11a3a;
 }
 
 html {
@@ -138,7 +147,7 @@ a {
   top: -3rem;
   z-index: 80;
   border-radius: 999px;
-  background: var(--color-accent);
+  background: var(--color-brand);
   color: white;
   padding: 0.6rem 1rem;
 }

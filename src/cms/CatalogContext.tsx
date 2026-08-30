@@ -49,7 +49,11 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
     // while the catalog uses "published". A published article must never be
     // silently dropped from the public catalog because of a casing difference —
     // that would render its URL as a noindex 404 fallback in production.
-    const published = state.articles.filter((item) => String(item.status).toLowerCase() === "published");
+    // Only genuinely published articles reach the public catalog. Drafts,
+    // review, scheduled and archived rows stay out of the rendered site.
+    const published = state.articles.filter(
+      (item) => String(item.status).toLowerCase() === "published",
+    );
     return {
       articles: published,
       managed: state.articles,

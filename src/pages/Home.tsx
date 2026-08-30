@@ -3,6 +3,7 @@ import { ArticleCard } from "../components/ArticleCard";
 import { CategoryCard } from "../components/CategoryCard";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { JsonLd, Seo } from "../components/Seo";
+import { WhatsAppContactCard } from "../components/WhatsAppContact";
 import { useCatalog } from "../cms/CatalogContext";
 import { HEALTH_LINES } from "../data/contact";
 
@@ -23,6 +24,7 @@ export function Home() {
         title="صحة المرأة والحمل: معلومات طبية موثّقة بالعربية"
         description={SITE.description}
         path="/"
+        image="/images/hero.jpg"
       />
       <JsonLd
         data={[
@@ -64,51 +66,74 @@ export function Home() {
           },
         ]}
       />
-      <section className="overflow-hidden rounded-[2rem] border border-line bg-paper shadow-sm">
-        <div className="grid md:grid-cols-[1.1fr_1fr]">
-          <div className="p-8 md:p-12">
-            <p className="text-sm font-semibold text-accent">محتوى تعليمي عربي موثّق بالمراجع</p>
-            <h1 className="mt-3 text-4xl font-bold leading-[1.35] text-brand-deep md:text-5xl">
-              صحة المرأة والحمل: معلومات طبية موثّقة بالعربية
+      {/* ── Hero: approved clinic banner, full-bleed, teal overlay, gold CTA ── */}
+      <section className="relative overflow-hidden rounded-[2rem] shadow-lg">
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero.jpg"
+            alt="استقبال عيادة سعودية هادئة بتصميم عربي تراثي وألوان خضراء طبية"
+            width={2000}
+            height={1125}
+            fetchPriority="high"
+            decoding="async"
+            className="h-full w-full object-cover"
+            loading="eager"
+          />
+          {/* Deep-teal scrim guarantees text contrast on any viewport */}
+          <div className="absolute inset-0 bg-gradient-to-l from-brand-deep/95 via-brand-deep/80 to-brand-deep/45" />
+        </div>
+
+        <div className="relative px-7 py-14 md:px-14 md:py-20 lg:py-24">
+          <div className="max-w-2xl text-white">
+            <p className="inline-flex items-center gap-2 rounded-full border border-accent/60 bg-white/10 px-3 py-1 text-xs font-semibold text-accent-soft backdrop-blur-sm sm:text-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+              محتوى تعليمي عربي موثّق بالمراجع
+            </p>
+            <h1 className="mt-5 text-3xl font-bold leading-[1.4] text-white sm:text-4xl md:text-5xl md:leading-[1.3]">
+              صحة المرأة والحمل:
+              <span className="block text-accent">معلومات طبية موثّقة بالعربية</span>
             </h1>
-            <p className="mt-5 max-w-xl text-[1.05rem] leading-9 text-ink-soft">
+            <p className="mt-5 max-w-xl text-[1rem] leading-8 text-white/90 md:text-[1.08rem] md:leading-9">
               منصة تعليمية عربية للصحة الإنجابية وصحة المرأة: مقالات موثّقة بالمراجع تشرح الحمل
               خارج الرحم، تكيس المبايض، الخصوبة، سلامة الأدوية أثناء الحمل، والطوارئ النسائية — بلغة
               واضحة، وبلا تشخيص أو وصف دوائي.
             </p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Link to="/blog" className="rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-white shadow-md transition hover:brightness-110">
+
+            {/* Clear CTA hierarchy: primary gold → secondary teal-outline → tertiary ghost */}
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link
+                to="/blog"
+                className="rounded-full bg-accent px-6 py-3 text-sm font-bold text-brand-deep shadow-lg transition hover:brightness-105 md:text-base"
+              >
                 تصفّحي المقالات
               </Link>
-              <Link to="/what-is-cytotec" className="rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white">
+              <Link
+                to="/what-is-cytotec"
+                className="rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/40 backdrop-blur-sm transition hover:bg-white/20 md:text-base"
+              >
                 ابدئي من الأساسيات
               </Link>
-              <Link to="/medical-sources" className="rounded-full border border-line bg-paper px-5 py-2.5 text-sm font-semibold">
+              <Link
+                to="/medical-sources"
+                className="rounded-full px-5 py-3 text-sm font-semibold text-white/90 underline decoration-accent underline-offset-4 hover:text-accent"
+              >
                 المصادر الطبية
               </Link>
             </div>
-            <p className="mt-4 text-xs leading-6 text-ink-soft">
+
+            <p className="mt-6 max-w-xl rounded-2xl border border-white/15 bg-brand-deep/40 px-4 py-3 text-xs leading-6 text-white/85">
               للحالات العاجلة: الإسعاف <span dir="ltr" className="font-mono font-bold">{SA_EMS}</span> في السعودية ·
               مركز وزارة الصحة <span dir="ltr" className="font-mono font-bold">{SA_MOH}</span>. هذا الموقع لا يقدّم
               استشارة فردية ولا يصرف أدوية.
             </p>
           </div>
-          <div className="relative min-h-72 bg-brand-soft">
-            <img
-              src="/images/hero-doctor.jpg"
-              alt="طبيبة سعودية بحجاب في عيادة صحة المرأة"
-              width={1200}
-              height={900}
-              fetchPriority="high"
-              decoding="async"
-              className="h-full w-full object-cover"
-              loading="eager"
-            />
-          </div>
         </div>
       </section>
 
       <DisclaimerBanner />
+
+      {/* Neutral medical-information contact channel (informational only) */}
+      <WhatsAppContactCard />
 
       <section>
         <div className="mb-6">

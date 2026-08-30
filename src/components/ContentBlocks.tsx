@@ -18,9 +18,9 @@ export function ContentBlocks({ blocks }: { blocks: ContentBlock[] }) {
         if (block.type === "callout") {
           const tone =
             block.tone === "emergency"
-              ? "border-clay bg-accent-soft"
+              ? "border-clay bg-[#fae9ea] text-clay"
               : block.tone === "warning"
-                ? "border-accent bg-accent-soft"
+                ? "border-warn bg-warn-soft"
                 : "border-brand bg-brand-soft";
           return (
             <aside key={i} className={`my-5 rounded-2xl border-r-4 px-4 py-3 leading-[2.05] ${tone}`}>
