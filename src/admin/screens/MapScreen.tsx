@@ -139,6 +139,9 @@ export function MapScreen() {
                     <span dir="ltr" className="block">{row.targetUrl}</span>
                     {isLive ? <Badge tone="ok">منشور فعلياً</Badge> : null}
                     {row.parent ? <span className="block text-[10px] text-ink-soft">الأصل: {row.parent}</span> : null}
+                    {row.internalLinks?.length ? <span className="block text-[10px] text-ink-soft">روابط: {row.internalLinks.slice(0, 3).join("، ")}</span> : null}
+                    {row.faqOpportunities?.length ? <span className="block text-[10px] text-ink-soft">FAQ: {row.faqOpportunities.slice(0, 2).join("، ")}</span> : null}
+                    {row.cta ? <span className="block text-[10px] text-ink-soft">CTA: {row.cta}</span> : null}
                   </Td>
                   <Td>
                     <select value={row.status} onChange={(e) => patchRow(row.id, { status: e.target.value as MapStatus })} className="rounded-full border border-line px-2 py-1 text-xs">

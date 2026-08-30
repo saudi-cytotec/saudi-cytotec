@@ -6,11 +6,23 @@ import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { ReferencesList } from "../components/ReferencesList";
 import { RelatedArticles } from "../components/RelatedArticles";
 import { JsonLd, Seo } from "../components/Seo";
-import { SITE } from "../data/site";
+import { staticPages } from "../data/pages";
+import { clusters, SITE } from "../data/site";
 import { relatedArticles as pickRelated } from "../data/articles";
 import { clusterPath, getCluster, readingMinutes } from "../utils/content";
 import { CareReferral } from "../components/CareReferral";
 import { NotFound } from "./NotFound";
+
+function labelForTarget(path: string, articles: { slug: string; title: string }[]) {
+  if (path.startsWith("/blog/")) return articles.find((item) => item.slug === path.slice(6))?.title ?? "مقال مرتبط";
+  if (!path.startsWith("/")) return articles.find((item) => item.slug === path)?.title ?? "مقال مرتبط";
+  const staticPage = staticPages.find((item) => item.path === path);
+  if (staticPage) return staticPage.title;
+  if (path === "/service-areas") return "المناطق والمدن";
+  if (path === "/topics") return "محاور المحتوى";
+  const cluster = clusters.find((item) => `/blog/cluster/${item.slug}` === path);
+  return cluster?.shortTitle ?? "صفحة مرتبطة";
+}
 
 export function ArticlePage() {
   const { slug } = useParams();
@@ -19,6 +31,10 @@ export function ArticlePage() {
   if (!article) return <NotFound />;
   const cluster = getCluster(article.cluster);
   const related = pickRelated(article, articles);
+  const clusterArticles = articles.filter((item) => item.cluster === article.cluster);
+  const indexInCluster = clusterArticles.findIndex((item) => item.slug === article.slug);
+  const previous = indexInCluster > 0 ? clusterArticles[indexInCluster - 1] : null;
+  const next = indexInCluster >= 0 && indexInCluster < clusterArticles.length - 1 ? clusterArticles[indexInCluster + 1] : null;
 
   return (
     <article className="mx-auto max-w-6xl px-4 py-8">
@@ -29,7 +45,7 @@ export function ArticlePage() {
         type="article"
         publishedAt={article.publishedAt}
         updatedAt={article.updatedAt}
-        image="/images/og-default.jpg"
+        image={article.image}
         keywords={article.title}
       />
       <JsonLd
@@ -108,12 +124,27 @@ export function ArticlePage() {
       </div>
       <ReferencesList ids={article.references} />
       <div className="mt-8 flex flex-wrap gap-3 text-sm">
+        <Link to={clusterPath(cluster)} className="rounded-full border border-line bg-paper px-3 py-1 font-semibold text-teal hover:bg-cream">
+          المزيد في محور {cluster.shortTitle}
+        </Link>
         {article.cornerstones.map((path) => (
           <Link key={path} to={path} className="rounded-full border border-line px-3 py-1 hover:bg-paper">
-            صفحة مرتبطة
+            {labelForTarget(path, articles)}
           </Link>
         ))}
+        <Link to="/faq" className="rounded-full border border-line px-3 py-1 hover:bg-paper">
+          أسئلة شائعة مرتبطة
+        </Link>
+        <Link to="/service-areas" className="rounded-full border border-line px-3 py-1 hover:bg-paper">
+          مسارات الرعاية حسب المنطقة
+        </Link>
       </div>
+      {(previous || next) ? (
+        <nav className="mt-8 grid gap-3 md:grid-cols-2" aria-label="المقال السابق والتالي داخل المحور">
+          {previous ? <Link to={`/blog/${previous.slug}`} className="rounded-2xl border border-line bg-paper p-4 text-sm hover:bg-cream">السابق في المحور: <strong>{previous.title}</strong></Link> : <span />}
+          {next ? <Link to={`/blog/${next.slug}`} className="rounded-2xl border border-line bg-paper p-4 text-sm hover:bg-cream">التالي في المحور: <strong>{next.title}</strong></Link> : null}
+        </nav>
+      ) : null}
       <section className="mt-14">
         <h2 className="mb-5 text-2xl font-bold text-teal-deep">مقالات ذات صلة</h2>
         <RelatedArticles articles={related} />

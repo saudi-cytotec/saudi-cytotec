@@ -39,6 +39,8 @@ interface Entry {
 }
 
 const EXTRA_ROUTES: Entry[] = [
+  { loc: "/topics", changefreq: "weekly", priority: "0.9" },
+  { loc: "/service-areas", changefreq: "monthly", priority: "0.8" },
   { loc: "/contact", changefreq: "yearly", priority: "0.5" },
   { loc: "/sitemap", changefreq: "monthly", priority: "0.4" },
 ];

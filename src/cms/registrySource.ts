@@ -31,7 +31,7 @@ function firstPayload(modules: Record<string, JsonModule>): unknown {
 
 const MAP_STATUSES = new Set(["IDEA", "RESEARCH", "OUTLINE", "DRAFT", "REVIEW", "READY", "PUBLISHED", "UPDATED"]);
 const MAP_PRIORITIES = new Set(["P0", "P1", "P2", "P3"]);
-const MAP_INTENTS = new Set(["informational", "navigational", "commercial", "transactional"]);
+const MAP_INTENTS = new Set(["informational", "navigational", "commercial", "transactional", "commercial investigation", "local", "medical safety", "FAQ"]);
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
@@ -59,6 +59,16 @@ function sanitizeMapItem(raw: unknown): ContentMapItem | null {
     targetUrl: typeof raw.targetUrl === "string" ? raw.targetUrl : "",
     parent: typeof raw.parent === "string" ? raw.parent : "",
     related: Array.isArray(raw.related) ? raw.related.filter((v): v is string => typeof v === "string") : [],
+    internalLinks: Array.isArray(raw.internalLinks)
+      ? raw.internalLinks.filter((v): v is string => typeof v === "string")
+      : [],
+    faqOpportunities: Array.isArray(raw.faqOpportunities)
+      ? raw.faqOpportunities.filter((v): v is string => typeof v === "string")
+      : [],
+    relevantReferences: Array.isArray(raw.relevantReferences)
+      ? raw.relevantReferences.filter((v): v is string => typeof v === "string")
+      : [],
+    cta: typeof raw.cta === "string" ? raw.cta : "اقرئي صفحة الأمان أو تواصلي للاستفسار العام فقط.",
     status: MAP_STATUSES.has(String(raw.status)) ? (raw.status as ContentMapItem["status"]) : "IDEA",
     notes: typeof raw.notes === "string" ? raw.notes : undefined,
   };
