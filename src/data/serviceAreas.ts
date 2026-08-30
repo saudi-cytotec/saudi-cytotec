@@ -96,7 +96,7 @@ export const serviceRegions: ServiceRegion[] = [
       {
         name: "جيزان",
         slug: "jizan",
-        articleSlug: "cytotec-jazan",
+        articleSlug: "cytotec-jizan",
         keyword: "سايتوتك في جيزان",
         blurb: "صفحة محلية تشرح كيف يُقرأ موضوع سايتوتك في جيزان طبياً، مع التنبيه إلى عدم تأخير الطوارئ عند ظهور نزيف أو دوخة في المدينة أو المحافظات الساحلية القريبة.",
         accessNote: "تناسب القارئات في جيزان أو من تأتي من المحافظات المحيطة وتحتاج مساراً واضحاً للرعاية المرخصة.",
@@ -112,7 +112,7 @@ export const serviceRegions: ServiceRegion[] = [
       {
         name: "الباحة",
         slug: "baha",
-        articleSlug: "cytotec-baha",
+        articleSlug: "cytotec-albahah",
         keyword: "سايتوتك في الباحة",
         blurb: "صفحة توعوية عن معنى البحث في الباحة، مع تركيز على المسافة والطريق وأهمية عدم تفسير الأعراض وحدك عندما تتسارع العلامات التحذيرية.",
         accessNote: "مفيدة للقارئات في الباحة ومحافظاتها اللواتي يحتجن خطة وصول واضحة عند النزيف أو الإغماء أو الحمى.",
@@ -154,6 +154,55 @@ export const serviceRegions: ServiceRegion[] = [
 ];
 
 export const priorityCityLinks = serviceRegions.flatMap((region) => region.cities);
+
+/**
+ * Supporting geographic guides published under content/published: the Saudi
+ * pillar, the four region clusters, and the FAQ / safety / verification
+ * explainers. The hub (/service-areas) links to every one of them so the
+ * geographic layer is fully connected in both directions.
+ */
+export const geoGuideLinks: { slug: string; label: string; note: string }[] = [
+  {
+    slug: "cytotec-saudi-regions",
+    label: "الدليل الشامل: سايتوتك في مناطق السعودية",
+    note: "المقال المحوري الذي يشرح كيف تُقرأ البنية الجغرافية ولماذا لا تتغير الحقائق الدوائية بين مدينة وأخرى.",
+  },
+  {
+    slug: "cytotec-western-region",
+    label: "دليل المنطقة الغربية",
+    note: "مكة والمدينة وجدة والطائف: المواسم والحركة الدائمة بين المدن وأثرها على توقيت المراجعة.",
+  },
+  {
+    slug: "cytotec-eastern-region",
+    label: "دليل المنطقة الشرقية",
+    note: "الدمام والخبر والقطيف والأحساء: كتلة حضرية واحدة وكيف تتحققين من المنشأة المرخصة.",
+  },
+  {
+    slug: "cytotec-central-region",
+    label: "دليل المنطقة الوسطى",
+    note: "الرياض والقصيم وحائل: كثافة الخيارات في العاصمة وعلاقتها بمحافظات الوسط.",
+  },
+  {
+    slug: "cytotec-southern-region",
+    label: "دليل المنطقة الجنوبية",
+    note: "عسير وجيزان ونجران والباحة: المرتفعات والمسافات والتخطيط المبكر للوصول إلى الرعاية.",
+  },
+  {
+    slug: "cytotec-saudi-faq",
+    label: "أسئلة شائعة بخصوص المدن والمناطق",
+    note: "إجابات عن الأسئلة الجغرافية المتكررة: هل تختلف المعلومة بين مدينة وأخرى؟ ومن أين تبدأين؟",
+  },
+  {
+    slug: "cytotec-saudi-safety",
+    label: "السلامة والتنظيم الدوائي في السعودية",
+    note: "الإطار التنظيمي العام، مخاطر القنوات غير النظامية، وعلامات الخطر التي لا تنتظر.",
+  },
+  {
+    slug: "cytotec-medical-verification",
+    label: "كيف تتحققين من المعلومة والمزود",
+    note: "دليل عملي للتمييز بين المحتوى التعليمي وصفحات البيع، وللتحقق من المصادر والمنشآت.",
+  },
+];
 
 export const serviceAreaLinks = [
   { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },

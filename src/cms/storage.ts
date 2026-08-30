@@ -40,12 +40,16 @@ export interface CmsState {
 
 function baseline(): ManagedArticle[] {
   // Committed JSON overrides a static row with the same slug, so a re-published
-  // article keeps its URL and updates in place.
-  const byId = new Map(staticManaged.map((item) => [item.id, item]));
+  // article keeps its URL and updates in place. The override matches by slug
+  // (committed rows carry a `cms-` id, so matching by id would silently keep
+  // BOTH rows and publish a duplicate catalog entry under one URL). The static
+  // row keeps its id so an editor's local overlay continues to merge cleanly.
+  const bySlug = new Map(staticManaged.map((item) => [item.slug, item]));
   for (const article of committedArticles) {
-    byId.set(article.id, article);
+    const base = bySlug.get(article.slug);
+    bySlug.set(article.slug, base ? { ...article, id: base.id } : article);
   }
-  return [...byId.values()];
+  return [...bySlug.values()];
 }
 
 function baseArticles(): ManagedArticle[] {

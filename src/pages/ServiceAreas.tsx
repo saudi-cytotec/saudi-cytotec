@@ -6,7 +6,7 @@ import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { PageHero } from "../components/PageHero";
 import { ReferencesList } from "../components/ReferencesList";
 import { JsonLd, Seo } from "../components/Seo";
-import { priorityCityLinks, serviceAreaLinks, serviceRegions } from "../data/serviceAreas";
+import { geoGuideLinks, priorityCityLinks, serviceAreaLinks, serviceRegions } from "../data/serviceAreas";
 import { SITE } from "../data/site";
 
 const faqItems = [
@@ -88,6 +88,9 @@ export function ServiceAreas() {
   const cityArticles = priorityCityLinks
     .map((city) => ({ city, article: articles.find((item) => item.slug === city.articleSlug) }))
     .filter((item): item is { city: (typeof priorityCityLinks)[number]; article: (typeof articles)[number] } => Boolean(item.article));
+  const geoGuides = geoGuideLinks
+    .map((guide) => ({ guide, article: articles.find((item) => item.slug === guide.slug) }))
+    .filter((item): item is { guide: (typeof geoGuideLinks)[number]; article: (typeof articles)[number] } => Boolean(item.article));
 
   return (
     <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
@@ -227,6 +230,28 @@ export function ServiceAreas() {
                 })}
               </div>
             </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="card-premium p-6">
+        <div className="max-w-3xl">
+          <h2 className="font-display text-2xl font-extrabold text-brand-deep">أدلة المناطق والمقالات المساندة</h2>
+          <p className="mt-3 leading-8 text-ink-soft">
+            إلى جانب صفحات المدن، يضم هذا المحور دليلاً محورياً واحداً وأربعة أدلة للمناطق الكبرى وثلاث مقالات مساندة عن
+            الأسئلة الجغرافية والسلامة والتحقق من المعلومة. كلها تعليمية ولا تتضمن بيعاً أو وساطة.
+          </p>
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {geoGuides.map(({ guide, article }) => (
+            <Link
+              key={guide.slug}
+              to={`/blog/${guide.slug}`}
+              className="rounded-2xl border border-line bg-cream/50 p-4 transition hover:bg-brand-soft"
+            >
+              <h3 className="font-bold text-brand-deep">{article?.title ?? guide.label}</h3>
+              <p className="mt-2 text-sm leading-7 text-ink-soft">{guide.note}</p>
+            </Link>
           ))}
         </div>
       </section>

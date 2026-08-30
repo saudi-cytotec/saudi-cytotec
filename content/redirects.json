@@ -419,6 +419,34 @@
       "isRegex": true,
       "reason": "Legacy per-page feed endpoints — gone.",
       "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/blog/cytotec-jazan/",
+      "destination": "/blog/cytotec-jizan",
+      "statusCode": 301,
+      "reason": "Duplicate slug consolidated: Jizan's canonical geographic article uses the standard transliteration cytotec-jizan.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/blog/cytotec-jazan",
+      "destination": "/blog/cytotec-jizan",
+      "statusCode": 301,
+      "reason": "Duplicate slug consolidated: Jizan's canonical geographic article uses the standard transliteration cytotec-jizan.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/blog/cytotec-baha/",
+      "destination": "/blog/cytotec-albahah",
+      "statusCode": 301,
+      "reason": "Duplicate slug consolidated: Al Bahah's canonical geographic article uses the standard transliteration cytotec-albahah.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/blog/cytotec-baha",
+      "destination": "/blog/cytotec-albahah",
+      "statusCode": 301,
+      "reason": "Duplicate slug consolidated: Al Bahah's canonical geographic article uses the standard transliteration cytotec-albahah.",
+      "createdAt": "2026-08-30"
     }
   ]
 }

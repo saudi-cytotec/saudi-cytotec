@@ -8,6 +8,7 @@ import {
   IconHelp,
   IconHeartPulse,
   IconLandmark,
+  IconMapPin,
   IconPill,
   IconSiren,
   IconStethoscope,
@@ -26,6 +27,7 @@ const CLUSTER_META: Record<ClusterId, { Icon: typeof IconPill; color: string; so
   interactions: { Icon: IconBan, color: "text-[#5b6b84]", soft: "bg-sand" },
   emergency: { Icon: IconSiren, color: "text-clay", soft: "bg-[#fdeceb]" },
   evidence: { Icon: IconLandmark, color: "text-sky", soft: "bg-sky-soft" },
+  geographic: { Icon: IconMapPin, color: "text-teal", soft: "bg-brand-soft" },
 };
 
 export function CategoryCard({ cluster, count }: { cluster: Cluster; count: number }) {
