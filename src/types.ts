@@ -84,7 +84,7 @@ export interface NavItem {
 }
 
 export type ArticleStatus = "draft" | "review" | "published" | "scheduled" | "archived";
-export type SearchIntent = "informational" | "navigational" | "commercial" | "transactional";
+export type SearchIntent = "informational" | "navigational" | "commercial" | "transactional" | "commercial investigation" | "local" | "medical safety" | "FAQ";
 export type ArticleType =
   | "pillar"
   | "cluster"
@@ -139,6 +139,14 @@ export interface ContentMapItem {
   /** Parent / pillar article or hub path. */
   parent: string;
   related: string[];
+  /** Deliberate links this topic should carry when drafted. */
+  internalLinks: string[];
+  /** Real FAQ angles to answer on-page or in the FAQ hub. */
+  faqOpportunities: string[];
+  /** Reference ids or official source labels to use during drafting. */
+  relevantReferences: string[];
+  /** Appropriate next step; never a forced sales CTA. */
+  cta: string;
   status: MapStatus;
   notes?: string;
 }

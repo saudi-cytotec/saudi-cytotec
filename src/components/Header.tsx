@@ -137,7 +137,7 @@ export function Header() {
               className="hidden items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgb(216_31_60/0.6)] transition hover:bg-accent-deep md:inline-flex"
             >
               <WhatsAppIcon className="h-4.5 w-4.5" />
-              استشارة طبية خاصة
+              تواصل معلوماتي عام
             </a>
             <button
               type="button"
@@ -213,7 +213,7 @@ export function Header() {
               className="mt-3 flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-bold text-white"
             >
               <WhatsAppIcon className="h-4.5 w-4.5" />
-              استشارة طبية خاصة — {INFO_WHATSAPP_DISPLAY}
+              تواصل معلوماتي عام — {INFO_WHATSAPP_DISPLAY}
             </a>
           </div>
         ) : null}

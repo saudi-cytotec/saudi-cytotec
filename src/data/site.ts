@@ -23,23 +23,24 @@ export const BRAND_TAGLINE = "مدونة سايتوتك التوعوية في ا
 
 export const mainNav: NavItem[] = [
   { to: "/", label: "الرئيسية" },
+  { to: "/topics", label: "محاور المحتوى" },
   { to: "/blog", label: "المقالات" },
   { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
+  { to: "/safety", label: "الأمان" },
+  { to: "/early-pregnancy", label: "الحمل المبكر" },
   { to: "/faq", label: "الأسئلة الشائعة" },
-  { to: "/about", label: "عن سايتوتك" },
-  { to: "/womens-health", label: "الصحة النسائية" },
-  { to: "/contact", label: "تواصل معنا" },
+  { to: "/service-areas", label: "المناطق" },
 ];
 
 export const moreNav: NavItem[] = [
   { to: "/medical-uses", label: "الاستخدامات الطبية" },
-  { to: "/safety", label: "الأمان والتحذيرات" },
   { to: "/side-effects", label: "الآثار الجانبية" },
   { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب" },
   { to: "/misoprostol", label: "ميزوبروستول" },
-  { to: "/early-pregnancy", label: "الحمل المبكر" },
+  { to: "/womens-health", label: "صحة المرأة" },
   { to: "/medical-sources", label: "المصادر الطبية" },
-  { to: "/service-areas", label: "مناطق التغطية" },
+  { to: "/about", label: "من نحن" },
+  { to: "/contact", label: "اتصل بنا" },
   { to: "/medical-disclaimer", label: "إخلاء المسؤولية" },
   { to: "/privacy", label: "الخصوصية" },
   { to: "/sitemap", label: "خريطة الموقع" },

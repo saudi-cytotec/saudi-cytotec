@@ -6,6 +6,7 @@ import { CareReferral } from "../components/CareReferral";
 import { IconArrowLeft } from "../components/icons";
 import { PageHero } from "../components/PageHero";
 import { Seo } from "../components/Seo";
+import { faqGroups } from "../data/faqs";
 import { clusters } from "../data/site";
 import { clusterPath } from "../utils/content";
 
@@ -24,6 +25,9 @@ export function ClusterPage() {
     );
   }
   const list = articles.filter((article) => article.cluster === cluster.id);
+  const questions = faqGroups.flatMap((group) => group.items).filter((item) =>
+    item.links.some((link) => link.to === clusterPath(cluster) || list.some((article) => link.to === `/blog/${article.slug}` || link.to === article.slug)),
+  ).slice(0, 3);
   const { Icon, color, soft } = clusterMeta(cluster.id);
 
   return (
@@ -46,6 +50,24 @@ export function ClusterPage() {
           </span>
         </div>
       </PageHero>
+
+      <div className="flex flex-wrap gap-2 text-sm">
+        <Link to="/topics" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-brand hover:bg-cream">كل المحاور</Link>
+        <Link to="/faq" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-brand hover:bg-cream">أسئلة شائعة</Link>
+        <Link to="/service-areas" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-brand hover:bg-cream">المناطق والمدن</Link>
+        <Link to="/medical-sources" className="rounded-full border border-line bg-paper px-4 py-2 font-semibold text-brand hover:bg-cream">المراجع الطبية</Link>
+      </div>
+
+      {questions.length ? (
+        <section className="card-premium p-5">
+          <h2 className="font-display text-xl font-extrabold text-brand-deep">أسئلة شائعة داخل هذا المحور</h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
+            {questions.map((item) => (
+              <Link key={item.q} to="/faq" className="rounded-2xl bg-cream p-4 text-sm font-semibold leading-7 text-brand-deep hover:bg-brand-soft">{item.q}</Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {list.map((article) => (

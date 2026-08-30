@@ -22,16 +22,10 @@ export function SitemapPage() {
               </Link>
             </li>
           ))}
-          <li className="mb-2">
-            <Link to="/blog" className="text-teal hover:underline">
-              المقالات
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link to="/contact" className="text-teal hover:underline">
-              اتصل بنا
-            </Link>
-          </li>
+          <li className="mb-2"><Link to="/topics" className="text-teal hover:underline">محاور المحتوى</Link></li>
+          <li className="mb-2"><Link to="/service-areas" className="text-teal hover:underline">المناطق والمدن</Link></li>
+          <li className="mb-2"><Link to="/blog" className="text-teal hover:underline">المقالات</Link></li>
+          <li className="mb-2"><Link to="/contact" className="text-teal hover:underline">اتصل بنا</Link></li>
         </ul>
       </section>
       <section className="mt-10">

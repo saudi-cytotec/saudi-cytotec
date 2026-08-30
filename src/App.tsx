@@ -9,10 +9,12 @@ import { ClusterPage } from "./pages/ClusterPage";
 import { Contact } from "./pages/Contact";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
+import { FaqHub } from "./pages/FaqHub";
 import { SearchPage } from "./pages/SearchPage";
 import { ServiceAreas } from "./pages/ServiceAreas";
 import { SitemapPage } from "./pages/SitemapPage";
 import { StaticPage } from "./pages/StaticPage";
+import { TopicsPage } from "./pages/TopicsPage";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -30,7 +32,10 @@ export default function App() {
         <Route path="/admin/*" element={<AdminApp />} />
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          {staticPages.map((page) => (
+          <Route path="/topics" element={<TopicsPage />} />
+          <Route path="/faq" element={<FaqHub />} />
+          <Route path="/service-areas" element={<ServiceAreas />} />
+          {staticPages.filter((page) => page.path !== "/faq").map((page) => (
             <Route key={page.path} path={page.path} element={<StaticPage page={page} />} />
           ))}
           <Route path="/blog" element={<BlogIndex />} />

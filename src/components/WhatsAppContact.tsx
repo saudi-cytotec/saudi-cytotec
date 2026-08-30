@@ -72,7 +72,7 @@ export function WhatsAppContactLink({ className = "" }: { className?: string }) 
       target="_blank"
       rel="noopener noreferrer"
       className={className}
-      aria-label={`استشارة طبية عبر واتساب: ${INFO_WHATSAPP_DISPLAY}`}
+      aria-label={`تواصل معلوماتي عبر واتساب: ${INFO_WHATSAPP_DISPLAY}`}
     >
       <WhatsAppIcon className="h-5 w-5" />
       <span>تواصل عبر واتساب</span>
@@ -100,10 +100,10 @@ export function WhatsAppContactCard({ compact = false }: { compact?: boolean }) 
           </span>
           <div>
             <h2 id="info-contact-heading" className="font-display text-xl font-extrabold text-brand-deep md:text-[1.45rem]">
-              استشارة طبية خاصة
+              تواصل معلوماتي عام
             </h2>
             <p className="mt-1 text-sm leading-7 text-ink-soft">
-              تحدثي مع مختص عبر واتساب للحصول على استشارة سرية ومعلومات دقيقة.
+              استخدمي واتساب لطلب رابط تعليمي مناسب أو توضيح عام حول محتوى الموقع فقط.
             </p>
           </div>
         </div>
@@ -140,15 +140,15 @@ export function WhatsAppFloat() {
       href={whatsappInfoUrl()}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="استشارة طبية عبر واتساب (قناة معلومات عامة — ليس طلب دواء)"
-      title="استشارة طبية خاصة — معلومات عامة فقط"
+      aria-label="تواصل معلوماتي عبر واتساب (قناة معلومات عامة — ليس طلب دواء)"
+      title="تواصل معلوماتي عام — معلومات عامة فقط"
       className="group fixed bottom-5 end-5 z-40 flex items-center gap-2 rounded-full bg-white p-2.5 shadow-[0_12px_32px_-8px_rgb(11_37_69/0.35)] ring-1 ring-line transition hover:shadow-[0_16px_40px_-8px_rgb(11_37_69/0.45)]"
     >
       <span className="grid h-11 w-11 place-items-center rounded-full bg-[#25D366] text-white">
         <WhatsAppIcon className="h-6 w-6" />
       </span>
       <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-bold text-brand-deep transition-all duration-300 group-hover:max-w-[14rem] group-hover:ps-1 group-hover:pe-2">
-        استشارة طبية خاصة
+        تواصل معلوماتي عام
       </span>
       <span className="absolute -top-1 -end-1 flex h-3.5 w-3.5">
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />

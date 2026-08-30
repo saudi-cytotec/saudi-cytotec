@@ -85,7 +85,7 @@ function CompetitorsTab() {
   return (
     <div className="space-y-4">
       <p className="max-w-3xl text-sm leading-7 text-ink-soft">
-        مصفوفة الفجوات مقابل المنافسين المدروسين (taxiporteu.com، femseha.com، sehaher.com، ومواقع البيع). المصدر: <span dir="ltr">content/competitors.json</span> · التقرير الكامل: <span dir="ltr">docs/competitor-research.md</span>.
+        مصفوفة الفجوات مقابل المنافسين الثلاثة المحددين فقط (saudi-cytotec.com، cytotecmedicine.com، cytotecsa.com). المصدر: <span dir="ltr">content/competitors.json</span> · التقرير الكامل: <span dir="ltr">docs/competitor-research.md</span>.
       </p>
       <div className="overflow-x-auto rounded-3xl border border-line bg-paper">
         <table className="w-full text-sm">

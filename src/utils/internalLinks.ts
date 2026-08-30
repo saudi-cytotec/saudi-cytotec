@@ -39,7 +39,7 @@ function normalizeTarget(target: string): string | null {
 export function buildLinkGraph(articles: ManagedArticle[]): LinkGraph {
   const published = articles.filter((article) => article.status === "published");
   const knownSlugs = new Set(published.map((article) => article.slug));
-  const knownPaths = new Set<string>(["/", "/blog", "/contact", "/sitemap", "/search", "/admin"]);
+  const knownPaths = new Set<string>(["/", "/topics", "/blog", "/faq", "/service-areas", "/contact", "/sitemap", "/search", "/admin"]);
   // Cornerstone pages and cluster hubs are valid link targets even though
   // they are not articles.
   for (const article of articles) {

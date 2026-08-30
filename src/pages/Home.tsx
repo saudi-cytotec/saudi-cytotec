@@ -39,17 +39,21 @@ const HERO_TRUST = [
 
 const FEATURES = [
   { Icon: IconBook, color: "text-brand", soft: "bg-brand-soft", title: "دليل شامل", text: "دليل كامل حول سايتوتك والصحة النسائية" },
-  { Icon: IconLock, color: "text-brand", soft: "bg-brand-soft", title: "خصوصيتك أولاً", text: "نضمن لك الخصوصية والسرية التامة" },
-  { Icon: IconAward, color: "text-accent", soft: "bg-accent-soft", title: "مصادر معتمدة", text: "نعتمد على أحدث الدراسات والإرشادات الطبية" },
-  { Icon: IconStethoscope, color: "text-brand", soft: "bg-brand-soft", title: "إشراف طبي", text: "محتوى تتم مراجعته من قبل مختصين في المجال الطبي" },
-  { Icon: IconShieldCheck, color: "text-brand", soft: "bg-brand-soft", title: "محتوى موثوق", text: "مقالات طبية مكتوبة وفق معايير موثوقة" },
+  { Icon: IconLock, color: "text-brand", soft: "bg-brand-soft", title: "خصوصيتك أولاً", text: "قنوات تواصل للمعلومات العامة فقط وليست للبيع أو التشخيص" },
+  { Icon: IconAward, color: "text-accent", soft: "bg-accent-soft", title: "مصادر معتمدة", text: "نعتمد على النشرات والهيئات الصحية والمراجع الطبية" },
+  { Icon: IconStethoscope, color: "text-brand", soft: "bg-brand-soft", title: "وضوح طبي", text: "نفرّق بين التعليم العام والاستشارة الفردية لدى طبيب مرخص" },
+  { Icon: IconShieldCheck, color: "text-brand", soft: "bg-brand-soft", title: "أمان أولاً", text: "كل مسار يربط بالمخاطر والطوارئ قبل أي خطوة تواصل" },
 ];
 
 const CORNERSTONES = [
+  { to: "/topics", title: "محاور المحتوى", text: "بوابة تربط المجموعات والـ 100 موضوع." },
   { to: "/what-is-cytotec", title: "ما هو سايتوتك؟", text: "تعريف تعليمي للاسم التجاري والمادة الفعالة." },
   { to: "/medical-uses", title: "الاستخدامات الطبية", text: "الاستطبابات والإشراف السريري وحدود الاستخدام." },
   { to: "/safety", title: "الأمان والتحذيرات", text: "تحذير الحمل والتنظيم ومصادر الدواء غير الموثوقة." },
+  { to: "/side-effects", title: "الآثار الجانبية", text: "التمييز بين العرض الشائع والعلامة الطارئة." },
   { to: "/when-to-see-doctor", title: "متى تراجعين الطبيب", text: "علامات تستدعي عيادة أو طوارئ دون تأخير." },
+  { to: "/faq", title: "الأسئلة الشائعة", text: "إجابات حسب القصد وروابط لمقالات أعمق." },
+  { to: "/service-areas", title: "المناطق والمدن", text: "تنظيم جغرافي مسؤول بلا صفحات مدينة رقيقة." },
 ];
 
 /** Hero banner panel: the EXACT approved homepage banner (Bannerrr.png) on a dark premium card. */
@@ -194,10 +198,10 @@ export function Home() {
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
-                to="/blog"
+                to="/topics"
                 className="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-bold text-white shadow-[0_14px_28px_-12px_rgb(22_53_107/0.7)] transition hover:bg-brand-deep"
               >
-                قراءة المقالات
+                محاور المحتوى
                 <IconArrowLeft className="h-4.5 w-4.5" />
               </Link>
               <Link

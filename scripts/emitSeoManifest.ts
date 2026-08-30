@@ -223,10 +223,19 @@ export function emitSeoManifest(): Plugin {
         expectedRobots: INDEXABLE,
       });
       pushRoute({
+        path: "/topics",
+        url: `${SITE.domain}/topics`,
+        title: "محاور المحتوى",
+        metaDescription: "محاور المحتوى وخريطة الموضوعات في سايتوتك في السعودية",
+        canonical: `${SITE.domain}/topics`,
+        kind: "page",
+        expectedRobots: INDEXABLE,
+      });
+      pushRoute({
         path: "/service-areas",
         url: `${SITE.domain}/service-areas`,
         title: "مناطق التغطية",
-        metaDescription: "مناطق التغطية والوصول إلى الرعاية في السعودية والخليج",
+        metaDescription: "مناطق التغطية والوصول إلى الرعاية في السعودية",
         canonical: `${SITE.domain}/service-areas`,
         kind: "page",
         expectedRobots: INDEXABLE,
