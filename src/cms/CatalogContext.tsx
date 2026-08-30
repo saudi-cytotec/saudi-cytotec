@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Article, ContentMapItem, ManagedArticle, NotFoundEntry, RedirectRule, SiteSettings } from "../types";
+import { wipeArticleImages } from "../utils/images";
 import { defaultSettings } from "./defaults";
 import { effectiveRedirectRules, loadState, saveState, type CmsState } from "./storage";
 
@@ -56,7 +57,10 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
       (item) => String(item.status).toLowerCase() === "published",
     );
     return {
-      articles: published,
+      // Public catalog never carries article-specific images. Stale CMS
+      // overlay values (deleted files, old OG defaults) cannot leak into
+      // ArticlePage / ArticleCard / Seo.
+      articles: published.map((item) => wipeArticleImages(item)),
       managed: state.articles,
       map: state.map,
       settings: state.settings,

@@ -75,7 +75,13 @@ const urls = [
   { path: "/blog/cytotec-definition", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-definition` },
   { path: "/blog/anemia-womens-health", expect: "indexable", canonical: `${DOMAIN}/blog/anemia-womens-health` },
   { path: "/blog/saudi-drug-regulation-context", expect: "indexable", canonical: `${DOMAIN}/blog/saudi-drug-regulation-context` },
+  { path: "/blog/cytotec-abha", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-abha` },
+  { path: "/blog/cytotec-makkah", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-makkah` },
+  { path: "/blog/cytotec-saudi-faq", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-saudi-faq` },
+  { path: "/blog/cytotec-saudi-safety", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-saudi-safety` },
   { path: "/blog/cluster/ma-huwa-saytotek", expect: "indexable", canonical: `${DOMAIN}/blog/cluster/ma-huwa-saytotek` },
+  { path: "/topics", expect: "indexable", canonical: `${DOMAIN}/topics` },
+  { path: "/faq", expect: "indexable", canonical: `${DOMAIN}/faq` },
   { path: "/contact", expect: "indexable", canonical: `${DOMAIN}/contact` },
   { path: "/search", expect: "noindex" },
   { path: "/admin", expect: "noindex" },
@@ -173,6 +179,11 @@ async function render(urlPath) {
   const twitterImage = doc.querySelector('meta[name="twitter:image"]')?.getAttribute("content") ?? null;
   const figureImgs = [...doc.querySelectorAll("figure img")].map((i) => i.getAttribute("src") ?? "");
   const imgSrcs = [...doc.querySelectorAll("img")].map((i) => i.getAttribute("src") ?? "").filter((s) => s && !s.startsWith("data:"));
+  const preloadHrefs = [...doc.querySelectorAll('link[rel="preload"]')].map((l) => l.getAttribute("href") ?? "").filter(Boolean);
+  const styleUrls = [...doc.querySelectorAll("[style]")]
+    .map((el) => el.getAttribute("style") ?? "")
+    .filter((s) => /url\(/i.test(s));
+  const htmlDump = `${doc.head?.innerHTML ?? ""}\n${doc.body?.innerHTML ?? ""}`;
 
   const result = {
     settled,
@@ -192,6 +203,9 @@ async function render(urlPath) {
     twitterImage,
     figureImgs,
     imgSrcs,
+    preloadHrefs,
+    styleUrls,
+    htmlDump,
   };
 
   dom.window.close();
@@ -269,13 +283,20 @@ for (const spec of urls) {
       assert(r.ldMainEntity === spec.canonical, spec.path, "JSON-LD mainEntityOfPage", r.ldMainEntity ?? "(none)");
     }
 
-    // ── Image policy: no selected image → no figure, no og:image, no
-    //    twitter:image; the approved article WhatsApp banner still renders. ──
-    assert(r.figureImgs.length === 0, spec.path, "no generated/article figure image", r.figureImgs.join(",") || "(none)");
-    assert(r.ogImage === null, spec.path, "no og:image without a selected image", r.ogImage ?? "(omitted)");
-    assert(r.twitterImage === null, spec.path, "no twitter:image without a selected image", r.twitterImage ?? "(omitted)");
+    // ── Image policy: articles have ZERO article-specific images.
+    //    Allowed <img> on an article page: site logo (chrome) + the permanent
+    //    WhatsApp banner. No figure, no og:image, no twitter:image, no
+    //    homepage banner, no thumbnail, no empty image box. ──
+    assert(r.figureImgs.length === 0, spec.path, "no article figure image", r.figureImgs.join(",") || "(none)");
+    assert(r.ogImage === null, spec.path, "article omits og:image", r.ogImage ?? "(omitted)");
+    assert(r.twitterImage === null, spec.path, "article omits twitter:image", r.twitterImage ?? "(omitted)");
     const hasApprovedBanner = r.imgSrcs.some((s) => s.endsWith("/images/saudiersaa-article-whatsapp-banner.png.png"));
     assert(hasApprovedBanner, spec.path, "approved article WhatsApp banner renders", hasApprovedBanner ? "banner present" : "MISSING");
+    const articleAllowed = ["/images/لوجو.png", "/images/saudiersaa-article-whatsapp-banner.png.png"];
+    const extraArticleImgs = r.imgSrcs.filter((s) => !articleAllowed.some((a) => s.endsWith(a)));
+    assert(extraArticleImgs.length === 0, spec.path, "article imgs = logo + WhatsApp banner only", extraArticleImgs.join(", ") || "ok");
+    assert(r.preloadHrefs.length === 0, spec.path, "no image preloads on article", r.preloadHrefs.join(",") || "(none)");
+    assert(r.styleUrls.length === 0, spec.path, "no background-image URLs on article", r.styleUrls.join(" | ") || "(none)");
   }
 
   // Homepage: the approved hero banner drives the only og:image on the site.
@@ -295,6 +316,22 @@ for (const spec of urls) {
   ];
   const nonApprovedImgs = r.imgSrcs.filter((s) => !approvedSuffixes.some((a) => s.endsWith(a) || s === a));
   assert(nonApprovedImgs.length === 0, spec.path, "all rendered images are approved", nonApprovedImgs.length ? nonApprovedImgs.join(", ") : "only 3 approved assets");
+
+  const forbiddenSnippets = [
+    "og-default",
+    "/images/safety",
+    "hero-doctor",
+    "/images/emergency.jpg",
+    "womens-health.jpg",
+    "whatsapp-consult",
+    "article-mark",
+    "/images/hero.jpg",
+    "/images/sources",
+    "/images/logo.png",
+  ];
+  const dump = String(r.htmlDump || "").toLowerCase();
+  const forbiddenHit = forbiddenSnippets.find((token) => dump.includes(token.toLowerCase()));
+  assert(!forbiddenHit, spec.path, "no deleted image URLs in rendered HTML", forbiddenHit ? `found ${forbiddenHit}` : "clean");
 }
 
 // ---------------------------------------------------------------- report

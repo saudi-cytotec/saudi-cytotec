@@ -44,9 +44,6 @@ export function ArticlePage() {
   const seoTitle = managedArticle?.seoTitle || article.metaTitle;
   const seoDescription = managedArticle?.metaDescription || article.metaDescription;
   const keywordMeta = managedArticle ? [managedArticle.primaryKeyword, ...managedArticle.secondaryKeywords].filter(Boolean).join(", ") : article.title;
-  const ogImage = article.ogImage || article.bannerImage || article.image || "";
-  const bannerSrc = article.bannerImage || article.image || "";
-  const bannerAlt = article.bannerImageAlt || article.imageAlt || article.title;
   const canonical = managedArticle?.canonical?.startsWith(SITE.domain)
     ? managedArticle.canonical
     : `${SITE.domain}/blog/${article.slug}`;
@@ -63,7 +60,6 @@ export function ArticlePage() {
         type="article"
         publishedAt={article.publishedAt}
         updatedAt={article.updatedAt}
-        image={ogImage}
         ogTitle={managedArticle?.ogTitle}
         ogDescription={managedArticle?.ogDescription}
         canonical={canonical}
@@ -126,21 +122,6 @@ export function ArticlePage() {
           نُشر في {article.publishedAt} · آخر تحديث {article.updatedAt} · قراءة تقريبية {readingMinutes(article)} دقائق
         </p>
       </div>
-
-      {bannerSrc ? (
-        <figure className="card-premium mt-7 max-w-4xl overflow-hidden">
-          <img
-            src={bannerSrc}
-            alt={bannerAlt}
-            width={1200}
-            height={article.bannerImage ? 675 : 900}
-            loading="eager"
-            decoding="async"
-            className="aspect-[16/9] w-full object-cover"
-          />
-          {article.imageAlt ? <figcaption className="px-4 py-2.5 text-xs text-ink-soft">{article.imageAlt}</figcaption> : null}
-        </figure>
-      ) : null}
 
       <ArticleWhatsAppBanner />
 

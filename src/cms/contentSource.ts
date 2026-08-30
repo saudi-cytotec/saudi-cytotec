@@ -73,11 +73,11 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
     excerpt: typeof raw.excerpt === "string" ? raw.excerpt : "",
     publishedAt: typeof raw.publishedAt === "string" ? raw.publishedAt : new Date().toISOString().slice(0, 10),
     updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : new Date().toISOString().slice(0, 10),
-    image: typeof raw.image === "string" ? raw.image : "",
-    imageAlt: typeof raw.imageAlt === "string" ? raw.imageAlt : "",
-    bannerImage: typeof raw.bannerImage === "string" ? raw.bannerImage : "",
-    bannerImageAlt: typeof raw.bannerImageAlt === "string" ? raw.bannerImageAlt : "",
-    ogImage: typeof raw.ogImage === "string" ? raw.ogImage : "",
+    image: "",
+    imageAlt: "",
+    bannerImage: "",
+    bannerImageAlt: "",
+    ogImage: "",
     related: Array.isArray(raw.related) ? raw.related.filter((v): v is string => typeof v === "string") : [],
     cornerstones: Array.isArray(raw.cornerstones)
       ? raw.cornerstones.filter((v): v is string => typeof v === "string")
@@ -120,11 +120,11 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
     ogDescription:
       typeof raw.ogDescription === "string" && raw.ogDescription ? raw.ogDescription : managed.ogDescription,
     description: typeof raw.description === "string" && raw.description ? raw.description : managed.description,
-    image: asStatic.image || managed.image,
-    imageAlt: asStatic.imageAlt || managed.imageAlt,
-    bannerImage: asStatic.bannerImage || managed.bannerImage || "",
-    bannerImageAlt: asStatic.bannerImageAlt || managed.bannerImageAlt || "",
-    ogImage: asStatic.ogImage || managed.ogImage || "",
+    image: "",
+    imageAlt: "",
+    bannerImage: "",
+    bannerImageAlt: "",
+    ogImage: "",
     metaDescription: typeof raw.metaDescription === "string" ? raw.metaDescription : managed.metaDescription,
     internalLinks: Array.isArray(raw.internalLinks)
       ? raw.internalLinks.filter((v): v is string => typeof v === "string")

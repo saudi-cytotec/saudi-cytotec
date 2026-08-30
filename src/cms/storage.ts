@@ -1,4 +1,5 @@
 import type { ContentMapItem, ManagedArticle, NotFoundEntry, RedirectRule, SiteSettings } from "../types";
+import { wipeArticleImages } from "../utils/images";
 import { defaultSettings, seedContentMap, staticManaged } from "./defaults";
 import { committedArticles } from "./contentSource";
 import { redirectRegistry } from "./registrySource";
@@ -119,8 +120,13 @@ export function loadState(): CmsState {
   const mapById = new Map(localMap.map((row) => [row.id, row]));
 
   return {
-    // Local edits win over the bundle; anything not touched locally comes from it.
-    articles: [...localRows, ...base.articles.filter((item) => !localIds.has(item.id))],
+    // Local edits win over the bundle, except article-specific images: those
+    // are always wiped so a stale CMS overlay cannot resurrect deleted files
+    // (or any thumbnail/OG/hero) on the public site.
+    articles: [
+      ...localRows.map((row) => wipeArticleImages(row)),
+      ...base.articles.filter((item) => !localIds.has(item.id)).map((item) => wipeArticleImages(item)),
+    ],
     map: base.map.map((row) => mapById.get(row.id) ?? row),
     // Only current settings keys are used anywhere — no default-OG-image field
     // exists in the type, so any legacy key in storage is inert dead data.
