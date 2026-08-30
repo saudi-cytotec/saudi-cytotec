@@ -283,10 +283,9 @@ export function expand(cluster: ClusterId, spec: ArticleSpec): Article {
     metaTitle: spec.metaTitle,
     metaDescription: spec.metaDescription,
     excerpt: spec.excerpt,
-    // Default articles intentionally carry NO featured image — editors select
-    // one explicitly when approved artwork exists. An empty image means: no
-    // card thumbnail, no article hero figure, no og:image meta.
-    imageAlt: "",
+    // Articles intentionally carry NO featured image — editors select one
+    // explicitly from the three approved assets when needed. An empty image
+    // means: no card thumbnail, no article hero figure, no og:image meta.
     related: spec.related,
     blocks,
     faqs: spec.faqs,

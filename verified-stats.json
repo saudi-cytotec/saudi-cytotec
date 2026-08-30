@@ -11,14 +11,5 @@
     "h3": 8,
     "passes": true
   },
-  "failingSample": [],
-  "testArticle": {
-    "slug": "cytotec-uses-warnings",
-    "wordCount": 2830,
-    "pipelineWordCount": 2830,
-    "paragraphs": 38,
-    "h2": 15,
-    "h3": 6,
-    "passes": true
-  }
+  "failingSample": []
 }

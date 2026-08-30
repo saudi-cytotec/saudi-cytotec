@@ -8,8 +8,11 @@ import { json, requireAdmin } from "./_lib/session.js";
  * src/cms/contentSource.ts, and the article becomes a public, crawlable URL.
  *
  *   POST   /api/publish            create or update a published article
- *   POST   /api/publish?schedule=1 publish at a future date (content/scheduled)
  *   DELETE /api/publish?slug=...   unpublish (delete the file)
+ *
+ * Publishing is ALWAYS an explicit administrator action (admin session
+ * required, button clicked in the CMS). There is NO scheduled, cron, automatic
+ * or background publishing path in this system.
  *
  * Requires GITHUB_PUBLISH_TOKEN (a fine-grained PAT with Contents: read/write on
  * this repository only). The token is read from process.env and is never logged
@@ -22,7 +25,6 @@ const BRANCH = process.env.GITHUB_REPO_BRANCH || "main";
 const API = "https://api.github.com";
 
 const PUBLISHED_DIR = "content/published";
-const SCHEDULED_DIR = "content/scheduled";
 
 const BLOCK_TYPES = new Set(["p", "h2", "h3", "ul", "callout"]);
 
@@ -81,10 +83,33 @@ async function commitFile(token, filePath, content, message) {
   });
 }
 
+// The ONLY image files the site may serve. Any other value is dropped and the
+// article keeps its no-image state (no thumbnail, no figure, no og:image).
+// This is enforced server-side so a malformed or tampered editor payload can
+// never introduce an unauthorized/broken image reference.
+const APPROVED_IMAGE_FILES = new Set([
+  "/images/لوجو.png",
+  "/images/Bannerrr.png",
+  "/images/saudiersaa-article-whatsapp-banner.png.png",
+]);
+
+const IMAGE_FIELDS = ["image", "imageAlt", "bannerImage", "bannerImageAlt", "ogImage"];
+
 function serialize(article) {
+  const clean = { ...article };
+  for (const key of IMAGE_FIELDS) {
+    const value = typeof clean[key] === "string" ? clean[key].trim() : "";
+    // Only approved asset paths are persisted; alternatives, uploads URLs and
+    // empty leftovers are normalized to "" ("no selected image").
+    if (key.endsWith("Image") && !key.endsWith("Alt")) {
+      clean[key] = APPROVED_IMAGE_FILES.has(value) ? value : "";
+    } else if (key.endsWith("Alt")) {
+      clean[key] = value;
+    }
+  }
   return `${JSON.stringify(
     {
-      ...article,
+      ...clean,
       blocks: article.blocks.filter((b) => b && BLOCK_TYPES.has(b.type)),
     },
     null,
@@ -130,6 +155,12 @@ export default async function handler(req, res) {
 
   if (req.method !== "POST") return json(res, 405, { error: "Method not allowed" });
 
+  // Scheduled publishing is deliberately unsupported: publishing must be an
+  // explicit administrator action, never a background cron promotion.
+  if (url.searchParams.get("schedule") === "1") {
+    return json(res, 400, { error: "النشر المجدول غير مفعّل — النشر يدوي من المحرر فقط." });
+  }
+
   const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
   const article = body.article;
   if (!article || typeof article !== "object") return json(res, 400, { error: "الحقل article مطلوب." });
@@ -141,26 +172,18 @@ export default async function handler(req, res) {
     return json(res, 400, { error: "لا يوجد محتوى في المتن." });
   }
 
-  const wantsSchedule = url.searchParams.get("schedule") === "1";
-  const publishAt = dateOnly(article.publishAt);
-  if (wantsSchedule && !publishAt) {
-    return json(res, 400, { error: "الجدولة تتطلب تاريخاً بصيغة YYYY-MM-DD." });
-  }
-
-  const scheduled = wantsSchedule && publishAt > new Date().toISOString().slice(0, 10);
-  const dir = scheduled ? SCHEDULED_DIR : PUBLISHED_DIR;
-  const filePath = `${dir}/${slug}.json`;
+  const filePath = `${PUBLISHED_DIR}/${slug}.json`;
 
   const payload = {
     ...article,
     slug,
     id: article.id || `cms-${slug}`,
-    status: scheduled ? "scheduled" : "published",
-    publishedAt: scheduled ? publishAt : dateOnly(article.publishedAt) || new Date().toISOString().slice(0, 10),
+    status: "published",
+    publishedAt: dateOnly(article.publishedAt) || new Date().toISOString().slice(0, 10),
     updatedAt: new Date().toISOString().slice(0, 10),
   };
 
-  const message = `${scheduled ? "Schedule" : "Publish"}: ${payload.title} (${slug})`;
+  const message = `Publish: ${payload.title} (${slug})`;
   const commit = await commitFile(token, filePath, serialize(payload), message);
 
   if (!commit.ok) {
@@ -179,11 +202,7 @@ export default async function handler(req, res) {
     slug,
     path: filePath,
     status: payload.status,
-    scheduled,
-    publishAt: scheduled ? publishAt : undefined,
-    url: scheduled ? undefined : `https://saudiersaa.com/blog/${slug}`,
-    note: scheduled
-      ? "تمت الجدولة. سيُنقل المقال إلى المنشور تلقائياً عند حلول تاريخه."
-      : "تم النشر. ستظهر الصفحة بعد اكتمال إعادة النشر على Vercel.",
+    url: `https://saudiersaa.com/blog/${slug}`,
+    note: "تم النشر. ستظهر الصفحة بعد اكتمال إعادة النشر على Vercel.",
   });
 }

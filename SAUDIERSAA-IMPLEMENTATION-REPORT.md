@@ -293,8 +293,10 @@ production. See Blockers.
 
 **Blocker: the two reference files named in the brief are not in the
 workspace.** `ls /home/user` shows only `saudi-cytotec`; a filesystem search for
-`تصميم الصفحة الرئيسية.png` and `لوجو.png` returns nothing. The only PNGs
-present are `public/favicon.png` and `public/images/*`.
+`تصميم الصفحة الرئيسية.png` and `لوجو.png` returns nothing. (The approved
+`لوجو.png` was delivered to the repository later; the only image assets kept
+today are the three approved ones: logo, homepage banner, article WhatsApp
+banner — favicons and every generated/contextual image were removed.)
 
 So the design was implemented from the written specification (red + deep blue +
 white) and the existing assets, **not** from the reference image, and the logo

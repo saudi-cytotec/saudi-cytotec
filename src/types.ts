@@ -92,7 +92,11 @@ export interface NavItem {
   label: string;
 }
 
-export type ArticleStatus = "draft" | "review" | "published" | "scheduled" | "archived";
+export type ArticleStatus = "draft" | "review" | "published" | "archived";
+// NOTE: the legacy "scheduled" status from earlier builds is deliberately not
+// part of this union anymore. Nothing in the system schedules or promotes
+// articles: publishing is exclusively an explicit administrator action. Any
+// old stored row with status "scheduled" is treated as a draft by the catalog.
 export type SearchIntent = "informational" | "navigational" | "commercial" | "transactional" | "commercial investigation" | "local" | "medical safety" | "FAQ";
 export type ArticleType =
   | "pillar"
@@ -118,8 +122,6 @@ export interface ManagedArticle extends Article {
   source: "static" | "cms";
   internalLinks: string[];
   hasDisclaimer: boolean;
-  /** Scheduled publish date (YYYY-MM-DD) when status === "scheduled". */
-  publishAt?: string;
   /** Editorial author byline; empty = platform editorial team. */
   author?: string;
 }
@@ -201,12 +203,6 @@ export interface SiteSettings {
   domain: string;
   email: string;
   description: string;
-  /**
-   * Historical field preserved to keep stored settings backward-compatible.
-   * No default OG image is ever emitted: og:image/twitter:image only render
-   * when an editor explicitly selects an image on a page/article.
-   */
-  defaultOgImage?: string;
   indexPublic: boolean;
 }
 

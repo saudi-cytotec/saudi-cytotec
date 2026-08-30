@@ -38,7 +38,6 @@ export function edu(
     metaTitle: string;
     metaDescription: string;
     excerpt: string;
-    imageAlt: string;
     related: string[];
     blocks: ContentBlock[];
     faqs?: { q: string; a: string }[];

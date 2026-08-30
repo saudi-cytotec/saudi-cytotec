@@ -30,17 +30,16 @@ export function generateRequest(payload: Record<string, unknown>) {
   );
 }
 
-export function publishRequest(article: unknown, schedule = false) {
+export function publishRequest(article: unknown) {
+  // Manual publish only. There is no scheduled / cron / automatic publish API.
   return api<{
     ok?: boolean;
     slug?: string;
     url?: string;
-    scheduled?: boolean;
-    publishAt?: string;
     error?: string;
     blocker?: string;
     note?: string;
-  }>(`/api/publish${schedule ? "?schedule=1" : ""}`, {
+  }>("/api/publish", {
     method: "POST",
     body: JSON.stringify({ article }),
   });
@@ -72,13 +71,6 @@ export function syncRedirectsRequest(rules: unknown[], wwwToApex: boolean) {
   return api<{ ok?: boolean; rules?: number; commit?: string; note?: string; error?: string; blocker?: string }>("/api/sync-redirects", {
     method: "POST",
     body: JSON.stringify({ rules, wwwToApex }),
-  });
-}
-
-export function uploadImageRequest(name: string, data: string) {
-  return api<{ ok?: boolean; url?: string; commit?: string; note?: string; error?: string; blocker?: string }>("/api/upload-image", {
-    method: "POST",
-    body: JSON.stringify({ name, data }),
   });
 }
 

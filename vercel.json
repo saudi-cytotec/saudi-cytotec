@@ -63,12 +63,6 @@
       ]
     }
   ],
-  "crons": [
-    {
-      "path": "/api/release",
-      "schedule": "17 3 * * *"
-    }
-  ],
   "redirects": [
     {
       "source": "/:path*",

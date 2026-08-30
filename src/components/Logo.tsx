@@ -3,13 +3,17 @@
  *
  * Canonical file: /images/لوجو.png (the supplied saudiersaa logo,
  * committed verbatim into the repo — never redrawn or regenerated).
+ * This is one of only three approved image assets; no fallback image or
+ * generated alternative is introduced anywhere.
  */
-import { useState } from "react";
-
 export const LOGO_SRC = "/images/لوجو.png";
 export const LOGO_ALT = "شعار saudiersaa — مدونة سايتوتك التوعوية في السعودية";
 
-/** Typographic wordmark used ONLY as the missing-file fallback. */
+/**
+ * Typographic wordmark used on the homepage hero brand panel and footer
+ * branding contexts where the logo marks sit alongside text lockups.
+ * This is a text element, not an image and not an image fallback.
+ */
 export function Wordmark({ className = "", tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
   return (
     <span className={`leading-none ${className}`}>
@@ -25,25 +29,22 @@ export function Wordmark({ className = "", tone = "dark" }: { className?: string
 }
 
 /**
- * The approved logo lockup.
- * - File present: rendered verbatim inside a rounded dark plate (the supplied
- *   asset has a black canvas, so a plate keeps it crisp on white/navy).
- * - File pending: plain typographic wordmark (no plate) so nothing renders
- *   dark-on-dark. `tone` controls the wordmark colours for light/dark hosts.
+ * The approved logo lockup — the committed file rendered verbatim inside a
+ * rounded dark plate (the supplied asset has a black canvas, so a plate keeps
+ * it crisp on white/navy).
  */
 export function BrandLogo({
-  tone = "dark",
   className = "h-14",
   plateClass = "rounded-xl",
+  tone = "dark",
 }: {
-  tone?: "dark" | "light";
   className?: string;
   plateClass?: string;
+  tone?: "dark" | "light";
 }) {
-  const [missing, setMissing] = useState(false);
-
-  if (missing) return <Wordmark tone={tone} className={className} />;
-
+  // `tone` is accepted for API compatibility (light isnavy host in the
+  // footer); the committed asset has a dark canvas so the plate is always navy.
+  void tone;
   return (
     <span className={`inline-flex overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
       <img
@@ -52,7 +53,6 @@ export function BrandLogo({
         loading="eager"
         decoding="async"
         className="h-full w-auto object-contain"
-        onError={() => setMissing(true)}
       />
     </span>
   );

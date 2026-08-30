@@ -16,8 +16,11 @@ import { clusters, SITE } from "../src/data/site";
  *   + every article that is part of the deployed bundle (static .ts articles
  *     plus every JSON file in content/published)
  *   - /admin, /api, /search: disallowed or non-content
- *   - anything scheduled but not yet published
+ *   - anything not yet published (drafts/review/archived)
  *   - duplicate URLs (deduplicated below)
+ *
+ * There is no scheduled publishing; only content/published/*.json entries are
+ * live, so the sitemap never needs a scheduler to stay accurate.
  */
 
 const PUBLISHED_DIR = path.resolve("content/published");

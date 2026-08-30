@@ -4,8 +4,9 @@
  * Complements verifyRendered (SEO/indexability) by asserting that the BUILT
  * bundle renders the approved navy/red design system: top navy bar, white
  * branded header with the exact logo slot, RTL nav, red consultation CTA,
- * light hero, credibility features, LIGHT WhatsApp card, category cards,
- * article cards with images, navy footer.
+ * light hero with the approved banner, credibility features, LIGHT WhatsApp
+ * card, category cards, text-only article cards (no generated images), the
+ * approved article WhatsApp banner, navy footer.
  */
 import fs from "node:fs";
 import os from "node:os";
@@ -46,6 +47,33 @@ async function waitFor(fn, ms = 20000) {
   }
 }
 
+/**
+ * Wait until the root has substantial content AND its markup stops changing
+ * across consecutive polls. The catalog is loaded asynchronously after the
+ * first paint, so a single innerHTML-length check can sample a half-rendered
+ * page (empty article list) and produce flaky failures.
+ */
+async function waitForStableRender(window, ms = 20000) {
+  const start = Date.now();
+  let previous = "";
+  let stablePolls = 0;
+  for (;;) {
+    const root = window.document.getElementById("root");
+    const html = root?.innerHTML ?? "";
+    if (html.length > 200) {
+      if (html === previous) {
+        stablePolls += 1;
+        if (stablePolls >= 2) return true;
+      } else {
+        stablePolls = 0;
+      }
+      previous = html;
+    }
+    if (Date.now() - start > ms) return false;
+    await new Promise((r) => setTimeout(r, 150));
+  }
+}
+
 async function renderAt(pathname) {
   const dom = new JSDOM(`<!doctype html><html lang="ar" dir="rtl"><body><div id="root"></div></body></html>`, {
     url: DOMAIN + pathname,
@@ -79,10 +107,7 @@ async function renderAt(pathname) {
   global.fetch = window.fetch;
 
   await import(pathToFileUrlSafe(bundlePath) + "?u=" + encodeURIComponent(pathname));
-  await waitFor(() => {
-    const root = window.document.getElementById("root");
-    return root && root.innerHTML.length > 200;
-  });
+  await waitForStableRender(window);
   return window.document;
 }
 
@@ -111,22 +136,22 @@ console.log("\nHOME PAGE — DESIGN STRUCTURE");
   check("top bar consultation label", text.includes("للاستشارة الطبية عبر واتساب"));
   check("verified-content label", text.includes("محتوى طبي موثّق"));
 
-  // Logo slot: exact file reference, or wordmark fallback while file pending
-  const logoImg = q('img[src="/images/saudiersaa-logo.png"]').length;
-  const wordmark = /saudi/.test(doc.querySelector("header a")?.textContent ?? "");
-  check("logo slot wired to exact file (img or fallback wordmark)", logoImg > 0 || wordmark, logoImg ? "img present" : "wordmark fallback");
+  // Logo slot: exact approved file reference — no fallback image is used.
+  const logoImg = q('img[src="/images/لوجو.png"]').length;
+  check("logo slot wired to exact approved file", logoImg > 0, `${logoImg} img(s)`);
 
-  for (const label of ["الرئيسية", "المقالات", "ما هو سايتوتك؟", "الأسئلة الشائعة", "عن سايتوتك", "الصحة النسائية", "تواصل معنا"]) {
+  for (const label of ["الرئيسية", "المقالات", "ما هو سايتوتك؟", "الأسئلة الشائعة", "الأمان", "في السعودية", "اتصل بنا"]) {
     check(`nav item: ${label}`, text.includes(label));
   }
-  check("red consultation CTA in header", q('header a.bg-accent').some((el) => el.textContent.includes("استشارة طبية خاصة")));
+  check("red informational CTA in header", q('header a.bg-accent').some((el) => el.textContent.includes("تواصل معلوماتي عام")));
   check("search control in header", doc.querySelector('header [aria-label*="بحث"]') !== null);
 
   // Hero
   const h1 = doc.querySelector("h1")?.textContent ?? "";
   check("hero H1: مدونة سايتوتك التوعوية", h1.includes("مدونة سايتوتك التوعوية"));
   check("hero H1 line 2: في السعودية", h1.includes("في السعودية"));
-  check("hero CTA: قراءة المقالات", text.includes("قراءة المقالات"));
+  check("hero CTA: محاور المحتوى", text.includes("محاور المحتوى"));
+  check("hero CTA: سايتوتك في السعودية", text.includes("سايتوتك في السعودية"));
   for (const t of ["محتوى موثوق", "معلومات طبية دقيقة", "خصوصية تامة", "مصادر معتمدة"]) {
     check(`hero trust: ${t}`, text.includes(t));
   }
@@ -149,11 +174,15 @@ console.log("\nHOME PAGE — DESIGN STRUCTURE");
   check("category cards (10 clusters)", catLinks.length >= 10, `${catLinks.length} links`);
   check("category count pills", text.includes("مقالاً") || text.includes("مقالات"));
 
-  // Article cards with images
+  // Article cards: text-only by design — no generated thumbnails.
   const cards = q("article");
   const cardImgs = q("article img");
   check("article cards rendered", cards.length >= 9, `${cards.length} cards`);
-  check("article cards have images", cardImgs.length >= 9, `${cardImgs.length} imgs`);
+  check("article cards carry no generated images", cardImgs.length === 0, `${cardImgs.length} imgs (must be 0)`);
+
+  // Homepage hero: the approved banner only.
+  const heroImgs = q('img[src="/images/Bannerrr.png"]');
+  check("homepage hero uses approved banner", heroImgs.length > 0, `${heroImgs.length} img(s)`);
 
   // Footer
   const footer = doc.querySelector("footer");
@@ -170,8 +199,10 @@ console.log("\nINTERNAL PAGES — SHARED DESIGN LANGUAGE");
   check("/blog category chips", doc.body.textContent.includes("الكل ("));
 
   const doc2 = await renderAt("/blog/cytotec-definition");
-  const imgs = [...doc2.querySelectorAll("figure img")].map((i) => i.getAttribute("src"));
-  check("article page hero/featured image renders", imgs.length > 0, imgs[0] ?? "none");
+  const figureImgs = [...doc2.querySelectorAll("figure img")].map((i) => i.getAttribute("src"));
+  check("article page renders NO featured/generated image", figureImgs.length === 0, figureImgs[0] ?? "none (correct)");
+  const waBanner = [...doc2.querySelectorAll('img[src="/images/saudiersaa-article-whatsapp-banner.png.png"]')];
+  check("article page shows approved WhatsApp banner", waBanner.length > 0, `${waBanner.length} img(s)`);
   check("article H1 styled (display font class)", doc2.querySelector("h1")?.className.includes("font-display") === true);
 
   const doc3 = await renderAt("/contact");
