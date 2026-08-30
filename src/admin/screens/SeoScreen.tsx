@@ -1,21 +1,20 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCatalog } from "../../cms/CatalogContext";
 import { competitorGaps, geoCoverage } from "../../cms/registrySource";
-import { validateArticle } from "../../utils/validation";
 import { Badge, EmptyState, Td, Th } from "../ui";
 
-type Tab = "audit" | "competitors" | "geo" | "pr";
+type Tab = "articles" | "competitors" | "geo" | "pr";
 
 export function SeoScreen() {
-  const [tab, setTab] = useState<Tab>("audit");
+  const [tab, setTab] = useState<Tab>("articles");
   return (
     <div className="space-y-5">
       <h1 className="text-3xl font-bold text-brand-deep">إدارة SEO</h1>
       <div className="flex flex-wrap gap-2">
         {(
           [
-            ["audit", "تدقيق الموقع"],
+            ["articles", "حقول SEO للمقالات"],
             ["competitors", "مصفوفة المنافسين"],
             ["geo", "التغطية الجغرافية"],
             ["pr", "الروابط والعلاقات الرقمية"],
@@ -31,7 +30,7 @@ export function SeoScreen() {
           </button>
         ))}
       </div>
-      {tab === "audit" ? <AuditTab /> : null}
+      {tab === "articles" ? <ArticlesTab /> : null}
       {tab === "competitors" ? <CompetitorsTab /> : null}
       {tab === "geo" ? <GeoTab /> : null}
       {tab === "pr" ? <PrTab /> : null}
@@ -39,72 +38,44 @@ export function SeoScreen() {
   );
 }
 
-function AuditTab() {
+/**
+ * A plain reference list of the SEO fields for each article. This is an editing
+ * aid, not a scoring/validation panel: no ERROR / WARNING / PASS, no SEO score,
+ * nothing that judges or gates publishing. Click through to edit any field.
+ */
+function ArticlesTab() {
   const { managed } = useCatalog();
-  const rows = useMemo(() => {
-    return managed.map((article) => {
-      const others = managed.filter((i) => i.id !== article.id);
-      const result = validateArticle(article, others.map((i) => i.slug), others.map((i) => i.title));
-      const errors = result.items.filter((i) => i.blocking && !i.ok).length;
-      const warnings = result.items.filter((i) => !i.blocking && !i.ok).length;
-      return {
-        article,
-        errors,
-        warnings,
-        seoTitleLen: article.seoTitle.length,
-        metaLen: article.metaDescription.length,
-      };
-    });
-  }, [managed]);
-  const withErrors = rows.filter((row) => row.errors > 0);
-  const withWarnings = rows.filter((row) => row.warnings > 0);
 
   return (
     <div className="space-y-4">
-      <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-3xl border border-line bg-paper p-5">
-          <p className="text-sm text-ink-soft">مقالات بأخطاء تقنية مانعة</p>
-          <p className={`mt-1 text-3xl font-bold ${withErrors.length ? "text-clay" : "text-sage"}`}>{withErrors.length}</p>
-        </div>
-        <div className="rounded-3xl border border-line bg-paper p-5">
-          <p className="text-sm text-ink-soft">مقالات بتحذيرات SEO</p>
-          <p className={`mt-1 text-3xl font-bold ${withWarnings.length ? "text-clay" : "text-sage"}`}>{withWarnings.length}</p>
-        </div>
-        <div className="rounded-3xl border border-line bg-paper p-5">
-          <p className="text-sm text-ink-soft">مقالات سليمة تماماً</p>
-          <p className="mt-1 text-3xl font-bold text-sage">{rows.length - withErrors.length - withWarnings.length}</p>
-        </div>
-      </div>
       <div className="overflow-x-auto rounded-3xl border border-line bg-paper">
         <table className="w-full text-sm">
           <thead className="bg-cream">
             <tr>
               <Th>المقال</Th>
               <Th>SEO title</Th>
-              <Th>Meta</Th>
-              <Th>الحالة</Th>
+              <Th>Meta description</Th>
+              <Th>الكلمة الأساسية</Th>
             </tr>
           </thead>
           <tbody>
-            {rows.map(({ article, errors, warnings, seoTitleLen, metaLen }) => (
+            {managed.map((article) => (
               <tr key={article.id} className="border-t border-line">
                 <Td>
                   <Link to={`/admin/articles/${article.id}`} className="font-semibold text-brand hover:underline">
                     {article.title || "بدون عنوان"}
                   </Link>
                 </Td>
-                <Td className={seoTitleLen >= 12 && seoTitleLen <= 70 ? "text-sage" : "text-clay"}>{seoTitleLen}</Td>
-                <Td className={metaLen >= 70 && metaLen <= 170 ? "text-sage" : "text-clay"}>{metaLen}</Td>
-                <Td>
-                  {errors ? <Badge tone="bad">ERROR ×{errors}</Badge> : warnings ? <Badge tone="warn">WARNING ×{warnings}</Badge> : <Badge tone="ok">PASS</Badge>}
-                </Td>
+                <Td className="max-w-xs truncate">{article.seoTitle || "—"}</Td>
+                <Td className="max-w-md truncate">{article.metaDescription || "—"}</Td>
+                <Td>{article.primaryKeyword || "—"}</Td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <p className="text-xs leading-6 text-ink-soft">
-        ملاحظة: المقالات الأصلية (source=static) معروضة للمراقبة؛ تحريرها متاح في المحرر. عمليات الفحص الكاملة للموقع (canonical، schema، robots، sitemap) تُشغّل من <span dir="ltr">scripts/auditSeo.mjs</span> وتُكتب نتائجها في <span dir="ltr">docs/seo-audit.md</span>.
+        هذه قائمة مرجعية لحقول SEO يمكن تحريرها من المحرر — ليست نظام تقييم ولا بوابة نشر. عمليات الفحص التقني للموقع (canonical، schema، robots، sitemap) تُشغّل من <span dir="ltr">scripts/auditSeo.mjs</span> وتُكتب نتائجها في <span dir="ltr">docs/seo-audit.md</span>.
       </p>
     </div>
   );

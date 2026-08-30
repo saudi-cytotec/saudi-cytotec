@@ -179,17 +179,4 @@ export interface SiteSettings {
   indexPublic: boolean;
 }
 
-export interface ValidationItem {
-  id: string;
-  label: string;
-  ok: boolean;
-  detail: string;
-  blocking: boolean;
-}
 
-export interface ValidationResult {
-  ok: boolean;
-  wordCount: number;
-  missingWords: number;
-  items: ValidationItem[];
-}

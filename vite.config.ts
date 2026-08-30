@@ -17,6 +17,15 @@ export default defineConfig({
     host: "0.0.0.0",
     // Dev preview only. `server` config does not affect the production build.
     allowedHosts: true,
+    // In production the /api/* Vercel functions serve these routes. In local
+    // dev they are proxied to scripts/devApi.mjs (see npm run dev:api) so the
+    // admin UI can be tested end-to-end.
+    proxy: {
+      "/api": {
+        target: `http://127.0.0.1:${process.env.DEV_API_PORT || 8787}`,
+        changeOrigin: true,
+      },
+    },
   },
   resolve: {
     alias: {
