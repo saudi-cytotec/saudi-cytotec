@@ -25,7 +25,6 @@ const nav = [
   { to: "/admin/articles", label: "المقالات" },
   { to: "/admin/articles/new", label: "مقال جديد" },
   { to: "/admin/drafts", label: "المسودات" },
-  { to: "/admin/scheduled", label: "المجدولة" },
   { to: "/admin/published", label: "المنشور" },
   { to: "/admin/categories", label: "التصنيفات" },
   { to: "/admin/map", label: "خريطة المحتوى" },
@@ -124,7 +123,6 @@ export function AdminApp() {
               <Route path="preview/:id" element={<PreviewScreen />} />
               <Route path="drafts" element={<ArticlesScreen filter="draft" />} />
               <Route path="review" element={<ArticlesScreen filter="review" />} />
-              <Route path="scheduled" element={<ArticlesScreen filter="scheduled" />} />
               <Route path="published" element={<ArticlesScreen filter="published" />} />
               <Route path="categories" element={<CategoriesScreen />} />
               <Route path="map" element={<MapScreen />} />

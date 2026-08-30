@@ -169,6 +169,11 @@ async function render(urlPath) {
     }
   });
 
+  const ogImage = doc.querySelector('meta[property="og:image"]')?.getAttribute("content") ?? null;
+  const twitterImage = doc.querySelector('meta[name="twitter:image"]')?.getAttribute("content") ?? null;
+  const figureImgs = [...doc.querySelectorAll("figure img")].map((i) => i.getAttribute("src") ?? "");
+  const imgSrcs = [...doc.querySelectorAll("img")].map((i) => i.getAttribute("src") ?? "").filter((s) => s && !s.startsWith("data:"));
+
   const result = {
     settled,
     robots: metaContent("robots"),
@@ -183,6 +188,10 @@ async function render(urlPath) {
       .flat()
       .find((d) => d && (d["@type"]?.includes("Article") || d["@type"] === "Article"))
       ?.mainEntityOfPage ?? null,
+    ogImage,
+    twitterImage,
+    figureImgs,
+    imgSrcs,
   };
 
   dom.window.close();
@@ -259,7 +268,33 @@ for (const spec of urls) {
     if (spec.path === TARGET) {
       assert(r.ldMainEntity === spec.canonical, spec.path, "JSON-LD mainEntityOfPage", r.ldMainEntity ?? "(none)");
     }
+
+    // ── Image policy: no selected image → no figure, no og:image, no
+    //    twitter:image; the approved article WhatsApp banner still renders. ──
+    assert(r.figureImgs.length === 0, spec.path, "no generated/article figure image", r.figureImgs.join(",") || "(none)");
+    assert(r.ogImage === null, spec.path, "no og:image without a selected image", r.ogImage ?? "(omitted)");
+    assert(r.twitterImage === null, spec.path, "no twitter:image without a selected image", r.twitterImage ?? "(omitted)");
+    const hasApprovedBanner = r.imgSrcs.some((s) => s.endsWith("/images/saudiersaa-article-whatsapp-banner.png.png"));
+    assert(hasApprovedBanner, spec.path, "approved article WhatsApp banner renders", hasApprovedBanner ? "banner present" : "MISSING");
   }
+
+  // Homepage: the approved hero banner drives the only og:image on the site.
+  if (spec.path === "/") {
+    assert(r.ogImage === `${DOMAIN}/images/Bannerrr.png`, spec.path, "homepage og:image = approved banner", r.ogImage ?? "(omitted)");
+    const hero = r.imgSrcs.some((s) => s.endsWith("/images/Bannerrr.png"));
+    assert(hero, spec.path, "homepage hero banner renders", hero ? "approved banner" : "MISSING");
+    const logo = r.imgSrcs.some((s) => s.endsWith("/images/لوجو.png"));
+    assert(logo, spec.path, "approved logo renders", logo ? "logo present" : "MISSING");
+  }
+
+  // ── Global: every rendered <img> must be one of the three approved assets ──
+  const approvedSuffixes = [
+    "/images/لوجو.png",
+    "/images/Bannerrr.png",
+    "/images/saudiersaa-article-whatsapp-banner.png.png",
+  ];
+  const nonApprovedImgs = r.imgSrcs.filter((s) => !approvedSuffixes.some((a) => s.endsWith(a) || s === a));
+  assert(nonApprovedImgs.length === 0, spec.path, "all rendered images are approved", nonApprovedImgs.length ? nonApprovedImgs.join(", ") : "only 3 approved assets");
 }
 
 // ---------------------------------------------------------------- report

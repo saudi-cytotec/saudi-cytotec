@@ -55,7 +55,6 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
   const [publishNote, setPublishNote] = useState<string | null>(null);
   const [publishError, setPublishError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
-  const [scheduleDate, setScheduleDate] = useState("");
   const [secondaryText, setSecondaryText] = useState(() => article.secondaryKeywords.join(", "));
   const [linksText, setLinksText] = useState(() => article.internalLinks.join(", "));
 
@@ -63,34 +62,36 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
     setArticle((current) => applyTopicDefaults({ ...current, ...next, updatedAt: new Date().toISOString().slice(0, 10) }));
   }
 
-  async function save(status?: ArticleStatus, schedule = false) {
+  async function save(status?: ArticleStatus) {
     setPublishNote(null);
     setPublishError(null);
-    const next = { ...article, status: status ?? article.status, ...(schedule && scheduleDate ? { publishAt: scheduleDate } : {}) };
+    const next = { ...article, status: status ?? article.status };
     // Only a technically broken record is refused (no working URL, no title, or
     // empty body). This is data integrity, NOT SEO/content-quality validation.
-    if ((status === "published" || schedule) && !integrity.ok) {
+    if (status === "published" && !integrity.ok) {
       setPublishError("تعذر الحفظ: " + integrity.problems.map((p) => p.message).join(" · "));
       return;
     }
-    if ((status === "published" || (status === "scheduled" && schedule)) && next.source === "cms") {
+    if (status === "published" && next.source === "cms") {
       next.slugLocked = true;
     }
-    if (status === "published" || schedule) {
+    // Publishing is ALWAYS an explicit administrator action. There is no
+    // scheduled / cron / automatic publish path anywhere in the system.
+    if (status === "published") {
       setBusy(true);
-      const res = await publishRequest(next, schedule);
+      const res = await publishRequest(next);
       setBusy(false);
       if (!res.ok) {
         const msg = res.data?.error || res.data?.blocker || "تعذر النشر.";
         setPublishNote(`${msg} — حُفظ المقال محلياً ويمكن إعادة المحاولة.`);
-        upsertArticle({ ...next, status: schedule ? "scheduled" : "draft" });
-        setArticle({ ...next, status: schedule ? "scheduled" : "draft" });
+        upsertArticle({ ...next, status: "draft" });
+        setArticle({ ...next, status: "draft" });
         return;
       }
-      setPublishNote(res.data?.note || (res.data?.scheduled ? "تمت الجدولة." : "تم النشر إلى المستودع."));
-      upsertArticle({ ...next, status: schedule ? "scheduled" : "published" });
-      setArticle({ ...next, status: schedule ? "scheduled" : "published" });
-      if (!schedule && mode === "create") navigate(`/admin/articles/${next.id}`);
+      setPublishNote(res.data?.note || "تم النشر إلى المستودع.");
+      upsertArticle({ ...next, status: "published" });
+      setArticle({ ...next, status: "published" });
+      if (mode === "create") navigate(`/admin/articles/${next.id}`);
       return;
     }
     upsertArticle(next);
@@ -121,7 +122,7 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h1 className="text-3xl font-bold text-brand-deep">{mode === "create" ? "إنشاء مقال" : "تحرير مقال"}</h1>
           <div className="flex gap-2 text-xs">
-            <Badge tone={article.status === "published" ? "ok" : article.status === "scheduled" ? "info" : "warn"}>{article.status}</Badge>
+            <Badge tone={article.status === "published" ? "ok" : "warn"}>{article.status}</Badge>
             <Badge tone="neutral">{article.source === "static" ? "أصل الموقع (محمي)" : "محتوى اللوحة"}</Badge>
           </div>
         </div>
@@ -298,30 +299,27 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
           <div className="space-y-5">
             <ImageField
               label="الصورة البارزة (Featured / thumbnail)"
-              hint="اختيارية — إن تُركت فارغة لن تظهر أي صورة في البطاقات أو أعلى المقال ولن تُصدر أي og:image."
+              hint="اختيارية — إن تُركت فارغة لن تظهر أي صورة في البطاقات أو أعلى المقال ولن تُصدر أي og:image. تُختار حصراً من الأصول المعتمدة الثلاثة."
               value={article.image || ""}
               altValue={article.imageAlt || ""}
               onPick={(file, alt) => patch({ image: file, imageAlt: article.imageAlt || alt })}
-              onUrl={(url) => patch({ image: url })}
               onAlt={(alt) => patch({ imageAlt: alt })}
             />
             <ImageField
               label="صورة البانر / البطل أعلى المقال (Banner / Hero)"
-              hint="اختيارية — إن تُركت فارغة تُستخدم الصورة البارزة. يُنصح بنسبة 16:9."
+              hint="اختيارية — إن تُركت فارغة تُستخدم الصورة البارزة. يُنصح بنسبة 16:9. تُختار حصراً من الأصول المعتمدة الثلاثة."
               value={article.bannerImage || ""}
               altValue={article.bannerImageAlt || ""}
               onPick={(file, alt) => patch({ bannerImage: file, bannerImageAlt: article.bannerImageAlt || alt })}
-              onUrl={(url) => patch({ bannerImage: url })}
               onAlt={(alt) => patch({ bannerImageAlt: alt })}
             />
             <ImageField
               label="صورة المشاركة الاجتماعية (OG image)"
-              hint="تظهر عند مشاركة الرابط على واتساب وتويتر وفيسبوك. إن تُركت فارغة (ولم تُحدّد صورة بارزة) لن تُصدر أي og:image/twitter:image."
+              hint="تظهر عند مشاركة الرابط على واتساب وتويتر وفيسبوك. إن تُركت فارغة (ولم تُحدّد صورة بارزة) لن تُصدر أي og:image/twitter:image. تُختار حصراً من الأصول المعتمدة الثلاثة."
               value={article.ogImage || ""}
               altValue=""
               hideAlt
               onPick={(file) => patch({ ogImage: file })}
-              onUrl={(url) => patch({ ogImage: url })}
               onAlt={() => {}}
             />
           </div>
@@ -382,15 +380,6 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
             </button>
           )}
           <div className="ms-auto flex flex-wrap items-center gap-2">
-            <input type="date" value={scheduleDate} onChange={(e) => setScheduleDate(e.target.value)} className="rounded-full border border-line px-3 py-2 text-sm" />
-            <button
-              type="button"
-              disabled={!scheduleDate || busy}
-              onClick={() => save("scheduled", true)}
-              className="rounded-full border border-line px-4 py-2 text-sm disabled:opacity-50"
-            >
-              {busy ? "جارٍ..." : "جدولة النشر"}
-            </button>
             <button
               type="button"
               disabled={busy}
@@ -423,14 +412,13 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
   );
 }
 
-/* ── Reusable image control: media-library picker + custom URL + alt ─────── */
+/* ── Reusable image control: approved-asset picker only (no uploads, no free URLs) ── */
 function ImageField({
   label,
   hint,
   value,
   altValue,
   onPick,
-  onUrl,
   onAlt,
   hideAlt = false,
 }: {
@@ -439,18 +427,23 @@ function ImageField({
   value: string;
   altValue: string;
   onPick: (file: string, alt: string) => void;
-  onUrl: (url: string) => void;
   onAlt: (alt: string) => void;
   hideAlt?: boolean;
 }) {
-  const [url, setUrl] = useState("");
-  const isExternal = (v: string) => /^https?:\/\//.test(v);
   return (
     <div className="rounded-2xl border border-line p-4">
       <p className="text-sm font-bold text-brand-deep">{label}</p>
       {hint ? <p className="mt-1 text-xs leading-6 text-ink-soft">{hint}</p> : null}
 
-      <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-6">
+      <div className="mt-3 flex flex-wrap gap-2">
+        {/* Explicit "no image" state — absence of an image is always valid. */}
+        <button
+          type="button"
+          className={`rounded-xl border px-3 py-4 text-xs ${!value ? "border-brand ring-2 ring-brand/30" : "border-line"}`}
+          onClick={() => onPick("", "")}
+        >
+          بدون صورة
+        </button>
         {mediaLibrary.map((item) => {
           const active = value === item.file;
           return (
@@ -470,33 +463,16 @@ function ImageField({
         })}
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center gap-2">
-        <input
-          dir="ltr"
-          value={value}
-          onChange={(e) => onUrl(e.target.value)}
-          placeholder="/images/... أو رفع سابق أو رابط https"
-          className={`${inputClass()} flex-1 font-mono text-xs`}
-        />
-        {value && !isExternal(value) ? (
-          <img src={value} alt={altValue || label} className="h-10 w-16 rounded-lg border border-line object-cover" loading="lazy" />
-        ) : null}
-        {value ? (
-          <button type="button" onClick={() => onUrl("")} className="rounded-full border border-clay px-3 py-1 text-xs text-clay">
+      {value ? (
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span dir="ltr" className="rounded-full bg-cream px-3 py-1 font-mono text-xs">{value}</span>
+          <button type="button" onClick={() => onPick("", "")} className="rounded-full border border-clay px-3 py-1 text-xs text-clay">
             مسح
           </button>
-        ) : null}
-      </div>
-      <p className="mt-1 text-[11px] text-ink-soft">
-        أو الصقي رابط صورة رُفعت:{" "}
-        <input
-          dir="ltr"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          onBlur={() => url.trim() && onUrl(url.trim())}
-          placeholder="https://…  أو  /images/uploads/x.jpg"
-          className="ms-1 w-56 rounded-full border border-line px-2 py-0.5 font-mono text-[11px]"
-        />
+        </div>
+      ) : null}
+      <p className="mt-2 text-[11px] text-ink-soft">
+        متاح فقط: الشعار المعتمد · بانر الصفحة الرئيسية · بانر واتساب المقالات. لا رفع صور و لا روابط صور خارجية.
       </p>
 
       {!hideAlt ? (

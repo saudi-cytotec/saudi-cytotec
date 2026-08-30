@@ -9,10 +9,10 @@
     "test:ui": "node scripts/uiRenderTest.mjs && node scripts/uiFlowTest.mjs",
     "prebuild": "node scripts/emitRedirects.mjs && node scripts/emitStrategyMd.mjs",
     "build": "vite build",
-    "postbuild": "node scripts/stampBuild.mjs && node scripts/urlParity.mjs && node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs",
+    "postbuild": "node scripts/stampBuild.mjs && node scripts/urlParity.mjs && node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs && node scripts/auditImages.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "audit": "node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs",
+    "audit": "node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs && node scripts/auditImages.mjs",
     "verify": "node scripts/verifyRendered.mjs"
   },
   "dependencies": {

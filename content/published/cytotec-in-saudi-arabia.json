@@ -9,8 +9,6 @@
   "excerpt": "الاسم الأكثر بحثاً في الموقع يستحق إجابة منهجية: المادة الفعالة، الاستطباب المعتمد، التنظيم السعودي، ومخاطر المصادر غير الموثوقة.",
   "publishedAt": "2026-03-18",
   "updatedAt": "2026-08-30",
-  "image": "/images/hero-doctor.jpg",
-  "imageAlt": "صورة مميزة مختارة عبر الـ CMS",
   "related": [
     "cytotec-definition",
     "saudi-drug-regulation-context",
@@ -368,9 +366,6 @@
     "/when-to-see-doctor"
   ],
   "hasDisclaimer": true,
-  "bannerImage": "/images/hero.jpg",
-  "bannerImageAlt": "بانر البطل المختار عبر الـ CMS",
-  "ogImage": "/images/safety.jpg",
   "noindex": true,
   "resourceLinks": [
     {

@@ -1,5 +1,5 @@
 import type { ContentMapItem, ManagedArticle, NotFoundEntry, RedirectRule, SiteSettings } from "../types";
-import { defaultSettings, generatedDrafts, seedContentMap, staticManaged } from "./defaults";
+import { defaultSettings, seedContentMap, staticManaged } from "./defaults";
 import { committedArticles } from "./contentSource";
 import { redirectRegistry } from "./registrySource";
 
@@ -53,9 +53,7 @@ function baseline(): ManagedArticle[] {
 }
 
 function baseArticles(): ManagedArticle[] {
-  const rows = baseline();
-  const known = new Set(rows.map((item) => item.id));
-  return [...rows, ...generatedDrafts.filter((item) => !known.has(item.id))];
+  return baseline();
 }
 
 function emptyState(): CmsState {
@@ -124,6 +122,8 @@ export function loadState(): CmsState {
     // Local edits win over the bundle; anything not touched locally comes from it.
     articles: [...localRows, ...base.articles.filter((item) => !localIds.has(item.id))],
     map: base.map.map((row) => mapById.get(row.id) ?? row),
+    // Only current settings keys are used anywhere — no default-OG-image field
+    // exists in the type, so any legacy key in storage is inert dead data.
     settings: { ...base.settings, ...(local.settings ?? {}) },
     redirectRules: Array.isArray(local.redirectRules) ? (local.redirectRules as RedirectRule[]) : null,
     notFoundLog: Array.isArray(local.notFoundLog) ? (local.notFoundLog as NotFoundEntry[]) : [],

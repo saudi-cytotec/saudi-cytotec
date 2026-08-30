@@ -31,8 +31,7 @@ export function CategoriesScreen() {
               </div>
               <p className="mt-2 text-sm leading-7 text-ink-soft">{cluster.description}</p>
               <p className="mt-3 text-xs">
-                <strong>{published}</strong> منشور · <strong>{inCluster.filter((a) => a.status === "draft").length}</strong> مسودة ·{" "}
-                <strong>{inCluster.filter((a) => a.status === "scheduled").length}</strong> مجدول
+                <strong>{published}</strong> منشور · <strong>{inCluster.filter((a) => a.status === "draft").length}</strong> مسودة
               </p>
               <div className="mt-3 border-t border-line pt-3">
                 <p className="text-xs font-semibold text-ink-soft">مواضيع خريطة المحتوى المرتبطة:</p>

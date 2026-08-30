@@ -1,8 +1,14 @@
 /**
- * Media registry — every committed image the site serves, with the metadata
- * the Media screen and the article editor need (alt text, dimensions, role).
- * Uploads via /api/upload-image land in /images/uploads/ and appear in the
- * Media screen as "uploaded" entries.
+ * Media registry — the ONLY image assets the site may serve.
+ *
+ * Exactly three owner-approved assets exist. Nothing else may be added:
+ *   - the approved logo
+ *   - the approved homepage banner / hero
+ *   - the approved permanent article WhatsApp banner
+ *
+ * Image upload is intentionally unavailable: adding new image assets would
+ * violate the approved set, so there is no upload endpoint and no uploads
+ * directory.
  */
 
 export interface MediaItem {
@@ -11,8 +17,19 @@ export interface MediaItem {
   width: number;
   height: number;
   role: string;
-  uploaded?: boolean;
 }
+
+/**
+ * The exact allowlist used by the image audit. Only these three files may
+ * exist under public/ — no favicons, no generated article images, no
+ * og-default, no uploads.
+ */
+export const APPROVED_IMAGE_FILES = [
+  "/images/لوجو.png",
+  "/images/Bannerrr.png",
+  "/images/saudiersaa-article-whatsapp-banner.png.png",
+] as const;
+
 
 export const mediaLibrary: MediaItem[] = [
   {
@@ -35,61 +52,5 @@ export const mediaLibrary: MediaItem[] = [
     width: 1717,
     height: 916,
     role: "بانر واتساب أعلى المقالات",
-  },
-  {
-    file: "/images/hero-doctor.jpg",
-    alt: "طبيبة سعودية بحجاب في عيادة صحة المرأة",
-    width: 1200,
-    height: 900,
-    role: "صورة سياقية — صفحات الفئات",
-  },
-  {
-    file: "/images/article-mark.svg",
-    alt: "",
-    width: 0,
-    height: 0,
-    role: "علامة تصميم موحّدة للمقالات",
-  },
-  {
-    file: "/images/emergency.jpg",
-    alt: "سياق الطوارئ الطبية",
-    width: 1200,
-    height: 900,
-    role: "صورة سياقية — الطوارئ",
-  },
-  {
-    file: "/images/hero.jpg",
-    alt: "بانر توعوي عام",
-    width: 1200,
-    height: 675,
-    role: "بانر عام احتياطي",
-  },
-  {
-    file: "/images/safety.jpg",
-    alt: "سلامة الأدوية",
-    width: 900,
-    height: 1200,
-    role: "صورة سياقية — الأمان الدوائي",
-  },
-  {
-    file: "/images/sources.jpg",
-    alt: "المصادر الطبية",
-    width: 900,
-    height: 1200,
-    role: "صورة سياقية — المصادر",
-  },
-  {
-    file: "/images/whatsapp-consult.jpg",
-    alt: "استشارة تعليمية عامة",
-    width: 1024,
-    height: 1024,
-    role: "صورة سياقية للاستشارة التعليمية",
-  },
-  {
-    file: "/images/womens-health.jpg",
-    alt: "صحة المرأة",
-    width: 900,
-    height: 1200,
-    role: "صورة سياقية — صحة المرأة",
   },
 ];

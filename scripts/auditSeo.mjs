@@ -156,30 +156,31 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   report("Internal links", broken.length === 0 && brokenPaths.length === 0, `${slugs.size} slugs; related broken: ${broken.length}; cornerstone broken: ${brokenPaths.length}${broken.length ? ` (${broken.slice(0, 3).join(", ")})` : ""}${brokenPaths.length ? ` (${brokenPaths.slice(0, 3).join(", ")})` : ""}`);
 }
 
-// 8. Referenced images exist (sources come from static data + bundle strings)
+// 8. Referenced images exist AND are from the three approved assets only.
 //
-// PENDING_ASSETS: assets whose file is known-outstanding (explicitly tracked,
-// never a silent gap). The approved saudiersaa logo is committed verbatim as
-// soon as the operator re-delivers the file to this repo — until then the UI
-// falls back to the typographic wordmark and this check reports a WARN instead
-// of a silent PASS or a blocking FAIL. Remove entries here only once the file
-// is present in public/images/.
-const PENDING_ASSETS = new Set(["/images/saudiersaa-logo.png"]);
+// APPROVED_ASSETS — the exact owner-approved image set (logo, homepage hero,
+// article WhatsApp banner). Any other image reference is a violation: no
+// og-default, no generated article image, no uploads path, no favicon, no
+// legacy contextual images.
+const APPROVED_ASSETS = new Set([
+  "/images/لوجو.png",
+  "/images/Bannerrr.png",
+  "/images/saudiersaa-article-whatsapp-banner.png.png",
+]);
 {
   const html = fs.readFileSync(DIST, "utf8");
   const media = fs.readFileSync(path.join(ROOT, "src", "data", "media.ts"), "utf8");
-  const srcRefs = [...html.matchAll(/\/images\/[a-z0-9./_-]+\.(?:jpg|jpeg|png|svg|webp|avif)/gi)].map((m) => m[0]);
-  const mediaRefs = [...media.matchAll(/\/images\/[a-z0-9./_-]+\.(?:jpg|jpeg|png|svg|webp|avif)/gi)].map((m) => m[0]);
-  const refs = [...new Set([...srcRefs, ...mediaRefs])].filter((src) => !src.includes("uploads/"));
+  // Unicode-aware: approved filenames include Arabic (لوجو.png).
+  const srcRefs = [...html.matchAll(/\/images\/[^"'()\s,;]+\.(?:jpg|jpeg|png|svg|webp|avif)/gi)].map((m) => m[0]);
+  const mediaRefs = [...media.matchAll(/\/images\/[^"'()\s,;]+\.(?:jpg|jpeg|png|svg|webp|avif)/gi)].map((m) => m[0]);
+  const refs = [...new Set([...srcRefs, ...mediaRefs])].map((src) => decodeURIComponent(src));
+  const nonApproved = refs.filter((src) => !APPROVED_ASSETS.has(src));
   const missing = refs.filter((src) => !fs.existsSync(path.join(ROOT, "dist", src)));
-  const pending = missing.filter((src) => PENDING_ASSETS.has(src));
-  const unexpected = missing.filter((src) => !PENDING_ASSETS.has(src));
   report(
     "Images",
-    unexpected.length === 0,
-    `${refs.length} unique references; missing: ${missing.length ? missing.join(", ") : "none"}${pending.length ? ` (pending-operator-assets, tracked: ${pending.join(", ")})` : ""}`,
+    nonApproved.length === 0 && missing.length === 0,
+    `${refs.length} unique references; non-approved: ${nonApproved.length ? nonApproved.join(", ") : "none"}; missing: ${missing.length ? missing.join(", ") : "none"}`,
   );
-  if (pending.length) console.log(`  [WARN] Images — pending operator assets (fallback UI active): ${pending.join(", ")}`);
 }
 
 // Write report

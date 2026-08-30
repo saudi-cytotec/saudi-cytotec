@@ -24,7 +24,6 @@ export function Overview() {
 
   const drafts = managed.filter((a) => a.status === "draft").length;
   const review = managed.filter((a) => a.status === "review").length;
-  const scheduled = managed.filter((a) => a.status === "scheduled").length;
   const published = articles.length;
 
   const mapPublished = map.filter((row) => row.status === "PUBLISHED" || row.status === "UPDATED").length;
@@ -51,11 +50,10 @@ export function Overview() {
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-3">
         <Card label="منشور للعامة" value={published} />
         <Card label="مسودات" value={drafts} />
         <Card label="قيد المراجعة" value={review} />
-        <Card label="مجدولة للنشر" value={scheduled} />
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
@@ -121,11 +119,9 @@ export function Overview() {
             </p>
           </div>
           <div className="rounded-2xl border border-line p-4">
-            <p className="font-bold text-brand-deep">الجدولة (Cron يومي)</p>
+            <p className="font-bold text-brand-deep">النشر الآلي والمجدول</p>
             <p className="mt-1 text-xs leading-6 text-ink-soft">
-              {env?.capabilities.autoRelease
-                ? "مفعّل: /api/release ينقل المقالات المستحقة يومياً (17:03 UTC)."
-                : "بانتظار GITHUB_PUBLISH_TOKEN وCRON_SECRET."}
+              لا توجد جدولة ولا cron ولا نشر تلقائي — النشر يحدث فقط بضغطة «نشر» من المحرر بعد جلسة مشرف.
             </p>
           </div>
           <div className="rounded-2xl border border-line p-4">
