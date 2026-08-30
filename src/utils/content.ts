@@ -26,6 +26,7 @@ export function defaultImage(cluster: ClusterId): string {
     interactions: "/images/safety.jpg",
     emergency: "/images/emergency.jpg",
     evidence: "/images/sources.jpg",
+    geographic: "/images/sources.jpg",
   };
   return map[cluster];
 }
