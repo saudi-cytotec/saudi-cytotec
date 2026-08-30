@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:api": "node scripts/devApi.mjs",
+    "test:ui": "node scripts/uiRenderTest.mjs && node scripts/uiFlowTest.mjs",
     "prebuild": "node scripts/emitRedirects.mjs && node scripts/emitStrategyMd.mjs",
     "build": "vite build",
     "postbuild": "node scripts/stampBuild.mjs && node scripts/urlParity.mjs && node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs",

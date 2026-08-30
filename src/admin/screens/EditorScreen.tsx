@@ -5,15 +5,12 @@ import { mediaLibrary } from "../../data/media";
 import { referenceList } from "../../data/references";
 import { clusters } from "../../data/site";
 import type { ArticleFaq, ArticleStatus, ClusterId, ManagedArticle } from "../../types";
-import { bodyWordCount, MIN_BODY_WORDS } from "../../utils/bodyWordCount";
 import { buildLinkGraph } from "../../utils/internalLinks";
-import { isValidShortSlug, suggestSlug } from "../../utils/slug";
-import { validateArticle } from "../../utils/validation";
+import { suggestSlug } from "../../utils/slug";
+import { checkArticleIntegrity } from "../../utils/validation";
 import { applyTopicDefaults, emptyArticle } from "../articleFactory";
 import { publishRequest, unpublishRequest } from "../api";
-import { Badge, Field, inputClass, Section, Td, Th } from "../ui";
-
-type AssistantVerdict = "PASS" | "WARNING" | "ERROR";
+import { Badge, Field, inputClass, Section } from "../ui";
 
 function serializeBlocks(article: ManagedArticle) {
   return article.blocks
@@ -48,8 +45,8 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
   }, [mode, existing]);
 
   const others = managed.filter((item) => item.id !== article.id);
-  const validation = useMemo(
-    () => validateArticle(article, others.map((item) => item.slug), others.map((item) => item.title)),
+  const integrity = useMemo(
+    () => checkArticleIntegrity(article, others.map((item) => item.slug)),
     [article, others],
   );
   const graph = useMemo(() => buildLinkGraph(managed), [managed]);
@@ -70,9 +67,10 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
     setPublishNote(null);
     setPublishError(null);
     const next = { ...article, status: status ?? article.status, ...(schedule && scheduleDate ? { publishAt: scheduleDate } : {}) };
-    if (status === "published" && !validation.ok) {
-      const errors = validation.items.filter((i) => i.blocking && !i.ok).map((i) => i.label);
-      setPublishError("لا يمكن النشر قبل إصلاح الأخطاء التقنية: " + errors.join("، ") + ".");
+    // Only a technically broken record is refused (no working URL, no title, or
+    // empty body). This is data integrity, NOT SEO/content-quality validation.
+    if ((status === "published" || schedule) && !integrity.ok) {
+      setPublishError("تعذر الحفظ: " + integrity.problems.map((p) => p.message).join(" · "));
       return;
     }
     if ((status === "published" || (status === "scheduled" && schedule)) && next.source === "cms") {
@@ -117,11 +115,8 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
   if (!ready) return <p>جاري تحميل المقال...</p>;
   if (mode === "edit" && !existing) return <p>المقال غير موجود.</p>;
 
-  const verdict: AssistantVerdict = !validation.ok ? "ERROR" : validation.items.some((i) => !i.ok) ? "WARNING" : "PASS";
-  const words = bodyWordCount(article.blocks);
-
   return (
-    <div className="grid gap-6 xl:grid-cols-[1fr_340px]">
+    <div className="mx-auto max-w-4xl space-y-4">
       <div className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h1 className="text-3xl font-bold text-brand-deep">{mode === "create" ? "إنشاء مقال" : "تحرير مقال"}</h1>
@@ -398,7 +393,7 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
             </button>
             <button
               type="button"
-              disabled={!validation.ok || busy}
+              disabled={busy}
               onClick={() => save("published")}
               className="rounded-full bg-brand px-4 py-2 text-sm text-white disabled:cursor-not-allowed disabled:opacity-50"
             >
@@ -424,63 +419,6 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
         {publishError ? <p role="alert" className="rounded-2xl bg-accent-soft p-3 text-sm text-clay">{publishError}</p> : null}
         {publishNote ? <p role="status" className="rounded-2xl bg-brand-soft p-3 text-sm leading-7 text-brand-deep">{publishNote}</p> : null}
       </div>
-
-      <aside className="h-fit space-y-4">
-        <SEOAssistant verdict={verdict} words={words} article={article} />
-      </aside>
-    </div>
-  );
-}
-
-function SEOAssistant({ verdict, words, article }: { verdict: AssistantVerdict; words: number; article: ManagedArticle }) {
-  const { managed } = useCatalog();
-  const others = managed.filter((item) => item.id !== article.id);
-  const result = validateArticle(article, others.map((i) => i.slug), others.map((i) => i.title));
-  const slug = isValidShortSlug(article.slug);
-  const tone = verdict === "PASS" ? "ok" : verdict === "WARNING" ? "warn" : "bad";
-  return (
-    <div className="rounded-3xl border border-line bg-paper p-5">
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-bold text-brand-deep">مساعد SEO</h2>
-        <Badge tone={tone}>{verdict}</Badge>
-      </div>
-      <p className="mt-3 text-2xl font-bold text-brand-deep">
-        {words} <span className="text-sm font-normal text-ink-soft">كلمة في المتن</span>
-      </p>
-      <p className="text-xs text-ink-soft">المتن فقط — بدون عنوان أو وصف أو إخلاء أو أسئلة.</p>
-      {result.missingWords > 0 ? (
-        <p className="mt-2 text-xs text-clay">
-          أقل من العمق المقترح ({MIN_BODY_WORDS}) بـ {result.missingWords} كلمة — <strong>تحذير لا يمنع النشر</strong>.
-        </p>
-      ) : null}
-      <p className="mt-2 text-xs text-ink-soft">{slug.reason}</p>
-
-      <table className="mt-4 w-full text-sm">
-        <thead>
-          <tr>
-            <Th>التحقق</Th>
-            <Th>النتيجة</Th>
-          </tr>
-        </thead>
-        <tbody>
-          {result.items.map((item) => (
-            <tr key={item.id} className="border-t border-line">
-              <Td>
-                <span className={item.ok ? "text-sage" : item.blocking ? "text-clay font-bold" : "text-[#a06a12]"}>
-                  {item.ok ? "✓" : item.blocking ? "✕" : "△"} {item.label}
-                </span>
-                <span className="block text-xs text-ink-soft">{item.detail}</span>
-              </Td>
-              <Td>
-                <Badge tone={item.ok ? "ok" : item.blocking ? "bad" : "warn"}>{item.ok ? "PASS" : item.blocking ? "ERROR" : "WARNING"}</Badge>
-              </Td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <p className="mt-4 rounded-2xl bg-cream p-3 text-xs leading-6 text-ink-soft">
-        <strong>ERROR</strong> (تقني) يمنع النشر فقط: رابط غير صالح أو مكرر، عنوان أو متن فارغ. كل ما عداه <strong>WARNING</strong> استشاري لا يمنع النشر.
-      </p>
     </div>
   );
 }
