@@ -1,6 +1,5 @@
 import { SITE } from "../data/site";
 import type { ManagedArticle } from "../types";
-import { defaultImage } from "../utils/content";
 import { runGenerationPipeline } from "./generationPipeline";
 
 const topic = "ما هو سايتوتك؟ الاستخدامات الطبية والتحذيرات";
@@ -32,8 +31,9 @@ export const testArticle: ManagedArticle = {
     "شرح تعليمي موسّع يفصل بين الاسم التجاري والمادة الفعالة، ويوضح حدود الاستطباب والتحذير دون أي مسار علاجي فردي.",
   publishedAt: "2026-03-22",
   updatedAt: "2026-03-22",
-  image: defaultImage("definition"),
-  imageAlt: "عنصر بصري تعليمي صغير",
+  // Test draft intentionally has no selected image — validates the no-image path.
+  image: "",
+  imageAlt: "",
   related: ["cytotec-definition", "approved-medical-uses-misoprostol", "general-safety-warnings"],
   cornerstones: ["/what-is-cytotec", "/medical-uses", "/safety", "/medical-disclaimer"],
   references: ["fdaLabel", "sfda", "dailyMed", "medlinePlus"],

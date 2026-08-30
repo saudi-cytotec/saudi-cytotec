@@ -4,6 +4,20 @@
   "wwwToApex": true,
   "rules": [
     {
+      "source": "/blog/cytotec-in-saudi-arabia/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Trailing-slash variant of the legacy Saudi blog URL now resolves to the single authoritative Saudi hub.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/blog/cytotec-in-saudi-arabia",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy Saudi blog URL now resolves to the single authoritative Saudi hub.",
+      "createdAt": "2026-08-30"
+    },
+    {
       "source": "/cytotec-saudi-arabia/",
       "destination": "/service-areas",
       "statusCode": 301,

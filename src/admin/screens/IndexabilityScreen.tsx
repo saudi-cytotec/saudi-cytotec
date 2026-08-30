@@ -33,7 +33,7 @@ export function IndexabilityScreen() {
   }, []);
 
   useEffect(() => {
-    const sample = ["/", "/blog", "/what-is-cytotec", ...articles.slice(0, 4).map((a) => `/blog/${a.slug}`)];
+    const sample = ["/", "/blog", "/what-is-cytotec", ...articles.filter((a) => !a.noindex).slice(0, 4).map((a) => `/blog/${a.slug}`)];
     Promise.all(sample.map((path) => checkPage(path)))
       .then(setChecks)
       .finally(() => setRunning(false));
@@ -43,10 +43,10 @@ export function IndexabilityScreen() {
   const graph = useMemo(() => buildLinkGraph(managed), [managed]);
 
   const computed = useMemo(() => {
-    const published = managed.filter((a) => a.status === "published");
-    // No public page carries noindex today; this count stays at zero unless an
-    // editor explicitly flags a page (which the publishing policy prevents).
-    const notIndexed = 0;
+    // Keep in sync with CatalogProvider: status matching is case-insensitive so
+    // a published article can never be miscounted as non-public here.
+    const published = managed.filter((a) => String(a.status).toLowerCase() === "published");
+    const notIndexed = published.filter((a) => a.noindex).length;
     const orphans = graph.orphans.length;
     return {
       total: published.length,
@@ -65,7 +65,7 @@ export function IndexabilityScreen() {
 
       <div className="grid gap-4 md:grid-cols-4">
         <Card label="مقالات منشورة" value={computed.total} />
-        <Card label="صفحات noindex" value={computed.notIndexed} tone="ok" hint="لا يوجد noindex على أي صفحة عامة" />
+        <Card label="صفحات noindex" value={computed.notIndexed} tone={computed.notIndexed ? "warn" : "ok"} hint={computed.notIndexed ? "روابط انتقالية مقصودة خارج الخريطة" : "لا يوجد noindex على أي صفحة عامة"} />
         <Card label="مقالات معزولة" value={computed.orphans} tone={computed.orphans ? "warn" : "ok"} />
         <Card label="Robots.txt" value={robots === "FETCH_FAILED" ? "تعذر الجلب" : robots ? "مقروء" : "..."} tone={robots && robots !== "FETCH_FAILED" ? "ok" : "warn"} />
       </div>

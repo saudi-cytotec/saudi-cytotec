@@ -97,7 +97,7 @@ export function AdminApp() {
           <header className="flex items-center justify-between border-b border-line bg-paper px-6 py-4">
             <div>
               <p className="text-sm text-ink-soft">مرحباً {user || "المحرر"}</p>
-              <p className="text-xs text-ink-soft">النشر: Git → Vercel → Production · التحذيرات لا تمنع النشر، الأخطاء التقنية فقط تمنعه</p>
+              <p className="text-xs text-ink-soft">سير العمل: إنشاء ← تحرير ← حفظ ← معاينة ← نشر · النشر: Git → Vercel → Production</p>
             </div>
             <div className="flex gap-2">
               <Link to="/" className="rounded-full border border-line px-3 py-1.5 text-sm">

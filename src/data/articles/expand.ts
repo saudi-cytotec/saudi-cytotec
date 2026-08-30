@@ -274,7 +274,10 @@ export function expand(cluster: ClusterId, spec: ArticleSpec): Article {
     metaTitle: spec.metaTitle,
     metaDescription: spec.metaDescription,
     excerpt: spec.excerpt,
-    imageAlt: "عنصر بصري هادئ لمحتوى طبي تعليمي",
+    // Default articles intentionally carry NO featured image — editors select
+    // one explicitly when approved artwork exists. An empty image means: no
+    // card thumbnail, no article hero figure, no og:image meta.
+    imageAlt: "",
     related: spec.related,
     blocks,
     faqs: spec.faqs,

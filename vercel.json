@@ -82,6 +82,16 @@
       "permanent": true
     },
     {
+      "source": "/blog/cytotec-in-saudi-arabia/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-in-saudi-arabia",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
       "source": "/cytotec-saudi-arabia/",
       "destination": "/service-areas",
       "statusCode": 301
