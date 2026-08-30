@@ -30,9 +30,9 @@ All published through the existing CMS build path (`content/published/*.json`) a
 6. `/blog/cytotec-tabuk` — تبوك
 7. `/blog/cytotec-hail` — حائل
 8. `/blog/cytotec-arar` — عرعر
-9. `/blog/cytotec-jazan` — جيزان
+9. `/blog/cytotec-jizan` — جيزان
 10. `/blog/cytotec-najran` — نجران
-11. `/blog/cytotec-baha` — الباحة
+11. `/blog/cytotec-albahah` — الباحة
 12. `/blog/cytotec-sakaka` — سكاكا
 
 ## Why these pages are not doorway pages

@@ -28,9 +28,9 @@ The following new article URLs were added through the CMS build path (`content/p
 - `/blog/cytotec-tabuk`
 - `/blog/cytotec-hail`
 - `/blog/cytotec-arar`
-- `/blog/cytotec-jazan`
+- `/blog/cytotec-jizan`
 - `/blog/cytotec-najran`
-- `/blog/cytotec-baha`
+- `/blog/cytotec-albahah`
 - `/blog/cytotec-sakaka`
 
 The baseline sitemap snapshot is stored in `docs/url-baseline.txt` and was updated to 141 URLs after publishing these pages.
