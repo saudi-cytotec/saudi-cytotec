@@ -34,6 +34,7 @@ export const moreNav: NavItem[] = [
   { to: "/womens-health", label: "صحة المرأة" },
   { to: "/early-pregnancy", label: "الحمل المبكر" },
   { to: "/medical-sources", label: "المصادر الطبية" },
+  { to: "/service-areas", label: "مناطق التغطية" },
   { to: "/about", label: "من نحن" },
   { to: "/contact", label: "اتصل بنا" },
   { to: "/medical-disclaimer", label: "إخلاء المسؤولية" },

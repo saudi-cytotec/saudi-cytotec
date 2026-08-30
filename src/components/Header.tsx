@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { BrandLogo } from "./Logo";
 import { moreNav, mainNav, SITE } from "../data/site";
 
 export function Header() {
@@ -18,22 +19,24 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-paper/95 backdrop-blur-md">
-      {/* Red identity accent strip */}
-      <div className="h-1 w-full bg-accent" aria-hidden="true" />
+      {/* Gold identity accent strip */}
+      <div className="h-1 w-full bg-gradient-to-l from-accent via-[#d9b866] to-accent" aria-hidden="true" />
       <div className="bg-brand-deep text-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2 text-xs sm:text-sm">
           <p>محتوى تعليمي عام — ليس استشارة طبية فردية</p>
-          <Link to="/medical-disclaimer" className="underline decoration-accent/80 underline-offset-4">
+          <Link to="/medical-disclaimer" className="underline decoration-accent underline-offset-4 hover:text-accent">
             إخلاء المسؤولية
           </Link>
         </div>
       </div>
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
-        <Link to="/" className="flex min-w-0 items-center gap-3">
-          <img src="/images/logo.png" alt="" width={48} height={48} className="h-12 w-12 rounded-2xl object-cover ring-1 ring-line" />
+        <Link to="/" className="flex min-w-0 items-center gap-3" aria-label={`${SITE.name} — الرئيسية`}>
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-soft ring-1 ring-line">
+            <BrandLogo className="h-9 w-9" />
+          </span>
           <span className="min-w-0">
             <span className="block truncate text-lg font-bold text-brand-deep">{SITE.name}</span>
-            <span className="block text-xs text-ink-soft">معلومات طبية تعليمية</span>
+            <span className="block text-xs text-sage">معلومات طبية تعليمية موثّقة</span>
           </span>
         </Link>
         <form onSubmit={onSearch} className="mr-auto hidden max-w-sm flex-1 md:block">

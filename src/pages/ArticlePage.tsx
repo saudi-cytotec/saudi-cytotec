@@ -20,6 +20,22 @@ export function ArticlePage() {
   const cluster = getCluster(article.cluster);
   const related = pickRelated(article, articles);
 
+  // Effective images: explicit OG → featured → banner → cluster default.
+  const managed = article as typeof article & {
+    ogTitle?: string;
+    ogDescription?: string;
+    canonical?: string;
+  };
+  const ogImage = article.ogImage || article.image || cluster.image || "/images/og-default.jpg";
+  const bannerSrc = article.bannerImage || article.image || "";
+  const bannerAlt = article.bannerImageAlt || article.imageAlt || article.title;
+  // A committed CMS article may carry its own canonical; only use it when it
+  // points at our own domain, otherwise keep the self-canonical.
+  const canonical =
+    managed.canonical && managed.canonical.startsWith(SITE.domain)
+      ? managed.canonical
+      : undefined;
+
   return (
     <article className="mx-auto max-w-6xl px-4 py-8">
       <Seo
@@ -29,8 +45,11 @@ export function ArticlePage() {
         type="article"
         publishedAt={article.publishedAt}
         updatedAt={article.updatedAt}
-        image="/images/og-default.jpg"
-        keywords={article.title}
+        image={ogImage}
+        ogTitle={managed.ogTitle}
+        ogDescription={managed.ogDescription}
+        canonical={canonical}
+        keywords={(article as { primaryKeyword?: string }).primaryKeyword || article.title}
       />
       <JsonLd
         data={[
@@ -84,6 +103,24 @@ export function ArticlePage() {
       <p className="mt-3 text-sm text-ink-soft">
         نُشر في {article.publishedAt} · آخر تحديث {article.updatedAt} · قراءة تقريبية {readingMinutes(article)} دقائق
       </p>
+
+      {bannerSrc ? (
+        <figure className="mt-6 max-w-4xl overflow-hidden rounded-3xl border border-line bg-brand-soft shadow-sm">
+          <img
+            src={bannerSrc}
+            alt={bannerAlt}
+            width={1200}
+            height={article.bannerImage ? 675 : 900}
+            loading="eager"
+            decoding="async"
+            className="aspect-[16/9] w-full object-cover"
+          />
+          {article.imageAlt ? (
+            <figcaption className="px-4 py-2 text-xs text-ink-soft">{article.imageAlt}</figcaption>
+          ) : null}
+        </figure>
+      ) : null}
+
       <div className="mt-6 max-w-3xl">
         <DisclaimerBanner />
       </div>

@@ -223,6 +223,15 @@ export function emitSeoManifest(): Plugin {
         expectedRobots: INDEXABLE,
       });
       pushRoute({
+        path: "/service-areas",
+        url: `${SITE.domain}/service-areas`,
+        title: "مناطق التغطية",
+        metaDescription: "مناطق التغطية والوصول إلى الرعاية في السعودية والخليج",
+        canonical: `${SITE.domain}/service-areas`,
+        kind: "page",
+        expectedRobots: INDEXABLE,
+      });
+      pushRoute({
         path: "/sitemap",
         url: `${SITE.domain}/sitemap`,
         title: "خريطة الموقع",

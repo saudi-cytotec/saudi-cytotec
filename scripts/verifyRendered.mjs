@@ -74,6 +74,8 @@ const urls = [
   { path: "/blog/anemia-womens-health", expect: "indexable", canonical: `${DOMAIN}/blog/anemia-womens-health` },
   { path: "/blog/saudi-drug-regulation-context", expect: "indexable", canonical: `${DOMAIN}/blog/saudi-drug-regulation-context` },
   { path: "/blog/cluster/ma-huwa-saytotek", expect: "indexable", canonical: `${DOMAIN}/blog/cluster/ma-huwa-saytotek` },
+  { path: "/service-areas", expect: "indexable", canonical: `${DOMAIN}/service-areas`, inSitemap: true },
+  { path: "/contact", expect: "indexable", canonical: `${DOMAIN}/contact` },
   { path: "/search", expect: "noindex" },
   { path: "/admin", expect: "noindex" },
   { path: "/blog/no-such-article-xyz", expect: "notfound" },

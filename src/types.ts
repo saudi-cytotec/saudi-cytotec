@@ -40,8 +40,14 @@ export interface Article {
   excerpt: string;
   publishedAt: string;
   updatedAt: string;
+  /** Card / featured-thumbnail image (also the hero when no bannerImage). */
   image: string;
   imageAlt: string;
+  /** Optional large hero/banner shown at the top of the public page. */
+  bannerImage?: string;
+  bannerImageAlt?: string;
+  /** Open Graph / social-sharing image (falls back to image, then site default). */
+  ogImage?: string;
   related: string[];
   cornerstones: string[];
   references: string[];
@@ -74,7 +80,7 @@ export interface NavItem {
   label: string;
 }
 
-export type ArticleStatus = "draft" | "review" | "published" | "scheduled";
+export type ArticleStatus = "draft" | "review" | "published" | "scheduled" | "archived";
 export type SearchIntent = "informational" | "navigational" | "commercial" | "transactional";
 export type ArticleType =
   | "pillar"

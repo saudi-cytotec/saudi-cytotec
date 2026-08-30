@@ -14,8 +14,26 @@ export function articlePath(slug: string): string {
   return `/blog/${slug}`;
 }
 
-export function defaultImage(_cluster: ClusterId): string {
-  return "/images/og-default.jpg";
+/**
+ * Contextual default imagery per topic cluster, drawn from the approved
+ * on-brand image library (teal/gold medical artwork). Falls back to the site
+ * OG default. Every returned file exists under /public/images.
+ */
+const CLUSTER_IMAGE: Record<ClusterId, string> = {
+  definition: "/images/og-default.jpg",
+  uses: "/images/hero-doctor.jpg",
+  safety: "/images/safety.jpg",
+  "side-effects": "/images/emergency.jpg",
+  pregnancy: "/images/hero-doctor.jpg",
+  "womens-health": "/images/womens-health.jpg",
+  faq: "/images/og-default.jpg",
+  interactions: "/images/safety.jpg",
+  emergency: "/images/emergency.jpg",
+  evidence: "/images/sources.jpg",
+};
+
+export function defaultImage(cluster: ClusterId): string {
+  return CLUSTER_IMAGE[cluster] || "/images/og-default.jpg";
 }
 
 export function articlePlainText(article: Pick<Article, "blocks" | "faqs" | "h1" | "excerpt" | "title">): string {
