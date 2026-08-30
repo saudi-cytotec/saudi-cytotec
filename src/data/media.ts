@@ -29,13 +29,7 @@ export const mediaLibrary: MediaItem[] = [
     height: 900,
     role: "صورة البطل في الصفحة الرئيسية (LCP)",
   },
-  {
-    file: "/images/og-default.jpg",
-    alt: "صورة مشاركة افتراضية لمنصة سعودي إرساء",
-    width: 1200,
-    height: 675,
-    role: "صورة Open Graph الافتراضية للمقالات والصفحات",
-  },
+
   {
     file: "/images/article-mark.svg",
     alt: "",

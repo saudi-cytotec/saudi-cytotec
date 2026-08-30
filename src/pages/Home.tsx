@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArticleCard } from "../components/ArticleCard";
 import { CategoryCard } from "../components/CategoryCard";
+import { ContactCta } from "../components/ContactCta";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { JsonLd, Seo } from "../components/Seo";
 import { useCatalog } from "../cms/CatalogContext";
@@ -77,14 +78,14 @@ export function Home() {
               واضحة، وبلا تشخيص أو وصف دوائي.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Link to="/blog" className="rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-white shadow-md transition hover:brightness-110">
-                تصفّحي المقالات
+              <Link to="/topics" className="rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-white shadow-md transition hover:brightness-110">
+                ابدئي من محاور المحتوى
               </Link>
               <Link to="/what-is-cytotec" className="rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white">
-                ابدئي من الأساسيات
+                ما هو سايتوتك؟
               </Link>
-              <Link to="/medical-sources" className="rounded-full border border-line bg-paper px-5 py-2.5 text-sm font-semibold">
-                المصادر الطبية
+              <Link to="/service-areas" className="rounded-full border border-line bg-paper px-5 py-2.5 text-sm font-semibold">
+                المناطق والمدن
               </Link>
             </div>
             <p className="mt-4 text-xs leading-6 text-ink-soft">
@@ -122,6 +123,10 @@ export function Home() {
               ["/medical-uses", "الاستخدامات الطبية", "الاستطبابات والإشراف السريري وحدود الاستخدام."],
               ["/safety", "الأمان والتحذيرات", "تحذير الحمل والتنظيم ومصادر الدواء غير الموثوقة."],
               ["/when-to-see-doctor", "متى تراجعين الطبيب", "علامات تستدعي عيادة أو طوارئ دون تأخير."],
+              ["/faq", "الأسئلة الشائعة", "إجابات حسب القصد وروابط للمقالات والمصادر."],
+              ["/service-areas", "المناطق والمدن", "تنظيم جغرافي مسؤول بلا صفحات مدينة رقيقة."],
+              ["/medical-sources", "المراجع الطبية", "مصادر رسمية لفهم الادعاءات والتحذيرات."],
+              ["/topics", "محاور المحتوى", "خريطة الموضوعات والعلاقات التحريرية."],
             ] as const
           ).map(([to, title, text]) => (
             <Link key={to} to={to} className="rounded-3xl border border-line bg-paper p-5 hover:bg-cream">
@@ -157,6 +162,25 @@ export function Home() {
             <ArticleCard key={article.slug} article={article} />
           ))}
         </div>
+      </section>
+
+      <section className="grid gap-5 lg:grid-cols-[1fr_0.9fr]">
+        <div className="rounded-3xl border border-line bg-paper p-6">
+          <h2 className="text-2xl font-bold text-teal-deep">أسئلة شائعة تقودك للمكان الصحيح</h2>
+          <div className="mt-5 grid gap-3">
+            {[
+              ["هل سايتوتك هو نفسه ميزوبروستول؟", "/faq#definition"],
+              ["متى يصبح النزيف حالة طارئة؟", "/when-to-see-doctor"],
+              ["هل توجد معلومات حسب المدينة؟", "/service-areas"],
+              ["كيف أتحقق من مصدر طبي؟", "/blog/how-to-verify-medical-information"],
+            ].map(([label, to]) => (
+              <Link key={to} to={to} className="rounded-2xl bg-cream px-4 py-3 text-sm font-semibold text-brand-deep hover:bg-brand-soft">
+                {label}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <ContactCta compact topic="سؤال عام من الصفحة الرئيسية" />
       </section>
 
       <section>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CareReferral } from "../components/CareReferral";
+import { ContactCta } from "../components/ContactCta";
 import { Seo } from "../components/Seo";
 import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
 
@@ -34,6 +35,7 @@ export function Contact() {
         </p>
       </div>
       <CareReferral />
+      <ContactCta topic="سؤال تواصل عام" />
       {sent ? (
         <div className="mt-8 rounded-3xl border border-brand bg-brand-soft p-5 leading-8">
           تم استلام رسالتك محلياً في هذا المتصفح لأغراض العرض. إن كان لديك تصحيح لمصدر طبي، أرسليه أيضاً عبر البريد.

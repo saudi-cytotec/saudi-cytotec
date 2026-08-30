@@ -17,7 +17,7 @@ export function Seo({
   title,
   description,
   path,
-  image = "/images/og-default.jpg",
+  image,
   type = "website",
   publishedAt,
   updatedAt,
@@ -25,7 +25,7 @@ export function Seo({
   keywords,
 }: SeoProps) {
   const url = `${SITE.domain}${path === "/" ? "/" : path}`;
-  const imageUrl = image.startsWith("http") ? image : `${SITE.domain}${image}`;
+  const imageUrl = image ? (image.startsWith("http") ? image : `${SITE.domain}${image}`) : null;
   const fullTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
   return (
     <Helmet>
@@ -39,13 +39,13 @@ export function Seo({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
-      <meta property="og:image" content={imageUrl} />
+      {imageUrl ? <meta property="og:image" content={imageUrl} /> : null}
       <meta property="og:locale" content={SITE.locale} />
       <meta property="og:site_name" content={SITE.name} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={imageUrl} />
+      {imageUrl ? <meta name="twitter:image" content={imageUrl} /> : null}
       {publishedAt ? <meta property="article:published_time" content={publishedAt} /> : null}
       {updatedAt ? <meta property="article:modified_time" content={updatedAt} /> : null}
       <meta name="format-detection" content="telephone=no" />

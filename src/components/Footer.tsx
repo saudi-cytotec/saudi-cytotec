@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
+import { APPROVED_WHATSAPP_NUMBER, whatsappUrl } from "../data/conversion";
 
 const SA = HEALTH_LINES.find((c) => c.code === "sa");
 import { clusters, moreNav, SITE } from "../data/site";
@@ -28,6 +29,10 @@ export function Footer() {
               ملاحظات تحريرية فقط:{" "}
               <a href={`mailto:${EDITORIAL_EMAIL}`} className="underline underline-offset-4 hover:text-white">
                 {EDITORIAL_EMAIL}
+              </a>
+              {" · "}
+              <a href={whatsappUrl("مرحباً، لدي ملاحظة عامة حول محتوى الموقع.")} target="_blank" rel="noopener noreferrer nofollow" className="underline underline-offset-4 hover:text-white">
+                واتساب {APPROVED_WHATSAPP_NUMBER}
               </a>
             </p>
           </div>

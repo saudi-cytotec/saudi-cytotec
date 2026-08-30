@@ -14,8 +14,20 @@ export function articlePath(slug: string): string {
   return `/blog/${slug}`;
 }
 
-export function defaultImage(_cluster: ClusterId): string {
-  return "/images/og-default.jpg";
+export function defaultImage(cluster: ClusterId): string {
+  const map: Record<ClusterId, string> = {
+    definition: "/images/sources.jpg",
+    uses: "/images/hero-doctor.jpg",
+    safety: "/images/safety.jpg",
+    "side-effects": "/images/emergency.jpg",
+    pregnancy: "/images/hero.jpg",
+    "womens-health": "/images/womens-health.jpg",
+    faq: "/images/sources.jpg",
+    interactions: "/images/safety.jpg",
+    emergency: "/images/emergency.jpg",
+    evidence: "/images/sources.jpg",
+  };
+  return map[cluster];
 }
 
 export function articlePlainText(article: Pick<Article, "blocks" | "faqs" | "h1" | "excerpt" | "title">): string {

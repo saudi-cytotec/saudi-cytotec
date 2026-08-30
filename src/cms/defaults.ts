@@ -40,7 +40,7 @@ export const defaultSettings: SiteSettings = {
   domain: SITE.domain,
   email: SITE.email,
   description: SITE.description,
-  defaultOgImage: "/images/og-default.jpg",
+    defaultOgImage: "/images/sources.jpg",
   indexPublic: true,
 };
 
