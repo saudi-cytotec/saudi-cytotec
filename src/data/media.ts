@@ -16,11 +16,11 @@ export interface MediaItem {
 
 export const mediaLibrary: MediaItem[] = [
   {
-    file: "/images/logo.png",
-    alt: "شعار منصة سعودي إرساء",
-    width: 512,
-    height: 512,
-    role: "الشعار — أيقونة الموقع وأيقونة أبل",
+    file: "/images/saudiersaa-logo.png",
+    alt: "شعار saudiersaa — مدونة سايتوتك التوعوية في السعودية",
+    width: 1568,
+    height: 1176,
+    role: "الشعار المعتمد — الهيدر والفوتر وقسم البطل",
   },
   {
     file: "/images/hero-doctor.jpg",
