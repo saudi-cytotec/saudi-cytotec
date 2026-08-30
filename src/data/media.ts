@@ -44,13 +44,6 @@ export const mediaLibrary: MediaItem[] = [
     role: "صورة سياقية — صفحات الفئات",
   },
   {
-    file: "/images/og-default.jpg",
-    alt: "صورة مشاركة افتراضية لمنصة سعودي إرساء",
-    width: 1200,
-    height: 675,
-    role: "صورة Open Graph الافتراضية للمقالات والصفحات",
-  },
-  {
     file: "/images/article-mark.svg",
     alt: "",
     width: 0,

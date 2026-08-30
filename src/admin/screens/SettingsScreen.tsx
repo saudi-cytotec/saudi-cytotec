@@ -34,8 +34,8 @@ export function SettingsScreen() {
           <Field label="الوصف العام" hint="يظهر في الصفحة الرئيسية وOpen Graph الافتراضي.">
             <textarea className={inputClass()} rows={3} value={settings.description} onChange={(e) => setSettings({ ...settings, description: e.target.value })} />
           </Field>
-          <Field label="صورة المشاركة الافتراضية">
-            <input dir="ltr" className={inputClass()} value={settings.defaultOgImage} onChange={(e) => setSettings({ ...settings, defaultOgImage: e.target.value })} />
+          <Field label="صورة المشاركة الافتراضية (Open Graph)" hint="معطّلة: لا تُستخدم أي صورة افتراضية. تُصدر og:image/twitter:image فقط عندما يختار المحرر صورة فعلية للمقالة/الصفحة.">
+            <input dir="ltr" className={inputClass()} value={settings.defaultOgImage || ""} onChange={(e) => setSettings({ ...settings, defaultOgImage: e.target.value })} placeholder="(غير مُستخدمة — لا صورة افتراضية)" disabled />
           </Field>
           <label className="flex items-center gap-2 text-sm">
             <input type="checkbox" checked={settings.indexPublic} onChange={(e) => setSettings({ ...settings, indexPublic: e.target.checked })} />
