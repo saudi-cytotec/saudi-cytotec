@@ -1,17 +1,12 @@
 /**
  * Brand logo — the EXACT approved asset.
  *
- * Canonical file: /images/saudiersaa-logo.png (the supplied saudiersaa logo,
+ * Canonical file: /images/لوجو.png (the supplied saudiersaa logo,
  * committed verbatim into the repo — never redrawn or regenerated).
- *
- * Until that file is present in the build, the <img> silently falls back to a
- * plain typographic wordmark ("saudiersaa" + tagline) so the header stays
- * clean. The moment the exact file is committed, every surface below renders
- * the supplied logo with zero further code changes.
  */
 import { useState } from "react";
 
-export const LOGO_SRC = "/images/saudiersaa-logo.png";
+export const LOGO_SRC = "/images/لوجو.png";
 export const LOGO_ALT = "شعار saudiersaa — مدونة سايتوتك التوعوية في السعودية";
 
 /** Typographic wordmark used ONLY as the missing-file fallback. */

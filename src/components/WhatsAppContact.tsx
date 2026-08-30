@@ -24,6 +24,35 @@ export function whatsappInfoUrl(): string {
   return `https://wa.me/${INFO_WHATSAPP_DIGITS}?text=${encodeURIComponent(INFO_MESSAGE)}`;
 }
 
+/** Article banner — the EXACT approved asset (public/images/saudiersaa-article-whatsapp-banner.png.png). */
+export const ARTICLE_WHATSAPP_BANNER_SRC = "/images/saudiersaa-article-whatsapp-banner.png.png";
+
+/**
+ * The approved WhatsApp banner shown on article pages. The whole image is the
+ * link to the informational channel (same compliant URL as every other CTA).
+ */
+export function ArticleWhatsAppBanner() {
+  return (
+    <a
+      href={whatsappInfoUrl()}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`التواصل عبر واتساب للاستشارة المعلوماتية: ${INFO_WHATSAPP_DISPLAY}`}
+      className="card-premium mt-7 block max-w-4xl overflow-hidden transition hover:shadow-[0_24px_50px_-20px_rgb(11_37_69/0.45)]"
+    >
+      <img
+        src={ARTICLE_WHATSAPP_BANNER_SRC}
+        alt={`بانر واتساب — استشارة معلوماتية عبر ${INFO_WHATSAPP_DISPLAY} (قناة معلومات عامة فقط)`}
+        width={1717}
+        height={916}
+        loading="lazy"
+        decoding="async"
+        className="w-full object-cover"
+      />
+    </a>
+  );
+}
+
 export const INFO_CONTACT_NOTE =
   "قناة معلومات عامة وإرشاد تعليمي فقط — ليست عيادة أو صيدلية، ولا تُقدَّم عبرها وصفة أو تشخيص أو دواء، ولا تُرتَّب أي عملية بيع أو توصيل. للحالات الطبية راجعي جهة صحية مرخصة، وفي الطوارئ اتصلي بالإسعاف 997.";
 
