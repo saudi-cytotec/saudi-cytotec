@@ -294,12 +294,12 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
 
         <Section
           title="الصور والمشاركة"
-          hint="كل حقل مستقل وينعكس فعلياً على الصفحة العامة: الصورة البارزة في البطاقات، البانر أعلى المقال، وصورة المشاركة على الشبكات."
+          hint="صفحات المقالات العامة لا تعرض صورة مقال خاصة. الحقول أدناه اختيارية للأرشيف التحريري فقط ولا تُرسم على الموقع ولا تُصدَر كـ og:image."
         >
           <div className="space-y-5">
             <ImageField
               label="الصورة البارزة (Featured / thumbnail)"
-              hint="اختيارية — إن تُركت فارغة لن تظهر أي صورة في البطاقات أو أعلى المقال ولن تُصدر أي og:image. تُختار حصراً من الأصول المعتمدة الثلاثة."
+              hint="اختيارية — الموقع العام يتجاهل هذا الحقل دائماً. لا صورة بطاقة ولا صورة أعلى المقال."
               value={article.image || ""}
               altValue={article.imageAlt || ""}
               onPick={(file, alt) => patch({ image: file, imageAlt: article.imageAlt || alt })}
@@ -307,7 +307,7 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
             />
             <ImageField
               label="صورة البانر / البطل أعلى المقال (Banner / Hero)"
-              hint="اختيارية — إن تُركت فارغة تُستخدم الصورة البارزة. يُنصح بنسبة 16:9. تُختار حصراً من الأصول المعتمدة الثلاثة."
+              hint="اختيارية — الموقع العام يتجاهل بانر المقال. بانر واتساب المعتمد يُعرض بشكل دائم ومستقل."
               value={article.bannerImage || ""}
               altValue={article.bannerImageAlt || ""}
               onPick={(file, alt) => patch({ bannerImage: file, bannerImageAlt: article.bannerImageAlt || alt })}

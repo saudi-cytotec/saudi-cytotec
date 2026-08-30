@@ -10,22 +10,8 @@ import type { StaticPage as StaticPageType } from "../types";
 export function StaticPage({ page }: { page: StaticPageType }) {
   return (
     <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
-      <Seo title={page.metaTitle} description={page.metaDescription} path={page.path} image={page.image} />
+      <Seo title={page.metaTitle} description={page.metaDescription} path={page.path} />
       <PageHero crumbs={[{ name: page.title, path: page.path }]} title={page.h1} />
-      {page.image ? (
-        <figure className="card-premium overflow-hidden">
-          <img
-            src={page.image}
-            alt={page.imageAlt || page.title}
-            width={1200}
-            height={675}
-            loading="eager"
-            decoding="async"
-            className="aspect-[16/9] w-full object-cover"
-          />
-          {page.imageAlt ? <figcaption className="px-4 py-2.5 text-xs text-ink-soft">{page.imageAlt}</figcaption> : null}
-        </figure>
-      ) : null}
       <div className="max-w-3xl">
         <DisclaimerBanner />
       </div>

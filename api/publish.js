@@ -83,29 +83,14 @@ async function commitFile(token, filePath, content, message) {
   });
 }
 
-// The ONLY image files the site may serve. Any other value is dropped and the
-// article keeps its no-image state (no thumbnail, no figure, no og:image).
-// This is enforced server-side so a malformed or tampered editor payload can
-// never introduce an unauthorized/broken image reference.
-const APPROVED_IMAGE_FILES = new Set([
-  "/images/لوجو.png",
-  "/images/Bannerrr.png",
-  "/images/saudiersaa-article-whatsapp-banner.png.png",
-]);
-
 const IMAGE_FIELDS = ["image", "imageAlt", "bannerImage", "bannerImageAlt", "ogImage"];
 
 function serialize(article) {
   const clean = { ...article };
+  // Articles never persist an article-specific image. The public renderer
+  // ignores these fields; emptying them here keeps Git JSON in the same state.
   for (const key of IMAGE_FIELDS) {
-    const value = typeof clean[key] === "string" ? clean[key].trim() : "";
-    // Only approved asset paths are persisted; alternatives, uploads URLs and
-    // empty leftovers are normalized to "" ("no selected image").
-    if (key.endsWith("Image") && !key.endsWith("Alt")) {
-      clean[key] = APPROVED_IMAGE_FILES.has(value) ? value : "";
-    } else if (key.endsWith("Alt")) {
-      clean[key] = value;
-    }
+    clean[key] = "";
   }
   return `${JSON.stringify(
     {
