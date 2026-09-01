@@ -55,6 +55,7 @@ const APPROVED = [
   "/images/لوجو.png",
   "/images/Bannerrr.png",
   "/images/saudiersaa-article-whatsapp-banner.png.png",
+  "/images/saudiersaa-social-share.png",
 ];
 
 function cleanImage(value) {

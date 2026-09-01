@@ -40,6 +40,7 @@ export const APPROVED_IMAGE_FILES = [
   "/images/لوجو.png",
   "/images/Bannerrr.png",
   "/images/saudiersaa-article-whatsapp-banner.png.png",
+  "/images/saudiersaa-social-share.png",
 ] as const;
 
 export const approvedAssets: MediaItem[] = [
@@ -63,6 +64,13 @@ export const approvedAssets: MediaItem[] = [
     width: 1717,
     height: 916,
     role: "بانر واتساب أعلى المقالات",
+  },
+  {
+    file: "/images/saudiersaa-social-share.png",
+    alt: "سايتوتك في السعودية والميزوبروستول — معلومات طبية توعوية",
+    width: 0,
+    height: 0,
+    role: "صورة مشاركة اجتماعية معتمدة — تُختار يدوياً فقط",
   },
 ];
 

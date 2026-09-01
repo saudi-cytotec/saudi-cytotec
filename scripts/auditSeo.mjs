@@ -156,16 +156,18 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   report("Internal links", broken.length === 0 && brokenPaths.length === 0, `${slugs.size} slugs; related broken: ${broken.length}; cornerstone broken: ${brokenPaths.length}${broken.length ? ` (${broken.slice(0, 3).join(", ")})` : ""}${brokenPaths.length ? ` (${brokenPaths.slice(0, 3).join(", ")})` : ""}`);
 }
 
-// 8. Referenced images exist AND are from the three approved assets only.
+// 8. Referenced images exist AND are from the approved assets only.
 //
 // APPROVED_ASSETS — the exact owner-approved image set (logo, homepage hero,
-// article WhatsApp banner). Any other image reference is a violation: no
-// og-default, no generated article image, no uploads path, no favicon, no
-// legacy contextual images.
+// article WhatsApp banner, social share). Any other /images/ reference is a
+// violation: no og-default, no generated article image, no favicon, no legacy
+// contextual images. Admin uploads live under /media/, not /images/, and are
+// covered by scripts/auditImages.mjs against content/media.json.
 const APPROVED_ASSETS = new Set([
   "/images/لوجو.png",
   "/images/Bannerrr.png",
   "/images/saudiersaa-article-whatsapp-banner.png.png",
+  "/images/saudiersaa-social-share.png",
 ]);
 {
   const html = fs.readFileSync(DIST, "utf8");
