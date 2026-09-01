@@ -4,8 +4,8 @@
  *   node scripts/auditImages.mjs
  *
  * Owner-approved policy (hard rules):
- *   1. The only PERMANENT assets under public/images/ are the three approved
- *      files (logo, homepage hero, article WhatsApp banner). Admin-uploaded
+ *   1. The only PERMANENT assets under public/images/ are the owner-approved
+ *      files (logo, homepage hero, article WhatsApp banner, social share). Admin-uploaded
  *      CMS media lives separately under public/media/ and is registered in
  *      content/media.json — every such file must be registered, and every
  *      registered file must exist.
@@ -32,6 +32,8 @@ const APPROVED = [
   "/images/لوجو.png",
   "/images/Bannerrr.png",
   "/images/saudiersaa-article-whatsapp-banner.png.png",
+  // Owner-committed social-share asset (908813a, direct to main).
+  "/images/saudiersaa-social-share.png",
 ];
 
 /** Admin-uploaded CMS media: registered in content/media.json, served from /media/. */
@@ -81,20 +83,20 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
   const onDisk = new Set(APPROVED.filter((a) => fs.existsSync(path.join(ROOT, "public", a.replace(/^\//, "")))));
   pass(
     "Approved asset files exist",
-    `${onDisk.size}/3 exist (${APPROVED.filter((a) => onDisk.has(a)).join(", ")})`,
+    `${onDisk.size}/${APPROVED.length} exist (${APPROVED.filter((a) => onDisk.has(a)).join(", ")})`,
   );
   if (onDisk.size !== APPROVED.length) {
-    fail("All 3 approved asset files exist", `missing: ${APPROVED.filter((a) => !onDisk.has(a)).join(", ")}`);
+    fail(`All ${APPROVED.length} approved asset files exist`, `missing: ${APPROVED.filter((a) => !onDisk.has(a)).join(", ")}`);
   }
   if (unapproved.length === 0) {
     pass("Only approved permanent image files in public/images", `${permanent.length} files, all approved`);
   } else {
     fail("Only approved permanent image files in public/images", `${unapproved.length} extra: ${unapproved.join(", ")}`);
   }
-  if (permanent.length > 3) {
-    fail("Permanent image file count = 3", `found ${permanent.length}`);
+  if (permanent.length > APPROVED.length) {
+    fail(`Permanent image file count = ${APPROVED.length}`, `found ${permanent.length}`);
   } else {
-    pass("Permanent image file count = 3", `${permanent.length} files`);
+    pass(`Permanent image file count = ${APPROVED.length}`, `${permanent.length} files`);
   }
 
   // Uploaded CMS media must be exactly what the registry says it is.
@@ -257,6 +259,6 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
 console.log(
   failures.length
     ? `\nIMAGE AUDIT: FAIL — ${failures.length}: ${failures.join(" | ")}`
-    : `\nIMAGE AUDIT: PASS — 3 approved permanent assets + ${REGISTERED_UPLOADS.length} registered upload(s); every reference resolves`,
+    : `\nIMAGE AUDIT: PASS — ${APPROVED.length} approved permanent assets + ${REGISTERED_UPLOADS.length} registered upload(s); every reference resolves`,
 );
 process.exit(failures.length ? 1 : 0);

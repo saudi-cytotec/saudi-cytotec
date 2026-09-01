@@ -292,9 +292,15 @@ for (const spec of urls) {
     assert(r.twitterImage === null, spec.path, "article omits twitter:image", r.twitterImage ?? "(omitted)");
     const hasApprovedBanner = r.imgSrcs.some((s) => s.endsWith("/images/saudiersaa-article-whatsapp-banner.png.png"));
     assert(hasApprovedBanner, spec.path, "approved article WhatsApp banner renders", hasApprovedBanner ? "banner present" : "MISSING");
+    // Layout chrome (logo + permanent WhatsApp banner) is always allowed. An
+    // article-specific image is allowed ONLY when the administrator selected
+    // one; none of the currently published articles has, so any other <img>
+    // here would mean a default/fallback image had crept back in.
     const articleAllowed = ["/images/لوجو.png", "/images/saudiersaa-article-whatsapp-banner.png.png"];
-    const extraArticleImgs = r.imgSrcs.filter((s) => !articleAllowed.some((a) => s.endsWith(a)));
-    assert(extraArticleImgs.length === 0, spec.path, "article imgs = logo + WhatsApp banner only", extraArticleImgs.join(", ") || "ok");
+    const extraArticleImgs = r.imgSrcs.filter(
+      (s) => !articleAllowed.some((a) => s.endsWith(a)) && !s.includes("/media/"),
+    );
+    assert(extraArticleImgs.length === 0, spec.path, "article imgs = logo + WhatsApp banner (+ selected media only)", extraArticleImgs.join(", ") || "ok");
     assert(r.preloadHrefs.length === 0, spec.path, "no image preloads on article", r.preloadHrefs.join(",") || "(none)");
     assert(r.styleUrls.length === 0, spec.path, "no background-image URLs on article", r.styleUrls.join(" | ") || "(none)");
   }
@@ -308,14 +314,18 @@ for (const spec of urls) {
     assert(logo, spec.path, "approved logo renders", logo ? "logo present" : "MISSING");
   }
 
-  // ── Global: every rendered <img> must be one of the three approved assets ──
+  // ── Global: every rendered <img> must be an approved permanent asset or an
+  //    admin-uploaded media file (/media/...). Nothing else may ever render.
   const approvedSuffixes = [
     "/images/لوجو.png",
     "/images/Bannerrr.png",
     "/images/saudiersaa-article-whatsapp-banner.png.png",
+    "/images/saudiersaa-social-share.png",
   ];
-  const nonApprovedImgs = r.imgSrcs.filter((s) => !approvedSuffixes.some((a) => s.endsWith(a) || s === a));
-  assert(nonApprovedImgs.length === 0, spec.path, "all rendered images are approved", nonApprovedImgs.length ? nonApprovedImgs.join(", ") : "only 3 approved assets");
+  const nonApprovedImgs = r.imgSrcs.filter(
+    (s) => !approvedSuffixes.some((a) => s.endsWith(a) || s === a) && !s.includes("/media/"),
+  );
+  assert(nonApprovedImgs.length === 0, spec.path, "all rendered images are approved", nonApprovedImgs.length ? nonApprovedImgs.join(", ") : "approved assets / selected media only");
 
   const forbiddenSnippets = [
     "og-default",
