@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/((?!api/|sitemap\\.xml|robots\\.txt|images/).*)",
+      "source": "/((?!api/|sitemap\\.xml|robots\\.txt|images/|media/).*)",
       "destination": "/index.html"
     }
   ],
@@ -45,6 +45,15 @@
       ]
     },
     {
+      "source": "/media/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/admin",
       "headers": [
         {
@@ -63,12 +72,6 @@
       ]
     }
   ],
-  "crons": [
-    {
-      "path": "/api/release",
-      "schedule": "17 3 * * *"
-    }
-  ],
   "redirects": [
     {
       "source": "/:path*",
@@ -82,13 +85,23 @@
       "permanent": true
     },
     {
+      "source": "/blog/cytotec-in-saudi-arabia/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-in-saudi-arabia",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
       "source": "/cytotec-saudi-arabia/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
       "source": "/https-saudiersaa-com-cytotec-saudi-arabia/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
@@ -103,7 +116,7 @@
     },
     {
       "source": "/%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83_%D9%81%D9%8A_%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D9%87/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
@@ -173,27 +186,27 @@
     },
     {
       "source": "/%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D9%87/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
       "source": "/%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D9%87",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
       "source": "/%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D9%87%D8%AC%D8%B1%D8%B9%D8%A9",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
       "source": "/%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
       "source": "/%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
@@ -248,12 +261,12 @@
     },
     {
       "source": "/%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83_%D9%81%D9%8A_%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
       "source": "/%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83_%D9%81%D9%8A_%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9-2/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
@@ -334,6 +347,26 @@
     {
       "source": "/%D9%86%D9%82%D8%B5-%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AF-%D8%A3%D8%B3%D8%A8%D8%A7%D8%A8%D9%87-%D9%88%D9%85%D8%A7%D9%87%D9%8A-%D8%A3%D8%B9%D8%B1%D8%A7%D8%B6%D9%87/",
       "destination": "/blog/anemia-womens-health",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-jazan/",
+      "destination": "/blog/cytotec-jizan",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-jazan",
+      "destination": "/blog/cytotec-jizan",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-baha/",
+      "destination": "/blog/cytotec-albahah",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-baha",
+      "destination": "/blog/cytotec-albahah",
       "statusCode": 301
     }
   ]

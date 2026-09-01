@@ -35,6 +35,8 @@ const closings: Record<ClusterId, string> = {
     "الوقت في العلامات الحادة قيمة طبية لا تُقاس. لا تؤجلي طلب الرعاية لأن المقال لم يذكر حرفياً وصف عرضك.",
   evidence:
     "قوة الدليل الطبي تُقاس بالمنهج وقابلية التحقق من المصادر، لا بثقة الكاتب أو بمدى انتشار المنشور على الإنترنت.",
+  geographic:
+    "الموقع الجغرافي لا يغير القواعد الطبية. الأمان يبدأ من تقييم طبي في منشأة مرخصة، بغض النظر عن المدينة أو المنطقة.",
 };
 
 const clusterFrames: Record<ClusterId, { intro: string; scope: string; care: string }> = {
@@ -107,6 +109,13 @@ const clusterFrames: Record<ClusterId, { intro: string; scope: string; care: str
     scope:
       "المقال يوضّح كيف تُقيَّم قوة الدليل، ولماذا تختلف توصية بلد عن آخر، وكيف تنشر منظمات مهنية دولية بيانات تُقرأ في سياقها لا خارجه.",
     care: "المصدر الرصين ينشر تحديثاته ويوثّق تراجعه عند اللزوم، ويُتيح الوصول للنص الكامل للتحقق.",
+  },
+  geographic: {
+    intro:
+      "الموقع الجغرافي في المملكة العربية السعودية لا يغيّر القواعد الطبية الأساسية. الأدوية الخاضعة للرقابة تحتاج تقييماً طبياً بغض النظر عن المدينة أو المنطقة، ومنظومة الصحة السعودية مصممة لتغطية كل المناطق.",
+    scope:
+      "المقال يتناول كيفية الوصول للرعاية الصحية الصحيحة في مختلف مناطق المملكة، مع التأكيد أن المحتوى التعليمي لا يختلف حسب الموقع، وأن ما يختلف فقط هو خيارات الوصول للرعاية.",
+    care: "المسافة أو صعوبة الوصول لا تبرر البحث عن مصادر عشوائية. القرار الطبي يبدأ من منشأة مرخصة بغض النظر عن المسافة.",
   },
 };
 
@@ -274,7 +283,10 @@ export function expand(cluster: ClusterId, spec: ArticleSpec): Article {
     metaTitle: spec.metaTitle,
     metaDescription: spec.metaDescription,
     excerpt: spec.excerpt,
-    imageAlt: "عنصر بصري هادئ لمحتوى طبي تعليمي",
+    // Articles intentionally carry NO featured image — editors select one
+    // explicitly from the four approved assets when needed. An empty image
+    // means: no featured image, no thumbnail, no banner/hero; SEO metadata
+    // alone may use the approved global social-share fallback.
     related: spec.related,
     blocks,
     faqs: spec.faqs,

@@ -1,8 +1,25 @@
+/// <reference types="vite/client" />
+import mediaRegistry from "../../content/media.json";
+
 /**
- * Media registry — every committed image the site serves, with the metadata
- * the Media screen and the article editor need (alt text, dimensions, role).
- * Uploads via /api/upload-image land in /images/uploads/ and appear in the
- * Media screen as "uploaded" entries.
+ * Media registry.
+ * ---------------
+ * Two distinct kinds of asset exist, and they must never be confused:
+ *
+ * 1. PERMANENT APPROVED ASSETS (4, immutable)
+ *    The approved logo, homepage banner, article WhatsApp banner and global
+ *    social-share image. These belong to the site design. They are never an
+ *    article's featured image or thumbnail by default. The social-share asset
+ *    is the metadata-only fallback when an author has not selected a custom OG
+ *    image; it is never rendered in article content.
+ *
+ * 2. UPLOADED MEDIA (content/media.json + public/media/*)
+ *    Images an administrator explicitly uploaded through the CMS. They are
+ *    committed to the repository, so they survive refresh, logout, deployment
+ *    and redeploy, and are visible from any browser. They are only ever used
+ *    where an administrator explicitly selected them.
+ *
+ * Nothing in this file assigns an image to anything automatically.
  */
 
 export interface MediaItem {
@@ -11,72 +28,92 @@ export interface MediaItem {
   width: number;
   height: number;
   role: string;
+  /** True for admin uploads (deletable); false for the permanent assets. */
   uploaded?: boolean;
+  uploadedAt?: string;
+  bytes?: number;
 }
 
-export const mediaLibrary: MediaItem[] = [
+/**
+ * The permanent approved assets. These four files may never be deleted,
+ * replaced or redrawn, and no other permanent asset may be added.
+ */
+export const APPROVED_IMAGE_FILES = [
+  "/images/لوجو.png",
+  "/images/Bannerrr.png",
+  "/images/saudiersaa-article-whatsapp-banner.png.png",
+  "/images/saudiersaa-social-share.png",
+] as const;
+
+/** The only automatic image behavior: metadata fallback, never a body image. */
+export const GLOBAL_SOCIAL_SHARE_IMAGE = "/images/saudiersaa-social-share.png" as const;
+
+export const approvedAssets: MediaItem[] = [
   {
-    file: "/images/logo.png",
-    alt: "شعار منصة سعودي إرساء",
-    width: 512,
-    height: 512,
-    role: "الشعار — أيقونة الموقع وأيقونة أبل",
+    file: "/images/لوجو.png",
+    alt: "شعار saudiersaa — مدونة سايتوتك التوعوية في السعودية",
+    width: 1536,
+    height: 1024,
+    role: "الشعار المعتمد — الهيدر والفوتر",
   },
   {
-    file: "/images/hero-doctor.jpg",
-    alt: "طبيبة سعودية بحجاب في عيادة صحة المرأة",
-    width: 1200,
-    height: 900,
+    file: "/images/Bannerrr.png",
+    alt: "بانر الصفحة الرئيسية المعتمد — معلومات طبية موثوقة عن صحة المرأة",
+    width: 1536,
+    height: 1024,
     role: "صورة البطل في الصفحة الرئيسية (LCP)",
   },
-
   {
-    file: "/images/article-mark.svg",
-    alt: "",
+    file: "/images/saudiersaa-article-whatsapp-banner.png.png",
+    alt: "بانر واتساب المعتمد للمقالات — قناة معلومات عامة",
+    width: 1717,
+    height: 916,
+    role: "بانر واتساب أعلى المقالات",
+  },
+  {
+    file: "/images/saudiersaa-social-share.png",
+    alt: "سايتوتك في السعودية والميزوبروستول — معلومات طبية توعوية",
     width: 0,
     height: 0,
-    role: "علامة تصميم موحّدة للمقالات",
-  },
-  {
-    file: "/images/emergency.jpg",
-    alt: "سياق الطوارئ الطبية",
-    width: 1200,
-    height: 900,
-    role: "صورة سياقية — الطوارئ",
-  },
-  {
-    file: "/images/hero.jpg",
-    alt: "بانر توعوي عام",
-    width: 1200,
-    height: 675,
-    role: "بانر عام احتياطي",
-  },
-  {
-    file: "/images/safety.jpg",
-    alt: "سلامة الأدوية",
-    width: 900,
-    height: 1200,
-    role: "صورة سياقية — الأمان الدوائي",
-  },
-  {
-    file: "/images/sources.jpg",
-    alt: "المصادر الطبية",
-    width: 900,
-    height: 1200,
-    role: "صورة سياقية — المصادر",
-  },
-  {
-    file: "/images/whatsapp-consult.jpg",
-    alt: "استشارة تعليمية عامة",
-    width: 1024,
-    height: 1024,
-    role: "صورة سياقية للاستشارة التعليمية",
-  },
-  {
-    file: "/images/womens-health.jpg",
-    alt: "صحة المرأة",
-    width: 900,
-    height: 1200,
-    role: "صورة سياقية — صحة المرأة",
+    role: "صورة مشاركة اجتماعية معتمدة — fallback للـOG/Twitter metadata فقط",
   },
 ];
+
+interface RegistryRow {
+  file?: unknown;
+  alt?: unknown;
+  width?: unknown;
+  height?: unknown;
+  uploadedAt?: unknown;
+  bytes?: unknown;
+}
+
+function sanitizeUpload(row: RegistryRow): MediaItem | null {
+  const file = typeof row.file === "string" ? row.file.trim() : "";
+  // Uploads live under /media/ only — no traversal, no other prefix.
+  if (!file.startsWith("/media/") || file.includes("..")) return null;
+  return {
+    file,
+    alt: typeof row.alt === "string" ? row.alt : "",
+    width: typeof row.width === "number" ? row.width : 0,
+    height: typeof row.height === "number" ? row.height : 0,
+    role: "صورة مرفوعة من لوحة التحكم",
+    uploaded: true,
+    uploadedAt: typeof row.uploadedAt === "string" ? row.uploadedAt : undefined,
+    bytes: typeof row.bytes === "number" ? row.bytes : undefined,
+  };
+}
+
+/** Admin-uploaded images committed to the repository. */
+export const uploadedMedia: MediaItem[] = Array.isArray((mediaRegistry as { items?: unknown }).items)
+  ? ((mediaRegistry as { items: RegistryRow[] }).items.map(sanitizeUpload).filter(Boolean) as MediaItem[])
+  : [];
+
+/**
+ * Everything an editor may pick from: the permanent approved assets plus
+ * whatever has actually been uploaded. Selecting is always explicit.
+ */
+export const mediaLibrary: MediaItem[] = [...approvedAssets, ...uploadedMedia];
+
+/** Every path the renderer is allowed to resolve for an article image. */
+export const selectableImagePaths: string[] = mediaLibrary.map((item) => item.file);

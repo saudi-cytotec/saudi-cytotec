@@ -1,173 +1,151 @@
-import type { ManagedArticle, ValidationItem, ValidationResult } from "../types";
-import { MIN_BODY_WORDS, bodyStructure, bodyWordCount, isDisclaimerBlock } from "./bodyWordCount";
+import type { ManagedArticle } from "../types";
 import { isValidShortSlug } from "./slug";
 
 /**
- * Validation policy
- * -----------------
- * Two classes of finding, deliberately separated:
+ * Data-integrity check (NOT an SEO / content-quality validator)
+ * ------------------------------------------------------------
+ * The visible ERROR / WARNING / PASS "SEO validation" system has been removed.
+ * Publishing is never blocked or scored by content-quality rules (word count,
+ * SEO title/meta length, heading structure, FAQ, references, keywords, images,
+ * disclaimers, ...). Editorial and SEO judgement belongs to the editor.
  *
- *  BLOCKING  — the page is technically broken and would render a bad or
- *              unreachable URL: missing/duplicate slug, missing title, or an
- *              empty body. These are correctness bugs, not opinions.
+ * The only thing kept here is the minimum needed so a *technically broken*
+ * record cannot be saved to the repository and produce an unreachable URL:
  *
- *  WARNING   — quality and SEO recommendations: word count, SEO title length,
- *              meta description length, heading structure, reference count,
- *              duplicate title, per-article disclaimer.
+ *   - a valid, unique short slug (otherwise the page has no working URL), and
+ *   - a non-empty title, and
+ *   - at least some body content.
  *
- * Warnings NEVER prevent publishing. The publishing model is
- * publish -> crawl -> index -> monitor -> improve, not
- * perfect-SEO -> publish. Editorial and SEO judgement belongs to the editor,
- * not to a hard gate in code.
+ * These are correctness bugs, not opinions, and they mirror the same checks the
+ * publish API enforces server-side. Nothing here is surfaced as a scoring panel.
  */
 
-function hasStructure(article: ManagedArticle): boolean {
-  const types = article.blocks.filter((b) => !isDisclaimerBlock(b)).map((b) => b.type);
-  return types.includes("p") && types.filter((t) => t === "h2").length >= 6 && types.filter((t) => t === "h3").length >= 2;
+export interface IntegrityProblem {
+  field: "slug" | "title" | "body";
+  message: string;
 }
 
-function hasDisclaimer(article: ManagedArticle): boolean {
-  if (article.hasDisclaimer) return true;
-  return article.blocks.some((block) => isDisclaimerBlock(block));
+export interface IntegrityResult {
+  ok: boolean;
+  problems: IntegrityProblem[];
 }
 
-export const MIN_WORDS = MIN_BODY_WORDS;
+function hasBodyContent(article: ManagedArticle): boolean {
+  return article.blocks.some(
+    (block) => (block.text && block.text.trim().length > 0) || (block.items && block.items.length > 0),
+  );
+}
 
-export function validateArticle(
-  article: ManagedArticle,
-  usedSlugs: string[],
-  usedTitles: string[],
-): ValidationResult {
-  const words = bodyWordCount(article.blocks);
-  const missingWords = Math.max(0, MIN_BODY_WORDS - words);
+export function checkArticleIntegrity(article: ManagedArticle, usedSlugs: string[] = []): IntegrityResult {
+  const problems: IntegrityProblem[] = [];
+
   const slugCheck = isValidShortSlug(article.slug);
-  const slugTaken = usedSlugs.some((s) => s === article.slug);
-  const titleTaken = usedTitles.some((t) => t.trim() === article.title.trim());
-  const structure = bodyStructure(article.blocks);
-  const seoTitleLen = article.seoTitle.trim().length;
-  const metaLen = article.metaDescription.trim().length;
+  if (!slugCheck.ok) {
+    problems.push({ field: "slug", message: slugCheck.reason });
+  } else if (usedSlugs.some((s) => s === article.slug)) {
+    problems.push({ field: "slug", message: "هذا الرابط مستخدم لمقال آخر — اختاري رابطاً مختلفاً." });
+  }
 
-  const items: ValidationItem[] = [
-    // ── BLOCKING: technically broken output ──────────────────────────────
-    {
-      id: "slug",
-      label: "رابط إنجليزي قصير وصالح",
-      ok: slugCheck.ok,
-      detail: slugCheck.reason,
-      blocking: true,
-    },
-    {
-      id: "unique-slug",
-      label: "الرابط غير مكرر",
-      ok: !slugTaken,
-      detail: slugTaken
-        ? "هذا الرابط مستخدم لمقال آخر — النشر سيُنشئ تصادماً في المسارات."
-        : "الرابط فريد.",
-      blocking: true,
-    },
-    {
-      id: "title",
-      label: "يوجد عنوان وH1",
-      ok: article.title.trim().length > 0 && article.h1.trim().length > 0,
-      detail:
-        article.title.trim() && article.h1.trim()
-          ? "العنوان وH1 موجودان."
-          : "الصفحة بلا عنوان أو H1 — لا يمكن نشر صفحة بلا عنوان.",
-      blocking: true,
-    },
-    {
-      id: "body",
-      label: "يوجد محتوى في المتن",
-      ok: words > 0,
-      detail: words > 0 ? `${words} كلمة في المتن.` : "المتن فارغ — لا يوجد ما يُنشر.",
-      blocking: true,
-    },
+  if (!article.title.trim()) {
+    problems.push({ field: "title", message: "العنوان مطلوب." });
+  }
 
-    // ── WARNING: editorial & SEO recommendations (never block) ───────────
-    {
+  if (!hasBodyContent(article)) {
+    problems.push({ field: "body", message: "لا يوجد محتوى في المتن." });
+  }
+
+  return { ok: problems.length === 0, problems };
+}
+
+/**
+ * Pre-publish status report — PASS / WARNING / ERROR.
+ * ---------------------------------------------------
+ * IMPORTANT POLICY: only genuine technical / data-integrity problems are
+ * ERRORS, and only ERRORS can block publication. Everything else is an
+ * informational WARNING that NEVER blocks publishing:
+ *
+ *   - article shorter than the recommended depth (word count is informational)
+ *   - no secondary keywords
+ *   - no FAQ
+ *   - fewer H2/H3 than recommended
+ *   - no optional image
+ *   - SEO title/description not "perfect"
+ *
+ * This is deliberately NOT the removed "SEO gatekeeper": there is no score, no
+ * pass mark and no gate. Editorial judgement belongs to the editor.
+ */
+
+export type PrePublishVerdict = "PASS" | "WARNING" | "ERROR";
+
+export interface PrePublishNote {
+  id: string;
+  message: string;
+}
+
+export interface PrePublishReport {
+  verdict: PrePublishVerdict;
+  /** Blocking — a technically broken record. */
+  errors: PrePublishNote[];
+  /** Informational only — never blocks publishing. */
+  warnings: PrePublishNote[];
+}
+
+/** Recommended body depth. Informational only — never enforced. */
+export const RECOMMENDED_BODY_WORDS = 2000;
+
+export function prePublishReport(article: ManagedArticle, integrity: IntegrityResult): PrePublishReport {
+  const errors: PrePublishNote[] = integrity.problems.map((problem, index) => ({
+    id: `${problem.field}-${index}`,
+    message: problem.message,
+  }));
+
+  const warnings: PrePublishNote[] = [];
+  const words = article.blocks.reduce((total, block) => {
+    const text = [block.text ?? "", ...(block.items ?? [])].join(" ");
+    return total + text.trim().split(/\s+/).filter(Boolean).length;
+  }, 0);
+  const h2 = article.blocks.filter((b) => b.type === "h2").length;
+  const h3 = article.blocks.filter((b) => b.type === "h3").length;
+
+  if (words < RECOMMENDED_BODY_WORDS) {
+    warnings.push({
       id: "words",
-      label: `العمق المقترح: ${MIN_BODY_WORDS} كلمة`,
-      ok: words >= MIN_BODY_WORDS,
-      detail:
-        words >= MIN_BODY_WORDS
-          ? `${words} كلمة — ضمن العمق المقترح.`
-          : `${words} كلمة. يُنصح بتوسيع المقال بـ ${missingWords} كلمة تقريباً. هذا لا يمنع النشر.`,
-      blocking: false,
-    },
-    {
-      id: "seo-title",
-      label: "طول عنوان SEO (12–70 حرفاً)",
-      ok: seoTitleLen >= 12 && seoTitleLen <= 70,
-      detail: seoTitleLen
-        ? `الطول الحالي ${seoTitleLen} حرفاً.`
-        : "لا يوجد عنوان SEO — سيُستخدم عنوان المقال افتراضياً.",
-      blocking: false,
-    },
-    {
-      id: "meta",
-      label: "طول الوصف التعريفي (70–170 حرفاً)",
-      ok: metaLen >= 70 && metaLen <= 170,
-      detail: metaLen ? `الطول الحالي ${metaLen} حرفاً.` : "لا يوجد وصف تعريفي.",
-      blocking: false,
-    },
-    {
-      id: "keyword",
-      label: "كلمة مفتاحية أساسية",
-      ok: article.primaryKeyword.trim().length >= 3,
-      detail: article.primaryKeyword.trim() || "لم تُحدَّد كلمة مفتاحية أساسية.",
-      blocking: false,
-    },
-    {
+      message: `طول المتن ${words} كلمة (الطول المرجعي ${RECOMMENDED_BODY_WORDS} كلمة). معلومة إرشادية فقط — لا تمنع النشر.`,
+    });
+  }
+  if (!article.secondaryKeywords.length) {
+    warnings.push({ id: "secondary", message: "لا توجد كلمات مفتاحية ثانوية — اختيارية ولا تمنع النشر." });
+  }
+  if (!article.faqs?.length) {
+    warnings.push({ id: "faq", message: "لا توجد أسئلة شائعة — اختيارية ولا تمنع النشر." });
+  }
+  if (h2 < 6 || h3 < 2) {
+    warnings.push({
       id: "structure",
-      label: "بنية العناوين (6×H2 و2×H3 مقترحة)",
-      ok: hasStructure(article),
-      detail: `فقرات ${structure.paragraphs} · H2 ${structure.h2} · H3 ${structure.h3}`,
-      blocking: false,
-    },
-    {
-      id: "disclaimer",
-      label: "إخلاء المسؤولية الطبية",
-      ok: hasDisclaimer(article),
-      detail: hasDisclaimer(article)
-        ? "موجود داخل المقال."
-        : "غير موجود داخل المقال — يُعرض إخلاء المسؤولية العام تلقائياً في كل صفحة مقال.",
-      blocking: false,
-    },
-    {
-      id: "references",
-      label: "المراجع (يُستحسن مرجعان فأكثر)",
-      ok: article.references.length >= 2,
-      detail:
-        article.references.length >= 2
-          ? `${article.references.length} مراجع.`
-          : "لا توجد مراجع كافية — يُستحسن إضافة مصادر يمكن التحقق منها.",
-      blocking: false,
-    },
-    {
-      id: "duplicate",
-      label: "لا يوجد عنوان مكرر",
-      ok: !titleTaken,
-      detail: titleTaken
-        ? "عنوان مطابق لمقال آخر — قد يتسبب في تآكل الكلمات المفتاحية."
-        : "العنوان غير مكرر.",
-      blocking: false,
-    },
-  ];
-
-  const blockingFailures = items.filter((i) => i.blocking && !i.ok);
+      message: `بنية العناوين: ${h2}×H2 و${h3}×H3 (المقترح 6×H2 و2×H3). توصية فقط — لا تمنع النشر.`,
+    });
+  }
+  if (!article.image && !article.thumbnail && !article.bannerImage && !article.ogImage) {
+    warnings.push({
+      id: "image",
+      message: "لم تُحدَّد أي صورة — هذا وضع صحيح تماماً: سيُنشر المقال بلا صورة ولن يُستبدل ذلك بصورة افتراضية.",
+    });
+  }
+  const seoLen = article.seoTitle.trim().length;
+  if (seoLen && (seoLen < 12 || seoLen > 70)) {
+    warnings.push({ id: "seo-title", message: `طول عنوان SEO ${seoLen} حرفاً (المقترح 12–70). توصية فقط.` });
+  }
+  const metaLen = article.metaDescription.trim().length;
+  if (metaLen && (metaLen < 70 || metaLen > 170)) {
+    warnings.push({ id: "meta", message: `طول الوصف التعريفي ${metaLen} حرفاً (المقترح 70–170). توصية فقط.` });
+  }
+  if (article.references.length < 2) {
+    warnings.push({ id: "references", message: "أقل من مرجعين — يُستحسن إضافة مصادر يمكن التحقق منها. لا يمنع النشر." });
+  }
 
   return {
-    ok: blockingFailures.length === 0,
-    wordCount: words,
-    missingWords,
-    items,
+    verdict: errors.length ? "ERROR" : warnings.length ? "WARNING" : "PASS",
+    errors,
+    warnings,
   };
-}
-
-export function blockingFailures(result: ValidationResult) {
-  return result.items.filter((item) => item.blocking && !item.ok);
-}
-
-export function warnings(result: ValidationResult) {
-  return result.items.filter((item) => !item.blocking && !item.ok);
 }

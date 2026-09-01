@@ -34,9 +34,6 @@ export function SettingsScreen() {
           <Field label="الوصف العام" hint="يظهر في الصفحة الرئيسية وOpen Graph الافتراضي.">
             <textarea className={inputClass()} rows={3} value={settings.description} onChange={(e) => setSettings({ ...settings, description: e.target.value })} />
           </Field>
-          <Field label="صورة المشاركة الافتراضية">
-            <input dir="ltr" className={inputClass()} value={settings.defaultOgImage} onChange={(e) => setSettings({ ...settings, defaultOgImage: e.target.value })} />
-          </Field>
           <label className="flex items-center gap-2 text-sm">
             <input type="checkbox" checked={settings.indexPublic} onChange={(e) => setSettings({ ...settings, indexPublic: e.target.checked })} />
             المحتوى العام قابل للفهرسة (index) — تعطيله يضيف noindex على كل الصفحات العامة
@@ -50,7 +47,9 @@ export function SettingsScreen() {
 
       <Section title="أمان البيانات">
         <ul className="list-disc space-y-2 pr-6 text-sm leading-7 text-ink-soft">
-          <li>لا مفاتيح في الواجهة الأمامية: OPENAI_API_KEY وGITHUB_PUBLISH_TOKEN وADMIN_PASSWORD وADMIN_SESSION_SECRET وCRON_SECRET تُقرأ من بيئة Vercel فقط (api/*).</li>
+          <li>لا مفاتيح في الواجهة الأمامية: OPENAI_API_KEY وGITHUB_PUBLISH_TOKEN وADMIN_PASSWORD وADMIN_SESSION_SECRET تُقرأ من بيئة Vercel فقط (api/*).</li>
+          <li>لا نشر مجدول ولا cron — النشر يتم يدوياً من المحرر بعد جلسة مشرف فقط.</li>
+          <li>الأصول الدائمة أربعة فقط (الشعار، بانر الرئيسية، بانر واتساب المقالات، social-share للـOG/Twitter metadata فقط)؛ أما صور CMS فمرفوعة ومسجلة يدوياً تحت /media/.</li>
           <li>الجلسة الإدارية: كوكي HttpOnly موقّع بـ HMAC مع مهلة 12 ساعة.</li>
           <li>CSP مقيّد + X-Frame-Options DENY + nosniff على كل الاستجابات (vercel.json).</li>
           <li>/admin و/api بلا تخزين مؤقت (no-store).</li>

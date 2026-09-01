@@ -2,8 +2,7 @@ import fs from "fs";
 import path from "path";
 import type { Plugin } from "vite";
 import { articles } from "../src/data/articles";
-import { testArticle, testGeneration } from "../src/cms/testArticle";
-import { bodyStructure, bodyWordCount, MIN_BODY_WORDS } from "../src/utils/bodyWordCount";
+import { bodyStructure, MIN_BODY_WORDS } from "../src/utils/bodyWordCount";
 
 export function emitVerifiedStats(): Plugin {
   return {
@@ -23,23 +22,14 @@ export function emitVerifiedStats(): Plugin {
       });
       const failing = all.filter((a) => !a.passes).sort((a, b) => a.wordCount - b.wordCount);
       const min = all.reduce((m, a) => (a.wordCount < m.wordCount ? a : m), all[0]);
-      const testWords = bodyWordCount(testArticle.blocks);
-      const testStructure = bodyStructure(testArticle.blocks);
+      // No generated test article is bundled or measured: AI generation only
+      // happens on explicit administrator action and stays an editable draft.
       const report = {
         totalArticles: all.length,
         passingArticles: all.length - failing.length,
         failingArticles: failing.length,
         minArticle: min,
         failingSample: failing.slice(0, 8),
-        testArticle: {
-          slug: testArticle.slug,
-          wordCount: testWords,
-          pipelineWordCount: testGeneration.wordCount,
-          paragraphs: testStructure.paragraphs,
-          h2: testStructure.h2,
-          h3: testStructure.h3,
-          passes: testWords >= MIN_BODY_WORDS,
-        },
       };
       fs.writeFileSync(path.resolve("verified-stats.json"), `${JSON.stringify(report, null, 2)}\n`);
       // Report only. This used to `throw`, which failed the entire production

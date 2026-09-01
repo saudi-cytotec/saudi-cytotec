@@ -25,7 +25,6 @@ const nav = [
   { to: "/admin/articles", label: "المقالات" },
   { to: "/admin/articles/new", label: "مقال جديد" },
   { to: "/admin/drafts", label: "المسودات" },
-  { to: "/admin/scheduled", label: "المجدولة" },
   { to: "/admin/published", label: "المنشور" },
   { to: "/admin/categories", label: "التصنيفات" },
   { to: "/admin/map", label: "خريطة المحتوى" },
@@ -97,7 +96,7 @@ export function AdminApp() {
           <header className="flex items-center justify-between border-b border-line bg-paper px-6 py-4">
             <div>
               <p className="text-sm text-ink-soft">مرحباً {user || "المحرر"}</p>
-              <p className="text-xs text-ink-soft">النشر: Git → Vercel → Production · التحذيرات لا تمنع النشر، الأخطاء التقنية فقط تمنعه</p>
+              <p className="text-xs text-ink-soft">سير العمل: إنشاء ← تحرير ← حفظ ← معاينة ← نشر · النشر: Git → Vercel → Production</p>
             </div>
             <div className="flex gap-2">
               <Link to="/" className="rounded-full border border-line px-3 py-1.5 text-sm">
@@ -124,7 +123,6 @@ export function AdminApp() {
               <Route path="preview/:id" element={<PreviewScreen />} />
               <Route path="drafts" element={<ArticlesScreen filter="draft" />} />
               <Route path="review" element={<ArticlesScreen filter="review" />} />
-              <Route path="scheduled" element={<ArticlesScreen filter="scheduled" />} />
               <Route path="published" element={<ArticlesScreen filter="published" />} />
               <Route path="categories" element={<CategoriesScreen />} />
               <Route path="map" element={<MapScreen />} />

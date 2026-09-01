@@ -4,13 +4,12 @@ import { useCatalog } from "../../cms/CatalogContext";
 import { bodyWordCount } from "../../utils/bodyWordCount";
 import { EmptyState, StatusBadge, Td, Th } from "../ui";
 
-export type ArticleFilter = "all" | "draft" | "review" | "scheduled" | "published";
+export type ArticleFilter = "all" | "draft" | "review" | "published";
 
 const FILTER_TITLES: Record<ArticleFilter, string> = {
   all: "كل المقالات",
   draft: "المسودات",
   review: "قيد المراجعة",
-  scheduled: "المجدولة للنشر",
   published: "المقالات المنشورة",
 };
 
@@ -21,7 +20,6 @@ export function ArticlesScreen({ filter }: { filter: ArticleFilter }) {
     .filter((item) => {
       if (filter === "draft") return item.status === "draft";
       if (filter === "review") return item.status === "review";
-      if (filter === "scheduled") return item.status === "scheduled";
       if (filter === "published") return item.status === "published";
       return true;
     })
@@ -61,7 +59,6 @@ export function ArticlesScreen({ filter }: { filter: ArticleFilter }) {
                   <Link to={`/admin/articles/${item.id}`} className="font-semibold text-brand hover:underline">
                     {item.title || "بدون عنوان"}
                   </Link>
-                  {item.publishAt ? <span className="block text-xs text-ink-soft">موعد النشر: {item.publishAt}</span> : null}
                 </Td>
                 <Td className="font-mono text-xs" >
                   <span dir="ltr">/{item.slug}</span>

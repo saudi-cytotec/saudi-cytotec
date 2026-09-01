@@ -42,7 +42,7 @@ export function SitemapScreen() {
     <div className="space-y-5">
       <h1 className="text-3xl font-bold text-brand-deep">حالة خريطة الموقع (Sitemap)</h1>
       <p className="max-w-3xl text-sm leading-7 text-ink-soft">
-        تُبنى <span dir="ltr">sitemap.xml</span> تلقائياً مع كل build من المحتوى القابل للتوجيه الفعلي: الصفحات الثابتة، صفحات المجموعات، المقالات الأصلية، وكل ملف ملتزم في <span dir="ltr">content/published/</span> — وتستبعد /admin و/api و/search والمقالات المجدولة غير المنشورة. نشر مقال = دخوله للخريطة بدون خطوة يدوية.
+        تُبنى <span dir="ltr">sitemap.xml</span> تلقائياً مع كل build من المحتوى القابل للتوجيه الفعلي: الصفحات الثابتة، صفحات المجموعات، المقالات الأصلية، وكل ملف ملتزم في <span dir="ltr">content/published/</span> — وتستبعد /admin و/api و/search والمقالات غير المنشورة. نشر مقال = دخوله للخريطة بدون خطوة يدوية.
       </p>
 
       <div className="grid gap-4 md:grid-cols-3">

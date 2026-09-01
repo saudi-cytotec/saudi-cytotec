@@ -14,8 +14,8 @@ import { MIN_BODY_WORDS, bodyStructure, bodyWordCount } from "./_lib/bodyCount.j
  *
  * Design rules:
  *  - The API key is read from process.env and is NEVER logged or returned.
- *  - No stage blocks publishing. Word count is reported as `advisory`, and the
- *    caller decides. See src/utils/validation.ts for the blocking policy.
+ *  - No stage blocks publishing, and there is no SEO/content-quality gate.
+ *    Word count is reported as `advisory` only, and the editor decides.
  *  - There is deliberately no "pad until word count is reached" loop: that
  *    produces repetition, which is a medical-content quality defect. If a draft
  *    comes back short, we say so and the editor expands it substantively.

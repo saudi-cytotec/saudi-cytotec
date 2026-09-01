@@ -1,40 +1,77 @@
-# Geographic Coverage Strategy — Saudi service-area architecture
+# Geographic Coverage Strategy — Saudi pillar + 20 supporting articles
 
-Date: 2026-08-30. Scope: Saudi Arabia only, matching the requested regional architecture.
+Date: 2026-09-01. Scope: Saudi Arabia only.
 
 ## Policy
 
-- No thin city pages.
-- No duplicate city templates with swapped city names.
-- No doorway pages.
-- No delivery, availability, pricing or drug-store claims.
-- A standalone city page may exist only when it contains genuinely distinct local healthcare-resource information managed through the existing CMS.
+- `/service-areas` is the authoritative Saudi geographic hub and is now titled **"سايتوتك في السعودية"**.
+- City pages are published only when they add real informational value such as travel, pilgrimage, distance-to-care, or referral-planning context.
+- No thin city templates with swapped names.
+- No sales, pricing, delivery, availability, provider directories, fake reviews, or unsafe dosing instructions.
+- Every city page must link back to the Saudi hub plus safety, FAQ, and care-pathway content.
 
-## Implemented route
+## Implemented architecture
 
-`/service-areas` is the canonical service-area hub. It groups cities by region, explains that medical facts do not change by city, and sends readers to relevant topic hubs, FAQs, safety pages, resources and official care pathways.
+### Primary hub
 
-## Regions and cities
+- `/service-areas`
+- H1/SEO focus: `سايتوتك في السعودية`
+- Role: national geographic information hub that explains the Saudi medical/regulatory context, warning signs, official lines, and links to all priority cities.
 
-| Region | Cities | Implementation |
-|---|---|---|
-| Central | Riyadh, Qassim, Hail | Regional section with city-specific healthcare-access notes and 937/997 references. |
-| Western | Jeddah, Makkah, Madinah, Taif | Regional section focused on licensed facilities and emergency signs, not availability. |
-| Eastern | Dammam, Khobar, Qatif, Al Ahsa, Jubail | Regional section linking city discovery to safety, FAQ and official resources. |
-| Southern/Other | Abha, Jazan, Najran, Tabuk | Regional section emphasizing urgent-care planning where distance can matter. |
+### Protected geographic article set — exactly 20
 
-## Why no city pages were generated
+All published through the existing CMS build path (`content/published/*.json`) and routed at `/blog/<english-slug>`. The set is intentionally retained as 20 articles; it is not a license to generate thin city pages:
 
-The requested rule is to avoid mass-generated thin city pages. For this medical-information platform, the core answer is the same in each Saudi city: use licensed healthcare, understand warnings, and seek emergency care for danger signs. The city-specific value currently fits inside a single regional hub.
+1. `/blog/cytotec-makkah` — مكة المكرمة
+2. `/blog/cytotec-madinah` — المدينة المنورة
+3. `/blog/cytotec-buraidah` — بريدة
+4. `/blog/cytotec-dammam` — الدمام
+5. `/blog/cytotec-abha` — أبها
+6. `/blog/cytotec-tabuk` — تبوك
+7. `/blog/cytotec-hail` — حائل
+8. `/blog/cytotec-arar` — عرعر
+9. `/blog/cytotec-jizan` — جيزان
+10. `/blog/cytotec-najran` — نجران
+11. `/blog/cytotec-albahah` — الباحة
+12. `/blog/cytotec-sakaka` — سكاكا
+13. `/blog/cytotec-saudi-regions` — مناطق السعودية
+14. `/blog/cytotec-western-region` — المنطقة الغربية
+15. `/blog/cytotec-eastern-region` — المنطقة الشرقية
+16. `/blog/cytotec-central-region` — المنطقة الوسطى
+17. `/blog/cytotec-southern-region` — المنطقة الجنوبية
+18. `/blog/cytotec-saudi-faq` — الأسئلة الجغرافية الشائعة
+19. `/blog/cytotec-saudi-safety` — السلامة والتنظيم الدوائي
+20. `/blog/cytotec-medical-verification` — التحقق من المعلومة والمزود
 
-If the CMS later stores verified local-resource information for a city — for example, a curated official directory page or a health-system pathway that materially differs — then a city page can be created with:
+### Supporting records kept separate from the geographic set
 
-- unique local healthcare discovery information;
-- relevant women's-health topics;
-- emergency/resource information;
-- related articles;
-- local FAQs;
-- legitimate references;
-- contextual internal links.
+- `/blog/cytotec-uses` is an indexable self-canonical explainer in the definition cluster; it supports medical understanding and does not own the national geographic query.
+- `/blog/cytotec-in-saudi-arabia` is an intentional noindex shadow record consolidated to `/service-areas`; it is not a second pillar.
 
-Until then, `/service-areas` is intentionally stronger and safer than duplicated city landing pages.
+## Why these pages are not doorway pages
+
+Each page contains unique local context, for example:
+
+- مكة المكرمة والمدينة المنورة: visitor / pilgrimage / short-stay considerations.
+- بريدة: movement from nearby Qassim governorates.
+- الدمام: cross-city access within the Eastern Province.
+- أبها، نجران، تبوك، عرعر، سكاكا، الباحة: time-and-distance planning for licensed care.
+- جيزان: city and nearby coastal-governorate care routing.
+- حائل: avoiding overnight delay when warning signs are present.
+
+The medical facts remain consistent; the unique value is in local care-access framing, emergency planning, and decision timing.
+
+## Official context preserved site-wide
+
+- Saudi Food and Drug Authority (SFDA)
+- Saudi Ministry of Health
+- 937 for general health guidance
+- 997 for emergencies
+
+## Editorial guardrails
+
+- Informational content only.
+- No buying instructions.
+- No commercial claims.
+- No prescription implication through WhatsApp.
+- WhatsApp remains editorial/informational only.

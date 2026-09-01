@@ -24,6 +24,8 @@ export interface LinkStats {
 
 export interface LinkGraph {
   stats: Map<string, LinkStats>;
+  /** Distinct source slugs for every normalized article target. */
+  incoming: Map<string, string[]>;
   orphans: ManagedArticle[];
   brokenLinks: { from: string; to: string }[];
 }
@@ -91,10 +93,12 @@ export function buildLinkGraph(articles: ManagedArticle[]): LinkGraph {
 
   const orphans = published.filter((article) => (incomingMap.get(article.slug)?.length ?? 0) === 0);
 
-  return { stats, orphans, brokenLinks };
+  const incoming = new Map<string, string[]>();
+  for (const [target, sources] of incomingMap) incoming.set(target, [...new Set(sources)]);
+
+  return { stats, incoming, orphans, brokenLinks };
 }
 
 export function incomingSources(graph: LinkGraph, slug: string): string[] {
-  const entry = graph.stats.get(slug);
-  return entry ? [] : [];
+  return [...(graph.incoming.get(slug) ?? [])];
 }

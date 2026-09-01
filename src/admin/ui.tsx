@@ -60,7 +60,8 @@ export function StatusBadge({ status }: { status: string }) {
     RESEARCH: "info",
     IDEA: "neutral",
     published: "ok",
-    scheduled: "info",
+    // No "scheduled" tone: scheduling was removed; statuses are draft /
+    // review / published / archived only.
     draft: "warn",
     review: "warn",
   };

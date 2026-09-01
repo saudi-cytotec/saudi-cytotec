@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useCatalog } from "../../cms/CatalogContext";
 import { clusters } from "../../data/site";
 import { buildLinkGraph } from "../../utils/internalLinks";
-import { validateArticle } from "../../utils/validation";
 import { statusRequest } from "../api";
 import { Badge, Card, Section, StatusBadge, Td, Th } from "../ui";
 
@@ -25,20 +24,7 @@ export function Overview() {
 
   const drafts = managed.filter((a) => a.status === "draft").length;
   const review = managed.filter((a) => a.status === "review").length;
-  const scheduled = managed.filter((a) => a.status === "scheduled").length;
   const published = articles.length;
-
-  const seoIssues = useMemo(() => {
-    let warnings = 0;
-    let errors = 0;
-    for (const article of managed) {
-      const others = managed.filter((i) => i.id !== article.id);
-      const result = validateArticle(article, others.map((i) => i.slug), others.map((i) => i.title));
-      warnings += result.items.filter((i) => !i.blocking && !i.ok).length;
-      errors += result.items.filter((i) => i.blocking && !i.ok).length;
-    }
-    return { warnings, errors };
-  }, [managed]);
 
   const mapPublished = map.filter((row) => row.status === "PUBLISHED" || row.status === "UPDATED").length;
   const mapP0 = map.filter((row) => row.priority === "P0");
@@ -64,16 +50,15 @@ export function Overview() {
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-3">
         <Card label="منشور للعامة" value={published} />
         <Card label="مسودات" value={drafts} />
         <Card label="قيد المراجعة" value={review} />
-        <Card label="مجدولة للنشر" value={scheduled} />
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">
         <Card label="خريطة المحتوى" value={`${mapPublished}/${map.length}`} hint={`P0 مكتمل: ${mapP0Done}/${mapP0.length}`} tone={mapPublished === map.length ? "ok" : "warn"} />
-        <Card label="تحذيرات SEO" value={seoIssues.warnings} hint={`أخطاء تقنية مانعة: ${seoIssues.errors}`} tone={seoIssues.errors ? "bad" : seoIssues.warnings ? "warn" : "ok"} />
+        <Card label="إجمالي المقالات" value={managed.length} hint={`منشور: ${published} · مسودات: ${drafts}`} />
         <Card label="روابط داخلية مكسورة" value={broken} tone={broken ? "bad" : "ok"} hint={`مقالات بلا روابط واردة: ${orphans}`} />
         <Card label="404 غير معالجة" value={open404} hint={`قواعد إعادة توجيه نشطة: ${redirectRules.length}`} tone={open404 ? "warn" : "ok"} />
       </div>
@@ -134,11 +119,9 @@ export function Overview() {
             </p>
           </div>
           <div className="rounded-2xl border border-line p-4">
-            <p className="font-bold text-brand-deep">الجدولة (Cron يومي)</p>
+            <p className="font-bold text-brand-deep">النشر الآلي والمجدول</p>
             <p className="mt-1 text-xs leading-6 text-ink-soft">
-              {env?.capabilities.autoRelease
-                ? "مفعّل: /api/release ينقل المقالات المستحقة يومياً (17:03 UTC)."
-                : "بانتظار GITHUB_PUBLISH_TOKEN وCRON_SECRET."}
+              لا توجد جدولة ولا cron ولا نشر تلقائي — النشر يحدث فقط بضغطة «نشر» من المحرر بعد جلسة مشرف.
             </p>
           </div>
           <div className="rounded-2xl border border-line p-4">

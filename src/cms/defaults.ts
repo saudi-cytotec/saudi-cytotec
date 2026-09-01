@@ -2,7 +2,6 @@ import { articles } from "../data/articles";
 import { SITE } from "../data/site";
 import type { ContentMapItem, ManagedArticle, SearchIntent, SiteSettings } from "../types";
 import { contentMap } from "./registrySource";
-import { testArticle } from "./testArticle";
 
 function intentFor(cluster: ManagedArticle["cluster"]): SearchIntent {
   if (cluster === "emergency") return "informational";
@@ -33,14 +32,16 @@ export function staticToManaged(article: (typeof articles)[number]): ManagedArti
 
 export const staticManaged: ManagedArticle[] = articles.map(staticToManaged);
 
-export const generatedDrafts: ManagedArticle[] = [testArticle];
+// NOTE: no generated test draft is seeded into the CMS. AI generation is only
+// possible when an administrator explicitly clicks "توليد المسودة" in the
+// generator screen, and the result is always an editable DRAFT — never
+// auto-published.
 
 export const defaultSettings: SiteSettings = {
   name: SITE.name,
   domain: SITE.domain,
   email: SITE.email,
   description: SITE.description,
-    defaultOgImage: "/images/sources.jpg",
   indexPublic: true,
 };
 

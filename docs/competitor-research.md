@@ -50,10 +50,10 @@ No other competitor was used. Findings below are structural only; no wording, cl
 
 ### Original saudiersaa implementation
 
-- Created `/service-areas` as a Saudi regional hub, not a mass city-page factory.
-- Regions: Central (Riyadh, Qassim, Hail), Western (Jeddah, Makkah, Madinah, Taif), Eastern (Dammam, Khobar, Qatif, Al Ahsa, Jubail), Southern/Other (Abha, Jazan, Najran, Tabuk).
-- Each city mention carries a distinct healthcare-access note, official numbers, and links back to topic/safety/FAQ/resource pages.
-- No standalone city URL is created unless future CMS content supplies genuinely distinct local healthcare/resource information.
+- Reused `/service-areas` as the authoritative Saudi hub for the query family around `سايتوتك في السعودية`.
+- Preserved the protected 20-article geographic layer through the existing CMS build path, with distinct healthcare-access context rather than swapped-name templates.
+- The hub links to all priority cities and back into safety, FAQ, emergency, and source content.
+- Each city page carries unique value such as pilgrimage/visitor context, inter-city movement, or distance-to-care planning — never delivery, pricing, or purchase language.
 
 ## Competitor 3 — cytotecsa.com
 
@@ -92,5 +92,5 @@ This is implemented via:
 - Safer geographic discovery with no doorway pages.
 - FAQ hub with JSON-LD and contextual links.
 - Article discovery through related articles, previous/next and cluster links.
-- Metadata preserved, selected images respected, and no invented fallback image is required.
+- Metadata preserved, selected image fields remain independent, and the approved social-share fallback is metadata-only for OG/Twitter.
 - CMS remains the single source for articles, map, competitor gap matrix and geo registry.

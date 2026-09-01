@@ -52,7 +52,7 @@ export const cluster06 = [
     metaTitle: "ألم الحوض متى تراجعين الطبيب",
     metaDescription: "علامات ألم الحوض التي تستدعي عيادة أو طوارئ، بما في ذلك الألم مع حمل محتمل.",
     excerpt: "الألم الذي يوقظ من النوم أو يمنع المشي أو يرافق حمى أو إغماء لا يُدار بالمسكّن وحده.",
-    related: ["severe-abdominal-pain", "warning-signs-in-pregnancy", "when-to-see-doctor-immediately"],
+    related: ["severe-abdominal-pain", "warning-signs-in-pregnancy", "when-to-see-doctor-immediately", "reproductive-tract-infections-awareness"],
     points: [
       "الألم الحاد المفاجئ مع دوخة قد يكون طارئاً.",
       "الألم المزمن يستحق تشخيصاً حتى لا يُطبَّع المعاناة.",

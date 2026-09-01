@@ -161,7 +161,7 @@ export function GeneratorScreen() {
       setDraftArticle(article);
       upsertArticle(article);
       setDraftNote(
-        `اكتملت المسودة (${pipeline.wordCount} كلمة في المتن)${pipeline.missingWords > 0 ? ` — أقل من العمق المقترح بـ ${pipeline.missingWords} كلمة ولا يمنع النشر.` : ""} افتحيها في المحرر للمراجعة النهائية.`,
+        `اكتملت المسودة (${pipeline.wordCount} كلمة في المتن). افتحيها في المحرر للتحرير والمراجعة قبل النشر اليدوي.`,
       );
     }
   }

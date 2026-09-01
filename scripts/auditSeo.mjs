@@ -29,6 +29,7 @@ const REDIRECTS = path.join(ROOT, "content", "redirects.json");
 const MAP = path.join(ROOT, "content", "map.json");
 const VERCEL = path.join(ROOT, "vercel.json");
 const ARTICLES_DIR = path.join(ROOT, "src", "data", "articles");
+const PUBLISHED_DIR = path.join(ROOT, "content", "published");
 
 const results = [];
 let criticals = 0;
@@ -148,6 +149,16 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   let all = "";
   for (const file of files) all += fs.readFileSync(path.join(ARTICLES_DIR, file), "utf8");
   const slugs = new Set([...all.matchAll(/slug:\s*"([a-z0-9-]+)"/g)].map((m) => m[1]));
+  // CMS-published JSON can add or override a static slug, so the audit must
+  // validate links against the same combined catalog shipped by the build.
+  try {
+    for (const file of fs.readdirSync(PUBLISHED_DIR).filter((name) => name.endsWith(".json"))) {
+      const row = JSON.parse(fs.readFileSync(path.join(PUBLISHED_DIR, file), "utf8"));
+      if (row?.slug) slugs.add(row.slug);
+    }
+  } catch {
+    // Static articles remain the minimum catalog on a fresh checkout.
+  }
   const related = [...all.matchAll(/related:\s*\[([^\]]*)\]/g)].flatMap((m) => [...m[1].matchAll(/"([a-z0-9-/]+)"/g)].map((x) => x[1]));
   const broken = related.filter((target) => !target.startsWith("/") && !slugs.has(target));
   const pathLinks = [...all.matchAll(/cornerstones:\s*\[([^\]]*)\]/g)].flatMap((m) => [...m[1].matchAll(/"(\/[^"]+)"/g)].map((x) => x[1]));
@@ -156,15 +167,33 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   report("Internal links", broken.length === 0 && brokenPaths.length === 0, `${slugs.size} slugs; related broken: ${broken.length}; cornerstone broken: ${brokenPaths.length}${broken.length ? ` (${broken.slice(0, 3).join(", ")})` : ""}${brokenPaths.length ? ` (${brokenPaths.slice(0, 3).join(", ")})` : ""}`);
 }
 
-// 8. Referenced images exist (sources come from static data + bundle strings)
+// 8. Referenced images exist AND are from the approved assets only.
+//
+// APPROVED_ASSETS — the exact owner-approved image set (logo, homepage hero,
+// article WhatsApp banner, social share). Any other /images/ reference is a
+// violation: no og-default, no generated article image, no favicon, no legacy
+// contextual images. Admin uploads live under /media/, not /images/, and are
+// covered by scripts/auditImages.mjs against content/media.json.
+const APPROVED_ASSETS = new Set([
+  "/images/لوجو.png",
+  "/images/Bannerrr.png",
+  "/images/saudiersaa-article-whatsapp-banner.png.png",
+  "/images/saudiersaa-social-share.png",
+]);
 {
   const html = fs.readFileSync(DIST, "utf8");
   const media = fs.readFileSync(path.join(ROOT, "src", "data", "media.ts"), "utf8");
-  const srcRefs = [...html.matchAll(/\/images\/[a-z0-9./_-]+\.(?:jpg|jpeg|png|svg|webp|avif)/gi)].map((m) => m[0]);
-  const mediaRefs = [...media.matchAll(/\/images\/[a-z0-9./_-]+\.(?:jpg|jpeg|png|svg|webp|avif)/gi)].map((m) => m[0]);
-  const refs = [...new Set([...srcRefs, ...mediaRefs])].filter((src) => !src.includes("uploads/"));
+  // Unicode-aware: approved filenames include Arabic (لوجو.png).
+  const srcRefs = [...html.matchAll(/\/images\/[^"'()\s,;]+\.(?:jpg|jpeg|png|svg|webp|avif)/gi)].map((m) => m[0]);
+  const mediaRefs = [...media.matchAll(/\/images\/[^"'()\s,;]+\.(?:jpg|jpeg|png|svg|webp|avif)/gi)].map((m) => m[0]);
+  const refs = [...new Set([...srcRefs, ...mediaRefs])].map((src) => decodeURIComponent(src));
+  const nonApproved = refs.filter((src) => !APPROVED_ASSETS.has(src));
   const missing = refs.filter((src) => !fs.existsSync(path.join(ROOT, "dist", src)));
-  report("Images", missing.length === 0, `${refs.length} unique references; missing: ${missing.length ? missing.join(", ") : "none"}`);
+  report(
+    "Images",
+    nonApproved.length === 0 && missing.length === 0,
+    `${refs.length} unique references; non-approved: ${nonApproved.length ? nonApproved.join(", ") : "none"}; missing: ${missing.length ? missing.join(", ") : "none"}`,
+  );
 }
 
 // Write report

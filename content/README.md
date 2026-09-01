@@ -6,21 +6,23 @@ Published articles live here as JSON, one file per article. This directory — n
 ```
 content/
   published/   live articles, bundled into the build
-  scheduled/   articles waiting for their publishAt date
 ```
 
 ## How publishing works
 
-1. `POST /api/publish` (admin only) writes `content/published/<slug>.json` and
-   commits it to this repository.
+1. `POST /api/publish` (admin only, explicit editor action) writes
+   `content/published/<slug>.json` and commits it to this repository.
 2. The commit triggers a Vercel redeploy.
 3. `src/cms/contentSource.ts` bundles every file in `content/published/*.json`
    at build time via `import.meta.glob`.
-4. `scripts/buildSitemap.mjs` regenerates `public/sitemap.xml` during the build,
-   so a newly published article enters the sitemap with no manual step.
+4. `scripts/emitSitemap.ts` (Vite plugin) regenerates `public/sitemap.xml`
+   during the build, so a newly published article enters the sitemap with no
+   manual step.
 
-Scheduled articles are written to `content/scheduled/` and promoted to
-`content/published/` by the daily Vercel Cron calling `POST /api/release`.
+There is **no scheduled or automatic publishing**: no cron, no `/api/release`,
+no background promotion. Publishing happens only when an administrator clicks
+«نشر» in the CMS. AI generation (explicit generator click) always creates an
+editable draft and never publishes.
 
 ## File shape
 
@@ -41,6 +43,13 @@ file:
 }
 ```
 
+Articles carry optional, independent image fields. Exactly four owner-approved
+permanent assets exist
+(logo, homepage banner, article WhatsApp banner, global social-share image). The
+first three are wired directly in the UI; the social-share asset is metadata-only
+fallback. An article with no selected image simply renders without an article
+image while its SEO metadata uses the global social-share image.
+
 Files with an invalid slug, a missing title, or no valid `blocks` are skipped at
 build time and logged as a warning — they cannot silently break the site.
 
@@ -49,3 +58,5 @@ build time and logged as a warning — they cannot silently break the site.
 - Never put a phone number, WhatsApp handle, or vendor contact in content.
 - Never add `Drug`, `Product`, `Offer`, `Review`, or `AggregateRating` schema;
   this site sells nothing and has no ratings.
+- Never add image fields to article JSON; the approved assets are the only
+  images the site serves.

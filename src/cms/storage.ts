@@ -1,5 +1,7 @@
 import type { ContentMapItem, ManagedArticle, NotFoundEntry, RedirectRule, SiteSettings } from "../types";
-import { defaultSettings, generatedDrafts, seedContentMap, staticManaged } from "./defaults";
+import { sanitizeArticleImages } from "../utils/images";
+import { selectableImagePaths } from "../data/media";
+import { defaultSettings, seedContentMap, staticManaged } from "./defaults";
 import { committedArticles } from "./contentSource";
 import { redirectRegistry } from "./registrySource";
 
@@ -40,18 +42,20 @@ export interface CmsState {
 
 function baseline(): ManagedArticle[] {
   // Committed JSON overrides a static row with the same slug, so a re-published
-  // article keeps its URL and updates in place.
-  const byId = new Map(staticManaged.map((item) => [item.id, item]));
+  // article keeps its URL and updates in place. The override matches by slug
+  // (committed rows carry a `cms-` id, so matching by id would silently keep
+  // BOTH rows and publish a duplicate catalog entry under one URL). The static
+  // row keeps its id so an editor's local overlay continues to merge cleanly.
+  const bySlug = new Map(staticManaged.map((item) => [item.slug, item]));
   for (const article of committedArticles) {
-    byId.set(article.id, article);
+    const base = bySlug.get(article.slug);
+    bySlug.set(article.slug, base ? { ...article, id: base.id } : article);
   }
-  return [...byId.values()];
+  return [...bySlug.values()];
 }
 
 function baseArticles(): ManagedArticle[] {
-  const rows = baseline();
-  const known = new Set(rows.map((item) => item.id));
-  return [...rows, ...generatedDrafts.filter((item) => !known.has(item.id))];
+  return baseline();
 }
 
 function emptyState(): CmsState {
@@ -117,9 +121,19 @@ export function loadState(): CmsState {
   const mapById = new Map(localMap.map((row) => [row.id, row]));
 
   return {
-    // Local edits win over the bundle; anything not touched locally comes from it.
-    articles: [...localRows, ...base.articles.filter((item) => !localIds.has(item.id))],
+    // Local edits win over the bundle. Image fields are sanitised (not wiped):
+    // an admin-selected upload or approved asset survives verbatim, while a
+    // stale overlay value pointing at a deleted legacy file resolves to "no
+    // image" and is never replaced by a default.
+    articles: [
+      ...localRows.map((row) => sanitizeArticleImages(row, selectableImagePaths)),
+      ...base.articles
+        .filter((item) => !localIds.has(item.id))
+        .map((item) => sanitizeArticleImages(item, selectableImagePaths)),
+    ],
     map: base.map.map((row) => mapById.get(row.id) ?? row),
+    // Only current settings keys are used anywhere — no default-OG-image field
+    // exists in the type, so any legacy key in storage is inert dead data.
     settings: { ...base.settings, ...(local.settings ?? {}) },
     redirectRules: Array.isArray(local.redirectRules) ? (local.redirectRules as RedirectRule[]) : null,
     notFoundLog: Array.isArray(local.notFoundLog) ? (local.notFoundLog as NotFoundEntry[]) : [],

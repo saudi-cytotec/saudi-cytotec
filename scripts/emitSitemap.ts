@@ -16,8 +16,13 @@ import { clusters, SITE } from "../src/data/site";
  *   + every article that is part of the deployed bundle (static .ts articles
  *     plus every JSON file in content/published)
  *   - /admin, /api, /search: disallowed or non-content
- *   - anything scheduled but not yet published
+ *   - anything not yet published (drafts/review/archived): they never exist as
+ *     a file under content/published, so they can never appear as a live URL
+ *   - any published article the administrator explicitly excluded
  *   - duplicate URLs (deduplicated below)
+ *
+ * There is no scheduled publishing; only content/published/*.json entries are
+ * live, so the sitemap never needs a scheduler to stay accurate.
  */
 
 const PUBLISHED_DIR = path.resolve("content/published");
@@ -42,18 +47,24 @@ const EXTRA_ROUTES: Entry[] = [
   { loc: "/topics", changefreq: "weekly", priority: "0.9" },
   { loc: "/service-areas", changefreq: "monthly", priority: "0.8" },
   { loc: "/contact", changefreq: "yearly", priority: "0.5" },
+  { loc: "/service-areas", changefreq: "monthly", priority: "0.6" },
   { loc: "/sitemap", changefreq: "monthly", priority: "0.4" },
 ];
 
-function readCommittedSlugs(): { slug: string; updatedAt?: string }[] {
+function readCommittedSlugs(): { slug: string; updatedAt?: string; noindex?: boolean; excludeFromSitemap?: boolean }[] {
   try {
     const files = fs.readdirSync(PUBLISHED_DIR).filter((f) => f.endsWith(".json"));
-    const out: { slug: string; updatedAt?: string }[] = [];
+    const out: { slug: string; updatedAt?: string; noindex?: boolean; excludeFromSitemap?: boolean }[] = [];
     for (const file of files) {
       try {
         const parsed = JSON.parse(fs.readFileSync(path.join(PUBLISHED_DIR, file), "utf8"));
         if (parsed && typeof parsed.slug === "string" && parsed.slug) {
-          out.push({ slug: parsed.slug, updatedAt: parsed.updatedAt });
+          out.push({
+            slug: parsed.slug,
+            updatedAt: parsed.updatedAt,
+            noindex: parsed.noindex === true,
+            excludeFromSitemap: parsed.excludeFromSitemap === true,
+          });
         }
       } catch (err) {
         console.warn(`[sitemap] skipped malformed ${file}`);
@@ -98,21 +109,31 @@ export function emitSitemap(): Plugin {
 
       push({ loc: "/blog", changefreq: "weekly", priority: "0.8" });
 
-      // Articles shipped in the bundle.
-      for (const article of articles) {
+      // Articles published through the CMS (committed JSON) come FIRST: a
+      // committed file overrides its static twin in the bundle (see
+      // src/cms/storage.ts), so the content that actually ships also owns the
+      // sitemap entry and its lastmod. Pushing static first would silently
+      // keep a stale lastmod for any re-published article.
+      const committedRows = new Map(readCommittedSlugs().map((row) => [row.slug, row]));
+      for (const row of committedRows.values()) {
+        // Drafts never reach content/published, so everything here is live.
+        // An administrator can still exclude a published article explicitly.
+        if (row.noindex || row.excludeFromSitemap) continue;
         push({
-          loc: `/blog/${article.slug}`,
-          lastmod: article.updatedAt,
+          loc: `/blog/${row.slug}`,
+          lastmod: row.updatedAt,
           changefreq: "monthly",
           priority: "0.6",
         });
       }
 
-      // Articles published through the CMS (committed JSON).
-      for (const row of readCommittedSlugs()) {
+      // Articles shipped in the bundle (static .ts files).
+      for (const article of articles) {
+        if (committedRows.has(article.slug)) continue;
+        if (article.noindex) continue;
         push({
-          loc: `/blog/${row.slug}`,
-          lastmod: row.updatedAt,
+          loc: `/blog/${article.slug}`,
+          lastmod: article.updatedAt,
           changefreq: "monthly",
           priority: "0.6",
         });

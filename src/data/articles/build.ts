@@ -12,6 +12,7 @@ const cornerstoneMap: Record<ClusterId, string[]> = {
   interactions: ["/safety", "/medical-uses", "/when-to-see-doctor"],
   emergency: ["/when-to-see-doctor", "/side-effects", "/contact"],
   evidence: ["/medical-sources", "/medical-disclaimer", "/about"],
+  geographic: ["/safety", "/what-is-cytotec", "/when-to-see-doctor"],
 };
 
 const referenceMap: Record<ClusterId, string[]> = {
@@ -25,6 +26,7 @@ const referenceMap: Record<ClusterId, string[]> = {
   interactions: ["fdaLabel", "dailyMed", "ema"],
   emergency: ["moh", "whoSafeMotherhood", "fdaLabel"],
   evidence: ["fdaLabel", "whoEml", "cochrane", "nice", "sfda"],
+  geographic: ["fdaLabel", "sfda", "moh", "dailyMed"],
 };
 
 export function edu(
@@ -36,7 +38,6 @@ export function edu(
     metaTitle: string;
     metaDescription: string;
     excerpt: string;
-    imageAlt: string;
     related: string[];
     blocks: ContentBlock[];
     faqs?: { q: string; a: string }[];

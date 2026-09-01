@@ -1,7 +1,10 @@
 /// <reference types="vite/client" />
 import type { ContentBlock, ManagedArticle } from "../types";
 import { staticToManaged } from "./defaults";
+import { SITE } from "../data/site";
 import { isValidShortSlug } from "../utils/slug";
+import { resolveImage } from "../utils/images";
+import { selectableImagePaths } from "../data/media";
 
 /**
  * Build-time content source.
@@ -63,8 +66,6 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
     return null;
   }
 
-  // Route through the same normaliser used for the static articles so committed
-  // content gets identical default fields (canonical, og tags, image, etc.).
   const asStatic = {
     slug,
     title,
@@ -75,8 +76,14 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
     excerpt: typeof raw.excerpt === "string" ? raw.excerpt : "",
     publishedAt: typeof raw.publishedAt === "string" ? raw.publishedAt : new Date().toISOString().slice(0, 10),
     updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : new Date().toISOString().slice(0, 10),
-    image: typeof raw.image === "string" ? raw.image : "",
+    // Images: exactly what the administrator selected, or nothing at all.
+    image: resolveImage(raw.image, selectableImagePaths),
     imageAlt: typeof raw.imageAlt === "string" ? raw.imageAlt : "",
+    thumbnail: resolveImage(raw.thumbnail, selectableImagePaths),
+    thumbnailAlt: typeof raw.thumbnailAlt === "string" ? raw.thumbnailAlt : "",
+    bannerImage: resolveImage(raw.bannerImage, selectableImagePaths),
+    bannerImageAlt: typeof raw.bannerImageAlt === "string" ? raw.bannerImageAlt : "",
+    ogImage: resolveImage(raw.ogImage, selectableImagePaths),
     related: Array.isArray(raw.related) ? raw.related.filter((v): v is string => typeof v === "string") : [],
     cornerstones: Array.isArray(raw.cornerstones)
       ? raw.cornerstones.filter((v): v is string => typeof v === "string")
@@ -89,26 +96,76 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
           .filter((f) => typeof f.q === "string" && typeof f.a === "string")
           .map((f) => ({ q: f.q as string, a: f.a as string }))
       : [],
+    noindex: raw.noindex === true,
   } as unknown as Parameters<typeof staticToManaged>[0];
 
   const managed = staticToManaged(asStatic);
+  const noindex = raw.noindex === true;
+  const selfCanonical = `${SITE.domain}/blog/${slug}`;
+  // Indexable articles must self-canonicalize. A different canonical is only
+  // retained for an intentionally noindex/consolidated legacy record.
+  const canonical = noindex && typeof raw.canonical === "string" && raw.canonical ? raw.canonical : selfCanonical;
 
   return {
     ...managed,
-    // Committed content is live by definition: it is in the deployed bundle.
     status: "published",
     source: "cms",
     id: typeof raw.id === "string" && raw.id ? raw.id : `cms-${slug}`,
     slugLocked: true,
-    canonical: typeof raw.canonical === "string" && raw.canonical ? raw.canonical : managed.canonical,
+    canonical,
     primaryKeyword:
       typeof raw.primaryKeyword === "string" && raw.primaryKeyword ? raw.primaryKeyword : managed.primaryKeyword,
+    secondaryKeywords: Array.isArray(raw.secondaryKeywords)
+      ? raw.secondaryKeywords.filter((v): v is string => typeof v === "string")
+      : managed.secondaryKeywords,
+    searchIntent:
+      typeof raw.searchIntent === "string" && raw.searchIntent
+        ? (raw.searchIntent as ManagedArticle["searchIntent"])
+        : managed.searchIntent,
+    articleType:
+      typeof raw.articleType === "string" && raw.articleType
+        ? (raw.articleType as ManagedArticle["articleType"])
+        : managed.articleType,
     seoTitle: typeof raw.seoTitle === "string" && raw.seoTitle ? raw.seoTitle : managed.seoTitle,
+    ogTitle: typeof raw.ogTitle === "string" && raw.ogTitle ? raw.ogTitle : managed.ogTitle,
+    ogDescription:
+      typeof raw.ogDescription === "string" && raw.ogDescription ? raw.ogDescription : managed.ogDescription,
+    description: typeof raw.description === "string" && raw.description ? raw.description : managed.description,
+    image: resolveImage(raw.image, selectableImagePaths),
+    imageAlt: resolveImage(raw.image, selectableImagePaths) && typeof raw.imageAlt === "string" ? raw.imageAlt : "",
+    thumbnail: resolveImage(raw.thumbnail, selectableImagePaths),
+    thumbnailAlt:
+      resolveImage(raw.thumbnail, selectableImagePaths) && typeof raw.thumbnailAlt === "string"
+        ? raw.thumbnailAlt
+        : "",
+    bannerImage: resolveImage(raw.bannerImage, selectableImagePaths),
+    bannerImageAlt:
+      resolveImage(raw.bannerImage, selectableImagePaths) && typeof raw.bannerImageAlt === "string"
+        ? raw.bannerImageAlt
+        : "",
+    ogImage: resolveImage(raw.ogImage, selectableImagePaths),
+    medicalReviewer: typeof raw.medicalReviewer === "string" ? raw.medicalReviewer : undefined,
+    lastReviewedAt: typeof raw.lastReviewedAt === "string" ? raw.lastReviewedAt : undefined,
+    nofollow: raw.nofollow === true,
+    excludeFromSitemap: raw.excludeFromSitemap === true,
     metaDescription: typeof raw.metaDescription === "string" ? raw.metaDescription : managed.metaDescription,
     internalLinks: Array.isArray(raw.internalLinks)
       ? raw.internalLinks.filter((v): v is string => typeof v === "string")
       : managed.internalLinks,
+    resourceLinks: Array.isArray(raw.resourceLinks)
+      ? raw.resourceLinks
+          .filter((item): item is Record<string, unknown> => isRecord(item))
+          .filter((item) => typeof item.to === "string" && typeof item.label === "string")
+          .map((item) => ({
+            to: item.to as string,
+            label: item.label as string,
+            description: typeof item.description === "string" ? item.description : undefined,
+          }))
+      : managed.resourceLinks,
     references: Array.isArray(raw.references) ? (raw.references as string[]) : managed.references,
+    hasDisclaimer: raw.hasDisclaimer === false ? false : managed.hasDisclaimer,
+    noindex: raw.noindex === true,
+    author: typeof raw.author === "string" ? raw.author : managed.author,
   };
 }
 
@@ -119,7 +176,6 @@ function load(): ManagedArticle[] {
     const article = sanitize(payload, path);
     if (article) out.push(article);
   }
-  // Newest first for "latest" listings.
   return out.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 }
 

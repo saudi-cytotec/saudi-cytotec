@@ -8,7 +8,8 @@ export type ClusterId =
   | "faq"
   | "interactions"
   | "emergency"
-  | "evidence";
+  | "evidence"
+  | "geographic";
 
 export interface Reference {
   id: string;
@@ -30,6 +31,12 @@ export interface ArticleFaq {
   a: string;
 }
 
+export interface ResourceLink {
+  to: string;
+  label: string;
+  description?: string;
+}
+
 export interface Article {
   slug: string;
   title: string;
@@ -40,13 +47,31 @@ export interface Article {
   excerpt: string;
   publishedAt: string;
   updatedAt: string;
-  image: string;
-  imageAlt: string;
+  /**
+   * Optional featured image for the article page. It is independent from the
+   * thumbnail and banner/hero fields; an empty value means no selection.
+   */
+  image?: string;
+  imageAlt?: string;
+  /** Optional large hero/banner shown at the top of the public page. */
+  bannerImage?: string;
+  bannerImageAlt?: string;
+  /**
+   * Optional card / listing thumbnail. Separate from the featured image so an
+   * editor can show a card image without a hero (or the reverse). Empty means
+   * the card stays text-only — never a fallback or generated substitute.
+   */
+  thumbnail?: string;
+  thumbnailAlt?: string;
+  /** Open Graph / social-sharing image. Global fallback is applied in metadata only. */
+  ogImage?: string;
   related: string[];
   cornerstones: string[];
   references: string[];
   blocks: ContentBlock[];
   faqs?: ArticleFaq[];
+  resourceLinks?: ResourceLink[];
+  noindex?: boolean;
 }
 
 export interface Cluster {
@@ -55,7 +80,6 @@ export interface Cluster {
   title: string;
   shortTitle: string;
   description: string;
-  image: string;
 }
 
 export interface StaticPage {
@@ -74,7 +98,11 @@ export interface NavItem {
   label: string;
 }
 
-export type ArticleStatus = "draft" | "review" | "published" | "scheduled";
+export type ArticleStatus = "draft" | "review" | "published" | "archived";
+// NOTE: the legacy "scheduled" status from earlier builds is deliberately not
+// part of this union anymore. Nothing in the system schedules or promotes
+// articles: publishing is exclusively an explicit administrator action. Any
+// old stored row with status "scheduled" is treated as a draft by the catalog.
 export type SearchIntent = "informational" | "navigational" | "commercial" | "transactional" | "commercial investigation" | "local" | "medical safety" | "FAQ";
 export type ArticleType =
   | "pillar"
@@ -100,10 +128,16 @@ export interface ManagedArticle extends Article {
   source: "static" | "cms";
   internalLinks: string[];
   hasDisclaimer: boolean;
-  /** Scheduled publish date (YYYY-MM-DD) when status === "scheduled". */
-  publishAt?: string;
   /** Editorial author byline; empty = platform editorial team. */
   author?: string;
+  /** Named medical reviewer. Only set when a real review happened. */
+  medicalReviewer?: string;
+  /** Date of the last medical review (YYYY-MM-DD). */
+  lastReviewedAt?: string;
+  /** robots follow/nofollow. Default (undefined/false) = follow. */
+  nofollow?: boolean;
+  /** Exclude from sitemap even when published. Default = included. */
+  excludeFromSitemap?: boolean;
 }
 
 /** Editorial workflow states for the 100-topic content map. */
@@ -183,21 +217,7 @@ export interface SiteSettings {
   domain: string;
   email: string;
   description: string;
-  defaultOgImage: string;
   indexPublic: boolean;
 }
 
-export interface ValidationItem {
-  id: string;
-  label: string;
-  ok: boolean;
-  detail: string;
-  blocking: boolean;
-}
 
-export interface ValidationResult {
-  ok: boolean;
-  wordCount: number;
-  missingWords: number;
-  items: ValidationItem[];
-}

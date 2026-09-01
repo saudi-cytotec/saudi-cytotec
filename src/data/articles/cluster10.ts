@@ -8,7 +8,7 @@ export const cluster10 = [
     metaTitle: "كيف تُقيَّم الأدلة الطبية",
     metaDescription: "مقدمة تعليمية لتسلسل قوة الدليل: الملاحظة، الدراسات، المراجعات، والنشرات التنظيمية.",
     excerpt: "ليست كل جملة منشورة دليلاً. القوة تأتي من المنهج وقابلية التكرار ومراجعة الجهات.",
-    related: ["clinical-studies-vs-anecdotes", "reading-a-paper-as-non-specialist", "trusted-sources-further-reading"],
+    related: ["clinical-studies-vs-anecdotes", "reading-a-paper-as-non-specialist", "trusted-sources-further-reading", "common-medical-terms-misoprostol"],
     points: [
       "الرأي الشخصي أضعف من دراسة مضبوطة.",
       "دراسة صغيرة ليست نهاية العلم.",

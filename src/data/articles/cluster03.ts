@@ -184,7 +184,7 @@ export const cluster03 = [
     metaTitle: "مخاطر مصادر الدواء غير الموثوقة",
     metaDescription: "لماذا تشكل الأسواق غير النظامية والتواصل الخاص لبيع الدواء خطراً على السلامة.",
     excerpt: "قد لا تحتوي العبوة على المادة، أو تحتوي تركيزاً خاطئاً، أو شوائب، أو تعليمات مضللة.",
-    related: ["saudi-drug-regulation-context", "risks-of-random-use", "unsafe-unsupervised-use"],
+    related: ["saudi-drug-regulation-context", "risks-of-random-use", "unsafe-unsupervised-use", "medicine-storage-home-safety"],
     points: [
       "التزييف سوق قائم، والأسماء الشهيرة هدف سهل.",
       "غياب سلسلة التبريد أو التخزين يفسد المركب.",

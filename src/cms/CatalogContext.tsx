@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Article, ContentMapItem, ManagedArticle, NotFoundEntry, RedirectRule, SiteSettings } from "../types";
+import { sanitizeArticleImages } from "../utils/images";
+import { selectableImagePaths } from "../data/media";
 import { defaultSettings } from "./defaults";
 import { effectiveRedirectRules, loadState, saveState, type CmsState } from "./storage";
 
@@ -45,9 +47,22 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
   }, [state, ready]);
 
   const value = useMemo<CatalogValue>(() => {
-    const published = state.articles.filter((item) => item.status === "published");
+    // Case-insensitive on purpose: the content-map vocabulary uses "PUBLISHED"
+    // while the catalog uses "published". A published article must never be
+    // silently dropped from the public catalog because of a casing difference —
+    // that would render its URL as a noindex 404 fallback in production.
+    // Only genuinely published articles reach the public catalog. Drafts,
+    // review and archived rows stay out of the rendered site. There is no
+    // scheduled state: nothing schedules or promotes articles.
+    const published = state.articles.filter(
+      (item) => String(item.status).toLowerCase() === "published",
+    );
     return {
-      articles: published,
+      // The public catalog carries EXACTLY the images the administrator
+      // selected. Stale overlay values pointing at deleted legacy assets are
+      // resolved to "no image"; nothing is ever substituted with a default,
+      // cluster or generated image.
+      articles: published.map((item) => sanitizeArticleImages(item, selectableImagePaths)),
       managed: state.articles,
       map: state.map,
       settings: state.settings,

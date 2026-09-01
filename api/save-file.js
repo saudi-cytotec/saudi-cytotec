@@ -9,9 +9,9 @@ import { publishToken, writeFile } from "./_lib/repo.js";
  *
  * Body: { path: "content/map.json", content: <string>, message: <string> }
  *
- * Only the registry files below may be written. Published/scheduled articles
- * go through /api/publish, and redirects through /api/sync-redirects (which
- * also regenerates vercel.json).
+ * Only the registry files below may be written. Published articles go through
+ * /api/publish (manual, admin-only — no scheduled publishing exists), and
+ * redirects through /api/sync-redirects (which also regenerates vercel.json).
  */
 const WHITELIST = new Set([
   "content/map.json",

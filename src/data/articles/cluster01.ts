@@ -8,7 +8,7 @@ export const cluster01 = [
     metaTitle: "تعريف سايتوتك بعيداً عن الشائعات",
     metaDescription: "مقال تعليمي يوضح أن سايتوتك اسم تجاري لمادة ميزوبروستول، ولماذا لا يكفي الاسم لفهم التحذيرات أو اتخاذ قرار صحي.",
     excerpt: "البحث عن الاسم الشائع يبدأ غالباً من القلق. هذا المقال يضع التعريف في سياقه التنظيمي ويفصل بين الشهرة والمعلومة.",
-    related: ["misoprostol-active-ingredient", "difference-cytotec-misoprostol", "key-facts-before-reading-cytotec"],
+    related: ["misoprostol-active-ingredient", "difference-cytotec-misoprostol", "key-facts-before-reading-cytotec", "cytotec-uses"],
     points: [
       "سايتوتك علامة تجارية، والتعريف الطبي يبدأ من المادة والاستطباب والتحذير لا من سهولة حفظ الاسم.",
       "نشرة إدارة الغذاء والدواء تربط الاسم بتحذير حمل بارز واستطباب مشروط لحماية المعدة.",
@@ -96,7 +96,7 @@ export const cluster01 = [
     metaTitle: "التصنيف الدوائي لميزوبروستول",
     metaDescription: "شرح تعليمي لانتماء ميزوبروستول إلى نظائر البروستاغلاندين E1 ودلالة ذلك على التأثيرات والتحذيرات.",
     excerpt: "التصنيف الدوائي أداة للفهم لا للتبسيط المخل. هو يفسر تعدد الأعضاء المستهدفة.",
-    related: ["misoprostol-active-ingredient", "how-misoprostol-works-in-body", "prostaglandin-allergy"],
+    related: ["misoprostol-active-ingredient", "how-misoprostol-works-in-body", "prostaglandin-allergy", "history-development-misoprostol"],
     points: [
       "الانتماء إلى نظائر PGE1 يعني تأثيرات محتملة على الغشاء المخاطي وعلى العضلات الملساء.",
       "الحساسية تجاه بروستاغلاندينات قد تضع الشخص في دائرة الموانع.",
@@ -162,7 +162,7 @@ export const cluster01 = [
     metaTitle: "أسماء تجارية أخرى لميزوبروستول",
     metaDescription: "لماذا قد يظهر ميزوبروستول بأسماء مختلفة حسب البلد، ولماذا تبقى التحذيرات الجوهرية مرتبطة بالمادة.",
     excerpt: "البحث بالاسم المحلي فقط قد يخفي أنك أمام المادة نفسها أو أمام مستحضر غير مكافئ.",
-    related: ["difference-cytotec-misoprostol", "saudi-drug-regulation-context", "cytotec-definition"],
+    related: ["difference-cytotec-misoprostol", "saudi-drug-regulation-context", "cytotec-definition", "cytotec-pharmaceutical-forms"],
     points: [
       "التسجيل التجاري محلي، أما المادة فعالمية في اسمها العلمي.",
       "وجود اسم مختلف لا يعني غياب تحذير الحمل.",

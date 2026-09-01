@@ -206,7 +206,7 @@ export const cluster05 = [
     metaTitle: "أسئلة شائعة عن الأدوية والحمل",
     metaDescription: "إجابات تعليمية عن التعامل مع الأدوية أثناء الحمل دون قوائم جرعات.",
     excerpt: "القاعدة الذهبية: لا تبدئي ولا توقفي دواءاً مزمناً فجأة دون سؤال الجهة المعالجة.",
-    related: ["early-pregnancy-overview", "why-contraindicated-in-pregnancy-ulcer-use", "discussing-medication-history"],
+    related: ["early-pregnancy-overview", "why-contraindicated-in-pregnancy-ulcer-use", "discussing-medication-history", "breastfeeding-considerations"],
     points: [
       "أبلغي أي طبيب أو طبيب أسنان أنك حامل أو قد تكونين.",
       "الأدوية المزمنة للضغط أو السكري أو الصرع تحتاج تنسيقاً لا انقطاعاً مفاجئاً.",
