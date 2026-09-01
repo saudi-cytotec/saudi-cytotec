@@ -331,9 +331,10 @@ check("twitter:image equals the exact selected URL", headWithOg.includes(`name="
 check("twitter:card upgrades to summary_large_image", headWithOg.includes('content="summary_large_image"'));
 
 const headNoOg = await renderSeoHead({ title: "CMS Test Article", description: "وصف", path: `/blog/${SLUG}`, type: "article" });
-check("NO og:image emitted when none selected", !headNoOg.includes("og:image"));
-check("NO twitter:image emitted when none selected", !headNoOg.includes("twitter:image"));
-check("no default image name leaks into the head", !/og-default|safety\.jpg|hero\.jpg|hero-doctor/.test(headNoOg));
+check("global social-share fallback is emitted as og:image metadata", headNoOg.includes('property="og:image" content="https://saudiersaa.com/images/saudiersaa-social-share.png"'));
+check("global social-share fallback is emitted as twitter:image metadata", headNoOg.includes('name="twitter:image" content="https://saudiersaa.com/images/saudiersaa-social-share.png"'));
+check("fallback does not become an article/body image", !headNoOg.includes("<img") && !/background-image/i.test(headNoOg));
+check("no deleted legacy image name leaks into the head", !/og-default|safety\.jpg|hero\.jpg|hero-doctor/.test(headNoOg));
 
 /* ==================================================== TEST 7 — REMOVE IMAGE */
 section("TEST 7 — REMOVE IMAGE");

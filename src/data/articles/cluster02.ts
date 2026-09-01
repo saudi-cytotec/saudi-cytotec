@@ -8,7 +8,7 @@ export const cluster02 = [
     metaTitle: "الاستطبابات المعتمدة لميزوبروستول",
     metaDescription: "شرح تعليمي للاستطباب المعتمد في النشرة الأمريكية وحدود نقل هذا الاستطباب إلى قرارات فردية.",
     excerpt: "الاعتماد التنظيمي وصف قانوني وعلمي مشروط، وليس دعوة عامة للاستخدام.",
-    related: ["misoprostol-gastric-ulcers", "off-label-use-meaning", "hospital-clinic-limits"],
+    related: ["misoprostol-gastric-ulcers", "off-label-use-meaning", "hospital-clinic-limits", "not-all-uses-are-alike"],
     points: [
       "النشرة الأمريكية تربط سايتوتك بتقليل خطر قرحة مرتبطة بمضادات الالتهاب في فئات مختارة.",
       "حتى الاستطباب المعتمد مشروط باستبعاد الحمل ومتابعة طبية.",
@@ -162,7 +162,7 @@ export const cluster02 = [
     metaTitle: "مخاطر الاستخدام غير الخاضع للإشراف",
     metaDescription: "شرح تعليمي لمخاطر استخدام ميزوبروستول دون تقييم طبي أو مصدر نظامي.",
     excerpt: "الخطر لا يأتي فقط من المركب، بل من غياب التشخيص والجودة والمتابعة.",
-    related: ["why-not-home-treatment", "risks-of-random-use", "unreliable-medicine-sources"],
+    related: ["why-not-home-treatment", "risks-of-random-use", "unreliable-medicine-sources", "use-without-prescription"],
     points: [
       "دون إشراف قد يُستخدم الدواء في حمل غير معروف أو حمل خارج الرحم أو موانع غير مكتشفة.",
       "المصدر غير النظامي يضيف خطر التزييف وسوء التخزين.",

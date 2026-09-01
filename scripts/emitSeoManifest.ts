@@ -37,6 +37,12 @@ interface ArticleEntry {
   references: string[];
   related: string[];
   cornerstones: string[];
+  internalLinks: string[];
+  resourceLinks: { to: string; label: string; description?: string }[];
+  image: string;
+  thumbnail: string;
+  bannerImage: string;
+  ogImage: string;
   expectedRobots: string;
   sitemapIncluded: boolean;
 }
@@ -55,6 +61,7 @@ interface PublishedRow {
   parsed: Record<string, any>;
   updatedAt?: string;
   noindex: boolean;
+  excludeFromSitemap: boolean;
 }
 
 function parseBlocks(raw: unknown) {
@@ -82,6 +89,22 @@ function selfUrl(slug: string) {
   return `${SITE.domain}/blog/${slug}`;
 }
 
+function resourceLinks(value: unknown): { to: string; label: string; description?: string }[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === "object")
+    .filter((item) => typeof item.to === "string" && typeof item.label === "string")
+    .map((item) => ({
+      to: String(item.to),
+      label: String(item.label),
+      description: typeof item.description === "string" ? item.description : undefined,
+    }));
+}
+
+function imageValue(value: unknown): string {
+  return typeof value === "string" ? value : "";
+}
+
 function loadCommitted(dir: string) {
   const committed = new Map<string, PublishedRow>();
   try {
@@ -93,6 +116,7 @@ function loadCommitted(dir: string) {
             parsed,
             updatedAt: parsed.updatedAt,
             noindex: parsed.noindex === true,
+            excludeFromSitemap: parsed.excludeFromSitemap === true,
           });
         }
       } catch {
@@ -119,11 +143,15 @@ export function emitSeoManifest(): Plugin {
         const updatedAt = str(override?.updatedAt, committed.get(article.slug)?.updatedAt ?? article.updatedAt);
         const blocks = override ? parseBlocks(override.blocks) : article.blocks;
         const noindex = override?.noindex === true || article.noindex === true;
+        const url = selfUrl(article.slug);
+        // A canonical override is only valid for an intentionally consolidated
+        // noindex URL. Indexable articles always self-canonicalize.
+        const canonical = noindex ? str(override?.canonical, url) : url;
         return {
           slug: article.slug,
           path: `/blog/${article.slug}`,
-          url: selfUrl(article.slug),
-          canonical: str(override?.canonical, selfUrl(article.slug)),
+          url,
+          canonical,
           title: str(override?.title, article.title),
           h1: str(override?.h1, article.h1),
           metaTitle: str(override?.metaTitle, article.metaTitle),
@@ -138,8 +166,14 @@ export function emitSeoManifest(): Plugin {
           references: override ? stringArray(override.references) : article.references,
           related: override ? stringArray(override.related) : article.related,
           cornerstones: override ? stringArray(override.cornerstones) : article.cornerstones,
+          internalLinks: override ? stringArray(override.internalLinks) : [...article.related, ...article.cornerstones],
+          resourceLinks: override ? resourceLinks(override.resourceLinks) : resourceLinks(article.resourceLinks),
+          image: imageValue(override?.image ?? article.image),
+          thumbnail: imageValue(override?.thumbnail ?? article.thumbnail),
+          bannerImage: imageValue(override?.bannerImage ?? article.bannerImage),
+          ogImage: imageValue(override?.ogImage ?? article.ogImage),
           expectedRobots: noindex ? NOINDEX : INDEXABLE,
-          sitemapIncluded: !noindex,
+          sitemapIncluded: !noindex && !(override?.excludeFromSitemap === true),
         };
       });
 
@@ -147,11 +181,13 @@ export function emitSeoManifest(): Plugin {
         if (articleSlugs.has(slug)) continue;
         const parsed = row.parsed;
         const blocks = parseBlocks(parsed.blocks);
+        const url = selfUrl(slug);
+        const canonical = row.noindex ? str(parsed.canonical, url) : url;
         articleEntries.push({
           slug,
           path: `/blog/${slug}`,
-          url: selfUrl(slug),
-          canonical: str(parsed.canonical, selfUrl(slug)),
+          url,
+          canonical,
           title: str(parsed.title),
           h1: str(parsed.h1, str(parsed.title)),
           metaTitle: str(parsed.metaTitle, str(parsed.title)),
@@ -166,8 +202,14 @@ export function emitSeoManifest(): Plugin {
           references: stringArray(parsed.references),
           related: stringArray(parsed.related),
           cornerstones: stringArray(parsed.cornerstones),
+          internalLinks: stringArray(parsed.internalLinks),
+          resourceLinks: resourceLinks(parsed.resourceLinks),
+          image: imageValue(parsed.image),
+          thumbnail: imageValue(parsed.thumbnail),
+          bannerImage: imageValue(parsed.bannerImage),
+          ogImage: imageValue(parsed.ogImage),
           expectedRobots: row.noindex ? NOINDEX : INDEXABLE,
-          sitemapIncluded: !row.noindex,
+          sitemapIncluded: !row.noindex && !row.excludeFromSitemap,
         });
       }
 

@@ -71,13 +71,14 @@ export function applyTopicDefaults(article: ManagedArticle): ManagedArticle {
     ogTitle: article.ogTitle || article.metaTitle || article.title,
     ogDescription: article.ogDescription || article.metaDescription,
     canonical:
-      article.canonical && /^https?:\/\/[^/]+\/.+/.test(article.canonical)
+      article.noindex === true && article.canonical && /^https?:\/\/[^/]+\/.+/.test(article.canonical)
         ? article.canonical
         : `${SITE.domain}/blog/${slug}`,
     description: article.description || article.excerpt,
     // Preserve the editor's chosen images verbatim. NEVER auto-assign a
     // cluster/default/generated image — absence of an image is a valid state
-    // (no card thumbnail, no hero figure, no og:image meta).
+    // (no card thumbnail, no featured/banner figure; SEO metadata uses the
+    // global social-share fallback independently).
     image: article.image || "",
     imageAlt: article.imageAlt || "",
     thumbnail: article.thumbnail || "",

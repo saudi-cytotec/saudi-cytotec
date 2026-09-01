@@ -16,9 +16,9 @@
     "cytotec-buraidah",
     "cytotec-hail",
     "cytotec-dammam",
-    "cytotec-baha",
+    "cytotec-albahah",
     "cytotec-abha",
-    "cytotec-jazan"
+    "cytotec-jizan"
   ],
   "cornerstones": [
     "/medical-disclaimer",
@@ -318,7 +318,7 @@
   "seoTitle": "ما هو سايتوتك؟ الاستخدامات الطبية والتحذيرات",
   "ogTitle": "ما هو سايتوتك؟ الاستخدامات الطبية والتحذيرات",
   "ogDescription": "مقال تعليمي مطوّل عن سايتوتك وميزوبروستول: التعريف والاستخدامات تحت الإشراف والتحذيرات ومتى تجب مراجعة الطبيب.",
-  "canonical": "https://saudiersaa.com/blog/cytotec-uses-warnings",
+  "canonical": "https://saudiersaa.com/blog/cytotec-uses",
   "description": "مقال تعليمي مطوّل عن سايتوتك وميزوبروستول: التعريف والاستخدامات تحت الإشراف والتحذيرات ومتى تجب مراجعة الطبيب.",
   "slugLocked": true,
   "source": "cms",
@@ -326,7 +326,7 @@
   "hasDisclaimer": true,
   "bannerImage": "",
   "bannerImageAlt": "",
-  "ogImage": "",
+  "ogImage": "/images/Bannerrr.png",
   "thumbnail": "",
   "thumbnailAlt": ""
 }

@@ -46,7 +46,7 @@ function toBase64(text) {
 
 /**
  * Image fields are persisted EXACTLY as the administrator selected them.
- * Permitted values: an uploaded media path (/media/...) or one of the three
+ * Permitted values: an uploaded media path (/media/...) or one of the four
  * permanent approved assets. This is a strict ALLOWLIST, so external URLs,
  * traversal attempts and every deleted legacy asset all resolve to "no image".
  * Nothing is ever auto-assigned, defaulted or generated.
@@ -207,10 +207,16 @@ export default async function handler(req, res) {
   }
 
   const today = new Date().toISOString().slice(0, 10);
+  const selfCanonical = `https://saudiersaa.com/blog/${slug}`;
+  const canonical =
+    article.noindex === true && typeof article.canonical === "string" && /^https?:\/\/[^/]+\/.+/.test(article.canonical)
+      ? article.canonical
+      : selfCanonical;
   const payload = {
     ...article,
     slug,
     id: article.id || `cms-${slug}`,
+    canonical,
     status: "published",
     publishedAt: dateOnly(article.publishedAt) || today,
     updatedAt: today,

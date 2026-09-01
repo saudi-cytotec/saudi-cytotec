@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { GLOBAL_SOCIAL_SHARE_IMAGE } from "../data/media";
 import { SITE } from "../data/site";
 
 interface SeoProps {
@@ -6,10 +7,9 @@ interface SeoProps {
   description: string;
   path: string;
   /**
-   * Explicitly selected social-sharing / featured image. OMIT (or pass empty
-   * string) when no real image exists — og:image / twitter:image will NOT be
-   * emitted, and Twitter will fall back to a text summary card automatically.
-   * No default placeholder image is ever injected.
+   * Explicitly selected custom OG/social image. Featured, thumbnail and hero
+   * fields are never consulted here. When omitted, the approved global
+   * social-share asset is emitted as metadata only.
    */
   image?: string;
   /** Optional Open Graph title override (falls back to title). */
@@ -46,7 +46,8 @@ export function Seo({
   const url = canonical || selfUrl;
   // Treat empty / whitespace-only strings as "no image selected".
   const realImage = image && image.trim() ? image.trim() : "";
-  const imageUrl = realImage ? (realImage.startsWith("http") ? realImage : `${SITE.domain}${realImage}`) : "";
+  const socialImage = realImage || GLOBAL_SOCIAL_SHARE_IMAGE;
+  const imageUrl = socialImage.startsWith("http") ? socialImage : `${SITE.domain}${socialImage}`;
   const fullTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
   const socialTitle = ogTitle && ogTitle.includes(SITE.name) ? ogTitle : ogTitle ? `${ogTitle} | ${SITE.name}` : fullTitle;
   const socialDescription = ogDescription || description;
@@ -73,12 +74,13 @@ export function Seo({
       <meta property="og:url" content={url} />
       <meta property="og:locale" content={SITE.locale} />
       <meta property="og:site_name" content={SITE.name} />
-      {/* og:image / twitter:image: ONLY when a real image was explicitly selected. */}
-      {imageUrl ? <meta property="og:image" content={imageUrl} /> : null}
-      {imageUrl ? <meta name="twitter:card" content="summary_large_image" /> : <meta name="twitter:card" content="summary" />}
+      {/* Custom OG > approved global social-share fallback. This is metadata
+          only; neither value is rendered as an article body image here. */}
+      <meta property="og:image" content={imageUrl} />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={socialTitle} />
       <meta name="twitter:description" content={socialDescription} />
-      {imageUrl ? <meta name="twitter:image" content={imageUrl} /> : null}
+      <meta name="twitter:image" content={imageUrl} />
       {publishedAt ? <meta property="article:published_time" content={publishedAt} /> : null}
       {updatedAt ? <meta property="article:modified_time" content={updatedAt} /> : null}
       <meta name="format-detection" content="telephone=no" />

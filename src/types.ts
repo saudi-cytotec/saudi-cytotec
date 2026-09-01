@@ -48,9 +48,8 @@ export interface Article {
   publishedAt: string;
   updatedAt: string;
   /**
-   * Card / featured-thumbnail image (also the hero when no bannerImage).
-   * Empty string means NO image has been selected — the UI must not invent
-   * a default. Keep controls available so editors can still assign one.
+   * Optional featured image for the article page. It is independent from the
+   * thumbnail and banner/hero fields; an empty value means no selection.
    */
   image?: string;
   imageAlt?: string;
@@ -64,7 +63,7 @@ export interface Article {
    */
   thumbnail?: string;
   thumbnailAlt?: string;
-  /** Open Graph / social-sharing image. Only emitted when explicitly set. */
+  /** Open Graph / social-sharing image. Global fallback is applied in metadata only. */
   ogImage?: string;
   related: string[];
   cornerstones: string[];

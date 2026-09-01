@@ -460,7 +460,7 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
         {/* ───────────────── 7. المشاركة الاجتماعية ───────────────────────── */}
         <Section
           title="٧. المشاركة الاجتماعية"
-          hint="عنوان ووصف وصورة المشاركة على واتساب وتويتر وفيسبوك. إن لم تُختَر صورة مشاركة، لن يُصدَر أي og:image أو twitter:image — ولا صورة افتراضية بديلة."
+          hint="عنوان ووصف وصورة المشاركة على واتساب وتويتر وفيسبوك. عند عدم اختيار صورة OG مخصصة، تُستخدم صورة social-share المعتمدة في metadata فقط."
         >
           <div className="grid gap-4 md:grid-cols-2">
             <Field label="عنوان المشاركة (OG title)" hint="افتراضياً عنوان SEO.">
@@ -473,7 +473,7 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
           <div className="mt-4">
             <ImageField
               label="صورة المشاركة الاجتماعية (OG image)"
-              hint="تُستخدم حرفياً كـ og:image و twitter:image. بدون اختيار: لا تُصدَر أي صورة مشاركة إطلاقاً."
+              hint="تُستخدم حرفياً كـ og:image و twitter:image. بدون اختيار: تظهر صورة social-share المعتمدة في metadata فقط، ولا تُضاف إلى جسم المقال أو الحقول الأخرى."
               library={library}
               value={article.ogImage || ""}
               altValue=""
@@ -486,9 +486,9 @@ export function EditorScreen({ mode }: { mode: "create" | "edit" }) {
           <div className="mt-3 rounded-2xl bg-cream p-3 text-xs leading-6 text-ink-soft" dir="ltr">
             <p dir="rtl" className="font-bold text-brand-deep">معاينة وسوم المشاركة</p>
             <p>og:title = {article.ogTitle || article.metaTitle || article.title || "—"}</p>
-            <p>og:image = {article.ogImage || "(لا يُصدَر)"}</p>
-            <p>twitter:image = {article.ogImage || "(لا يُصدَر)"}</p>
-            <p>twitter:card = {article.ogImage ? "summary_large_image" : "summary"}</p>
+            <p>og:image = {article.ogImage || "/images/saudiersaa-social-share.png (metadata fallback)"}</p>
+            <p>twitter:image = {article.ogImage || "/images/saudiersaa-social-share.png (metadata fallback)"}</p>
+            <p>twitter:card = summary_large_image</p>
           </div>
         </Section>
 

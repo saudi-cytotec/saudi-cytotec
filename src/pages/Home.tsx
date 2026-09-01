@@ -123,7 +123,6 @@ export function Home() {
         title="صحة المرأة والحمل: معلومات طبية موثّقة بالعربية"
         description={SITE.description}
         path="/"
-        image="/images/Bannerrr.png"
       />
       <JsonLd
         data={[

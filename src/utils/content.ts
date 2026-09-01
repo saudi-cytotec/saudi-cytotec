@@ -42,7 +42,8 @@ export function makeArticle(
     updatedAt: "2026-03-18",
     // Do NOT inject a default image. The article only has an image when an
     // editor (or the article spec) explicitly selects one; otherwise the UI
-    // renders a clean no-image state and no og:image meta is emitted.
+    // renders a clean no-image state; SEO metadata independently uses the
+    // approved global social-share fallback when no custom OG image exists.
     ...article,
   };
 }

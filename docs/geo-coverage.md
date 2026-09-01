@@ -1,6 +1,6 @@
-# Geographic Coverage Strategy — Saudi hub + priority city pages
+# Geographic Coverage Strategy — Saudi pillar + 20 supporting articles
 
-Date: 2026-08-30. Scope: Saudi Arabia only.
+Date: 2026-09-01. Scope: Saudi Arabia only.
 
 ## Policy
 
@@ -18,9 +18,9 @@ Date: 2026-08-30. Scope: Saudi Arabia only.
 - H1/SEO focus: `سايتوتك في السعودية`
 - Role: national geographic information hub that explains the Saudi medical/regulatory context, warning signs, official lines, and links to all priority cities.
 
-### Priority city pages
+### Protected geographic article set — exactly 20
 
-All published through the existing CMS build path (`content/published/*.json`) and routed at `/blog/<english-slug>`:
+All published through the existing CMS build path (`content/published/*.json`) and routed at `/blog/<english-slug>`. The set is intentionally retained as 20 articles; it is not a license to generate thin city pages:
 
 1. `/blog/cytotec-makkah` — مكة المكرمة
 2. `/blog/cytotec-madinah` — المدينة المنورة
@@ -34,6 +34,19 @@ All published through the existing CMS build path (`content/published/*.json`) a
 10. `/blog/cytotec-najran` — نجران
 11. `/blog/cytotec-albahah` — الباحة
 12. `/blog/cytotec-sakaka` — سكاكا
+13. `/blog/cytotec-saudi-regions` — مناطق السعودية
+14. `/blog/cytotec-western-region` — المنطقة الغربية
+15. `/blog/cytotec-eastern-region` — المنطقة الشرقية
+16. `/blog/cytotec-central-region` — المنطقة الوسطى
+17. `/blog/cytotec-southern-region` — المنطقة الجنوبية
+18. `/blog/cytotec-saudi-faq` — الأسئلة الجغرافية الشائعة
+19. `/blog/cytotec-saudi-safety` — السلامة والتنظيم الدوائي
+20. `/blog/cytotec-medical-verification` — التحقق من المعلومة والمزود
+
+### Supporting records kept separate from the geographic set
+
+- `/blog/cytotec-uses` is an indexable self-canonical explainer in the definition cluster; it supports medical understanding and does not own the national geographic query.
+- `/blog/cytotec-in-saudi-arabia` is an intentional noindex shadow record consolidated to `/service-areas`; it is not a second pillar.
 
 ## Why these pages are not doorway pages
 

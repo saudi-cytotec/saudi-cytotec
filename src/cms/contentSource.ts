@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 import type { ContentBlock, ManagedArticle } from "../types";
 import { staticToManaged } from "./defaults";
+import { SITE } from "../data/site";
 import { isValidShortSlug } from "../utils/slug";
 import { resolveImage } from "../utils/images";
 import { selectableImagePaths } from "../data/media";
@@ -99,6 +100,11 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
   } as unknown as Parameters<typeof staticToManaged>[0];
 
   const managed = staticToManaged(asStatic);
+  const noindex = raw.noindex === true;
+  const selfCanonical = `${SITE.domain}/blog/${slug}`;
+  // Indexable articles must self-canonicalize. A different canonical is only
+  // retained for an intentionally noindex/consolidated legacy record.
+  const canonical = noindex && typeof raw.canonical === "string" && raw.canonical ? raw.canonical : selfCanonical;
 
   return {
     ...managed,
@@ -106,7 +112,7 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
     source: "cms",
     id: typeof raw.id === "string" && raw.id ? raw.id : `cms-${slug}`,
     slugLocked: true,
-    canonical: typeof raw.canonical === "string" && raw.canonical ? raw.canonical : managed.canonical,
+    canonical,
     primaryKeyword:
       typeof raw.primaryKeyword === "string" && raw.primaryKeyword ? raw.primaryKeyword : managed.primaryKeyword,
     secondaryKeywords: Array.isArray(raw.secondaryKeywords)

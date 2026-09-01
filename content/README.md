@@ -43,10 +43,12 @@ file:
 }
 ```
 
-Articles carry **no image fields**. Only the three owner-approved assets exist
-(logo, homepage banner, article WhatsApp banner) and they are wired directly in
-the UI; an article with no selected image simply renders without one and emits
-no `og:image`/`twitter:image`.
+Articles carry optional, independent image fields. Exactly four owner-approved
+permanent assets exist
+(logo, homepage banner, article WhatsApp banner, global social-share image). The
+first three are wired directly in the UI; the social-share asset is metadata-only
+fallback. An article with no selected image simply renders without an article
+image while its SEO metadata uses the global social-share image.
 
 Files with an invalid slug, a missing title, or no valid `blocks` are skipped at
 build time and logged as a warning — they cannot silently break the site.

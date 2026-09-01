@@ -69,10 +69,16 @@ function publishHandler(req, res) {
   }
 
   const today = new Date().toISOString().slice(0, 10);
+  const selfCanonical = `https://saudiersaa.com/blog/${slug}`;
+  const canonical =
+    article.noindex === true && typeof article.canonical === "string" && /^https?:\/\/[^/]+\/.+/.test(article.canonical)
+      ? article.canonical
+      : selfCanonical;
   const payload = {
     ...article,
     slug,
     id: article.id || `cms-${slug}`,
+    canonical,
     status: "published",
     publishedAt: article.publishedAt || today,
     updatedAt: today,

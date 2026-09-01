@@ -6,10 +6,12 @@ import mediaRegistry from "../../content/media.json";
  * ---------------
  * Two distinct kinds of asset exist, and they must never be confused:
  *
- * 1. PERMANENT APPROVED ASSETS (3, immutable)
- *    The approved logo, the approved homepage banner and the permanent article
- *    WhatsApp banner. These belong to the site design. They are never an
- *    article's featured image, thumbnail or OG image by default.
+ * 1. PERMANENT APPROVED ASSETS (4, immutable)
+ *    The approved logo, homepage banner, article WhatsApp banner and global
+ *    social-share image. These belong to the site design. They are never an
+ *    article's featured image or thumbnail by default. The social-share asset
+ *    is the metadata-only fallback when an author has not selected a custom OG
+ *    image; it is never rendered in article content.
  *
  * 2. UPLOADED MEDIA (content/media.json + public/media/*)
  *    Images an administrator explicitly uploaded through the CMS. They are
@@ -33,7 +35,7 @@ export interface MediaItem {
 }
 
 /**
- * The permanent approved assets. These three files may never be deleted,
+ * The permanent approved assets. These four files may never be deleted,
  * replaced or redrawn, and no other permanent asset may be added.
  */
 export const APPROVED_IMAGE_FILES = [
@@ -42,6 +44,9 @@ export const APPROVED_IMAGE_FILES = [
   "/images/saudiersaa-article-whatsapp-banner.png.png",
   "/images/saudiersaa-social-share.png",
 ] as const;
+
+/** The only automatic image behavior: metadata fallback, never a body image. */
+export const GLOBAL_SOCIAL_SHARE_IMAGE = "/images/saudiersaa-social-share.png" as const;
 
 export const approvedAssets: MediaItem[] = [
   {
@@ -70,7 +75,7 @@ export const approvedAssets: MediaItem[] = [
     alt: "سايتوتك في السعودية والميزوبروستول — معلومات طبية توعوية",
     width: 0,
     height: 0,
-    role: "صورة مشاركة اجتماعية معتمدة — تُختار يدوياً فقط",
+    role: "صورة مشاركة اجتماعية معتمدة — fallback للـOG/Twitter metadata فقط",
   },
 ];
 

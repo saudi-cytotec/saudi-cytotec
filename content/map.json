@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30",
+  "updatedAt": "2026-09-01",
   "statuses": [
     "IDEA",
     "RESEARCH",
@@ -3839,5 +3839,14 @@
       ],
       "cta": "راجعي /medical-sources ثم احفظي المراجع المستخدمة في مسودة المقال."
     }
-  ]
+  ],
+  "pillarOwnership": {
+    "nationalSaudi": {
+      "query": "سايتوتك في السعودية",
+      "targetUrl": "/service-areas",
+      "role": "pillar",
+      "supportingLayer": "20 geographic articles plus regional, safety and verification explainers",
+      "policy": "Supporting pages must retain distinct local or educational intent and must not become alternate national pillars."
+    }
+  }
 }

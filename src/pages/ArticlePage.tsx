@@ -53,15 +53,16 @@ export function ArticlePage() {
 
   /**
    * Image policy on the public article:
-   *   - the hero figure is the explicitly selected banner image, otherwise the
-   *     explicitly selected featured image, otherwise NOTHING;
-   *   - og:image / twitter:image is ONLY the explicitly selected OG image.
-   * There is no default, fallback, cluster or generated substitute anywhere.
-   * The permanent approved WhatsApp banner below is part of the page design,
-   * not an article image, and renders independently.
+   *   - featured, thumbnail, banner/hero and custom OG are independent fields;
+   *   - only an explicitly selected featured or banner image is rendered in
+   *     the article page, and each keeps its own role when both are selected;
+   *   - og:image / twitter:image uses only the explicitly selected custom OG
+   *     image, or the approved global metadata fallback inside <Seo>.
+   * The permanent approved WhatsApp banner below is page chrome, not an
+   * article image, and renders independently.
    */
-  const heroImage = article.bannerImage?.trim() || article.image?.trim() || "";
-  const heroAlt = article.bannerImage?.trim() ? (article.bannerImageAlt ?? "") : (article.imageAlt ?? "");
+  const featuredImage = article.image?.trim() ?? "";
+  const bannerImage = article.bannerImage?.trim() ?? "";
   const ogImage = article.ogImage?.trim() ?? "";
 
   return (
@@ -138,11 +139,21 @@ export function ArticlePage() {
         </p>
       </div>
 
-      {heroImage ? (
-        <figure className="mt-8">
+      {bannerImage ? (
+        <figure className="mt-8" data-image-role="banner-hero">
           <img
-            src={heroImage}
-            alt={heroAlt}
+            src={bannerImage}
+            alt={article.bannerImageAlt ?? ""}
+            decoding="async"
+            className="w-full rounded-3xl border border-line object-cover"
+          />
+        </figure>
+      ) : null}
+      {featuredImage ? (
+        <figure className="mt-8" data-image-role="featured-image">
+          <img
+            src={featuredImage}
+            alt={article.imageAlt ?? ""}
             decoding="async"
             className="w-full rounded-3xl border border-line object-cover"
           />

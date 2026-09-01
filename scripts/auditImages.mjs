@@ -12,9 +12,10 @@
  *   2. No image reference may point at any deleted/legacy asset
  *      (og-default.jpg, safety.jpg, hero.jpg, favicons, article-mark, etc.),
  *      and those files must never be recreated under any name.
- *   3. No default/fallback/auto-assignment image mechanism may exist in code
- *      (defaultImage, defaultOgImage, fallbackImage, automatic assignment,
- *      thumbnail generators, cluster image maps).
+ *   3. No default/fallback/auto-assignment image mechanism may exist for
+ *      article fields (featured, thumbnail or banner). The sole exception is
+ *      the explicitly approved global social-share image used by Seo.tsx for
+ *      og:image/twitter:image metadata when no custom OG image is selected.
  *   4. Article data (committed JSON + static TS) may only reference an
  *      approved asset or a registered upload; absence of an image is valid.
  *   5. Every referenced image must exist on disk.
@@ -118,7 +119,6 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
   const searchable = ["src", "api", "content"];
   const forbiddenTokens = [
     /og-default/i,
-    /defaultOgImage/i,
     /defaultImage/i,
     /fallbackImage/i,
     /CLUSTER_IMAGE/i,
@@ -168,10 +168,22 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
     }
   }
   if (hits.length === 0) {
-    pass("No forbidden image tokens in code/content", "og-default, default images, uploads, favicons, legacy assets: none");
+    pass("No forbidden image tokens in code/content", "legacy/generated article assets: none");
   } else {
     fail("No forbidden image tokens in code/content", hits.slice(0, 10).join(" | "));
   }
+
+  const seoPath = path.join(ROOT, "src", "components", "Seo.tsx");
+  const seoSource = fs.readFileSync(seoPath, "utf8");
+  const globalFallbackIsMetadataOnly =
+    seoSource.includes("GLOBAL_SOCIAL_SHARE_IMAGE") &&
+    seoSource.includes("og:image") &&
+    seoSource.includes("twitter:image") &&
+    !seoSource.includes("article.image") &&
+    !seoSource.includes("article.thumbnail");
+  globalFallbackIsMetadataOnly
+    ? pass("Global social-share fallback is metadata-only", "custom OG image takes priority; article fields are not consulted")
+    : fail("Global social-share fallback is metadata-only", "Seo.tsx fallback policy is missing or reads an article image field");
 }
 
 // ------------------------------------------------- 3. every referenced image is approved + exists

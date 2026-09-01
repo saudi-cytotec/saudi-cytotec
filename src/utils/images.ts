@@ -5,27 +5,31 @@
  * NOTHING when nothing was selected.
  *
  *   - no default image
- *   - no fallback image
+ *   - no article-image fallback (featured, thumbnail or banner)
+ *   - the global social-share image is permitted only as metadata fallback
  *   - no cluster / category image
  *   - no random image
  *   - no generated (AI) image
- *   - no automatic assignment of any kind
+ *   - no automatic article-image assignment of any kind
  *
- * Absence of an image is a fully valid, first-class state: the article renders
- * with no article-specific figure, the card stays text-only, and no
- * og:image / twitter:image meta tag is emitted at all.
+ * Absence of an article image is a fully valid, first-class state: the article
+ * renders with no article-specific figure and the card stays text-only. SEO
+ * metadata may still use the approved global social-share fallback.
  *
  * Permanent, design-level assets (the approved logo, the approved homepage
  * banner, the permanent article WhatsApp banner) are NOT article images: they
  * belong to the layout and are rendered independently of this policy.
  */
 
+import { GLOBAL_SOCIAL_SHARE_IMAGE } from "../data/media";
+
 /**
  * Paths the CMS is allowed to persist as an article image.
  *
- * Only two sources are permitted, and both require an explicit administrator
- * action: an image uploaded through the CMS (committed under /media/), or one
- * of the permanent approved assets passed in by the caller.
+ * Two sources are permitted for explicit article fields: an image uploaded
+ * through the CMS (committed under /media/), or one of the permanent approved
+ * assets passed in by the caller. The global social-share image is additionally
+ * used by the SEO component as metadata fallback, never as an article field.
  *
  * Every legacy asset was deleted and must never be resolved or recreated.
  * Rather than listing those filenames here (which would reintroduce them as
@@ -103,10 +107,14 @@ export function sanitizeArticleImages<T extends ArticleImageFields>(
 }
 
 /**
- * The image used for social metadata. ONLY the explicitly selected OG image —
- * there is deliberately no featured-image fallback and no default asset. When
- * nothing is selected, no og:image/twitter:image tag is emitted.
+ * The image used for social metadata. A custom OG image has priority; when
+ * none is selected, the caller may use the approved global metadata fallback.
+ * Featured, thumbnail and banner fields are never consulted here.
  */
-export function socialImage(article: ArticleImageFields, approved: readonly string[] = []): string {
-  return resolveImage(article.ogImage, approved);
+export function socialImage(
+  article: ArticleImageFields,
+  approved: readonly string[] = [],
+  globalFallback = GLOBAL_SOCIAL_SHARE_IMAGE,
+): string {
+  return resolveImage(article.ogImage, approved) || globalFallback;
 }

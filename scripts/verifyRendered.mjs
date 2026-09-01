@@ -39,6 +39,9 @@ const ROOT = path.resolve(__dirname, "..");
 const DIST_HTML = path.join(ROOT, "dist", "index.html");
 const SITEMAP = path.join(ROOT, "public", "sitemap.xml");
 const DOMAIN = "https://saudiersaa.com";
+const GLOBAL_SOCIAL_IMAGE = `${DOMAIN}/images/saudiersaa-social-share.png`;
+const CUSTOM_OG_ARTICLE = "/blog/cytotec-uses";
+const CUSTOM_OG_IMAGE = `${DOMAIN}/images/Bannerrr.png`;
 
 if (!fs.existsSync(DIST_HTML)) {
   console.error("[verify] dist/index.html not found — run `npm run build` first.");
@@ -73,6 +76,7 @@ const urls = [
   { path: "/safety", expect: "indexable", canonical: `${DOMAIN}/safety` },
   { path: "/blog", expect: "indexable", canonical: `${DOMAIN}/blog` },
   { path: "/blog/cytotec-definition", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-definition` },
+  { path: CUSTOM_OG_ARTICLE, expect: "indexable", canonical: `${DOMAIN}${CUSTOM_OG_ARTICLE}`, inSitemap: true },
   { path: "/blog/anemia-womens-health", expect: "indexable", canonical: `${DOMAIN}/blog/anemia-womens-health` },
   { path: "/blog/saudi-drug-regulation-context", expect: "indexable", canonical: `${DOMAIN}/blog/saudi-drug-regulation-context` },
   { path: "/blog/cytotec-abha", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-abha` },
@@ -283,19 +287,19 @@ for (const spec of urls) {
       assert(r.ldMainEntity === spec.canonical, spec.path, "JSON-LD mainEntityOfPage", r.ldMainEntity ?? "(none)");
     }
 
-    // ── Image policy: articles have ZERO article-specific images.
-    //    Allowed <img> on an article page: site logo (chrome) + the permanent
-    //    WhatsApp banner. No figure, no og:image, no twitter:image, no
-    //    homepage banner, no thumbnail, no empty image box. ──
-    assert(r.figureImgs.length === 0, spec.path, "no article figure image", r.figureImgs.join(",") || "(none)");
-    assert(r.ogImage === null, spec.path, "article omits og:image", r.ogImage ?? "(omitted)");
-    assert(r.twitterImage === null, spec.path, "article omits twitter:image", r.twitterImage ?? "(omitted)");
+    // ── Image policy: an article may render only explicitly selected article
+    //    fields. The global social-share asset is metadata-only and must never
+    //    appear inside the article body. Custom OG takes priority over it. ──
+    const expectedSocialImage = spec.path === CUSTOM_OG_ARTICLE ? CUSTOM_OG_IMAGE : GLOBAL_SOCIAL_IMAGE;
+    assert(r.ogImage === expectedSocialImage, spec.path, "og:image custom-or-global metadata fallback", r.ogImage ?? "(omitted)");
+    assert(r.twitterImage === expectedSocialImage, spec.path, "twitter:image custom-or-global metadata fallback", r.twitterImage ?? "(omitted)");
+    const bodyFallbackImgs = r.figureImgs.filter((s) => s.endsWith("/images/saudiersaa-social-share.png"));
+    assert(bodyFallbackImgs.length === 0, spec.path, "social-share fallback absent from article body", "none");
     const hasApprovedBanner = r.imgSrcs.some((s) => s.endsWith("/images/saudiersaa-article-whatsapp-banner.png.png"));
     assert(hasApprovedBanner, spec.path, "approved article WhatsApp banner renders", hasApprovedBanner ? "banner present" : "MISSING");
     // Layout chrome (logo + permanent WhatsApp banner) is always allowed. An
-    // article-specific image is allowed ONLY when the administrator selected
-    // one; none of the currently published articles has, so any other <img>
-    // here would mean a default/fallback image had crept back in.
+    // article-specific image is allowed only when the administrator selected
+    // it; the global social-share fallback is never an article <img>.
     const articleAllowed = ["/images/لوجو.png", "/images/saudiersaa-article-whatsapp-banner.png.png"];
     const extraArticleImgs = r.imgSrcs.filter(
       (s) => !articleAllowed.some((a) => s.endsWith(a)) && !s.includes("/media/"),
@@ -305,9 +309,11 @@ for (const spec of urls) {
     assert(r.styleUrls.length === 0, spec.path, "no background-image URLs on article", r.styleUrls.join(" | ") || "(none)");
   }
 
-  // Homepage: the approved hero banner drives the only og:image on the site.
+  // Homepage hero is a body image; social metadata uses the global fallback
+  // because no custom OG image was selected for the homepage.
   if (spec.path === "/") {
-    assert(r.ogImage === `${DOMAIN}/images/Bannerrr.png`, spec.path, "homepage og:image = approved banner", r.ogImage ?? "(omitted)");
+    assert(r.ogImage === GLOBAL_SOCIAL_IMAGE, spec.path, "homepage og:image = global metadata fallback", r.ogImage ?? "(omitted)");
+    assert(r.twitterImage === GLOBAL_SOCIAL_IMAGE, spec.path, "homepage twitter:image = global metadata fallback", r.twitterImage ?? "(omitted)");
     const hero = r.imgSrcs.some((s) => s.endsWith("/images/Bannerrr.png"));
     assert(hero, spec.path, "homepage hero banner renders", hero ? "approved banner" : "MISSING");
     const logo = r.imgSrcs.some((s) => s.endsWith("/images/لوجو.png"));

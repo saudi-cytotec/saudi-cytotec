@@ -262,8 +262,12 @@ for (const slug of GEO_SLUGS) {
   for (const s of sh) if (!shingleMap.has(s)) shingleMap.set(s, slug);
 }
 
-// extra geo files beyond the required 20 (excluding the intentional noindex hub)
-const extra = [...articles.keys()].filter((s) => !GEO_SLUGS.includes(s) && s !== "cytotec-in-saudi-arabia");
+// Extra files are allowed in other editorial clusters; only an additional
+// published article labelled geographic would expand the protected 20-page
+// layer without an explicit audit update.
+const extra = [...articles.values()]
+  .filter((a) => a.cluster === "geographic" && !GEO_SLUGS.includes(a.slug))
+  .map((a) => a.slug);
 if (extra.length) failures.push(`unexpected extra geo articles: ${extra.join(", ")}`);
 
 // ---------------------------------------------------------------- report

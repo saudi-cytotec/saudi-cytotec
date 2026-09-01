@@ -29,6 +29,7 @@ const REDIRECTS = path.join(ROOT, "content", "redirects.json");
 const MAP = path.join(ROOT, "content", "map.json");
 const VERCEL = path.join(ROOT, "vercel.json");
 const ARTICLES_DIR = path.join(ROOT, "src", "data", "articles");
+const PUBLISHED_DIR = path.join(ROOT, "content", "published");
 
 const results = [];
 let criticals = 0;
@@ -148,6 +149,16 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   let all = "";
   for (const file of files) all += fs.readFileSync(path.join(ARTICLES_DIR, file), "utf8");
   const slugs = new Set([...all.matchAll(/slug:\s*"([a-z0-9-]+)"/g)].map((m) => m[1]));
+  // CMS-published JSON can add or override a static slug, so the audit must
+  // validate links against the same combined catalog shipped by the build.
+  try {
+    for (const file of fs.readdirSync(PUBLISHED_DIR).filter((name) => name.endsWith(".json"))) {
+      const row = JSON.parse(fs.readFileSync(path.join(PUBLISHED_DIR, file), "utf8"));
+      if (row?.slug) slugs.add(row.slug);
+    }
+  } catch {
+    // Static articles remain the minimum catalog on a fresh checkout.
+  }
   const related = [...all.matchAll(/related:\s*\[([^\]]*)\]/g)].flatMap((m) => [...m[1].matchAll(/"([a-z0-9-/]+)"/g)].map((x) => x[1]));
   const broken = related.filter((target) => !target.startsWith("/") && !slugs.has(target));
   const pathLinks = [...all.matchAll(/cornerstones:\s*\[([^\]]*)\]/g)].flatMap((m) => [...m[1].matchAll(/"(\/[^"]+)"/g)].map((x) => x[1]));

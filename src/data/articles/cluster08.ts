@@ -162,7 +162,7 @@ export const cluster08 = [
     metaTitle: "حالات تحتاج تقييماً قبل ميزوبروستول",
     metaDescription: "أمثلة تعليمية لحالات تستدعي تقييماً أدق: الحمل، الجراحة الرحمية، النزف، والأمراض المزمنة.",
     excerpt: "التقييم المسبق أرخص وأأمن من إدارة مضاعفة لاحقاً.",
-    related: ["contraindications-misoprostol", "heart-vascular-considerations", "why-medical-supervision-required"],
+    related: ["contraindications-misoprostol", "heart-vascular-considerations", "why-medical-supervision-required", "liver-kidney-considerations"],
     points: [
       "احتمال الحمل أول الأسئلة لا آخرها.",
       "العمليات القيصرية وجراحات الرحم.",

@@ -3,8 +3,8 @@
  *
  * Canonical file: /images/لوجو.png (the supplied saudiersaa logo,
  * committed verbatim into the repo — never redrawn or regenerated).
- * This is one of only three approved image assets; no fallback image or
- * generated alternative is introduced anywhere.
+ * This is one of exactly four approved permanent image assets; no fallback
+ * article image or generated alternative is introduced anywhere.
  */
 export const LOGO_SRC = "/images/لوجو.png";
 export const LOGO_ALT = "شعار saudiersaa — مدونة سايتوتك التوعوية في السعودية";
