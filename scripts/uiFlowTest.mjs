@@ -125,7 +125,10 @@ const beforeBreak = publishCalls;
 await act(async () => { findButton("نشر").click(); await sleep(80); });
 check("empty-title article did NOT reach publish API (integrity guard)", publishCalls === beforeBreak);
 const alertText = [...container.querySelectorAll('[role="alert"]')].map((n) => n.textContent).join(" ");
-check("integrity message shown for broken record", alertText.includes("تعذر الحفظ"));
+check(
+  "integrity message shown for broken record",
+  alertText.includes("تعذر النشر") && alertText.includes("العنوان مطلوب"),
+);
 check("refusal is data-integrity, NOT an SEO verdict", !/SEO|ERROR|WARNING|العمق|كلمة/.test(alertText));
 
 root.unmount();

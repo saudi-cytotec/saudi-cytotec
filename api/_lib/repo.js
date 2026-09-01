@@ -71,11 +71,15 @@ export async function writeFile(token, filePath, content, message) {
 }
 
 /**
- * Atomic multi-file commit via the Git Data API: either every file update
- * lands or none does. Used by the redirect sync (registry + generated
- * vercel.json must change together).
+ * Atomic multi-file commit via the Git Data API: either every change lands or
+ * none does. Used wherever two files must change together (media bytes +
+ * registry row, redirect registry + generated vercel.json).
+ *
+ * `files`   — [{ path, content, encoding }]; encoding defaults to "utf-8",
+ *             pass "base64" for binary payloads such as uploaded images.
+ * `deletes` — repository paths to remove in the same commit.
  */
-export async function commitFilesAtomic(token, files, message) {
+export async function commitFilesAtomic(token, files, message, deletes = []) {
   // Head ref
   const headRes = await gh(`/repos/${OWNER}/${REPO}/git/ref/heads/${BRANCH}`, { token });
   if (!headRes.ok) return headRes;
@@ -91,7 +95,7 @@ export async function commitFilesAtomic(token, files, message) {
     const blobRes = await gh(`/repos/${OWNER}/${REPO}/git/blobs`, {
       method: "POST",
       token,
-      body: { content: file.content, encoding: "utf-8" },
+      body: { content: file.content, encoding: file.encoding || "utf-8" },
     });
     if (!blobRes.ok) return blobRes;
     treeItems.push({
@@ -100,6 +104,11 @@ export async function commitFilesAtomic(token, files, message) {
       type: "blob",
       sha: blobRes.payload.sha,
     });
+  }
+
+  // A null sha removes the path from the tree.
+  for (const path of deletes) {
+    treeItems.push({ path, mode: "100644", type: "blob", sha: null });
   }
 
   const treeRes = await gh(`/repos/${OWNER}/${REPO}/git/trees`, {
@@ -120,11 +129,13 @@ export async function commitFilesAtomic(token, files, message) {
   });
   if (!commitRes.ok) return commitRes;
 
-  return gh(`/repos/${OWNER}/${REPO}/git/refs/heads/${BRANCH}`, {
+  const refRes = await gh(`/repos/${OWNER}/${REPO}/git/refs/heads/${BRANCH}`, {
     method: "PATCH",
     token,
     body: { sha: commitRes.payload.sha, force: false },
   });
+  if (refRes.ok) refRes.commitSha = commitRes.payload.sha;
+  return refRes;
 }
 
 export const REPO_CONTEXT = { OWNER, REPO, BRANCH };

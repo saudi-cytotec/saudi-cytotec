@@ -16,7 +16,9 @@ import { clusters, SITE } from "../src/data/site";
  *   + every article that is part of the deployed bundle (static .ts articles
  *     plus every JSON file in content/published)
  *   - /admin, /api, /search: disallowed or non-content
- *   - anything not yet published (drafts/review/archived)
+ *   - anything not yet published (drafts/review/archived): they never exist as
+ *     a file under content/published, so they can never appear as a live URL
+ *   - any published article the administrator explicitly excluded
  *   - duplicate URLs (deduplicated below)
  *
  * There is no scheduled publishing; only content/published/*.json entries are
@@ -49,10 +51,10 @@ const EXTRA_ROUTES: Entry[] = [
   { loc: "/sitemap", changefreq: "monthly", priority: "0.4" },
 ];
 
-function readCommittedSlugs(): { slug: string; updatedAt?: string; noindex?: boolean }[] {
+function readCommittedSlugs(): { slug: string; updatedAt?: string; noindex?: boolean; excludeFromSitemap?: boolean }[] {
   try {
     const files = fs.readdirSync(PUBLISHED_DIR).filter((f) => f.endsWith(".json"));
-    const out: { slug: string; updatedAt?: string; noindex?: boolean }[] = [];
+    const out: { slug: string; updatedAt?: string; noindex?: boolean; excludeFromSitemap?: boolean }[] = [];
     for (const file of files) {
       try {
         const parsed = JSON.parse(fs.readFileSync(path.join(PUBLISHED_DIR, file), "utf8"));
@@ -61,6 +63,7 @@ function readCommittedSlugs(): { slug: string; updatedAt?: string; noindex?: boo
             slug: parsed.slug,
             updatedAt: parsed.updatedAt,
             noindex: parsed.noindex === true,
+            excludeFromSitemap: parsed.excludeFromSitemap === true,
           });
         }
       } catch (err) {
@@ -113,7 +116,9 @@ export function emitSitemap(): Plugin {
       // keep a stale lastmod for any re-published article.
       const committedRows = new Map(readCommittedSlugs().map((row) => [row.slug, row]));
       for (const row of committedRows.values()) {
-        if (row.noindex) continue;
+        // Drafts never reach content/published, so everything here is live.
+        // An administrator can still exclude a published article explicitly.
+        if (row.noindex || row.excludeFromSitemap) continue;
         push({
           loc: `/blog/${row.slug}`,
           lastmod: row.updatedAt,

@@ -57,6 +57,13 @@ export interface Article {
   /** Optional large hero/banner shown at the top of the public page. */
   bannerImage?: string;
   bannerImageAlt?: string;
+  /**
+   * Optional card / listing thumbnail. Separate from the featured image so an
+   * editor can show a card image without a hero (or the reverse). Empty means
+   * the card stays text-only — never a fallback or generated substitute.
+   */
+  thumbnail?: string;
+  thumbnailAlt?: string;
   /** Open Graph / social-sharing image. Only emitted when explicitly set. */
   ogImage?: string;
   related: string[];
@@ -124,6 +131,14 @@ export interface ManagedArticle extends Article {
   hasDisclaimer: boolean;
   /** Editorial author byline; empty = platform editorial team. */
   author?: string;
+  /** Named medical reviewer. Only set when a real review happened. */
+  medicalReviewer?: string;
+  /** Date of the last medical review (YYYY-MM-DD). */
+  lastReviewedAt?: string;
+  /** robots follow/nofollow. Default (undefined/false) = follow. */
+  nofollow?: boolean;
+  /** Exclude from sitemap even when published. Default = included. */
+  excludeFromSitemap?: boolean;
 }
 
 /** Editorial workflow states for the 100-topic content map. */

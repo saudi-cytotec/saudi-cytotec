@@ -2,6 +2,8 @@
 import type { ContentBlock, ManagedArticle } from "../types";
 import { staticToManaged } from "./defaults";
 import { isValidShortSlug } from "../utils/slug";
+import { resolveImage } from "../utils/images";
+import { selectableImagePaths } from "../data/media";
 
 /**
  * Build-time content source.
@@ -73,11 +75,14 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
     excerpt: typeof raw.excerpt === "string" ? raw.excerpt : "",
     publishedAt: typeof raw.publishedAt === "string" ? raw.publishedAt : new Date().toISOString().slice(0, 10),
     updatedAt: typeof raw.updatedAt === "string" ? raw.updatedAt : new Date().toISOString().slice(0, 10),
-    image: "",
-    imageAlt: "",
-    bannerImage: "",
-    bannerImageAlt: "",
-    ogImage: "",
+    // Images: exactly what the administrator selected, or nothing at all.
+    image: resolveImage(raw.image, selectableImagePaths),
+    imageAlt: typeof raw.imageAlt === "string" ? raw.imageAlt : "",
+    thumbnail: resolveImage(raw.thumbnail, selectableImagePaths),
+    thumbnailAlt: typeof raw.thumbnailAlt === "string" ? raw.thumbnailAlt : "",
+    bannerImage: resolveImage(raw.bannerImage, selectableImagePaths),
+    bannerImageAlt: typeof raw.bannerImageAlt === "string" ? raw.bannerImageAlt : "",
+    ogImage: resolveImage(raw.ogImage, selectableImagePaths),
     related: Array.isArray(raw.related) ? raw.related.filter((v): v is string => typeof v === "string") : [],
     cornerstones: Array.isArray(raw.cornerstones)
       ? raw.cornerstones.filter((v): v is string => typeof v === "string")
@@ -120,11 +125,23 @@ function sanitize(raw: unknown, fileName: string): ManagedArticle | null {
     ogDescription:
       typeof raw.ogDescription === "string" && raw.ogDescription ? raw.ogDescription : managed.ogDescription,
     description: typeof raw.description === "string" && raw.description ? raw.description : managed.description,
-    image: "",
-    imageAlt: "",
-    bannerImage: "",
-    bannerImageAlt: "",
-    ogImage: "",
+    image: resolveImage(raw.image, selectableImagePaths),
+    imageAlt: resolveImage(raw.image, selectableImagePaths) && typeof raw.imageAlt === "string" ? raw.imageAlt : "",
+    thumbnail: resolveImage(raw.thumbnail, selectableImagePaths),
+    thumbnailAlt:
+      resolveImage(raw.thumbnail, selectableImagePaths) && typeof raw.thumbnailAlt === "string"
+        ? raw.thumbnailAlt
+        : "",
+    bannerImage: resolveImage(raw.bannerImage, selectableImagePaths),
+    bannerImageAlt:
+      resolveImage(raw.bannerImage, selectableImagePaths) && typeof raw.bannerImageAlt === "string"
+        ? raw.bannerImageAlt
+        : "",
+    ogImage: resolveImage(raw.ogImage, selectableImagePaths),
+    medicalReviewer: typeof raw.medicalReviewer === "string" ? raw.medicalReviewer : undefined,
+    lastReviewedAt: typeof raw.lastReviewedAt === "string" ? raw.lastReviewedAt : undefined,
+    nofollow: raw.nofollow === true,
+    excludeFromSitemap: raw.excludeFromSitemap === true,
     metaDescription: typeof raw.metaDescription === "string" ? raw.metaDescription : managed.metaDescription,
     internalLinks: Array.isArray(raw.internalLinks)
       ? raw.internalLinks.filter((v): v is string => typeof v === "string")
