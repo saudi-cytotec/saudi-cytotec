@@ -340,10 +340,17 @@ ESLint or test-runner configuration and no such scripts in `package.json`. They
 were not invented to produce a green line. Adding a test framework is a
 reasonable follow-up.
 
-**NOT VERIFIED IN PRODUCTION.** `curl https://saudiersaa.com/` fails with
-`SSL_ERROR_SYSCALL` (HTTP 000); the sandbox has no route to that host. Nothing
-has been deployed and no live URL, HTTP status, redirect or admin-login
-behaviour was observed.
+The production status below was a historical snapshot from 2026-08-29. It is
+superseded by the current audit/deployment addendum:
+
+## Current audit and deployment addendum — 2026-09-01
+
+- PR [#22](https://github.com/saudi-cytotec/saudi-cytotec/pull/22) was merged to `main`.
+- Vercel production deployments for the merged commit completed successfully for both configured projects. Deployment status is recorded by GitHub/Vercel; no Google ranking or traffic improvement is claimed.
+- Current catalog: 151 sitemap URLs, 122 article records, 121 indexable and 1 intentional noindex consolidation; the protected geographic layer remains exactly 20 articles.
+- Current reports: `docs/content-map-report.md`, `docs/url-inventory.md`, `docs/indexing-blocker-report.md`, `docs/duplicate-cannibalization-report.md`, `docs/orphan-report.md`, `docs/geo-articles-audit.md`, and `docs/seo-audit.md`.
+- Local verification passed: `npm run build`, `npm run typecheck`, `npm run test:ui`, the real CMS workflow with `npm run dev:api`, `node scripts/verifyRendered.mjs`, `node scripts/verifyDesign.mjs`, `node scripts/auditGeoArticles.mjs`, and `npm run audit`.
+- Direct live HTTP verification was attempted against `https://saudiersaa.com/` and the successful Vercel deployment URL, but this sandbox received `SSL_ERROR_SYSCALL` / HTTP 000. Therefore live response headers, redirect status, image 404s, and rendered production HTML remain unobserved here; the Vercel deployment success must not be confused with live HTTP observation.
 
 ---
 
