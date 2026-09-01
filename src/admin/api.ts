@@ -51,6 +51,31 @@ export function unpublishRequest(slug: string) {
   });
 }
 
+export function uploadImageRequest(name: string, data: string, alt = "") {
+  return api<{
+    ok?: boolean;
+    url?: string;
+    width?: number;
+    height?: number;
+    bytes?: number;
+    note?: string;
+    error?: string;
+    remedy?: string;
+    code?: string;
+    detail?: string;
+  }>("/api/upload-image", {
+    method: "POST",
+    body: JSON.stringify({ name, data, alt }),
+  });
+}
+
+export function deleteImageRequest(file: string) {
+  return api<{ ok?: boolean; note?: string; error?: string; remedy?: string; code?: string }>(
+    `/api/upload-image?file=${encodeURIComponent(file)}`,
+    { method: "DELETE" },
+  );
+}
+
 export function statusRequest() {
   return api<{
     environment: string;

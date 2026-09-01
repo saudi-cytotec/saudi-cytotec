@@ -8,8 +8,7 @@ import { publishToken, REPO_CONTEXT } from "./_lib/repo.js";
  * THIS deployment. Reports configuration presence only; never values, and
  * never any secret material.
  *
- * Deliberately absent: scheduling/cron (no automatic publishing exists) and
- * media upload (only the three approved images may exist).
+ * Deliberately absent: scheduling/cron — no automatic publishing exists.
  */
 export default async function handler(_req, res) {
   const configured = {
@@ -27,8 +26,10 @@ export default async function handler(_req, res) {
       unpublish: configured.publishToken,
       aiWriter: configured.openai,
       registrySave: configured.publishToken,
-      // No schedule / autoRelease / mediaUpload capabilities: automatic
-      // publishing and image upload are intentionally removed.
+      mediaUpload: configured.publishToken,
+      mediaDelete: configured.publishToken,
+      // No schedule / autoRelease capability: automatic publishing does not
+      // exist. Every publish is an explicit administrator action.
     },
   });
 }

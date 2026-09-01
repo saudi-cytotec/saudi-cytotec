@@ -56,3 +56,96 @@ export function checkArticleIntegrity(article: ManagedArticle, usedSlugs: string
 
   return { ok: problems.length === 0, problems };
 }
+
+/**
+ * Pre-publish status report — PASS / WARNING / ERROR.
+ * ---------------------------------------------------
+ * IMPORTANT POLICY: only genuine technical / data-integrity problems are
+ * ERRORS, and only ERRORS can block publication. Everything else is an
+ * informational WARNING that NEVER blocks publishing:
+ *
+ *   - article shorter than the recommended depth (word count is informational)
+ *   - no secondary keywords
+ *   - no FAQ
+ *   - fewer H2/H3 than recommended
+ *   - no optional image
+ *   - SEO title/description not "perfect"
+ *
+ * This is deliberately NOT the removed "SEO gatekeeper": there is no score, no
+ * pass mark and no gate. Editorial judgement belongs to the editor.
+ */
+
+export type PrePublishVerdict = "PASS" | "WARNING" | "ERROR";
+
+export interface PrePublishNote {
+  id: string;
+  message: string;
+}
+
+export interface PrePublishReport {
+  verdict: PrePublishVerdict;
+  /** Blocking — a technically broken record. */
+  errors: PrePublishNote[];
+  /** Informational only — never blocks publishing. */
+  warnings: PrePublishNote[];
+}
+
+/** Recommended body depth. Informational only — never enforced. */
+export const RECOMMENDED_BODY_WORDS = 2000;
+
+export function prePublishReport(article: ManagedArticle, integrity: IntegrityResult): PrePublishReport {
+  const errors: PrePublishNote[] = integrity.problems.map((problem, index) => ({
+    id: `${problem.field}-${index}`,
+    message: problem.message,
+  }));
+
+  const warnings: PrePublishNote[] = [];
+  const words = article.blocks.reduce((total, block) => {
+    const text = [block.text ?? "", ...(block.items ?? [])].join(" ");
+    return total + text.trim().split(/\s+/).filter(Boolean).length;
+  }, 0);
+  const h2 = article.blocks.filter((b) => b.type === "h2").length;
+  const h3 = article.blocks.filter((b) => b.type === "h3").length;
+
+  if (words < RECOMMENDED_BODY_WORDS) {
+    warnings.push({
+      id: "words",
+      message: `طول المتن ${words} كلمة (الطول المرجعي ${RECOMMENDED_BODY_WORDS} كلمة). معلومة إرشادية فقط — لا تمنع النشر.`,
+    });
+  }
+  if (!article.secondaryKeywords.length) {
+    warnings.push({ id: "secondary", message: "لا توجد كلمات مفتاحية ثانوية — اختيارية ولا تمنع النشر." });
+  }
+  if (!article.faqs?.length) {
+    warnings.push({ id: "faq", message: "لا توجد أسئلة شائعة — اختيارية ولا تمنع النشر." });
+  }
+  if (h2 < 6 || h3 < 2) {
+    warnings.push({
+      id: "structure",
+      message: `بنية العناوين: ${h2}×H2 و${h3}×H3 (المقترح 6×H2 و2×H3). توصية فقط — لا تمنع النشر.`,
+    });
+  }
+  if (!article.image && !article.thumbnail && !article.bannerImage && !article.ogImage) {
+    warnings.push({
+      id: "image",
+      message: "لم تُحدَّد أي صورة — هذا وضع صحيح تماماً: سيُنشر المقال بلا صورة ولن يُستبدل ذلك بصورة افتراضية.",
+    });
+  }
+  const seoLen = article.seoTitle.trim().length;
+  if (seoLen && (seoLen < 12 || seoLen > 70)) {
+    warnings.push({ id: "seo-title", message: `طول عنوان SEO ${seoLen} حرفاً (المقترح 12–70). توصية فقط.` });
+  }
+  const metaLen = article.metaDescription.trim().length;
+  if (metaLen && (metaLen < 70 || metaLen > 170)) {
+    warnings.push({ id: "meta", message: `طول الوصف التعريفي ${metaLen} حرفاً (المقترح 70–170). توصية فقط.` });
+  }
+  if (article.references.length < 2) {
+    warnings.push({ id: "references", message: "أقل من مرجعين — يُستحسن إضافة مصادر يمكن التحقق منها. لا يمنع النشر." });
+  }
+
+  return {
+    verdict: errors.length ? "ERROR" : warnings.length ? "WARNING" : "PASS",
+    errors,
+    warnings,
+  };
+}

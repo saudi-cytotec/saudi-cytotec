@@ -4,17 +4,20 @@
  *   node scripts/auditImages.mjs
  *
  * Owner-approved policy (hard rules):
- *   1. The ONLY image files that may exist in the repo are the three approved
- *      assets: logo, homepage hero, article WhatsApp banner.
+ *   1. The only PERMANENT assets under public/images/ are the three approved
+ *      files (logo, homepage hero, article WhatsApp banner). Admin-uploaded
+ *      CMS media lives separately under public/media/ and is registered in
+ *      content/media.json — every such file must be registered, and every
+ *      registered file must exist.
  *   2. No image reference may point at any deleted/legacy asset
- *      (og-default.jpg, safety.jpg, hero.jpg, uploads, favicons, article-mark,
- *      etc.).
+ *      (og-default.jpg, safety.jpg, hero.jpg, favicons, article-mark, etc.),
+ *      and those files must never be recreated under any name.
  *   3. No default/fallback/auto-assignment image mechanism may exist in code
  *      (defaultImage, defaultOgImage, fallbackImage, automatic assignment,
  *      thumbnail generators, cluster image maps).
- *   4. Article data (committed JSON + static TS) must NOT carry image fields
- *      unless they reference an approved asset; absence of an image is valid.
- *   5. Every approved image referenced anywhere must exist on disk.
+ *   4. Article data (committed JSON + static TS) may only reference an
+ *      approved asset or a registered upload; absence of an image is valid.
+ *   5. Every referenced image must exist on disk.
  *
  * Exit 1 on any violation.
  */
@@ -30,6 +33,18 @@ const APPROVED = [
   "/images/Bannerrr.png",
   "/images/saudiersaa-article-whatsapp-banner.png.png",
 ];
+
+/** Admin-uploaded CMS media: registered in content/media.json, served from /media/. */
+const REGISTERED_UPLOADS = (() => {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(path.join(ROOT, "content", "media.json"), "utf8"));
+    return Array.isArray(parsed.items) ? parsed.items.map((i) => String(i && i.file)) : [];
+  } catch {
+    return [];
+  }
+})();
+
+const isAllowedRef = (ref) => APPROVED.includes(ref) || REGISTERED_UPLOADS.includes(ref);
 
 const failures = [];
 const pass = (label, detail = "") => console.log(`  [PASS] ${label}${detail ? ` — ${detail}` : ""}`);
@@ -60,7 +75,9 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
   const files = walk(path.join(ROOT, "public"))
     .map((f) => path.relative(ROOT, f).replace(/\\/g, "/"))
     .filter((f) => IMAGE_EXT.test(f));
-  const unapproved = files.filter((f) => !APPROVED.includes("/" + f.replace(/^public\//, "")));
+  const permanent = files.filter((f) => !f.startsWith("public/media/"));
+  const uploads = files.filter((f) => f.startsWith("public/media/"));
+  const unapproved = permanent.filter((f) => !APPROVED.includes("/" + f.replace(/^public\//, "")));
   const onDisk = new Set(APPROVED.filter((a) => fs.existsSync(path.join(ROOT, "public", a.replace(/^\//, "")))));
   pass(
     "Approved asset files exist",
@@ -70,14 +87,25 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
     fail("All 3 approved asset files exist", `missing: ${APPROVED.filter((a) => !onDisk.has(a)).join(", ")}`);
   }
   if (unapproved.length === 0) {
-    pass("Only approved image files in public/", `${files.length} files, all approved`);
+    pass("Only approved permanent image files in public/images", `${permanent.length} files, all approved`);
   } else {
-    fail("Only approved image files in public/", `${unapproved.length} extra: ${unapproved.join(", ")}`);
+    fail("Only approved permanent image files in public/images", `${unapproved.length} extra: ${unapproved.join(", ")}`);
   }
-  if (files.length > 3) {
-    fail("Image file count = 3", `found ${files.length}`);
+  if (permanent.length > 3) {
+    fail("Permanent image file count = 3", `found ${permanent.length}`);
   } else {
-    pass("Image file count = 3", `${files.length} files`);
+    pass("Permanent image file count = 3", `${permanent.length} files`);
+  }
+
+  // Uploaded CMS media must be exactly what the registry says it is.
+  const uploadPaths = uploads.map((f) => "/" + f.replace(/^public\//, ""));
+  const unregistered = uploadPaths.filter((f) => !REGISTERED_UPLOADS.includes(f));
+  const missingUploads = REGISTERED_UPLOADS.filter((f) => !uploadPaths.includes(f));
+  if (!unregistered.length && !missingUploads.length) {
+    pass("Uploaded media matches its registry", `${uploadPaths.length} uploads, all registered and present`);
+  } else {
+    if (unregistered.length) fail("Every uploaded file is registered", unregistered.join(", "));
+    if (missingUploads.length) fail("Every registered upload exists on disk", missingUploads.join(", "));
   }
 }
 
@@ -166,21 +194,21 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
       const norm = ref.startsWith("/") ? ref : "/" + ref;
       // Normalize URL-encoded unicode to the literal file path.
       const decoded = decodeURIComponent(norm);
-      if (!APPROVED.includes(decoded)) badRefs.push(`${path.relative(ROOT, p)}: ${decoded}`);
+      if (!isAllowedRef(decoded)) badRefs.push(`${path.relative(ROOT, p)}: ${decoded}`);
       else refs.add(decoded);
     }
   }
   const uniqueBad = [...new Set(badRefs)];
   if (uniqueBad.length === 0) {
-    pass("All image references approved", `${refs.size} unique approved references`);
+    pass("All image references allowed", `${refs.size} unique references (approved assets + registered uploads)`);
   } else {
-    fail("All image references approved", `${uniqueBad.length}: ${uniqueBad.slice(0, 8).join(" | ")}`);
+    fail("All image references allowed", `${uniqueBad.length}: ${uniqueBad.slice(0, 8).join(" | ")}`);
   }
   const missingApproved = [...refs].filter((r) => !fs.existsSync(path.join(ROOT, "public", r.replace(/^\//, ""))));
   if (missingApproved.length === 0) {
-    pass("Approved references exist on disk", `${refs.size} references resolve`);
+    pass("References exist on disk", `${refs.size} references resolve`);
   } else {
-    fail("Approved references exist on disk", missingApproved.join(", "));
+    fail("References exist on disk", missingApproved.join(", "));
   }
 }
 
@@ -189,7 +217,7 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
   // Path fields: any non-empty value must be one of the approved assets.
   // "No selected image" (absent or "") is a fully valid state. Alt fields are
   // free text and only matter when a path is actually set.
-  const PATH_KEYS = ["image", "bannerImage", "ogImage"];
+  const PATH_KEYS = ["image", "thumbnail", "bannerImage", "ogImage"];
   const publishedDir = path.join(ROOT, "content", "published");
   let files = 0;
   let withImage = 0;
@@ -201,13 +229,13 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
       if (!Object.prototype.hasOwnProperty.call(a, key)) continue;
       const value = String(a[key] ?? "").trim();
       if (!value) continue; // explicitly no selected image — valid
-      if (!APPROVED.includes(value)) withImage++, offenders.push(`${a.slug || f}:${key}=${value}`);
+      if (!isAllowedRef(value)) withImage++, offenders.push(`${a.slug || f}:${key}=${value}`);
     }
   }
   if (withImage === 0) {
-    pass("Published article image values are approved-only", `${files} JSON files, 0 unapproved image paths`);
+    pass("Published article image values are allowed-only", `${files} JSON files, 0 disallowed image paths`);
   } else {
-    fail("Published article image values are approved-only", `${withImage}: ${offenders.slice(0, 5).join(", ")}`);
+    fail("Published article image values are allowed-only", `${withImage}: ${offenders.slice(0, 5).join(", ")}`);
   }
 
   // Static TS articles must not invent images either.
@@ -229,6 +257,6 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
 console.log(
   failures.length
     ? `\nIMAGE AUDIT: FAIL — ${failures.length}: ${failures.join(" | ")}`
-    : "\nIMAGE AUDIT: PASS — only the 3 approved assets exist and every reference resolves",
+    : `\nIMAGE AUDIT: PASS — 3 approved permanent assets + ${REGISTERED_UPLOADS.length} registered upload(s); every reference resolves`,
 );
 process.exit(failures.length ? 1 : 0);

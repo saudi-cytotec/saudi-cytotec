@@ -1,8 +1,14 @@
 /**
  * UI render test (testing only): mounts the REAL admin React screens using
  * Vite's SSR module loader (so import.meta.glob resolves exactly like the app),
- * runs effects, and asserts the removed SEO validation system is gone while the
- * editing controls + workflow remain.
+ * runs effects, and asserts:
+ *
+ *   - the removed SEO GATEKEEPER is gone: no score, no "ready to publish"
+ *     verdict, and above all no disabled publish button,
+ *   - the editing controls + full workflow remain,
+ *   - the pre-publish status panel (PASS / WARNING / ERROR) is present, since
+ *     status reporting is required — what is forbidden is BLOCKING on SEO
+ *     quality, not reporting it.
  */
 import { JSDOM } from "jsdom";
 import { createServer } from "vite";
@@ -70,8 +76,23 @@ async function renderAt(path, element) {
   return { html, publishBtnDisabled };
 }
 
-const FORBIDDEN = ["مساعد SEO", "العمق المقترح", "جاهزة للنشر", "تحذيرات SEO", "أخطاء تقنية", ">ERROR<", ">WARNING<", ">PASS<", "SEO score"];
-const REQUIRED_EDITOR = ["العنوان", "H1", "الرابط (slug)", "الكلمة المفتاحية الأساسية", "عنوان SEO", "الوصف التعريفي", "جسم المقال", "أسئلة متكررة", "المراجع", "الصورة البارزة", "النص البديل (ALT)", "حفظ مسودة", "نشر", "معاينة", "إخلاء المسؤولية الطبية"];
+// Hallmarks of the removed SEO gatekeeper. The PASS/WARNING/ERROR verdict is
+// deliberately NOT in this list: reporting status is required by the spec; the
+// gatekeeper was the hard publish block, which is asserted absent below.
+const FORBIDDEN = ["مساعد SEO", "العمق المقترح", "جاهزة للنشر", "تحذيرات SEO", "أخطاء تقنية", "SEO score"];
+const REQUIRED_EDITOR = [
+  // content
+  "العنوان", "H1", "الرابط (slug)", "الكلمة المفتاحية الأساسية", "الكلمات المفتاحية الثانوية",
+  "جسم المقال", "أسئلة متكررة", "المراجع",
+  // seo
+  "عنوان SEO", "الوصف التعريفي", "الرابط القانوني", "noindex", "nofollow", "sitemap",
+  // media (all optional)
+  "الصورة البارزة", "صورة البطاقة", "صورة المشاركة الاجتماعية", "النص البديل (ALT)", "رفع صورة", "بدون صورة",
+  // medical metadata
+  "المراجع الطبي", "تاريخ آخر مراجعة طبية", "إخلاء المسؤولية الطبية",
+  // workflow
+  "حالة ما قبل النشر", "حفظ مسودة", "إرسال للمراجعة", "نشر", "معاينة",
+];
 
 let failures = 0;
 function check(name, cond) {
@@ -86,6 +107,11 @@ check("editor rendered (not stuck loading)", !editorHtml.includes("جاري تح
 for (const term of FORBIDDEN) check(`editor does NOT show "${term}"`, !editorHtml.includes(term));
 for (const term of REQUIRED_EDITOR) check(`editor keeps field/control "${term}"`, editorHtml.includes(term));
 check("publish button is NOT disabled by validation gate", !editor.publishBtnDisabled);
+check("pre-publish status panel is rendered (PASS/WARNING/ERROR)", editorHtml.includes("حالة ما قبل النشر"));
+check(
+  "warnings are declared non-blocking in the UI copy",
+  editorHtml.includes("لا تمنع النشر") || editorHtml.includes("التحذيرات إرشادية"),
+);
 
 const seo = await renderAt("/admin/seo", React.createElement(SeoScreen, null));
 const seoHtml = seo.html;

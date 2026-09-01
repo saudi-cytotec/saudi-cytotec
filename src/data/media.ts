@@ -1,14 +1,23 @@
+/// <reference types="vite/client" />
+import mediaRegistry from "../../content/media.json";
+
 /**
- * Media registry — the ONLY image assets the site may serve.
+ * Media registry.
+ * ---------------
+ * Two distinct kinds of asset exist, and they must never be confused:
  *
- * Exactly three owner-approved assets exist. Nothing else may be added:
- *   - the approved logo
- *   - the approved homepage banner / hero
- *   - the approved permanent article WhatsApp banner
+ * 1. PERMANENT APPROVED ASSETS (3, immutable)
+ *    The approved logo, the approved homepage banner and the permanent article
+ *    WhatsApp banner. These belong to the site design. They are never an
+ *    article's featured image, thumbnail or OG image by default.
  *
- * Image upload is intentionally unavailable: adding new image assets would
- * violate the approved set, so there is no upload endpoint and no uploads
- * directory.
+ * 2. UPLOADED MEDIA (content/media.json + public/media/*)
+ *    Images an administrator explicitly uploaded through the CMS. They are
+ *    committed to the repository, so they survive refresh, logout, deployment
+ *    and redeploy, and are visible from any browser. They are only ever used
+ *    where an administrator explicitly selected them.
+ *
+ * Nothing in this file assigns an image to anything automatically.
  */
 
 export interface MediaItem {
@@ -17,12 +26,15 @@ export interface MediaItem {
   width: number;
   height: number;
   role: string;
+  /** True for admin uploads (deletable); false for the permanent assets. */
+  uploaded?: boolean;
+  uploadedAt?: string;
+  bytes?: number;
 }
 
 /**
- * The exact allowlist used by the image audit. Only these three files may
- * exist under public/ — no favicons, no generated article images, no
- * og-default, no uploads.
+ * The permanent approved assets. These three files may never be deleted,
+ * replaced or redrawn, and no other permanent asset may be added.
  */
 export const APPROVED_IMAGE_FILES = [
   "/images/لوجو.png",
@@ -30,8 +42,7 @@ export const APPROVED_IMAGE_FILES = [
   "/images/saudiersaa-article-whatsapp-banner.png.png",
 ] as const;
 
-
-export const mediaLibrary: MediaItem[] = [
+export const approvedAssets: MediaItem[] = [
   {
     file: "/images/لوجو.png",
     alt: "شعار saudiersaa — مدونة سايتوتك التوعوية في السعودية",
@@ -54,3 +65,42 @@ export const mediaLibrary: MediaItem[] = [
     role: "بانر واتساب أعلى المقالات",
   },
 ];
+
+interface RegistryRow {
+  file?: unknown;
+  alt?: unknown;
+  width?: unknown;
+  height?: unknown;
+  uploadedAt?: unknown;
+  bytes?: unknown;
+}
+
+function sanitizeUpload(row: RegistryRow): MediaItem | null {
+  const file = typeof row.file === "string" ? row.file.trim() : "";
+  // Uploads live under /media/ only — no traversal, no other prefix.
+  if (!file.startsWith("/media/") || file.includes("..")) return null;
+  return {
+    file,
+    alt: typeof row.alt === "string" ? row.alt : "",
+    width: typeof row.width === "number" ? row.width : 0,
+    height: typeof row.height === "number" ? row.height : 0,
+    role: "صورة مرفوعة من لوحة التحكم",
+    uploaded: true,
+    uploadedAt: typeof row.uploadedAt === "string" ? row.uploadedAt : undefined,
+    bytes: typeof row.bytes === "number" ? row.bytes : undefined,
+  };
+}
+
+/** Admin-uploaded images committed to the repository. */
+export const uploadedMedia: MediaItem[] = Array.isArray((mediaRegistry as { items?: unknown }).items)
+  ? ((mediaRegistry as { items: RegistryRow[] }).items.map(sanitizeUpload).filter(Boolean) as MediaItem[])
+  : [];
+
+/**
+ * Everything an editor may pick from: the permanent approved assets plus
+ * whatever has actually been uploaded. Selecting is always explicit.
+ */
+export const mediaLibrary: MediaItem[] = [...approvedAssets, ...uploadedMedia];
+
+/** Every path the renderer is allowed to resolve for an article image. */
+export const selectableImagePaths: string[] = mediaLibrary.map((item) => item.file);

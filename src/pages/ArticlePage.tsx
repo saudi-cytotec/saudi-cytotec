@@ -51,6 +51,19 @@ export function ArticlePage() {
   const resourceLinks = managedArticle?.resourceLinks ?? [];
   const isSaudiHubShadow = article.slug === "cytotec-in-saudi-arabia";
 
+  /**
+   * Image policy on the public article:
+   *   - the hero figure is the explicitly selected banner image, otherwise the
+   *     explicitly selected featured image, otherwise NOTHING;
+   *   - og:image / twitter:image is ONLY the explicitly selected OG image.
+   * There is no default, fallback, cluster or generated substitute anywhere.
+   * The permanent approved WhatsApp banner below is part of the page design,
+   * not an article image, and renders independently.
+   */
+  const heroImage = article.bannerImage?.trim() || article.image?.trim() || "";
+  const heroAlt = article.bannerImage?.trim() ? (article.bannerImageAlt ?? "") : (article.imageAlt ?? "");
+  const ogImage = article.ogImage?.trim() ?? "";
+
   return (
     <article className="mx-auto max-w-6xl px-4 py-8">
       <Seo
@@ -65,6 +78,8 @@ export function ArticlePage() {
         canonical={canonical}
         keywords={keywordMeta}
         noindex={noindex}
+        nofollow={managedArticle?.nofollow === true}
+        image={ogImage}
       />
       {!noindex ? (
         <JsonLd
@@ -122,6 +137,17 @@ export function ArticlePage() {
           نُشر في {article.publishedAt} · آخر تحديث {article.updatedAt} · قراءة تقريبية {readingMinutes(article)} دقائق
         </p>
       </div>
+
+      {heroImage ? (
+        <figure className="mt-8">
+          <img
+            src={heroImage}
+            alt={heroAlt}
+            decoding="async"
+            className="w-full rounded-3xl border border-line object-cover"
+          />
+        </figure>
+      ) : null}
 
       <ArticleWhatsAppBanner />
 

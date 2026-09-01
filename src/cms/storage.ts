@@ -1,5 +1,6 @@
 import type { ContentMapItem, ManagedArticle, NotFoundEntry, RedirectRule, SiteSettings } from "../types";
-import { wipeArticleImages } from "../utils/images";
+import { sanitizeArticleImages } from "../utils/images";
+import { selectableImagePaths } from "../data/media";
 import { defaultSettings, seedContentMap, staticManaged } from "./defaults";
 import { committedArticles } from "./contentSource";
 import { redirectRegistry } from "./registrySource";
@@ -120,12 +121,15 @@ export function loadState(): CmsState {
   const mapById = new Map(localMap.map((row) => [row.id, row]));
 
   return {
-    // Local edits win over the bundle, except article-specific images: those
-    // are always wiped so a stale CMS overlay cannot resurrect deleted files
-    // (or any thumbnail/OG/hero) on the public site.
+    // Local edits win over the bundle. Image fields are sanitised (not wiped):
+    // an admin-selected upload or approved asset survives verbatim, while a
+    // stale overlay value pointing at a deleted legacy file resolves to "no
+    // image" and is never replaced by a default.
     articles: [
-      ...localRows.map((row) => wipeArticleImages(row)),
-      ...base.articles.filter((item) => !localIds.has(item.id)).map((item) => wipeArticleImages(item)),
+      ...localRows.map((row) => sanitizeArticleImages(row, selectableImagePaths)),
+      ...base.articles
+        .filter((item) => !localIds.has(item.id))
+        .map((item) => sanitizeArticleImages(item, selectableImagePaths)),
     ],
     map: base.map.map((row) => mapById.get(row.id) ?? row),
     // Only current settings keys are used anywhere — no default-OG-image field

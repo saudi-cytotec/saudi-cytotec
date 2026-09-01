@@ -22,6 +22,8 @@ interface SeoProps {
   publishedAt?: string;
   updatedAt?: string;
   noindex?: boolean;
+  /** Emit nofollow. Default false = follow. Independent of noindex. */
+  nofollow?: boolean;
   keywords?: string;
 }
 
@@ -37,6 +39,7 @@ export function Seo({
   publishedAt,
   updatedAt,
   noindex = false,
+  nofollow = false,
   keywords,
 }: SeoProps) {
   const selfUrl = `${SITE.domain}${path === "/" ? "/" : path}`;
@@ -54,7 +57,16 @@ export function Seo({
       <meta name="description" content={description} />
       {keywords ? <meta name="keywords" content={keywords} /> : null}
       <link rel="canonical" href={url} />
-      <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow,max-image-preview:large"} />
+      <meta
+        name="robots"
+        content={
+          noindex
+            ? "noindex,nofollow"
+            : nofollow
+              ? "index,nofollow,max-image-preview:large"
+              : "index,follow,max-image-preview:large"
+        }
+      />
       <meta property="og:type" content={type} />
       <meta property="og:title" content={socialTitle} />
       <meta property="og:description" content={socialDescription} />
