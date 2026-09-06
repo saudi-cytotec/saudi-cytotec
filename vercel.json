@@ -113,11 +113,6 @@
       "statusCode": 301
     },
     {
-      "source": "/category-care.html",
-      "destination": "/womens-health",
-      "statusCode": 301
-    },
-    {
       "source": "/feed",
       "destination": "/404",
       "statusCode": 404
