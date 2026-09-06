@@ -1,7 +1,11 @@
 {
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm ci",
   "rewrites": [
     {
-      "source": "/((?!api/|sitemap\\.xml|robots\\.txt|images/|media/).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ],
@@ -82,7 +86,7 @@
         }
       ],
       "destination": "https://saudiersaa.com/:path*",
-      "permanent": true
+      "statusCode": 308
     },
     {
       "source": "/blog/cytotec-in-saudi-arabia/",

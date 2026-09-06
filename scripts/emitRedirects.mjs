@@ -40,11 +40,11 @@ function validate(registry) {
       problems.push("rule without a source");
       continue;
     }
-    if (![301, 410].includes(rule.statusCode)) {
-      problems.push(`${rule.source}: unsupported statusCode ${rule.statusCode} (only 301/410)`);
+    if (![301, 308, 410].includes(rule.statusCode)) {
+      problems.push(`${rule.source}: unsupported statusCode ${rule.statusCode} (only 301/308/410)`);
     }
-    if (rule.statusCode === 301 && !rule.destination) {
-      problems.push(`${rule.source}: 301 requires a destination`);
+    if ([301, 308].includes(rule.statusCode) && !rule.destination) {
+      problems.push(`${rule.source}: ${rule.statusCode} requires a destination`);
     }
     const key = encodePath(rule.source);
     if (sources.has(key)) {
@@ -85,30 +85,23 @@ function main() {
         },
       ],
       destination: "https://saudiersaa.com/:path*",
-      permanent: true,
+      statusCode: 308,
     });
   }
   for (const rule of registry.rules) {
-    if (rule.statusCode === 301 && rule.destination) {
+    if ([301, 308].includes(rule.statusCode) && rule.destination) {
       // Skip regex patterns that would cause redirect errors - convert to 410 or specific redirects
       if (rule.isRegex) {
-        // For regex 301s, we need to ensure destination is valid and source is Vercel-compatible
-        // Vercel supports regex in source via :path* patterns, but not full regex like /(?:2018|...)/(.*)
-        // We'll keep them as 301 if they are simple, otherwise skip to avoid redirect errors
-        // The 2 redirect errors in GSC were likely from invalid regex
         if (rule.source.includes("(?:") || rule.source.includes(".*") && !rule.source.includes(":path")) {
-          // Convert problematic regex 301s to not emit, they will be handled as 404/410 via rewrites
-          // Actually better to keep them as 410 if no destination, or skip
           continue;
         }
       }
       redirects.push({
         source: encodePath(rule.source),
         destination: rule.destination,
-        statusCode: 301,
+        statusCode: rule.statusCode,
       });
     } else if (rule.statusCode === 410) {
-      // Vercel 410 Gone - no destination, just statusCode
       redirects.push({
         source: encodePath(rule.source),
         statusCode: 410,
