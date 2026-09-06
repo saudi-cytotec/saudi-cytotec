@@ -3,7 +3,6 @@ import { useCatalog } from "../cms/CatalogContext";
 import { ArticleCard } from "../components/ArticleCard";
 import { clusterMeta } from "../components/CategoryCard";
 import { CareReferral } from "../components/CareReferral";
-import { CountryCornerstoneLinks } from "../components/CountryCornerstoneLinks";
 import { IconArrowLeft } from "../components/icons";
 import { PageHero } from "../components/PageHero";
 import { Seo } from "../components/Seo";
@@ -73,8 +72,6 @@ export function ClusterPage() {
           </div>
         </section>
       ) : null}
-
-      <CountryCornerstoneLinks cluster={cluster.id} />
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {list.map((article) => (
