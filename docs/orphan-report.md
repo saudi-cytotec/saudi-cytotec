@@ -2,22 +2,18 @@
 
 Date: 2026-09-06 · generated from the built article graph
 
-**Result: REVIEW**
+**Result: PASS — no published article orphans**
 
 | Metric | Count |
 |---|---:|
 | Indexable articles | 101 |
-| Articles with at least one incoming article link | 100 |
-| Article orphans | 1 |
+| Articles with at least one incoming article link | 101 |
+| Article orphans | 0 |
 | Unresolved article targets in declared graph | 0 |
 
 The graph includes `related`, `internalLinks`, `cornerstones`, and CMS `resourceLinks`. Navigation and automatically generated card listings are not treated as editorial links, so the report does not manufacture links merely to make a count pass.
 
-## Orphans
-
-| Article | URL | Suggested action |
-|---|---|---|
-| frequent-warning-questions | `/blog/frequent-warning-questions` | Add one contextually relevant link from an existing article or hub; do not create a thin page. |
+No indexable article is orphaned in the declared editorial graph.
 
 ## Incoming sources
 
@@ -44,15 +40,15 @@ The graph includes `related`, `internalLinks`, `cornerstones`, and CMS `resource
 | `hospital-clinic-limits` | `approved-medical-uses-misoprostol`, `obstetric-uses-under-supervision`, `labor-induction-hospital-setting`, `why-not-home-treatment`, `follow-up-after-medical-care` |
 | `why-not-home-treatment` | `labor-induction-hospital-setting`, `unsafe-unsupervised-use`, `hospital-clinic-limits`, `myths-about-home-dosing`, `danger-of-delaying-care` |
 | `general-safety-warnings` | `pregnancy-boxed-warning`, `why-medical-supervision-required`, `medicine-storage-home-safety`, `is-cytotec-safe-for-everyone`, `cytotec-uses` |
-| `pregnancy-boxed-warning` | `general-safety-warnings`, `uterine-reproductive-effects`, `why-contraindicated-in-pregnancy-ulcer-use`, `pregnancy-contraindication-ulcer-indication`, `fda-cytotec-warnings` |
+| `pregnancy-boxed-warning` | `general-safety-warnings`, `uterine-reproductive-effects`, `why-contraindicated-in-pregnancy-ulcer-use`, `pregnancy-contraindication-ulcer-indication`, `fda-cytotec-warnings`, `cytotec-uses` |
 | `why-medical-supervision-required` | `general-safety-warnings`, `use-without-prescription`, `conditions-needing-prior-assessment` |
 | `risks-of-random-use` | `unsafe-unsupervised-use`, `unreliable-medicine-sources` |
 | `medicine-storage-home-safety` | `unreliable-medicine-sources` |
 | `how-to-read-package-insert` | `medicine-storage-home-safety`, `official-drug-leaflets` |
 | `general-info-vs-personal-advice` | `key-facts-before-reading-cytotec`, `how-to-read-package-insert`, `education-vs-individual-treatment`, `internet-not-a-doctor` |
 | `regulatory-drug-warnings` | `off-label-use-meaning`, `general-safety-warnings`, `saudi-drug-regulation-context`, `fda-cytotec-warnings`, `why-medical-recommendations-change` |
-| `unreliable-medicine-sources` | `cytotec-pharmaceutical-forms`, `unsafe-unsupervised-use`, `risks-of-random-use`, `medicine-storage-home-safety`, `saudi-drug-regulation-context`, `use-without-prescription` |
-| `saudi-drug-regulation-context` | `misoprostol-other-brand-names`, `regulatory-drug-warnings`, `unreliable-medicine-sources` |
+| `unreliable-medicine-sources` | `cytotec-pharmaceutical-forms`, `unsafe-unsupervised-use`, `risks-of-random-use`, `medicine-storage-home-safety`, `saudi-drug-regulation-context`, `use-without-prescription`, `cytotec-uses` |
+| `saudi-drug-regulation-context` | `misoprostol-other-brand-names`, `regulatory-drug-warnings`, `unreliable-medicine-sources`, `cytotec-uses` |
 | `common-side-effects` | `diarrhea-abdominal-pain`, `fever-and-chills`, `nausea-and-vomiting`, `what-to-do-if-side-effects` |
 | `diarrhea-abdominal-pain` | `common-side-effects`, `nausea-and-vomiting`, `gastrointestinal-effects` |
 | `fever-and-chills` | `high-fever-and-infection` |
@@ -91,7 +87,7 @@ The graph includes `related`, `internalLinks`, `cornerstones`, and CMS `resource
 | `not-all-uses-are-alike` | `approved-medical-uses-misoprostol` |
 | `myths-about-home-dosing` | `common-myths-cytotec` |
 | `mild-symptoms-not-always-safe` | `annoying-symptom-vs-emergency` |
-| `frequent-warning-questions` | — |
+| `frequent-warning-questions` | `common-myths-cytotec` |
 | `how-to-verify-medical-information` | `reproductive-health-reliable-info`, `reliable-womens-health-sources`, `internet-not-a-doctor`, `official-drug-leaflets`, `limits-of-online-medical-info` |
 | `contraindications-misoprostol` | `is-cytotec-safe-for-everyone`, `prostaglandin-allergy`, `conditions-needing-prior-assessment`, `pregnancy-contraindication-ulcer-indication` |
 | `basic-drug-interactions` | `nsaid-stomach-protection`, `liver-kidney-considerations`, `medicines-that-may-increase-risk`, `discussing-medication-history` |

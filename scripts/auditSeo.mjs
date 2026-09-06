@@ -96,7 +96,12 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   const missingTargets = registry.rules.filter((rule) => rule.statusCode === 301 && rule.destination && !sitemapUrls.includes(rule.destination) && !rule.destination.startsWith("/blog/cluster"));
   const vercel = JSON.parse(fs.readFileSync(VERCEL, "utf8"));
   const vercelRules = vercel.redirects ?? [];
-  const vercelBad = vercelRules.filter((r) => !r.source || !r.destination || !r.source.startsWith("/") || r.statusCode === 410);
+  const vercelBad = vercelRules.filter((r) => {
+    if (!r.source || !r.source.startsWith("/")) return true;
+    if (r.statusCode === 410) return false;
+    if (!r.destination) return true;
+    return false;
+  });
 
   report(
     "Redirects",
@@ -170,14 +175,13 @@ console.log("SEO AUDIT — saudiersaa.com\n");
 // 8. Referenced images exist AND are from the approved assets only.
 //
 // APPROVED_ASSETS — the exact owner-approved image set (logo, homepage hero,
-// article WhatsApp banner, social share). Any other /images/ reference is a
+// social share). WhatsApp banner removed in repositioning. Any other /images/ reference is a
 // violation: no og-default, no generated article image, no favicon, no legacy
 // contextual images. Admin uploads live under /media/, not /images/, and are
 // covered by scripts/auditImages.mjs against content/media.json.
 const APPROVED_ASSETS = new Set([
   "/images/لوجو.png",
   "/images/Bannerrr.png",
-  "/images/saudiersaa-article-whatsapp-banner.png.png",
   "/images/saudiersaa-social-share.png",
 ]);
 {

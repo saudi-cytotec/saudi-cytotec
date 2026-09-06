@@ -375,22 +375,6 @@
       "createdAt": "2026-08-29"
     },
     {
-      "source": "/حبوب-سايتوتك-للبيع.*",
-      "destination": null,
-      "statusCode": 410,
-      "isRegex": true,
-      "reason": "Legacy seller-spam URL family with embedded phone numbers — gone, no educational replacement.",
-      "createdAt": "2026-08-29"
-    },
-    {
-      "source": "/(?:2018|2019|2020|2021)/(.*)",
-      "destination": null,
-      "statusCode": 410,
-      "isRegex": true,
-      "reason": "2018–2021 Blogger-era auto-scraped content (unrelated to the current medical platform). No replacement exists.",
-      "createdAt": "2026-08-29"
-    },
-    {
       "source": "/feed",
       "destination": null,
       "statusCode": 410,
@@ -402,22 +386,6 @@
       "destination": null,
       "statusCode": 410,
       "reason": "Legacy feed endpoint — gone.",
-      "createdAt": "2026-08-29"
-    },
-    {
-      "source": "/(.*)/feed",
-      "destination": null,
-      "statusCode": 410,
-      "isRegex": true,
-      "reason": "Legacy per-page feed endpoints — gone.",
-      "createdAt": "2026-08-29"
-    },
-    {
-      "source": "/(.*)/feed/",
-      "destination": null,
-      "statusCode": 410,
-      "isRegex": true,
-      "reason": "Legacy per-page feed endpoints — gone.",
       "createdAt": "2026-08-29"
     },
     {
@@ -740,6 +708,20 @@
       "destination": "/service-areas",
       "statusCode": 301,
       "reason": "City/doorway article abortion-medications-saudi-arabia removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cluster/almojazat-aljograyiya",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Geographic cluster removed in repositioning - consolidated to Saudi care access guide",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cluster/almojazat-aljograyiya/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Geographic cluster removed in repositioning - consolidated to Saudi care access guide",
       "createdAt": "2026-09-06"
     }
   ]

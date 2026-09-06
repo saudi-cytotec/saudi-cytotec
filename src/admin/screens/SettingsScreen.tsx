@@ -49,7 +49,7 @@ export function SettingsScreen() {
         <ul className="list-disc space-y-2 pr-6 text-sm leading-7 text-ink-soft">
           <li>لا مفاتيح في الواجهة الأمامية: OPENAI_API_KEY وGITHUB_PUBLISH_TOKEN وADMIN_PASSWORD وADMIN_SESSION_SECRET تُقرأ من بيئة Vercel فقط (api/*).</li>
           <li>لا نشر مجدول ولا cron — النشر يتم يدوياً من المحرر بعد جلسة مشرف فقط.</li>
-          <li>الأصول الدائمة أربعة فقط (الشعار، بانر الرئيسية، بانر واتساب المقالات، social-share للـOG/Twitter metadata فقط)؛ أما صور CMS فمرفوعة ومسجلة يدوياً تحت /media/.</li>
+          <li>الأصول الدائمة ثلاثة فقط (الشعار، بانر الرئيسية، social-share للـOG/Twitter metadata فقط)؛ أما صور CMS فمرفوعة ومسجلة يدوياً تحت /media/. تمت إزالة بانر واتساب كجزء من إعادة التموضع إلى صحة المرأة.</li>
           <li>الجلسة الإدارية: كوكي HttpOnly موقّع بـ HMAC مع مهلة 12 ساعة.</li>
           <li>CSP مقيّد + X-Frame-Options DENY + nosniff على كل الاستجابات (vercel.json).</li>
           <li>/admin و/api بلا تخزين مؤقت (no-store).</li>

@@ -350,6 +350,14 @@
       "statusCode": 301
     },
     {
+      "source": "/feed",
+      "statusCode": 410
+    },
+    {
+      "source": "/feed/",
+      "statusCode": 410
+    },
+    {
       "source": "/blog/cytotec-jazan/",
       "destination": "/service-areas",
       "statusCode": 301
@@ -576,6 +584,16 @@
     },
     {
       "source": "/blog/abortion-medications-saudi-arabia/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cluster/almojazat-aljograyiya",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cluster/almojazat-aljograyiya/",
       "destination": "/service-areas",
       "statusCode": 301
     }

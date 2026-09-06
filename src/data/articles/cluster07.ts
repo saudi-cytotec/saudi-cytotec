@@ -8,7 +8,7 @@ export const cluster07 = [
     metaTitle: "مفاهيم خاطئة عن سايتوتك",
     metaDescription: "تصحيح تعليمي لمفاهيم شائعة تخلط بين الشهرة والأمان وبين الاسم والمادة.",
     excerpt: "أكثر الأضرار المعرفية تأتي من جمل قصيرة تبدو حاسمة.",
-    related: ["is-cytotec-safe-for-everyone", "myths-about-home-dosing", "brand-name-vs-active-ingredient"],
+    related: ["is-cytotec-safe-for-everyone", "myths-about-home-dosing", "brand-name-vs-active-ingredient", "frequent-warning-questions"],
     points: [
       "«الجميع يستخدمه» ليست معلومة سلامة.",
       "«للمعدة فقط فلا خطر» جملة ناقصة.",
