@@ -51,6 +51,13 @@
       "statusCode": 301,
       "reason": "Legacy static HTML Privacy page.",
       "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/category-care.html",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy static HTML health-care category page.",
+      "createdAt": "2026-08-29"
     }
   ]
 }
