@@ -1,15 +1,15 @@
 import type { Cluster, NavItem } from "../types";
 
 export const SITE = {
-  name: "سايتوتك في السعودية",
-  nameEn: "Cytotec in Saudi Arabia",
+  name: "صحة المرأة السعودية - سعودي إرساء",
+  nameEn: "Saudi Women's Health - Saudiersaa",
   domain: "https://saudiersaa.com",
   locale: "ar-SA",
   language: "ar",
   description:
-    "موقع تعليمي عربي يقدم معلومات عامة عن سايتوتك (ميزوبروستول)، الاستخدامات الطبية، تحذيرات الأمان، الآثار الجانبية، ومتى تجب مراجعة الطبيب. المحتوى تعليمي ولا يغني عن الاستشارة الطبية.",
+    "منصة سعودية توعوية موثوقة لصحة المرأة: معلومات طبية مبسطة عن الحمل، الخصوبة، الدورة الشهرية، الصحة الإنجابية، سلامة الأدوية، والطوارئ النسائية. يتضمن المحتوى معلومات تعليمية عن سايتوتك وميزوبروستول كمادة دوائية ضمن إطار التوعية الدوائية فقط. المحتوى تعليمي ولا يغني عن الاستشارة الطبية.",
   email: "info@saudiersaa.com",
-  updated: "2026-03-20",
+  updated: "2026-09-06",
 };
 
 export const DISCLAIMER_SHORT =
@@ -19,26 +19,26 @@ export const EMERGENCY_NOTE =
   "إذا ظهر نزيف شديد، إغماء، ألم بطني حاد، حمى مرتفعة، أو ضيق تنفس، اطلبي رعاية طبية طارئة فوراً.";
 
 export const BRAND_NAME_EN = "saudiersaa";
-export const BRAND_TAGLINE = "مدونة سايتوتك التوعوية في السعودية";
+export const BRAND_TAGLINE = "منصة سعودية موثوقة للتوعية بصحة المرأة";
 
 export const mainNav: NavItem[] = [
   { to: "/", label: "الرئيسية" },
   { to: "/topics", label: "محاور المحتوى" },
   { to: "/blog", label: "المقالات" },
-  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
-  { to: "/safety", label: "الأمان" },
+  { to: "/womens-health", label: "صحة المرأة" },
   { to: "/early-pregnancy", label: "الحمل المبكر" },
+  { to: "/safety", label: "الأمان الدوائي" },
   { to: "/faq", label: "الأسئلة الشائعة" },
-  { to: "/service-areas", label: "في السعودية" },
 ];
 
 export const moreNav: NavItem[] = [
+  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟ (توعوي)" },
+  { to: "/misoprostol", label: "ميزوبروستول (توعوي)" },
   { to: "/medical-uses", label: "الاستخدامات الطبية" },
   { to: "/side-effects", label: "الآثار الجانبية" },
   { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب" },
-  { to: "/misoprostol", label: "ميزوبروستول" },
-  { to: "/womens-health", label: "صحة المرأة" },
   { to: "/medical-sources", label: "المصادر الطبية" },
+  { to: "/service-areas", label: "الرعاية في السعودية" },
   { to: "/about", label: "من نحن" },
   { to: "/contact", label: "اتصل بنا" },
   { to: "/medical-disclaimer", label: "إخلاء المسؤولية" },
@@ -50,15 +50,15 @@ export const clusters: Cluster[] = [
   {
     id: "definition",
     slug: "ma-huwa-saytotek",
-    title: "ما هو سايتوتك وميزوبروستول",
-    shortTitle: "التعريف",
+    title: "ما هو سايتوتك وميزوبروستول - معلومات توعوية",
+    shortTitle: "التعريف الدوائي",
     description:
-      "شرح تعليمي للمادة الفعالة والاسم التجاري، وآلية العمل، والأشكال الصيدلانية، وحدود المعلومات العامة.",
+      "شرح تعليمي للمادة الفعالة والاسم التجاري، وآلية العمل، والأشكال الصيدلانية، وحدود المعلومات العامة ضمن إطار التوعية الدوائية.",
   },
   {
     id: "uses",
     slug: "alestekhdamat-altebbiya",
-    title: "الاستخدامات الطبية",
+    title: "الاستخدامات الطبية في الإطار النظامي",
     shortTitle: "الاستخدامات",
     description:
       "الاستطبابات المعتمدة والاستخدامات السريرية تحت إشراف طبي، ومعنى الاستخدام خارج النشرة، ولماذا لا يُعامل الدواء كعلاج منزلي.",
@@ -66,10 +66,10 @@ export const clusters: Cluster[] = [
   {
     id: "safety",
     slug: "alaman-walthahdhirat",
-    title: "الأمان والتحذيرات",
+    title: "الأمان الدوائي والتحذيرات",
     shortTitle: "الأمان",
     description:
-      "تحذيرات الحمل، الإشراف الطبي، قراءة النشرة، التنظيم الدوائي، ومخاطر المصادر غير الموثوقة.",
+      "تحذيرات الحمل، الإشراف الطبي، قراءة النشرة، التنظيم الدوائي السعودي، ومخاطر المصادر غير الموثوقة.",
   },
   {
     id: "side-effects",
@@ -93,7 +93,7 @@ export const clusters: Cluster[] = [
     title: "صحة المرأة",
     shortTitle: "صحة المرأة",
     description:
-      "مقالات عن الدورة، ألم الحوض، فقر الدم، الفحوصات الدورية، والصحة النفسية المرتبطة بالصحة الإنجابية.",
+      "مقالات عن الدورة الشهرية، تكيس المبايض، الخصوبة، ألم الحوض، فقر الدم، الفحوصات الدورية، والصحة النفسية المرتبطة بالصحة الإنجابية.",
   },
   {
     id: "faq",
@@ -109,7 +109,7 @@ export const clusters: Cluster[] = [
     title: "التداخلات الدوائية وموانع الاستخدام",
     shortTitle: "الموانع",
     description:
-      "موانع الاستخدام، الحساسية، اعتبارات القلب والكبد والكلى والرضاعة، وكيفية مناقشة التاريخ الدوائي.",
+      "موانع الاستخدام، الحساسية، اعتبارات القلب والكبد والكلى والرضاعة، وكيفية مناقشة التاريخ الدوائي مع الطبيب.",
   },
   {
     id: "emergency",
@@ -117,31 +117,24 @@ export const clusters: Cluster[] = [
     title: "متى يجب مراجعة الطبيب والطوارئ",
     shortTitle: "الطوارئ",
     description:
-      "علامات النزيف الخطير، الحمى، الألم الحاد، الإغماء، وما ينبغي ذكره في قسم الطوارئ.",
+      "علامات النزيف الخطير، الحمى، الألم الحاد، الإغماء، وما ينبغي ذكره في قسم الطوارئ، مع أرقام وزارة الصحة الرسمية.",
   },
   {
     id: "evidence",
     slug: "aladilla-walmasader",
-    title: "الأدلة والمصادر والمعلومات الطبية المتقدمة",
+    title: "الأدلة والمصادر والمعلومات الطبية الموثوقة",
     shortTitle: "المصادر",
     description:
-      "كيف تُقيَّم الأدلة، النشرات الرسمية، هيئات التنظيم، وحدود الدراسات والقصص الشخصية.",
-  },
-  {
-    id: "geographic",
-    slug: "almojazat-aljograyiya",
-    title: "المحتوى الجغرافي حسب المناطق والمدن",
-    shortTitle: "المدن والمناطق",
-    description:
-      "مقالات تعليمية للنساء في مختلف مناطق المملكة العربية السعودية، مع التركيز على الوصول الآمن للرعاية الصحية في كل منطقة.",
+      "كيف تُقيَّم الأدلة، النشرات الرسمية، هيئات التنظيم السعودية والدولية، وحدود الدراسات والقصص الشخصية.",
   },
 ];
 
 export const cornerstonePaths = [
+  "/womens-health",
+  "/early-pregnancy",
+  "/safety",
   "/what-is-cytotec",
   "/misoprostol",
-  "/medical-uses",
-  "/safety",
   "/side-effects",
   "/when-to-see-doctor",
   "/medical-sources",

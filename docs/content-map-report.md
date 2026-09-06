@@ -1,6 +1,6 @@
 # Content Map Report
 
-Date: 2026-09-01 · source: `content/map.json` + built `dist/seo-manifest.json`
+Date: 2026-09-06 · source: `content/map.json` + built `dist/seo-manifest.json`
 
 ## Search-intent ownership
 
@@ -14,7 +14,7 @@ Date: 2026-09-01 · source: `content/map.json` + built `dist/seo-manifest.json`
 
 - Content-map topics: **100**
 - Content-map items marked PUBLISHED/UPDATED: **36**
-- Built article records: **122** (121 indexable, 1 intentional noindex)
+- Built article records: **101** (101 indexable, 0 intentional noindex)
 - Geographic articles protected by the editorial plan: **20**; no city page was added or removed by this audit.
 - Published/updated map targets missing from a built route: **0**
 - Planning-only target paths not yet built: **64**; these are IDEA records, not live URLs or mass-publishing instructions.
@@ -41,7 +41,7 @@ Date: 2026-09-01 · source: `content/map.json` + built `dist/seo-manifest.json`
 | E | FAQ and misconception architecture | `/faq` |
 | F | Medical resources and evidence literacy | `/medical-sources` |
 | G | Medication interactions and contraindications | `/safety` |
-| H | Saudi service-area discovery without doorway pages | `/service-areas` |
+| H | Saudi women's health care access - general education | `/service-areas` |
 | I | Emergency signs and urgent-care pathways | `/when-to-see-doctor` |
 | J | Advanced references and source verification | `/medical-sources` |
 

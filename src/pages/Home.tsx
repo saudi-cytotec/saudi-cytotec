@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArticleCard } from "../components/ArticleCard";
 import { CategoryCard } from "../components/CategoryCard";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
+import { CareReferral } from "../components/CareReferral";
 import { Wordmark } from "../components/Logo";
 import {
   IconArrowLeft,
@@ -16,14 +17,13 @@ import {
   IconVenus,
 } from "../components/icons";
 import { JsonLd, Seo } from "../components/Seo";
-import { WhatsAppContactCard } from "../components/WhatsAppContact";
 import { useCatalog } from "../cms/CatalogContext";
 import { HEALTH_LINES } from "../data/contact";
 import { LOGO_SRC } from "../components/Logo";
 import { SITE, clusters } from "../data/site";
 
 const HERO_BANNER_SRC = "/images/Bannerrr.png";
-const HERO_BANNER_ALT = "بانر سعودي إرساء — معلومات طبية موثوقة عن صحة المرأة في السعودية";
+const HERO_BANNER_ALT = "سعودي إرساء - منصة سعودية موثوقة للتوعية بصحة المرأة";
 
 const SA = HEALTH_LINES.find((c) => c.code === "sa");
 const SA_MOH = SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value ?? "937";
@@ -31,26 +31,26 @@ const SA_EMS = SA?.lines.find((l) => l.label.includes("الإسعاف"))?.value 
 
 const HERO_TRUST = [
   { Icon: IconShieldCheck, label: "محتوى موثوق" },
-  { Icon: IconStethoscope, label: "معلومات طبية دقيقة" },
-  { Icon: IconLock, label: "خصوصية تامة" },
+  { Icon: IconStethoscope, label: "توعية طبية" },
+  { Icon: IconLock, label: "بدون بيع أدوية" },
   { Icon: IconBook, label: "مصادر معتمدة" },
 ];
 
 const FEATURES = [
-  { Icon: IconBook, color: "text-brand", soft: "bg-brand-soft", title: "دليل شامل", text: "دليل كامل حول سايتوتك والصحة النسائية" },
-  { Icon: IconLock, color: "text-brand", soft: "bg-brand-soft", title: "خصوصيتك أولاً", text: "قنوات تواصل للمعلومات العامة فقط وليست للبيع أو التشخيص" },
-  { Icon: IconAward, color: "text-accent", soft: "bg-accent-soft", title: "مصادر معتمدة", text: "نعتمد على النشرات والهيئات الصحية والمراجع الطبية" },
+  { Icon: IconBook, color: "text-brand", soft: "bg-brand-soft", title: "دليل شامل", text: "دليل توعوي حول صحة المرأة والحمل والخصوبة" },
+  { Icon: IconLock, color: "text-brand", soft: "bg-brand-soft", title: "بدون بيع", text: "لا نبيع أدوية ولا نوسط للحصول عليها إطلاقاً" },
+  { Icon: IconAward, color: "text-accent", soft: "bg-accent-soft", title: "مصادر معتمدة", text: "نعتمد على وزارة الصحة، SFDA، FDA، WHO والمراجع الطبية" },
   { Icon: IconStethoscope, color: "text-brand", soft: "bg-brand-soft", title: "وضوح طبي", text: "نفرّق بين التعليم العام والاستشارة الفردية لدى طبيب مرخص" },
-  { Icon: IconShieldCheck, color: "text-brand", soft: "bg-brand-soft", title: "أمان أولاً", text: "كل مسار يربط بالمخاطر والطوارئ قبل أي خطوة تواصل" },
+  { Icon: IconShieldCheck, color: "text-brand", soft: "bg-brand-soft", title: "أمان أولاً", text: "كل مسار يربط بالمخاطر والطوارئ والقنوات الرسمية" },
 ];
 
 const CORNERSTONES = [
-  { to: "/service-areas", title: "سايتوتك في السعودية", text: "المحور الوطني الرئيسي وروابط المدن ذات الأولوية." },
-  { to: "/service-areas#cities", title: "المناطق والمدن", text: "دليل الصفحات المحلية ومسارات الوصول إلى الرعاية." },
-  { to: "/topics", title: "محاور المحتوى", text: "بوابة تربط المجموعات والـ 100 موضوع." },
-  { to: "/what-is-cytotec", title: "ما هو سايتوتك؟", text: "تعريف تعليمي للاسم التجاري والمادة الفعالة." },
-  { to: "/medical-uses", title: "الاستخدامات الطبية", text: "الاستطبابات والإشراف السريري وحدود الاستخدام." },
-  { to: "/safety", title: "الأمان والتحذيرات", text: "تحذير الحمل والتنظيم ومصادر الدواء غير الموثوقة." },
+  { to: "/womens-health", title: "صحة المرأة", text: "الدورة، تكيس المبايض، الخصوبة، الفحوصات الدورية." },
+  { to: "/early-pregnancy", title: "الحمل المبكر", text: "علامات الحمل، المتابعة، ومتى تكون المراجعة عاجلة." },
+  { to: "/safety", title: "الأمان الدوائي", text: "تحذيرات الأدوية، التنظيم السعودي، ومخاطر المصادر غير الموثوقة." },
+  { to: "/topics", title: "محاور المحتوى", text: "بوابة تربط المجموعات التعليمية والـ 100 موضوع." },
+  { to: "/what-is-cytotec", title: "ما هو سايتوتك؟ (توعوي)", text: "تعريف تعليمي للاسم التجاري ضمن التوعية الدوائية فقط." },
+  { to: "/misoprostol", title: "ميزوبروستول (توعوي)", text: "معلومات عن المادة الفعالة والتحذيرات الأساسية." },
   { to: "/side-effects", title: "الآثار الجانبية", text: "التمييز بين العرض الشائع والعلامة الطارئة." },
   { to: "/when-to-see-doctor", title: "متى تراجعين الطبيب", text: "علامات تستدعي عيادة أو طوارئ دون تأخير." },
   { to: "/faq", title: "الأسئلة الشائعة", text: "إجابات حسب القصد وروابط لمقالات أعمق." },
@@ -120,7 +120,7 @@ export function Home() {
   return (
     <div className="mx-auto max-w-7xl space-y-12 px-4 py-8 md:space-y-16 md:py-10">
       <Seo
-        title="صحة المرأة والحمل: معلومات طبية موثّقة بالعربية"
+        title="صحة المرأة السعودية | منصة توعوية موثوقة"
         description={SITE.description}
         path="/"
       />
@@ -134,6 +134,12 @@ export function Home() {
             inLanguage: "ar",
             description: SITE.description,
             publisher: { "@type": "Organization", name: SITE.name, url: SITE.domain },
+            about: [
+              { "@type": "MedicalCondition", name: "صحة المرأة" },
+              { "@type": "MedicalCondition", name: "الحمل المبكر" },
+              { "@type": "MedicalCondition", name: "تكيس المبايض" },
+              { "@type": "MedicalCondition", name: "الخصوبة" },
+            ],
           },
           {
             "@context": "https://schema.org",
@@ -141,6 +147,7 @@ export function Home() {
             name: SITE.name,
             url: SITE.domain,
             logo: `${SITE.domain}${LOGO_SRC}`,
+            description: SITE.description,
             contactPoint: [
               {
                 "@type": "ContactPoint",
@@ -156,6 +163,7 @@ export function Home() {
             name: SITE.name,
             url: SITE.domain,
             inLanguage: "ar",
+            description: SITE.description,
             potentialAction: {
               "@type": "SearchAction",
               target: `${SITE.domain}/search?q={search_term_string}`,
@@ -170,12 +178,13 @@ export function Home() {
         <div className="relative grid items-center gap-10 px-6 pb-20 pt-10 sm:px-10 sm:pt-14 lg:grid-cols-2 lg:gap-8 lg:px-12">
           <div>
             <h1 className="font-display text-4xl font-extrabold leading-[1.35] text-brand-deep sm:text-[2.9rem] sm:leading-[1.3]">
-              مدونة سايتوتك التوعوية
-              <span className="mt-1 block text-accent">في السعودية</span>
+              صحة المرأة السعودية
+              <span className="mt-1 block text-accent">منصة توعوية موثوقة</span>
             </h1>
             <p className="mt-5 max-w-xl text-[1.05rem] leading-9 text-ink-soft">
-              معلومات طبية دقيقة وموثوقة حول سايتوتك (ميزوبروستول) ودوره في الصحة النسائية، بأعلى معايير
-              الخصوصية والمصداقية — محتوى تعليمي عام لا يغني عن استشارة الطبيب المرخص.
+              منصة سعودية تقدم معلومات طبية مبسطة وموثوقة عن صحة المرأة، الحمل المبكر، تكيس المبايض، الخصوبة، الدورة
+              الشهرية، الصحة الإنجابية، وسلامة الأدوية. يتضمن المحتوى معلومات توعوية عن سايتوتك وميزوبروستول كمادة دوائية
+              ضمن إطار التثقيف الدوائي فقط — بدون بيع، بدون وصفات، وبدون تعليمات استخدام.
             </p>
 
             <ul className="mt-7 grid max-w-xl grid-cols-2 gap-3 sm:grid-cols-4">
@@ -198,17 +207,17 @@ export function Home() {
                 <IconArrowLeft className="h-4.5 w-4.5" />
               </Link>
               <Link
-                to="/service-areas"
+                to="/womens-health"
                 className="inline-flex items-center rounded-full border border-brand/25 bg-white/60 px-6 py-3.5 text-sm font-bold text-brand transition hover:border-brand/50 hover:bg-white"
               >
-                سايتوتك في السعودية
+                صحة المرأة
               </Link>
             </div>
 
             <p className="mt-6 max-w-xl rounded-2xl border border-line/70 bg-white/60 px-4 py-2.5 text-xs leading-6 text-ink-soft backdrop-blur-sm">
               للحالات العاجلة: الإسعاف <span dir="ltr" className="font-mono font-bold text-brand-deep">{SA_EMS}</span> في
               السعودية · مركز وزارة الصحة <span dir="ltr" className="font-mono font-bold text-brand-deep">{SA_MOH}</span>.
-              هذا الموقع لا يقدّم استشارة فردية ولا يصرف أدوية.
+              هذا الموقع تعليمي فقط ولا يقدّم استشارة فردية ولا يصرف أدوية.
             </p>
           </div>
 
@@ -231,13 +240,33 @@ export function Home() {
             </div>
           ))}
         </div>
-        <WhatsAppContactCard compact />
+        <div className="card-premium p-5">
+          <h2 className="font-display text-lg font-extrabold text-brand-deep">القنوات الرسمية للرعاية</h2>
+          <div className="mt-4 space-y-3">
+            <div className="rounded-2xl bg-cream p-4">
+              <p className="text-xs font-bold text-brand-deep">مركز اتصال وزارة الصحة</p>
+              <p className="mt-1 font-mono text-xl font-bold text-brand" dir="ltr">{SA_MOH}</p>
+              <p className="mt-1 text-xs text-ink-soft">استفسارات صحية عامة وتوجيه للمسار المناسب</p>
+            </div>
+            <div className="rounded-2xl bg-accent-soft p-4">
+              <p className="text-xs font-bold text-accent">الإسعاف والطوارئ</p>
+              <p className="mt-1 font-mono text-xl font-bold text-accent" dir="ltr">{SA_EMS}</p>
+              <p className="mt-1 text-xs text-ink-soft">نزيف شديد، إغماء، ألم حاد، حمى مرتفعة</p>
+            </div>
+          </div>
+          <p className="mt-4 text-[11px] leading-6 text-ink-soft">
+            هذا الموقع لا يبيع أدوية ولا يقدم وصفات. للملاحظات التحريرية: info@saudiersaa.com
+          </p>
+        </div>
       </section>
 
       <section>
         <div className="mb-8 text-center">
           <h2 className="font-display text-2xl font-extrabold text-brand-deep sm:text-[1.8rem]">تصفح المقالات حسب الفئة</h2>
           <span className="mx-auto mt-3 block h-1 w-16 rounded-full bg-accent" aria-hidden="true" />
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-ink-soft">
+            محتوى تعليمي مصنف حسب المحور الطبي. معلومات سايتوتك وميزوبروستول موجودة ضمن محور التوعية الدوائية فقط، وليست محور الموقع الرئيسي.
+          </p>
         </div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-5">
           {clusters.map((cluster) => (
@@ -291,6 +320,8 @@ export function Home() {
           ))}
         </div>
       </section>
+
+      <CareReferral />
     </div>
   );
 }

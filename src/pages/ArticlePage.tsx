@@ -11,7 +11,6 @@ import { clusters, SITE } from "../data/site";
 import { relatedArticles as pickRelated } from "../data/articles";
 import { clusterPath, getCluster, readingMinutes } from "../utils/content";
 import { CareReferral } from "../components/CareReferral";
-import { ArticleWhatsAppBanner } from "../components/WhatsAppContact";
 import { LOGO_SRC } from "../components/Logo";
 import type { ManagedArticle } from "../types";
 import { NotFound } from "./NotFound";
@@ -21,7 +20,7 @@ function labelForTarget(path: string, articles: { slug: string; title: string }[
   if (!path.startsWith("/")) return articles.find((item) => item.slug === path)?.title ?? "مقال مرتبط";
   const staticPage = staticPages.find((item) => item.path === path);
   if (staticPage) return staticPage.title;
-  if (path === "/service-areas") return "المناطق والمدن";
+  if (path === "/service-areas") return "الرعاية في السعودية";
   if (path === "/topics") return "محاور المحتوى";
   const cluster = clusters.find((item) => `/blog/cluster/${item.slug}` === path);
   return cluster?.shortTitle ?? "صفحة مرتبطة";
@@ -49,18 +48,7 @@ export function ArticlePage() {
     : `${SITE.domain}/blog/${article.slug}`;
   const noindex = managedArticle?.noindex === true || article.noindex === true;
   const resourceLinks = managedArticle?.resourceLinks ?? [];
-  const isSaudiHubShadow = article.slug === "cytotec-in-saudi-arabia";
 
-  /**
-   * Image policy on the public article:
-   *   - featured, thumbnail, banner/hero and custom OG are independent fields;
-   *   - only an explicitly selected featured or banner image is rendered in
-   *     the article page, and each keeps its own role when both are selected;
-   *   - og:image / twitter:image uses only the explicitly selected custom OG
-   *     image, or the approved global metadata fallback inside <Seo>.
-   * The permanent approved WhatsApp banner below is page chrome, not an
-   * article image, and renders independently.
-   */
   const featuredImage = article.image?.trim() ?? "";
   const bannerImage = article.bannerImage?.trim() ?? "";
   const ogImage = article.ogImage?.trim() ?? "";
@@ -101,6 +89,7 @@ export function ArticlePage() {
               dateModified: article.updatedAt,
               inLanguage: "ar",
               mainEntityOfPage: canonical,
+              isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE.domain },
             },
             ...(article.faqs?.length
               ? [
@@ -160,41 +149,19 @@ export function ArticlePage() {
         </figure>
       ) : null}
 
-      <ArticleWhatsAppBanner />
-
       <div className="mt-6 max-w-3xl">
         <DisclaimerBanner />
       </div>
-      {isSaudiHubShadow ? (
-        <section className="mt-6 max-w-3xl rounded-3xl border border-brand/20 bg-brand-soft p-5">
-          <p className="text-xs font-bold text-brand">تنبيه هيكلي</p>
-          <h2 className="mt-1 text-xl font-bold text-brand-deep">الصفحة السعودية الرئيسية لهذا الموضوع أصبحت هنا</h2>
-          <p className="mt-2 text-sm leading-7 text-ink-soft">
-            للحفاظ على مسار واحد واضح وغير مكرر، تعتمد بنية الموقع الآن على صفحة <strong>سايتوتك في السعودية</strong>
-            ضمن <strong>المناطق والمدن</strong> بوصفها المركز الأساسي، بينما تبقى هذه الصفحة مرجعاً انتقالياً لمن يصل إليها
-            عبر رابط قديم.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3 text-sm">
-            <Link to="/service-areas" className="rounded-full bg-accent px-5 py-2.5 font-bold text-white transition hover:brightness-110">
-              الانتقال إلى الصفحة الرئيسية
-            </Link>
-            <Link to="/faq" className="rounded-full border border-line bg-paper px-5 py-2.5 font-semibold text-brand-deep hover:bg-cream">
-              أسئلة شائعة
-            </Link>
-          </div>
-        </section>
-      ) : null}
+
       <div className="mt-10">
         <ContentBlocks blocks={article.blocks} />
       </div>
 
       {resourceLinks.length ? (
         <section className="mt-12 rounded-3xl border border-line bg-paper p-6 shadow-sm">
-          <h2 className="text-2xl font-bold text-teal-deep">{isSaudiHubShadow ? "الصفحة الرئيسية وروابط المدن" : "روابط مرتبطة مفيدة"}</h2>
+          <h2 className="text-2xl font-bold text-teal-deep">روابط مرتبطة مفيدة</h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-ink-soft">
-            {isSaudiHubShadow
-              ? "إذا وصلتِ إلى هذا الرابط مباشرة، فابدئي من الصفحة السعودية الرئيسية ثم انتقلي إلى المدينة الأقرب لسؤالك أو إلى صفحات الأمان والطوارئ والمراجع."
-              : "الروابط التالية تساعدك على الانتقال بين الصفحة السعودية الرئيسية، والدليل الجغرافي، والموضوعات المرتبطة بسؤالك."}
+            الروابط التالية تساعدك على الانتقال بين المحاور التعليمية والموضوعات المرتبطة بسؤالك ضمن منصة صحة المرأة السعودية.
           </p>
           <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {resourceLinks.map((item) => (
@@ -238,7 +205,7 @@ export function ArticlePage() {
           أسئلة شائعة مرتبطة
         </Link>
         <Link to="/service-areas" className="rounded-full border border-line px-3 py-1 hover:bg-paper">
-          المناطق والمدن
+          الرعاية في السعودية
         </Link>
       </div>
 

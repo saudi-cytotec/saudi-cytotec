@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { BrandLogo } from "./Logo";
-import { WhatsAppContactLink } from "./WhatsAppContact";
 import { IconArrowLeft } from "./icons";
 import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
 import { clusters, mainNav, moreNav, SITE } from "../data/site";
@@ -15,24 +14,38 @@ export function Footer() {
         <div>
           <BrandLogo className="h-14" tone="light" />
           <p className="mt-5 max-w-xl text-sm leading-8 text-white/75">
-            مدونة سعودية توعوية تقدم معلومات عامة موثوقة حول سايتوتك (ميزوبروستول) والصحة النسائية: الاستخدامات
-            الطبية، تحذيرات الأمان، الآثار الجانبية، ومتى تجب مراجعة الطبيب — بلغة واضحة وبلا وصف دوائي.
+            منصة سعودية توعوية موثوقة لصحة المرأة: معلومات طبية مبسطة عن الحمل، الخصوبة، الدورة الشهرية، الصحة
+            الإنجابية، سلامة الأدوية، والطوارئ النسائية. يتضمن المحتوى معلومات تعليمية عن سايتوتك وميزوبروستول كمادة
+            دوائية ضمن إطار التوعية الدوائية فقط، دون وصف أو بيع.
           </p>
           <div className="mt-5 rounded-2xl border border-white/15 bg-white/5 p-4">
-            <p className="text-xs font-bold">لرعاية طبية حقيقية</p>
+            <p className="text-xs font-bold">لرعاية طبية حقيقية - القنوات الرسمية</p>
             <p className="mt-1 text-xs leading-6 text-white/75">
-              الإسعاف <span dir="ltr" className="font-mono font-bold text-white">{SA?.lines.find((l) => l.label.includes("الإسعاف"))?.value}</span>{" "}
+              الإسعاف{" "}
+              <span dir="ltr" className="font-mono font-bold text-white">
+                {SA?.lines.find((l) => l.label.includes("الإسعاف"))?.value}
+              </span>{" "}
               · مركز وزارة الصحة السعودية{" "}
-              <span dir="ltr" className="font-mono font-bold text-white">{SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value}</span>
+              <span dir="ltr" className="font-mono font-bold text-white">
+                {SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value}
+              </span>
             </p>
             <p className="mt-3">
-              <WhatsAppContactLink className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-1.5 text-xs font-bold text-white transition hover:bg-accent-deep" />
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold text-white ring-1 ring-white/20 transition hover:bg-white/20"
+              >
+                تواصل تحريري
+              </Link>
             </p>
             <p className="mt-2 text-xs text-white/75">
               ملاحظات تحريرية فقط:{" "}
               <a href={`mailto:${EDITORIAL_EMAIL}`} className="underline underline-offset-4 transition hover:text-white">
                 {EDITORIAL_EMAIL}
               </a>
+            </p>
+            <p className="mt-2 text-[11px] leading-5 text-white/60">
+              هذا الموقع لا يقدم تشخيصاً ولا وصفاً دوائياً ولا يبيع أدوية. المحتوى تعليمي عام فقط.
             </p>
           </div>
         </div>
@@ -69,13 +82,22 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 text-xs text-white/70 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {SITE.name} — {SITE.nameEn}. جميع الحقوق محفوظة.
+            © {new Date().getFullYear()} {SITE.name} — {SITE.nameEn}. جميع الحقوق محفوظة. محتوى تعليمي لا يغني عن
+            الاستشارة الطبية.
           </p>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
-            <Link to="/privacy" className="transition hover:text-white">سياسة الخصوصية</Link>
-            <Link to="/medical-disclaimer" className="transition hover:text-white">إخلاء المسؤولية الطبية</Link>
-            <Link to="/sitemap" className="transition hover:text-white">خريطة الموقع</Link>
-            <Link to="/contact" className="transition hover:text-white">اتصل بنا</Link>
+            <Link to="/privacy" className="transition hover:text-white">
+              سياسة الخصوصية
+            </Link>
+            <Link to="/medical-disclaimer" className="transition hover:text-white">
+              إخلاء المسؤولية الطبية
+            </Link>
+            <Link to="/sitemap" className="transition hover:text-white">
+              خريطة الموقع
+            </Link>
+            <Link to="/contact" className="transition hover:text-white">
+              اتصل بنا
+            </Link>
           </div>
         </div>
       </div>
