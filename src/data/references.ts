@@ -106,6 +106,55 @@ export const references: Record<string, Reference> = {
     url: "https://www.ema.europa.eu/en",
     note: "هيئة تنظيمية أوروبية لنشرات الأدوية وتقييم المنافع والمخاطر.",
   },
+  mohap: {
+    id: "mohap",
+    title: "Ministry of Health and Prevention — United Arab Emirates",
+    source: "وزارة الصحة ووقاية المجتمع في الإمارات",
+    url: "https://www.mohap.gov.ae/",
+    note: "الجهة الاتحادية المسؤولة عن تسجيل الأدوية وتصنيف صرفها وترخيص المنشآت الصيدلانية في الدولة.",
+  },
+  dha: {
+    id: "dha",
+    title: "Dubai Health Authority",
+    source: "هيئة الصحة بدبي",
+    url: "https://www.dha.gov.ae/",
+    note: "الجهة الصحية المنظمة للرعاية والمنشآت المرخصة في إمارة دبي.",
+  },
+  doh: {
+    id: "doh",
+    title: "Department of Health — Abu Dhabi",
+    source: "دائرة الصحة في أبوظبي",
+    url: "https://doh.gov.ae/",
+    note: "الجهة المنظمة للقطاع الصحي العام والخاص في إمارة أبوظبي.",
+  },
+  mohkw: {
+    id: "mohkw",
+    title: "Ministry of Health — State of Kuwait",
+    source: "وزارة الصحة الكويتية",
+    url: "https://www.moh.gov.kw/",
+    note: "الجهة الحكومية المسؤولة عن السياسة الصحية وتنظيم الخدمات والإشراف على تداول الأدوية في الكويت.",
+  },
+  kuwaDrug: {
+    id: "kuwaDrug",
+    title: "Drug and Food Control Administration — registration of pharmaceutical products",
+    source: "إدارة تسجيل ومراقبة الأدوية الطبية والنباتية في الكويت",
+    url: "https://www.moh.gov.kw/en/pages/DRUGCA.aspx",
+    note: "الإدارة المعنية بتسجيل المستحضرات الطبية واعتماد الوكلاء المحليين والإفراج الجمركي عن الأدوية.",
+  },
+  mohbh: {
+    id: "mohbh",
+    title: "Ministry of Health — Kingdom of Bahrain",
+    source: "وزارة الصحة البحرينية",
+    url: "https://www.moh.gov.bh/",
+    note: "الجهة الحكومية المسؤولة عن تقديم وتنظيم الخدمات الصحية العامة في مملكة البحرين.",
+  },
+  nhra: {
+    id: "nhra",
+    title: "National Health Regulatory Authority — Kingdom of Bahrain",
+    source: "الهيئة الوطنية لتنظيم المهن والخدمات الصحية في البحرين",
+    url: "https://www.nhra.bh/",
+    note: "الجهة التنظيمية المسؤولة عن ترخيص المنشآت الصحية والصيادلة ومراقبة الأدوية وتداولها في البحرين.",
+  },
 };
 
 export const referenceList = Object.values(references);

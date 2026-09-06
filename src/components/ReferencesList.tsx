@@ -1,11 +1,11 @@
 import { references } from "../data/references";
 
-export function ReferencesList({ ids }: { ids: string[] }) {
+export function ReferencesList({ ids, title = "مراجع طبية وتنظيمية" }: { ids: string[]; title?: string }) {
   const items = ids.map((id) => references[id]).filter(Boolean);
   if (!items.length) return null;
   return (
     <section className="mt-12 rounded-3xl border border-line bg-paper p-6">
-      <h2 className="text-2xl font-bold text-teal-deep">مراجع طبية وتنظيمية</h2>
+      <h2 className="text-2xl font-bold text-teal-deep">{title}</h2>
       <p className="mt-2 text-sm leading-7 text-ink-soft">
         الروابط التالية لمصادر عامة أو نشرات رسمية. وجود المرجع لا يعني أنه يغطي حالتك الفردية.
       </p>

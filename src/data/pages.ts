@@ -1,3 +1,4 @@
+import { countryPages } from "./country";
 import { emergency, h2, h3, info, p, ul, warn } from "../utils/content";
 import type { StaticPage } from "../types";
 
@@ -338,4 +339,17 @@ export const staticPages: StaticPage[] = [
       emergency("في النزيف الشديد أو الإغماء أو الألم الحاد أو ضيق التنفس اطلبي الطوارئ فوراً عبر 997."),
     ],
   },
+  // Country cornerstone pages (full layout rendered by CountryCornerstonePage).
+  // These records keep the routes inside the static page registry so they are
+  // included in the sitemap, the SEO manifest and the architecture audits.
+  ...countryPages.map((spec) => ({
+    path: spec.path,
+    title: spec.title,
+    h1: spec.h1,
+    metaTitle: spec.metaTitle,
+    metaDescription: spec.metaDescription,
+    image: "/images/Bannerrr.png",
+    imageAlt: "بانر معتمد لمعلومات طبية موثوقة عن صحة المرأة",
+    blocks: [],
+  })),
 ];
