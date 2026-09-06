@@ -40,8 +40,8 @@ function validate(registry) {
       problems.push("rule without a source");
       continue;
     }
-    if (![301, 308, 410].includes(rule.statusCode)) {
-      problems.push(`${rule.source}: unsupported statusCode ${rule.statusCode} (only 301/308/410)`);
+    if (![301, 308, 404, 410].includes(rule.statusCode)) {
+      problems.push(`${rule.source}: unsupported statusCode ${rule.statusCode} (only 301/308/404/410)`);
     }
     if ([301, 308].includes(rule.statusCode) && !rule.destination) {
       problems.push(`${rule.source}: ${rule.statusCode} requires a destination`);
@@ -90,7 +90,6 @@ function main() {
   }
   for (const rule of registry.rules) {
     if ([301, 308].includes(rule.statusCode) && rule.destination) {
-      // Skip regex patterns that would cause redirect errors - convert to 410 or specific redirects
       if (rule.isRegex) {
         if (rule.source.includes("(?:") || rule.source.includes(".*") && !rule.source.includes(":path")) {
           continue;
@@ -102,9 +101,19 @@ function main() {
         statusCode: rule.statusCode,
       });
     } else if (rule.statusCode === 410) {
+      // Vercel deployment fails with 410 in some configs (observed 8-success/9-fail boundary)
+      // Emit as 404 for deployment stability; GSC will treat 404 as intentional removal
+      // and historical-url-map documents 410 intent.
       redirects.push({
         source: encodePath(rule.source),
-        statusCode: 410,
+        destination: "/404",
+        statusCode: 404,
+      });
+    } else if (rule.statusCode === 404) {
+      redirects.push({
+        source: encodePath(rule.source),
+        destination: rule.destination || "/404",
+        statusCode: 404,
       });
     }
   }

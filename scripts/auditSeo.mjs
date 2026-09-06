@@ -102,13 +102,14 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   const sitemapUrls = locs(fs.readFileSync(SITEMAP, "utf8")).map((url) => url.replace("https://saudiersaa.com", ""));
   const sources = new Set(registry.rules.map((rule) => rule.source));
   const loops = registry.rules.filter((rule) => rule.destination && sources.has(rule.destination));
-  const badStatus = registry.rules.filter((rule) => ![301, 308, 410].includes(rule.statusCode));
-  const missingTargets = registry.rules.filter((rule) => rule.statusCode === 301 && rule.destination && !sitemapUrls.includes(rule.destination) && !rule.destination.startsWith("/blog/cluster"));
+  const badStatus = registry.rules.filter((rule) => ![301, 308, 404, 410].includes(rule.statusCode));
+  const missingTargets = registry.rules.filter((rule) => [301, 308].includes(rule.statusCode) && rule.destination && !sitemapUrls.includes(rule.destination) && !rule.destination.startsWith("/blog/cluster") && rule.destination !== "/404");
   const vercel = JSON.parse(fs.readFileSync(VERCEL, "utf8"));
   const vercelRules = vercel.redirects ?? [];
   const vercelBad = vercelRules.filter((r) => {
     if (!r.source || !r.source.startsWith("/")) return true;
     if (r.statusCode === 410) return false;
+    if (r.statusCode === 404) return false;
     if (r.statusCode === 308) return false;
     if (!r.destination) return true;
     return false;
