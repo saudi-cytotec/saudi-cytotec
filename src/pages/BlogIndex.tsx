@@ -7,19 +7,23 @@ import { IconArrowLeft, IconSearch } from "../components/icons";
 import { PageHero } from "../components/PageHero";
 import { Seo } from "../components/Seo";
 import { clusters } from "../data/site";
+import { articles as staticArticles } from "../data/articles";
 
 export function BlogIndex() {
   const { articles } = useCatalog();
   const [q, setQ] = useState("");
   const [activeCluster, setActiveCluster] = useState<string>("all");
+  // localStorage/CMS state can be empty on a fresh browser or unavailable after a reset.
+  // The checked-in published catalog is the authoritative, non-commercial fallback.
+  const catalog = articles.length ? articles : staticArticles.filter((article) => !article.noindex);
 
   const filtered = useMemo(() => {
-    let list = articles;
+    let list = catalog;
     if (activeCluster !== "all") list = list.filter((a) => a.cluster === activeCluster);
     const value = q.trim();
     if (value) list = list.filter((article) => `${article.title} ${article.excerpt} ${article.h1}`.includes(value));
     return list;
-  }, [q, activeCluster, articles]);
+  }, [q, activeCluster, catalog]);
 
   return (
     <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
@@ -43,10 +47,10 @@ export function BlogIndex() {
             activeCluster === "all" ? "bg-brand text-white" : "bg-white text-brand-deep ring-1 ring-line hover:bg-brand-soft"
           }`}
         >
-          الكل ({articles.filter((article) => !article.noindex).length})
+          الكل ({catalog.filter((article) => !article.noindex).length})
         </button>
         {clusters.map((cluster) => {
-          const count = articles.filter((a) => a.cluster === cluster.id).length;
+          const count = catalog.filter((a) => a.cluster === cluster.id).length;
           const active = activeCluster === cluster.id;
           return (
             <button
