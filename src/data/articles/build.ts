@@ -2,17 +2,24 @@ import { makeArticle } from "../../utils/content";
 import type { Article, ClusterId, ContentBlock } from "../../types";
 
 const cornerstoneMap: Record<ClusterId, string[]> = {
-  definition: ["/what-is-cytotec", "/misoprostol", "/medical-sources"],
+  definition: ["/what-is-cytotec", "/misoprostol", "/medical-sources", "/abortion-pills-saudi-arabia"],
   uses: ["/medical-uses", "/safety", "/what-is-cytotec"],
-  safety: ["/safety", "/medical-disclaimer", "/when-to-see-doctor"],
+  safety: ["/safety", "/medical-disclaimer", "/when-to-see-doctor", "/abortion-pills-saudi-arabia"],
   "side-effects": ["/side-effects", "/when-to-see-doctor", "/safety"],
-  pregnancy: ["/early-pregnancy", "/safety", "/when-to-see-doctor"],
+  pregnancy: ["/early-pregnancy", "/safety", "/when-to-see-doctor", "/abortion-pills-saudi-arabia"],
   "womens-health": ["/womens-health", "/early-pregnancy", "/when-to-see-doctor"],
   faq: ["/faq", "/medical-disclaimer", "/what-is-cytotec"],
   interactions: ["/safety", "/medical-uses", "/when-to-see-doctor"],
-  emergency: ["/when-to-see-doctor", "/side-effects", "/contact"],
+  emergency: ["/when-to-see-doctor", "/side-effects", "/contact", "/abortion-pills-saudi-arabia"],
   evidence: ["/medical-sources", "/medical-disclaimer", "/about"],
-  geographic: ["/safety", "/what-is-cytotec", "/when-to-see-doctor"],
+  geographic: [
+    "/abortion-pills-saudi-arabia",
+    "/abortion-pills-uae",
+    "/abortion-pills-kuwait",
+    "/abortion-pills-bahrain",
+    "/safety",
+    "/what-is-cytotec",
+  ],
 };
 
 const referenceMap: Record<ClusterId, string[]> = {
