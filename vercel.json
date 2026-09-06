@@ -116,6 +116,10 @@
       "source": "/category-care.html",
       "destination": "/womens-health",
       "statusCode": 301
+    },
+    {
+      "source": "/feed",
+      "statusCode": 410
     }
   ]
 }
