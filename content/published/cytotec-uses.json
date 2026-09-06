@@ -14,28 +14,6 @@
   "related": ["cytotec-definition", "misoprostol-active-ingredient", "difference-cytotec-misoprostol", "general-safety-warnings", "pregnancy-boxed-warning", "unreliable-medicine-sources", "saudi-drug-regulation-context"],
   "cornerstones": ["/what-is-cytotec", "/misoprostol", "/safety", "/medical-disclaimer", "/medical-sources", "/when-to-see-doctor"],
   "references": ["fdaLabel", "sfda", "moh", "medlinePlus", "dailyMed", "whoEml"],
-  "resourceLinks": [
-    {
-      "to": "/abortion-pills-saudi-arabia",
-      "label": "أدوية الإجهاض وسايتوتك: السياق السعودي",
-      "description": "وزارة الصحة وSFDA، وتقييم فقدان الحمل وقنوات الرعاية في السعودية."
-    },
-    {
-      "to": "/abortion-pills-uae",
-      "label": "أدوية الإجهاض وسايتوتك: السياق الإماراتي",
-      "description": "المعلومات الطبية ومؤسسة الإمارات للدواء والضوابط المحلية."
-    },
-    {
-      "to": "/abortion-pills-kuwait",
-      "label": "أدوية الإجهاض وسايتوتك: السياق الكويتي",
-      "description": "دور وزارة الصحة، والسجلات والمواعيد، والتمييز بين المتابعة والطوارئ."
-    },
-    {
-      "to": "/abortion-pills-bahrain",
-      "label": "أدوية الإجهاض وسايتوتك: السياق البحريني",
-      "description": "متابعة المراكز الصحية ومصادر وزارة الصحة وNHRA لسلامة الدواء."
-    }
-  ],
   "blocks": [
     {
       "type": "p",

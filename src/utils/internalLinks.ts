@@ -1,11 +1,10 @@
 import type { ManagedArticle } from "../types";
-import { cornerstonePaths } from "../data/site";
 
 /**
  * Internal-linking engine.
  *
  * Builds the link graph from the article corpus (related, internalLinks,
- * cornerstones, resourceLinks) and reports the signals the CMS dashboard uses:
+ * cornerstones) and reports the signals the CMS dashboard uses:
  *
  *   - outgoing/incoming counts per article
  *   - orphans: published articles no other article links to
@@ -42,7 +41,7 @@ function normalizeTarget(target: string): string | null {
 export function buildLinkGraph(articles: ManagedArticle[]): LinkGraph {
   const published = articles.filter((article) => article.status === "published");
   const knownSlugs = new Set(published.map((article) => article.slug));
-  const knownPaths = new Set<string>(["/", "/topics", "/blog", "/faq", "/service-areas", "/contact", "/sitemap", "/search", "/admin", ...cornerstonePaths]);
+  const knownPaths = new Set<string>(["/", "/topics", "/blog", "/faq", "/service-areas", "/contact", "/sitemap", "/search", "/admin"]);
   // Cornerstone pages and cluster hubs are valid link targets even though
   // they are not articles.
   for (const article of articles) {
@@ -55,7 +54,7 @@ export function buildLinkGraph(articles: ManagedArticle[]): LinkGraph {
   const brokenLinks: { from: string; to: string }[] = [];
 
   for (const article of published) {
-    const targets = [...new Set([...article.related, ...article.internalLinks, ...article.cornerstones, ...(article.resourceLinks ?? []).map((link) => link.to)])];
+    const targets = [...new Set([...article.related, ...article.internalLinks, ...article.cornerstones])];
     const normalized: string[] = [];
     for (const target of targets) {
       const norm = normalizeTarget(target);

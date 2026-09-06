@@ -3,7 +3,6 @@ import { useCatalog } from "../cms/CatalogContext";
 import { mapRegistry } from "../cms/registrySource";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CategoryCard } from "../components/CategoryCard";
-import { CountryCornerstoneLinks } from "../components/CountryCornerstoneLinks";
 import { Seo } from "../components/Seo";
 import { clusters } from "../data/site";
 import { clusterPath } from "../utils/content";
@@ -21,7 +20,6 @@ export function TopicsPage() {
           <CategoryCard key={cluster.id} cluster={cluster} count={articles.filter((a) => a.cluster === cluster.id).length} />
         ))}
       </div>
-      <CountryCornerstoneLinks />
       <section className="mt-12 rounded-3xl border border-line bg-paper p-6">
         <h2 className="text-2xl font-bold text-teal-deep">خريطة الـ 100 موضوع</h2>
         <p className="mt-2 text-sm leading-7 text-ink-soft">الخريطة ليست 100 مقال عشوائي؛ إنها graph تحريري يحدد القصد والكلمات والروابط والـ FAQ والمراجع وخطوة التقدم لكل موضوع.</p>
