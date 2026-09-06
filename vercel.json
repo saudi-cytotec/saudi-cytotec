@@ -78,6 +78,17 @@
   ],
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.saudiersaa.com"
+        }
+      ],
+      "destination": "https://saudiersaa.com/:path*",
+      "statusCode": 308
+    },
+    {
       "source": "/blog/cytotec-in-saudi-arabia/",
       "destination": "/service-areas",
       "statusCode": 301
