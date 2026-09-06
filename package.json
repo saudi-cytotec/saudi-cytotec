@@ -17,8 +17,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "audit": "node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs && node scripts/auditImages.mjs && node scripts/auditArchitecture.mjs",
-    "verify": "node scripts/verifyRendered.mjs",
-    "test:countries": "node scripts/verifyCountryCornerstones.mjs"
+    "verify": "node scripts/verifyRendered.mjs"
   },
   "dependencies": {
     "clsx": "2.1.1",
