@@ -15,6 +15,64 @@ export function TopicsPage() {
       <Breadcrumbs items={[{ name: "محاور المحتوى", path: "/topics" }]} />
       <h1 className="mt-5 text-4xl font-bold text-teal-deep">محاور المحتوى</h1>
       <p className="mt-3 max-w-3xl leading-8 text-ink-soft">استخدمي هذه الصفحة كبوابة للانتقال من السؤال العام إلى المجموعة المناسبة ثم المقال التفصيلي أو صفحة الأسئلة.</p>
+
+      <section className="mt-8 rounded-3xl border border-line bg-paper p-6">
+        <h2 className="text-2xl font-bold text-teal-deep">المحتوى حسب الدولة</h2>
+        <p className="mt-2 text-sm leading-7 text-ink-soft">
+          أدلة توعوية مخصصة لكل دولة خليجية، تغطي السياق التنظيمي المحلي والمصادر الرسمية للرعاية الصحية.
+        </p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <Link
+            to="/abortion-pills-saudi-arabia"
+            className="group rounded-2xl border border-line bg-cream/60 p-4 transition hover:border-teal hover:bg-cream"
+          >
+            <h3 className="font-bold text-brand-deep group-hover:text-teal-deep">🇸🇦 المملكة العربية السعودية</h3>
+            <p className="mt-1 text-xs leading-5 text-ink-soft">
+              الهيئة العامة للغذاء والدواء ووزارة الصحة
+            </p>
+            <span className="mt-3 inline-block text-xs font-bold text-teal">
+              الدليل السعودي ←
+            </span>
+          </Link>
+          <Link
+            to="/abortion-pills-uae"
+            className="group rounded-2xl border border-line bg-cream/60 p-4 transition hover:border-teal hover:bg-cream"
+          >
+            <h3 className="font-bold text-brand-deep group-hover:text-teal-deep">🇦🇪 الإمارات العربية المتحدة</h3>
+            <p className="mt-1 text-xs leading-5 text-ink-soft">
+              وزارة الصحة ووقاية المجتمع والجهات الصحية المحلية
+            </p>
+            <span className="mt-3 inline-block text-xs font-bold text-teal">
+              دليل الإمارات ←
+            </span>
+          </Link>
+          <Link
+            to="/abortion-pills-kuwait"
+            className="group rounded-2xl border border-line bg-cream/60 p-4 transition hover:border-teal hover:bg-cream"
+          >
+            <h3 className="font-bold text-brand-deep group-hover:text-teal-deep">🇰🇼 دولة الكويت</h3>
+            <p className="mt-1 text-xs leading-5 text-ink-soft">
+              وزارة الصحة — إدارة الرقابة الدوائية والغذائية
+            </p>
+            <span className="mt-3 inline-block text-xs font-bold text-teal">
+              الدليل الكويتي ←
+            </span>
+          </Link>
+          <Link
+            to="/abortion-pills-bahrain"
+            className="group rounded-2xl border border-line bg-cream/60 p-4 transition hover:border-teal hover:bg-cream"
+          >
+            <h3 className="font-bold text-brand-deep group-hover:text-teal-deep">🇧🇭 مملكة البحرين</h3>
+            <p className="mt-1 text-xs leading-5 text-ink-soft">
+              وزارة الصحة والهيئة الوطنية لتنظيم المهن الصحية
+            </p>
+            <span className="mt-3 inline-block text-xs font-bold text-teal">
+              دليل البحرين ←
+            </span>
+          </Link>
+        </div>
+      </section>
+
       <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {clusters.map((cluster) => (
           <CategoryCard key={cluster.id} cluster={cluster} count={articles.filter((a) => a.cluster === cluster.id).length} />
