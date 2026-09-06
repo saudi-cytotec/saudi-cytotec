@@ -40,8 +40,6 @@ const DIST_HTML = path.join(ROOT, "dist", "index.html");
 const SITEMAP = path.join(ROOT, "public", "sitemap.xml");
 const DOMAIN = "https://saudiersaa.com";
 const GLOBAL_SOCIAL_IMAGE = `${DOMAIN}/images/saudiersaa-social-share.png`;
-const CUSTOM_OG_ARTICLE = "/blog/cytotec-uses";
-const CUSTOM_OG_IMAGE = `${DOMAIN}/images/Bannerrr.png`;
 
 if (!fs.existsSync(DIST_HTML)) {
   console.error("[verify] dist/index.html not found — run `npm run build` first.");
@@ -65,31 +63,58 @@ const sitemapXml = fs.readFileSync(SITEMAP, "utf8");
 const sitemapLocs = new Set([...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]));
 
 const TARGET = "/service-areas";
-const SHADOW = "/blog/cytotec-in-saudi-arabia";
+
+// Country cornerstone pages: indexable, self-canonical, in the sitemap, with
+// the required H1, the fixed second statement and the approved banner image.
+const COUNTRY_PAGES = [
+  {
+    path: "/abortion-pills-saudi-arabia",
+    h1: "أدوية إجهاض الحمل في السعودية",
+    tagline: "حبوب سايتوتك في السعودية",
+  },
+  {
+    path: "/abortion-pills-uae",
+    h1: "أدوية إجهاض الحمل في الإمارات",
+    tagline: "حبوب سايتوتك في الإمارات",
+  },
+  {
+    path: "/abortion-pills-kuwait",
+    h1: "أدوية إجهاض الحمل في الكويت",
+    tagline: "حبوب سايتوتك في الكويت",
+  },
+  {
+    path: "/abortion-pills-bahrain",
+    h1: "أدوية إجهاض الحمل في البحرين",
+    tagline: "حبوب سايتوتك في البحرين",
+  },
+].map((page) => ({
+  ...page,
+  expect: "indexable",
+  canonical: `${DOMAIN}${page.path}`,
+  inSitemap: true,
+  country: true,
+}));
 
 const urls = [
   // { path, expect: "indexable" | "noindex" | "notfound", canonical?, inSitemap? }
   { path: TARGET, expect: "indexable", canonical: `${DOMAIN}/service-areas`, inSitemap: true },
-  { path: SHADOW, expect: "noindex", canonical: `${DOMAIN}/service-areas`, inSitemap: false },
   { path: "/", expect: "indexable", canonical: `${DOMAIN}/` },
   { path: "/what-is-cytotec", expect: "indexable", canonical: `${DOMAIN}/what-is-cytotec` },
   { path: "/safety", expect: "indexable", canonical: `${DOMAIN}/safety` },
   { path: "/blog", expect: "indexable", canonical: `${DOMAIN}/blog` },
   { path: "/blog/cytotec-definition", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-definition` },
-  { path: CUSTOM_OG_ARTICLE, expect: "indexable", canonical: `${DOMAIN}${CUSTOM_OG_ARTICLE}`, inSitemap: true },
+  { path: "/blog/cytotec-uses", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-uses`, inSitemap: true },
   { path: "/blog/anemia-womens-health", expect: "indexable", canonical: `${DOMAIN}/blog/anemia-womens-health` },
   { path: "/blog/saudi-drug-regulation-context", expect: "indexable", canonical: `${DOMAIN}/blog/saudi-drug-regulation-context` },
-  { path: "/blog/cytotec-abha", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-abha` },
-  { path: "/blog/cytotec-makkah", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-makkah` },
-  { path: "/blog/cytotec-saudi-faq", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-saudi-faq` },
-  { path: "/blog/cytotec-saudi-safety", expect: "indexable", canonical: `${DOMAIN}/blog/cytotec-saudi-safety` },
   { path: "/blog/cluster/ma-huwa-saytotek", expect: "indexable", canonical: `${DOMAIN}/blog/cluster/ma-huwa-saytotek` },
   { path: "/topics", expect: "indexable", canonical: `${DOMAIN}/topics` },
+  { path: "/sitemap", expect: "indexable", canonical: `${DOMAIN}/sitemap` },
   { path: "/faq", expect: "indexable", canonical: `${DOMAIN}/faq` },
   { path: "/contact", expect: "indexable", canonical: `${DOMAIN}/contact` },
   { path: "/search", expect: "noindex" },
   { path: "/admin", expect: "noindex" },
   { path: "/blog/no-such-article-xyz", expect: "notfound" },
+  ...COUNTRY_PAGES,
 ];
 
 // ---------------------------------------------------------------- render one URL
@@ -287,26 +312,38 @@ for (const spec of urls) {
       assert(r.ldMainEntity === spec.canonical, spec.path, "JSON-LD mainEntityOfPage", r.ldMainEntity ?? "(none)");
     }
 
-    // ── Image policy: an article may render only explicitly selected article
-    //    fields. The global social-share asset is metadata-only and must never
-    //    appear inside the article body. Custom OG takes priority over it. ──
-    const expectedSocialImage = spec.path === CUSTOM_OG_ARTICLE ? CUSTOM_OG_IMAGE : GLOBAL_SOCIAL_IMAGE;
+    // ── Image policy: an article may render only the approved logo in the
+    //    layout chrome and any explicitly selected article image (registered
+    //    /media/ uploads or the article's own approved banner). The global
+    //    social-share asset is metadata-only and must never appear inside the
+    //    article body. Custom OG takes priority over it. ──
+    const expectedSocialImage = GLOBAL_SOCIAL_IMAGE;
     assert(r.ogImage === expectedSocialImage, spec.path, "og:image custom-or-global metadata fallback", r.ogImage ?? "(omitted)");
     assert(r.twitterImage === expectedSocialImage, spec.path, "twitter:image custom-or-global metadata fallback", r.twitterImage ?? "(omitted)");
     const bodyFallbackImgs = r.figureImgs.filter((s) => s.endsWith("/images/saudiersaa-social-share.png"));
     assert(bodyFallbackImgs.length === 0, spec.path, "social-share fallback absent from article body", "none");
-    const hasApprovedBanner = r.imgSrcs.some((s) => s.endsWith("/images/saudiersaa-article-whatsapp-banner.png.png"));
-    assert(hasApprovedBanner, spec.path, "approved article WhatsApp banner renders", hasApprovedBanner ? "banner present" : "MISSING");
-    // Layout chrome (logo + permanent WhatsApp banner) is always allowed. An
-    // article-specific image is allowed only when the administrator selected
-    // it; the global social-share fallback is never an article <img>.
-    const articleAllowed = ["/images/لوجو.png", "/images/saudiersaa-article-whatsapp-banner.png.png"];
+    // Layout chrome: logo only. An article-specific image is allowed only when
+    // the administrator selected it; the global social-share fallback is never
+    // an article <img>, and no legacy WhatsApp banner exists anymore.
+    const articleAllowed = ["/images/لوجو.png"];
     const extraArticleImgs = r.imgSrcs.filter(
       (s) => !articleAllowed.some((a) => s.endsWith(a)) && !s.includes("/media/"),
     );
-    assert(extraArticleImgs.length === 0, spec.path, "article imgs = logo + WhatsApp banner (+ selected media only)", extraArticleImgs.join(", ") || "ok");
+    assert(extraArticleImgs.length === 0, spec.path, "article imgs = logo (+ selected media only)", extraArticleImgs.join(", ") || "ok");
     assert(r.preloadHrefs.length === 0, spec.path, "no image preloads on article", r.preloadHrefs.join(",") || "(none)");
     assert(r.styleUrls.length === 0, spec.path, "no background-image URLs on article", r.styleUrls.join(" | ") || "(none)");
+  }
+
+  // Country cornerstone pages: required H1, fixed second statement, banner
+  // image present, and a FAQPage block with 8+ questions mirroring the FAQ.
+  if (spec.country) {
+    assert(Boolean(r.h1) && r.h1.trim() === spec.h1, spec.path, "country H1", r.h1 ? r.h1.trim().slice(0, 50) : "(missing)");
+    const dump = String(r.htmlDump || "");
+    assert(dump.includes(spec.tagline), spec.path, "fixed second statement renders", spec.tagline);
+    const banner = r.imgSrcs.some((s) => s.endsWith("/images/Bannerrr.png"));
+    assert(banner, spec.path, "approved Bannerrr.png renders", banner ? "banner present" : "MISSING");
+    const faqPage = r.ldTypes.includes("FAQPage");
+    assert(faqPage, spec.path, "FAQPage JSON-LD present", r.ldTypes.join(",") || "(none)");
   }
 
   // Homepage hero is a body image; social metadata uses the global fallback
@@ -325,7 +362,6 @@ for (const spec of urls) {
   const approvedSuffixes = [
     "/images/لوجو.png",
     "/images/Bannerrr.png",
-    "/images/saudiersaa-article-whatsapp-banner.png.png",
     "/images/saudiersaa-social-share.png",
   ];
   const nonApprovedImgs = r.imgSrcs.filter(

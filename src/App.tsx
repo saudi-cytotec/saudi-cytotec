@@ -2,11 +2,13 @@ import { useLayoutEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AdminApp } from "./admin/AdminApp";
 import { Layout } from "./components/Layout";
+import { countryPagePaths, countryPages } from "./data/country";
 import { staticPages } from "./data/pages";
 import { ArticlePage } from "./pages/ArticlePage";
 import { BlogIndex } from "./pages/BlogIndex";
 import { ClusterPage } from "./pages/ClusterPage";
 import { Contact } from "./pages/Contact";
+import { CountryCornerstonePage } from "./pages/CountryCornerstonePage";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { FaqHub } from "./pages/FaqHub";
@@ -35,9 +37,11 @@ export default function App() {
           <Route path="/topics" element={<TopicsPage />} />
           <Route path="/faq" element={<FaqHub />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
-          {staticPages.filter((page) => page.path !== "/faq").map((page) => (
-            <Route key={page.path} path={page.path} element={<StaticPage page={page} />} />
-          ))}
+          {staticPages
+            .filter((page) => page.path !== "/faq" && !countryPagePaths.has(page.path))
+            .map((page) => (
+              <Route key={page.path} path={page.path} element={<StaticPage page={page} />} />
+            ))}
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/cluster/:slug" element={<ClusterPage />} />
           <Route path="/blog/:slug" element={<ArticlePage />} />
@@ -45,6 +49,9 @@ export default function App() {
           <Route path="/sitemap" element={<SitemapPage />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
           <Route path="/contact" element={<Contact />} />
+          {countryPages.map((spec) => (
+            <Route key={spec.path} path={spec.path} element={<CountryCornerstonePage spec={spec} />} />
+          ))}
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
