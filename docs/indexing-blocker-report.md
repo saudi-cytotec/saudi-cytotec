@@ -8,7 +8,7 @@ Date: 2026-09-06 · generated from the built catalog
 |---|---|---|
 | Indexable articles | PASS | 101 indexable; 0 intentional noindex |
 | Canonical consistency | PASS | indexable records self-canonicalize |
-| Sitemap | PASS | 130 unique URLs; no noindex article is advertised |
+| Sitemap | PASS | 134 unique URLs; no noindex article is advertised |
 | Robots | PASS | public content allowed; admin/search/API excluded |
 
 ## Decision log

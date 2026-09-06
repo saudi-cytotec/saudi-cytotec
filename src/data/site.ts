@@ -138,4 +138,8 @@ export const cornerstonePaths = [
   "/side-effects",
   "/when-to-see-doctor",
   "/medical-sources",
+  "/abortion-pills-saudi-arabia",
+  "/abortion-pills-uae",
+  "/abortion-pills-kuwait",
+  "/abortion-pills-bahrain",
 ];

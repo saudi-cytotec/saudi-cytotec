@@ -3,6 +3,8 @@ import path from "path";
 import type { Plugin } from "vite";
 import { articles } from "../src/data/articles";
 import { staticPages } from "../src/data/pages";
+import { countryCornerstones, countryReferenceIds } from "../src/data/countryCornerstones";
+import { references } from "../src/data/references";
 import { clusters, SITE } from "../src/data/site";
 import { bodyStructure } from "../src/utils/bodyWordCount";
 
@@ -320,6 +322,12 @@ export function emitSeoManifest(): Plugin {
         domain: SITE.domain,
         articles: articleEntries,
         routes: routeEntries,
+        // The country-page verifier compares these same editorial records with
+        // the rendered production bundle (including FAQ text and citations).
+        countryCornerstones: countryCornerstones.map((page) => ({
+          ...page,
+          references: countryReferenceIds(page).map((id) => references[id]),
+        })),
         allArticleSlugs: [...allSlugs].sort(),
       };
 

@@ -3,6 +3,8 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { AdminApp } from "./admin/AdminApp";
 import { Layout } from "./components/Layout";
 import { staticPages } from "./data/pages";
+import { isCountryCornerstone } from "./data/countryCornerstones";
+import { CountryCornerstonePage } from "./pages/CountryCornerstonePage";
 import { ArticlePage } from "./pages/ArticlePage";
 import { BlogIndex } from "./pages/BlogIndex";
 import { ClusterPage } from "./pages/ClusterPage";
@@ -36,7 +38,11 @@ export default function App() {
           <Route path="/faq" element={<FaqHub />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
           {staticPages.filter((page) => page.path !== "/faq").map((page) => (
-            <Route key={page.path} path={page.path} element={<StaticPage page={page} />} />
+            <Route
+              key={page.path}
+              path={page.path}
+              element={isCountryCornerstone(page) ? <CountryCornerstonePage page={page} /> : <StaticPage page={page} />}
+            />
           ))}
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/cluster/:slug" element={<ClusterPage />} />

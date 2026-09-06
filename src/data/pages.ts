@@ -1,5 +1,6 @@
 import { emergency, h2, h3, info, p, ul, warn } from "../utils/content";
 import type { StaticPage } from "../types";
+import { countryCornerstones } from "./countryCornerstones";
 
 export const staticPages: StaticPage[] = [
   {
@@ -338,4 +339,5 @@ export const staticPages: StaticPage[] = [
       emergency("في النزيف الشديد أو الإغماء أو الألم الحاد أو ضيق التنفس اطلبي الطوارئ فوراً عبر 997."),
     ],
   },
+  ...countryCornerstones,
 ];
