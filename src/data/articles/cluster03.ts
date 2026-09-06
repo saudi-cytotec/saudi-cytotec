@@ -74,7 +74,7 @@ export const cluster03 = [
     metaTitle: "مخاطر الاستخدام العشوائي لسايتوتك",
     metaDescription: "كيف يرفع الاستخدام العشوائي احتمالات التشخيص الخاطئ والتزييف وتأخير الرعاية.",
     excerpt: "العشوائية تعني غياب التشخيص والجرعة الموصوفة والجودة والمتابعة في وقت واحد.",
-    related: ["unsafe-unsupervised-use", "unreliable-medicine-sources", "risks-of-random-use"],
+    related: ["unsafe-unsupervised-use", "unreliable-medicine-sources", "saudi-drug-regulation-context"],
     points: [
       "الاستخدام العشوائي قد يقع على تشخيص خاطئ مثل حمل خارج الرحم.",
       "قد يُستعمل تركيز غير معروف أو مادة مختلفة.",

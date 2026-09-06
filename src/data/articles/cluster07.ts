@@ -52,7 +52,7 @@ export const cluster07 = [
     metaTitle: "استخدام سايتوتك دون وصفة",
     metaDescription: "لماذا يُعد تجاوز الوصفة تجاوزاً لتقييم الحمل والموانع والجودة.",
     excerpt: "الوصفة وثيقة أمان لا عقبة بيروقراطية.",
-    related: ["unsafe-unsupervised-use", "unreliable-medicine-sources", "why-medical-supervision-required"],
+    related: ["unsafe-unsupervised-use", "unreliable-medicine-sources", "why-medical-supervision-required", "saudi-drug-regulation-context"],
     points: [
       "دون وصفة لا يوجد تحقق منظم من الحمل أو التداخلات.",
       "مسار الصرف غير النظامي يرفع خطر التزييف.",

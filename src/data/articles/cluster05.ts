@@ -96,7 +96,7 @@ export const cluster05 = [
     metaTitle: "الإجهاض نظرة تعليمية عامة",
     metaDescription: "إطار تعليمي حساس عن الإجهاض كحدث طبي يحتاج رعاية ومتابعة، لا تعليمات ذاتية.",
     excerpt: "الفقدان يحتاج رعاية جسدية ونفسية. المقال لا يدير الحالة ولا يقدّم خطوات منزلية.",
-    related: ["bleeding-in-early-pregnancy", "mental-and-reproductive-health", "follow-up-after-medical-care"],
+    related: ["bleeding-in-early-pregnancy", "warning-signs-in-pregnancy", "mental-and-reproductive-health", "follow-up-after-medical-care"],
     points: [
       "التشخيص والمتابعة يحددان إن كانت هناك مضاعفات كالنزف أو بقايا أو التهاب.",
       "الدعم النفسي حق لا ترف.",

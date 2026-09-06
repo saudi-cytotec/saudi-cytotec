@@ -52,7 +52,7 @@ export const cluster01 = [
     metaTitle: "الفرق بين سايتوتك وميزوبروستول",
     metaDescription: "توضيح الفرق بين الاسم التجاري سايتوتك والمادة الفعالة ميزوبروستول، ولماذا يسبب الخلط بينهما أخطاء في فهم المخاطر.",
     excerpt: "كثير من الأسئلة المكررة ناتج عن التعامل مع الاسمين وكأنهما دواءان مختلفان تماماً أو متطابقان في كل شيء.",
-    related: ["cytotec-definition", "misoprostol-other-brand-names", "misoprostol-in-clinical-references"],
+    related: ["cytotec-definition", "misoprostol-other-brand-names", "brand-name-vs-active-ingredient", "misoprostol-in-clinical-references"],
     points: [
       "الفرق الأساسي لغوي وتنظيمي: علامة تجارية مقابل مركب كيميائي.",
       "المستحضر العام قد يختلف في التصنيع حتى مع تطابق المادة.",

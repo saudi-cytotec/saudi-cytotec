@@ -48,7 +48,7 @@ No indexable article is orphaned in the declared editorial graph.
 | `general-info-vs-personal-advice` | `key-facts-before-reading-cytotec`, `how-to-read-package-insert`, `education-vs-individual-treatment`, `internet-not-a-doctor` |
 | `regulatory-drug-warnings` | `off-label-use-meaning`, `general-safety-warnings`, `saudi-drug-regulation-context`, `fda-cytotec-warnings`, `why-medical-recommendations-change` |
 | `unreliable-medicine-sources` | `cytotec-pharmaceutical-forms`, `unsafe-unsupervised-use`, `risks-of-random-use`, `medicine-storage-home-safety`, `saudi-drug-regulation-context`, `use-without-prescription`, `cytotec-uses` |
-| `saudi-drug-regulation-context` | `misoprostol-other-brand-names`, `regulatory-drug-warnings`, `unreliable-medicine-sources`, `cytotec-uses` |
+| `saudi-drug-regulation-context` | `misoprostol-other-brand-names`, `risks-of-random-use`, `regulatory-drug-warnings`, `unreliable-medicine-sources`, `use-without-prescription`, `cytotec-uses` |
 | `common-side-effects` | `diarrhea-abdominal-pain`, `fever-and-chills`, `nausea-and-vomiting`, `what-to-do-if-side-effects` |
 | `diarrhea-abdominal-pain` | `common-side-effects`, `nausea-and-vomiting`, `gastrointestinal-effects` |
 | `fever-and-chills` | `high-fever-and-infection` |
@@ -62,7 +62,7 @@ No indexable article is orphaned in the declared editorial graph.
 | `early-pregnancy-overview` | `pregnancy-boxed-warning`, `pregnancy-follow-up-care`, `warning-signs-in-pregnancy`, `pregnancy-and-medicines-faq` |
 | `why-contraindicated-in-pregnancy-ulcer-use` | `pregnancy-boxed-warning`, `pregnancy-and-medicines-faq`, `pregnancy-contraindication-ulcer-indication` |
 | `pregnancy-follow-up-care` | `early-pregnancy-overview`, `education-vs-individual-treatment` |
-| `warning-signs-in-pregnancy` | `early-pregnancy-overview`, `pregnancy-follow-up-care`, `bleeding-in-early-pregnancy`, `pelvic-pain-when-to-see-doctor`, `mild-symptoms-not-always-safe`, `severe-abdominal-pain` |
+| `warning-signs-in-pregnancy` | `early-pregnancy-overview`, `pregnancy-follow-up-care`, `miscarriage-educational-overview`, `bleeding-in-early-pregnancy`, `pelvic-pain-when-to-see-doctor`, `mild-symptoms-not-always-safe`, `severe-abdominal-pain` |
 | `miscarriage-educational-overview` | `mental-and-reproductive-health` |
 | `bleeding-in-early-pregnancy` | `abnormal-bleeding`, `warning-signs-in-pregnancy`, `miscarriage-educational-overview`, `signs-of-dangerous-bleeding` |
 | `family-planning-education` | `reproductive-health-reliable-info`, `irregular-menstrual-cycle`, `reproductive-age-preventive-care` |
@@ -83,7 +83,7 @@ No indexable article is orphaned in the declared editorial graph.
 | `is-cytotec-safe-for-everyone` | `common-myths-cytotec`, `frequent-warning-questions` |
 | `use-without-prescription` | `unsafe-unsupervised-use` |
 | `internet-not-a-doctor` | `key-facts-before-reading-cytotec`, `general-info-vs-personal-advice`, `education-vs-individual-treatment`, `how-to-verify-medical-information`, `limits-of-online-medical-info` |
-| `brand-name-vs-active-ingredient` | `common-myths-cytotec` |
+| `brand-name-vs-active-ingredient` | `difference-cytotec-misoprostol`, `common-myths-cytotec` |
 | `not-all-uses-are-alike` | `approved-medical-uses-misoprostol` |
 | `myths-about-home-dosing` | `common-myths-cytotec` |
 | `mild-symptoms-not-always-safe` | `annoying-symptom-vs-emergency` |
