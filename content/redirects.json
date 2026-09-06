@@ -2,5 +2,412 @@
   "version": 2,
   "updatedAt": "2026-09-06",
   "wwwToApex": false,
-  "rules": []
+  "rules": [
+    {
+      "source": "/blog/cytotec-in-saudi-arabia/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Trailing-slash variant of the legacy Saudi blog URL now resolves to the single authoritative Saudi hub.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/blog/cytotec-in-saudi-arabia",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy Saudi blog URL now resolves to the single authoritative Saudi hub.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/cytotec-saudi-arabia/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/https-saudiersaa-com-cytotec-saudi-arabia/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Mangled duplicate of the legacy Saudi geographic query.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/about.html",
+      "destination": "/about",
+      "statusCode": 301,
+      "reason": "Legacy static HTML About page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "statusCode": 301,
+      "reason": "Legacy static HTML Contact page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/privacy-policy.html",
+      "destination": "/privacy",
+      "statusCode": 301,
+      "reason": "Legacy static HTML Privacy page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/category-care.html",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy static HTML health-care category page.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/feed",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy feed endpoint — gone.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/feed/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy feed endpoint — gone.",
+      "createdAt": "2026-08-29"
+    },
+    {
+      "source": "/blog/cytotec-jazan/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City doorway page removed per women's health repositioning - now consolidated to Saudi care access guide.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/blog/cytotec-jazan",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City doorway page removed per women's health repositioning - now consolidated to Saudi care access guide.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/blog/cytotec-baha/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City doorway page removed per women's health repositioning - now consolidated to Saudi care access guide.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/blog/cytotec-baha",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City doorway page removed per women's health repositioning - now consolidated to Saudi care access guide.",
+      "createdAt": "2026-08-30"
+    },
+    {
+      "source": "/blog/cytotec-abha",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-abha removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-abha/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-abha removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-albahah",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-albahah removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-albahah/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-albahah removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-arar",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-arar removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-arar/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-arar removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-buraidah",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-buraidah removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-buraidah/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-buraidah removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-central-region",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-central-region removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-central-region/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-central-region removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-dammam",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-dammam removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-dammam/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-dammam removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-eastern-region",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-eastern-region removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-eastern-region/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-eastern-region removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-hail",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-hail removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-hail/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-hail removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-jizan",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-jizan removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-jizan/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-jizan removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-madinah",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-madinah removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-madinah/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-madinah removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-makkah",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-makkah removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-makkah/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-makkah removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-medical-verification",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-medical-verification removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-medical-verification/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-medical-verification removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-najran",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-najran removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-najran/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-najran removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-sakaka",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-sakaka removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-sakaka/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-sakaka removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-saudi-faq",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-saudi-faq removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-saudi-faq/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-saudi-faq removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-saudi-regions",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-saudi-regions removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-saudi-regions/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-saudi-regions removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-saudi-safety",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-saudi-safety removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-saudi-safety/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-saudi-safety removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-southern-region",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-southern-region removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-southern-region/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-southern-region removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-tabuk",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-tabuk removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-tabuk/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-tabuk removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-western-region",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-western-region removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cytotec-western-region/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article cytotec-western-region removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/abortion-medications-saudi-arabia",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article abortion-medications-saudi-arabia removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/abortion-medications-saudi-arabia/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City/doorway article abortion-medications-saudi-arabia removed - repositioned to women's health platform, consolidated to /service-areas",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cluster/almojazat-aljograyiya",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Geographic cluster removed in repositioning - consolidated to Saudi care access guide",
+      "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/cluster/almojazat-aljograyiya/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Geographic cluster removed in repositioning - consolidated to Saudi care access guide",
+      "createdAt": "2026-09-06"
+    }
+  ]
 }
