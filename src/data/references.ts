@@ -1,6 +1,8 @@
 import type { Reference } from "../types";
+import { countryCornerstoneReferences } from "./countryCornerstones/references";
 
 export const references: Record<string, Reference> = {
+  ...countryCornerstoneReferences,
   fdaLabel: {
     id: "fdaLabel",
     title: "Cytotec (misoprostol) prescribing information",
