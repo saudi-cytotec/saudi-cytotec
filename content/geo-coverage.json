@@ -1,7 +1,7 @@
 {
-  "version": 3,
-  "updatedAt": "2026-08-30",
-  "policy": "The authoritative Saudi geographic hub is /service-areas, titled \"سايتوتك في السعودية\". City pages are allowed only when they add genuinely distinct healthcare-access context such as travel, pilgrimage, distance to care, or regional referral planning. No city page may include sales, prices, delivery, providers, fake reviews, or unsafe dosing instructions.",
+  "version": 4,
+  "updatedAt": "2026-09-06",
+  "policy": "Repositioned as Saudi women's health medical information source. No city-specific doorway pages, no keyword stuffing. The authoritative hub is /service-areas titled 'الرعاية الصحية للمرأة في السعودية' which explains official MOH/SFDA channels (937, 997) without listing cities. Geographic content removed to comply with medical information positioning.",
   "countries": [
     {
       "code": "SA",
@@ -11,142 +11,16 @@
       "healthLine": "937",
       "emergency": "997",
       "contextTopics": [
-        "/service-areas",
+        "/womens-health",
+        "/early-pregnancy",
         "/safety",
         "/when-to-see-doctor",
-        "/blog/saudi-drug-regulation-context"
+        "/service-areas",
+        "/medical-sources"
       ],
-      "note": "Saudi GEO coverage is now handled by one national hub plus unique educational city pages for priority cities."
+      "note": "Saudi coverage is now general women's health education, not city-specific drug pages. All cities served via unified official channels 937/997."
     }
   ],
-  "regions": [
-    {
-      "id": "western",
-      "name": "Western",
-      "cities": [
-        "Makkah",
-        "Madinah"
-      ]
-    },
-    {
-      "id": "central",
-      "name": "Central",
-      "cities": [
-        "Buraidah",
-        "Hail"
-      ]
-    },
-    {
-      "id": "eastern",
-      "name": "Eastern",
-      "cities": [
-        "Dammam"
-      ]
-    },
-    {
-      "id": "southern",
-      "name": "Southern",
-      "cities": [
-        "Abha",
-        "Jazan",
-        "Najran",
-        "Al Baha"
-      ]
-    },
-    {
-      "id": "northern",
-      "name": "Northern",
-      "cities": [
-        "Tabuk",
-        "Arar",
-        "Sakaka"
-      ]
-    }
-  ],
-  "cities": [
-    {
-      "city": "Makkah",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-makkah",
-      "coverage": "Unique page for pilgrimage/visitor context, crowding, and emergency-first care planning."
-    },
-    {
-      "city": "Madinah",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-madinah",
-      "coverage": "Unique page for visit-related care planning, short stays, and licensed-care routing."
-    },
-    {
-      "city": "Buraidah",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-buraidah",
-      "coverage": "Unique page for Qassim-region travel between nearby governorates and timely review."
-    },
-    {
-      "city": "Dammam",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-dammam",
-      "coverage": "Unique page for Eastern Province movement between Dammam/Khobar/Dhahran and urgent evaluation."
-    },
-    {
-      "city": "Abha",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-abha",
-      "coverage": "Unique page for Asir travel distance, symptom escalation, and licensed-care preparation."
-    },
-    {
-      "city": "Tabuk",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-tabuk",
-      "coverage": "Unique page for long-distance care planning and the time-sensitive nature of danger signs."
-    },
-    {
-      "city": "Hail",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-hail",
-      "coverage": "Unique page focused on avoiding overnight delay and distinguishing stable symptoms from emergencies."
-    },
-    {
-      "city": "Arar",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-arar",
-      "coverage": "Unique page for northern-distance planning and emergency routing over non-licensed shortcuts."
-    },
-    {
-      "city": "Jazan",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-jizan",
-      "coverage": "Unique page for city/coastal-governorate readers with urgent-care and symptom-triage framing."
-    },
-    {
-      "city": "Najran",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-najran",
-      "coverage": "Unique page for early planning where referral distance may matter."
-    },
-    {
-      "city": "Al Baha",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-albahah",
-      "coverage": "Unique page for route/time planning and symptom escalation in Al Baha and nearby governorates."
-    },
-    {
-      "city": "Sakaka",
-      "country": "SA",
-      "hasPage": true,
-      "path": "/blog/cytotec-sakaka",
-      "coverage": "Unique page for Al Jawf readers travelling from nearby centers and needing early licensed review."
-    }
-  ]
+  "regions": [],
+  "cities": []
 }

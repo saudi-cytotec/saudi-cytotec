@@ -32,8 +32,6 @@ const ROOT = path.resolve(__dirname, "..");
 const APPROVED = [
   "/images/لوجو.png",
   "/images/Bannerrr.png",
-  "/images/saudiersaa-article-whatsapp-banner.png.png",
-  // Owner-committed social-share asset (908813a, direct to main).
   "/images/saudiersaa-social-share.png",
 ];
 

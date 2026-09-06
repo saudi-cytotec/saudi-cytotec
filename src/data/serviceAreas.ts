@@ -1,3 +1,10 @@
+/**
+ * Service areas - Repositioned as general Saudi women's health care access.
+ * No city-specific doorway content. No keyword stuffing.
+ * This file provides only general, non-commercial educational links about
+ * accessing licensed care in Saudi Arabia.
+ */
+
 export interface ServiceCity {
   name: string;
   slug: string;
@@ -14,202 +21,39 @@ export interface ServiceRegion {
   cities: ServiceCity[];
 }
 
-export const serviceRegions: ServiceRegion[] = [
-  {
-    id: "western",
-    title: "الغربية والمشاعر والزيارة",
-    description:
-      "في مكة المكرمة والمدينة المنورة تظهر أسئلة إضافية تتعلق بالزحام والسفر والزيارة، لذلك يركز المحتوى على الوصول السريع إلى منشأة مرخصة عند النزيف أو الألم الحاد، لا على أي ادعاء عن التوفر.",
-    cities: [
-      {
-        name: "مكة المكرمة",
-        slug: "makkah",
-        articleSlug: "cytotec-makkah",
-        keyword: "سايتوتك في مكة المكرمة",
-        blurb: "صفحة تعليمية تشرح معنى البحث طبياً داخل مكة، وكيف يختلف التخطيط للرعاية إذا ظهرت أعراض أثناء الزحام أو الزيارة.",
-        accessNote: "تفيد خصوصاً للسكان والزائرات ومن تكون في طريقها بين مكة والمشاعر أو جدة عند الحاجة إلى تقييم سريع.",
-      },
-      {
-        name: "المدينة المنورة",
-        slug: "madinah",
-        articleSlug: "cytotec-madinah",
-        keyword: "سايتوتك في المدينة المنورة",
-        blurb: "محتوى يربط بين المعلومات العامة عن ميزوبروستول وبين أسئلة الزيارة والسفر والاطمئنان الزائف إلى الانتظار.",
-        accessNote: "يناسب المقيمات والزائرات ومن يحتجن لترتيب مراجعة مرخصة بدل الاكتفاء برسائل خاصة.",
-      },
-    ],
-  },
-  {
-    id: "central",
-    title: "القصيم والوسط والشمال الداخلي",
-    description:
-      "في بريدة وحائل قد يأتي السؤال من المدينة نفسها أو من محافظات مجاورة، لذا تركز الصفحات على جمع المعلومات الطبية قبل المراجعة وعدم تأخير الطوارئ بسبب المسافة أو محاولة الانتظار حتى اليوم التالي.",
-    cities: [
-      {
-        name: "بريدة",
-        slug: "buraidah",
-        articleSlug: "cytotec-buraidah",
-        keyword: "سايتوتك في بريدة",
-        blurb: "صفحة تربط بين البحث المحلي في بريدة ومعلومة الأمان الدوائي، مع توضيح أهمية المراجعة المرخصة لمن تأتي من محافظات القصيم القريبة.",
-        accessNote: "مفيدة أيضاً لمن تكون بين بريدة وعنيزة أو قادمة من محافظة قريبة وتحتاج قراراً سريعاً بخصوص الطوارئ.",
-      },
-      {
-        name: "حائل",
-        slug: "hail",
-        articleSlug: "cytotec-hail",
-        keyword: "سايتوتك في حائل",
-        blurb: "شرح تعليمي يركز على الوصول للرعاية في حائل، وعلى الفرق بين العرض الذي يمكن ترتيبه في عيادة والعلامة التي تستدعي الإسعاف فوراً.",
-        accessNote: "يفيد خصوصاً للقارئات في حائل أو المدن المحيطة اللواتي قد يترددن بسبب بعد المسافة أو وقت الطريق.",
-      },
-    ],
-  },
-  {
-    id: "eastern",
-    title: "المنطقة الشرقية",
-    description:
-      "في الدمام وما حولها تتقاطع المدن المتجاورة بسرعة، لذلك تشرح الصفحة كيف يُفهم الموضوع طبياً، وكيف تختارين مساراً مرخصاً للرعاية بين الدمام والخبر والظهران والقطيف من دون الانجرار إلى صفحات بيع.",
-    cities: [
-      {
-        name: "الدمام",
-        slug: "dammam",
-        articleSlug: "cytotec-dammam",
-        keyword: "سايتوتك في الدمام",
-        blurb: "صفحة معلوماتية عن البحث المتعلق بسايتوتك في الدمام، مع سياق خاص للمدن المتقاربة في الشرقية وكيفية التصرف عند ظهور الأعراض.",
-        accessNote: "مناسبة أيضاً لمن تتحرك بين الدمام والخبر والظهران وتحتاج توجيهاً تعليمياً واضحاً نحو الرعاية النظامية.",
-      },
-    ],
-  },
-  {
-    id: "southern",
-    title: "الجنوب والمرتفعات",
-    description:
-      "في أبها وجيزان ونجران والباحة قد تكون المسافة أو الطريق جزءاً من قرار الوصول للرعاية. لهذا تركز الصفحات على علامات الخطر، والتجهيز للمراجعة، ومتى لا يكون الانتظار خياراً آمناً.",
-    cities: [
-      {
-        name: "أبها",
-        slug: "abha",
-        articleSlug: "cytotec-abha",
-        keyword: "سايتوتك في أبها",
-        blurb: "معلومات عامة عن ميزوبروستول وتحذيراته في سياق أبها وعسير، مع تركيز على التخطيط للمراجعة إذا كانت الأعراض بدأت بعيداً عن المدينة.",
-        accessNote: "مفيد لمن تقيم في أبها أو تصلها من محافظات عسير وتحتاج معرفة متى تصبح المراجعة عاجلة.",
-      },
-      {
-        name: "جيزان",
-        slug: "jizan",
-        articleSlug: "cytotec-jizan",
-        keyword: "سايتوتك في جيزان",
-        blurb: "صفحة محلية تشرح كيف يُقرأ موضوع سايتوتك في جيزان طبياً، مع التنبيه إلى عدم تأخير الطوارئ عند ظهور نزيف أو دوخة في المدينة أو المحافظات الساحلية القريبة.",
-        accessNote: "تناسب القارئات في جيزان أو من تأتي من المحافظات المحيطة وتحتاج مساراً واضحاً للرعاية المرخصة.",
-      },
-      {
-        name: "نجران",
-        slug: "najran",
-        articleSlug: "cytotec-najran",
-        keyword: "سايتوتك في نجران",
-        blurb: "شرح تعليمي يربط بين السؤال المحلي في نجران وبين أهمية عدم تأخير الرعاية عند الحمل المحتمل أو الألم الأحادي الجانب.",
-        accessNote: "يخاطب أيضاً من تأتي من المحافظات الأبعد حيث يصبح التخطيط المبكر للطوارئ أكثر أهمية.",
-      },
-      {
-        name: "الباحة",
-        slug: "baha",
-        articleSlug: "cytotec-albahah",
-        keyword: "سايتوتك في الباحة",
-        blurb: "صفحة توعوية عن معنى البحث في الباحة، مع تركيز على المسافة والطريق وأهمية عدم تفسير الأعراض وحدك عندما تتسارع العلامات التحذيرية.",
-        accessNote: "مفيدة للقارئات في الباحة ومحافظاتها اللواتي يحتجن خطة وصول واضحة عند النزيف أو الإغماء أو الحمى.",
-      },
-    ],
-  },
-  {
-    id: "northern",
-    title: "الشمال والحدود",
-    description:
-      "في تبوك وعرعر وسكاكا قد يكون البعد الجغرافي عن بعض الخدمات عاملاً عملياً مهماً. لذلك تركّز هذه الصفحات على الاستعداد للمراجعة، والتمييز بين الاستفسار الصحي العام وبين الحالات التي تستدعي الطوارئ مباشرة.",
-    cities: [
-      {
-        name: "تبوك",
-        slug: "tabuk",
-        articleSlug: "cytotec-tabuk",
-        keyword: "سايتوتك في تبوك",
-        blurb: "مقال محلي يشرح ما الذي يعنيه سؤال سايتوتك في تبوك، وكيف يساعدك التخطيط للمراجعة على تجنب تأخير خطير عند الأعراض الحادة.",
-        accessNote: "مناسب لمن تسكن تبوك أو المدن التابعة لها وتحتاج توضيحاً تعليمياً قبل المراجعة المرخصة.",
-      },
-      {
-        name: "عرعر",
-        slug: "arar",
-        articleSlug: "cytotec-arar",
-        keyword: "سايتوتك في عرعر",
-        blurb: "صفحة تشرح البحث المحلي في عرعر ضمن إطار معلوماتي مسؤول، مع التركيز على المسافة وعدم الاعتماد على وسيط غير مرخص.",
-        accessNote: "تفيد خصوصاً لمن تقيم في عرعر أو المحافظات الشمالية القريبة وتحتاج خطة وصول لا خطة دردشة.",
-      },
-      {
-        name: "سكاكا",
-        slug: "sakaka",
-        articleSlug: "cytotec-sakaka",
-        keyword: "سايتوتك في سكاكا",
-        blurb: "محتوى يشرح سؤال سايتوتك في سكاكا بصورة طبية، مع أهمية تجهيز التاريخ الدوائي والتوجه للرعاية المرخصة إذا ظهرت علامات مضاعفات.",
-        accessNote: "يناسب أيضاً القارئات في الجوف والمراكز القريبة اللواتي يحتجن معرفة متى يصبح الوقت عاملاً حاسماً.",
-      },
-    ],
-  },
-];
+// No city-specific doorway regions - kept empty to prevent SEO stuffing
+export const serviceRegions: ServiceRegion[] = [];
 
-export const priorityCityLinks = serviceRegions.flatMap((region) => region.cities);
+export const priorityCityLinks: ServiceCity[] = [];
 
 /**
- * Supporting geographic guides published under content/published: the Saudi
- * pillar, the four region clusters, and the FAQ / safety / verification
- * explainers. The hub (/service-areas) links to every one of them so the
- * geographic layer is fully connected in both directions.
+ * General educational guides about Saudi health system - not city doorway pages
  */
 export const geoGuideLinks: { slug: string; label: string; note: string }[] = [
   {
-    slug: "cytotec-saudi-regions",
-    label: "الدليل الشامل: سايتوتك في مناطق السعودية",
-    note: "المقال المحوري الذي يشرح كيف تُقرأ البنية الجغرافية ولماذا لا تتغير الحقائق الدوائية بين مدينة وأخرى.",
+    slug: "saudi-drug-regulation-context",
+    label: "تنظيم الدواء في السعودية",
+    note: "دور الهيئة العامة للغذاء والدواء ووزارة الصحة في تنظيم تداول الأدوية.",
   },
   {
-    slug: "cytotec-western-region",
-    label: "دليل المنطقة الغربية",
-    note: "مكة والمدينة وجدة والطائف: المواسم والحركة الدائمة بين المدن وأثرها على توقيت المراجعة.",
+    slug: "how-to-verify-medical-information",
+    label: "كيف تتحققين من المعلومة الطبية",
+    note: "منهج بسيط للتحقق من المصادر قبل اتخاذ أي قرار صحي.",
   },
   {
-    slug: "cytotec-eastern-region",
-    label: "دليل المنطقة الشرقية",
-    note: "الدمام والخبر والقطيف والأحساء: كتلة حضرية واحدة وكيف تتحققين من المنشأة المرخصة.",
-  },
-  {
-    slug: "cytotec-central-region",
-    label: "دليل المنطقة الوسطى",
-    note: "الرياض والقصيم وحائل: كثافة الخيارات في العاصمة وعلاقتها بمحافظات الوسط.",
-  },
-  {
-    slug: "cytotec-southern-region",
-    label: "دليل المنطقة الجنوبية",
-    note: "عسير وجيزان ونجران والباحة: المرتفعات والمسافات والتخطيط المبكر للوصول إلى الرعاية.",
-  },
-  {
-    slug: "cytotec-saudi-faq",
-    label: "أسئلة شائعة بخصوص المدن والمناطق",
-    note: "إجابات عن الأسئلة الجغرافية المتكررة: هل تختلف المعلومة بين مدينة وأخرى؟ ومن أين تبدأين؟",
-  },
-  {
-    slug: "cytotec-saudi-safety",
-    label: "السلامة والتنظيم الدوائي في السعودية",
-    note: "الإطار التنظيمي العام، مخاطر القنوات غير النظامية، وعلامات الخطر التي لا تنتظر.",
-  },
-  {
-    slug: "cytotec-medical-verification",
-    label: "كيف تتحققين من المعلومة والمزود",
-    note: "دليل عملي للتمييز بين المحتوى التعليمي وصفحات البيع، وللتحقق من المصادر والمنشآت.",
+    slug: "when-symptoms-are-emergencies",
+    label: "متى تكون الأعراض طارئة",
+    note: "علامات تستدعي مراجعة عاجلة أو طوارئ دون تأخير.",
   },
 ];
 
 export const serviceAreaLinks = [
-  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
-  { to: "/misoprostol", label: "معلومات عن ميزوبروستول" },
-  { to: "/safety", label: "الأمان والتحذيرات" },
-  { to: "/when-to-see-doctor", label: "متى تجب مراجعة الطبيب" },
+  { to: "/womens-health", label: "صحة المرأة" },
+  { to: "/early-pregnancy", label: "الحمل المبكر" },
+  { to: "/safety", label: "الأمان الدوائي" },
+  { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب" },
+  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟ (توعوي)" },
+  { to: "/misoprostol", label: "ميزوبروستول (توعوي)" },
+  { to: "/medical-sources", label: "المصادر الطبية" },
   { to: "/faq", label: "الأسئلة الشائعة" },
-  { to: "/medical-sources", label: "المراجع الطبية" },
-  { to: "/blog/saudi-drug-regulation-context", label: "تنظيم الدواء في السعودية" },
 ];

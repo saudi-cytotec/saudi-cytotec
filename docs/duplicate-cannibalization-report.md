@@ -1,6 +1,6 @@
 # Duplicate & Cannibalization Report
 
-Date: 2026-09-01 · generated from 121 indexable article records and 100 content-map items
+Date: 2026-09-06 · generated from 101 indexable article records and 100 content-map items
 
 **Result: PASS — no exact duplicate signals**
 

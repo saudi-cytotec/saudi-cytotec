@@ -351,22 +351,232 @@
     },
     {
       "source": "/blog/cytotec-jazan/",
-      "destination": "/blog/cytotec-jizan",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
       "source": "/blog/cytotec-jazan",
-      "destination": "/blog/cytotec-jizan",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
       "source": "/blog/cytotec-baha/",
-      "destination": "/blog/cytotec-albahah",
+      "destination": "/service-areas",
       "statusCode": 301
     },
     {
       "source": "/blog/cytotec-baha",
-      "destination": "/blog/cytotec-albahah",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-abha",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-abha/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-albahah",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-albahah/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-arar",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-arar/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-buraidah",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-buraidah/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-central-region",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-central-region/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-dammam",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-dammam/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-eastern-region",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-eastern-region/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-hail",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-hail/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-jizan",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-jizan/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-madinah",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-madinah/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-makkah",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-makkah/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-medical-verification",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-medical-verification/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-najran",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-najran/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-sakaka",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-sakaka/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-saudi-faq",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-saudi-faq/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-saudi-regions",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-saudi-regions/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-saudi-safety",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-saudi-safety/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-southern-region",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-southern-region/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-tabuk",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-tabuk/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-western-region",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cytotec-western-region/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/abortion-medications-saudi-arabia",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/abortion-medications-saudi-arabia/",
+      "destination": "/service-areas",
       "statusCode": 301
     }
   ]

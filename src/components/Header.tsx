@@ -1,9 +1,18 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BrandLogo } from "./Logo";
-import { WhatsAppIcon, INFO_WHATSAPP_DISPLAY, whatsappInfoUrl } from "./WhatsAppContact";
-import { IconFacebook, IconInstagram, IconMenu, IconSearch, IconShieldCheck, IconX, IconXSocial, IconYoutube } from "./icons";
+import {
+  IconFacebook,
+  IconInstagram,
+  IconMenu,
+  IconSearch,
+  IconShieldCheck,
+  IconX,
+  IconXSocial,
+  IconYoutube,
+} from "./icons";
 import { mainNav, moreNav, SITE } from "../data/site";
+import { HEALTH_LINES } from "../data/contact";
 
 const SOCIALS = [
   { label: "إنستغرام", Icon: IconInstagram },
@@ -11,6 +20,8 @@ const SOCIALS = [
   { label: "إكس", Icon: IconXSocial },
   { label: "يوتيوب", Icon: IconYoutube },
 ];
+
+const SA = HEALTH_LINES.find((c) => c.code === "sa");
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -34,19 +45,23 @@ export function Header() {
       {/* ── Top navy bar ─────────────────────────────────────────────── */}
       <div className="bg-brand-deep text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 text-xs sm:text-[13px]">
-          {/* Start (right in RTL): WhatsApp line */}
-          <a
-            href={whatsappInfoUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 font-semibold transition hover:text-white/80"
-          >
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-[#25D366] text-white">
-              <WhatsAppIcon className="h-3.5 w-3.5" />
+          {/* Start (right in RTL): Official health lines */}
+          <div className="flex items-center gap-3 font-semibold">
+            <span className="flex items-center gap-1.5">
+              <IconShieldCheck className="h-4 w-4 text-[#7fd4a8]" />
+              منصة توعوية موثوقة لصحة المرأة السعودية
             </span>
-            <span dir="ltr">{INFO_WHATSAPP_DISPLAY}</span>
-            <span className="hidden font-normal text-white/80 sm:inline">للاستشارة الطبية عبر واتساب</span>
-          </a>
+            <span className="hidden sm:inline-flex items-center gap-2 text-white/80">
+              <span>وزارة الصحة</span>
+              <span dir="ltr" className="font-mono font-bold text-white">
+                {SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value ?? "937"}
+              </span>
+              <span>· الطوارئ</span>
+              <span dir="ltr" className="font-mono font-bold text-white">
+                {SA?.lines.find((l) => l.label.includes("الإسعاف"))?.value ?? "997"}
+              </span>
+            </span>
+          </div>
           {/* End (left in RTL): socials + verified content */}
           <div className="flex items-center gap-3">
             <div className="hidden items-center gap-2.5 text-white/75 sm:flex" aria-hidden="true">
@@ -98,7 +113,14 @@ export function Header() {
                 className="flex items-center gap-1 rounded-lg px-3 py-2 text-[15px] font-semibold text-brand-deep transition hover:bg-brand-soft"
               >
                 المزيد
-                <svg viewBox="0 0 24 24" className={`h-4 w-4 transition ${more ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <svg
+                  viewBox="0 0 24 24"
+                  className={`h-4 w-4 transition ${more ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                >
                   <path d="m6 9 6 6 6-6" />
                 </svg>
               </button>
@@ -130,15 +152,12 @@ export function Header() {
             >
               <IconSearch className="h-5 w-5" />
             </button>
-            <a
-              href={whatsappInfoUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgb(216_31_60/0.6)] transition hover:bg-accent-deep md:inline-flex"
+            <Link
+              to="/contact"
+              className="hidden items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgb(22_53_107/0.6)] transition hover:bg-brand-deep md:inline-flex"
             >
-              <WhatsAppIcon className="h-4.5 w-4.5" />
-              تواصل معلوماتي عام
-            </a>
+              تواصل تحريري
+            </Link>
             <button
               type="button"
               className="grid h-10 w-10 place-items-center rounded-xl border border-line text-brand-deep xl:hidden"
@@ -165,11 +184,14 @@ export function Header() {
                   autoFocus
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
-                  placeholder="ابحثي عن موضوع: سايتوتك، الحمل، الآثار الجانبية..."
+                  placeholder="ابحثي عن موضوع: صحة المرأة، الحمل، الخصوبة، الأمان الدوائي..."
                   className="w-full rounded-full border border-line bg-cream py-2.5 pe-4 ps-11 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
                 />
               </div>
-              <button type="submit" className="rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-deep">
+              <button
+                type="submit"
+                className="rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-deep"
+              >
                 بحث
               </button>
             </form>
@@ -206,15 +228,13 @@ export function Header() {
                 </NavLink>
               ))}
             </div>
-            <a
-              href={whatsappInfoUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-bold text-white"
+            <Link
+              to="/contact"
+              onClick={() => setOpen(false)}
+              className="mt-3 flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-bold text-white"
             >
-              <WhatsAppIcon className="h-4.5 w-4.5" />
-              تواصل معلوماتي عام — {INFO_WHATSAPP_DISPLAY}
-            </a>
+              تواصل تحريري
+            </Link>
           </div>
         ) : null}
       </div>
