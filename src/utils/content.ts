@@ -1,8 +1,27 @@
 import { clusters } from "../data/site";
 import type { Article, Cluster, ClusterId, ContentBlock } from "../types";
 
+/**
+ * Fallback used when an article carries a cluster id that is not registered in
+ * `clusters` (e.g. a legacy CMS/localStorage overlay row, or a published JSON
+ * whose cluster was renamed/removed). `getCluster` must never return undefined:
+ * ArticleCard and ArticlePage dereference `.title`/`.shortTitle`/`.slug` on the
+ * result, and an undefined value throws during render, which unmounts the whole
+ * React tree and leaves `/blog` (and article pages) as an empty page.
+ *
+ * The fallback keeps the page alive without touching the cluster registry, so
+ * the real catalog (counts, chips, navigation) is completely unchanged.
+ */
+const FALLBACK_CLUSTER: Cluster = {
+  id: "geographic",
+  slug: "general-information",
+  title: "معلومات عامة",
+  shortTitle: "عام",
+  description: "محتوى توعوي عام غير مصنف ضمن المحاور المحددة حالياً.",
+};
+
 export function getCluster(id: ClusterId): Cluster {
-  return clusters.find((c) => c.id === id)!;
+  return clusters.find((c) => c.id === id) ?? FALLBACK_CLUSTER;
 }
 
 export function clusterPath(cluster: Cluster | ClusterId): string {
