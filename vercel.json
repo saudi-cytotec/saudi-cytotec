@@ -119,7 +119,8 @@
     },
     {
       "source": "/feed",
-      "statusCode": 410
+      "destination": "/404",
+      "statusCode": 404
     }
   ]
 }
