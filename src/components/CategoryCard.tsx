@@ -37,7 +37,7 @@ export function CategoryCard({ cluster, count }: { cluster: Cluster; count: numb
   return (
     <Link
       to={`/blog/cluster/${cluster.slug}`}
-      className="card-premium group flex flex-col items-center gap-3 p-6 text-center transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgb(11_37_69/0.25)]"
+      className="card-premium group flex flex-col items-center gap-3 p-6 text-center transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgb(10_74_51/0.25)]"
     >
       <span className={`grid h-14 w-14 place-items-center rounded-2xl ${soft} ${color} transition duration-300 group-hover:scale-105`}>
         <Icon className="h-7 w-7" />

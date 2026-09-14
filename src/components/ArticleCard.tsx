@@ -17,7 +17,7 @@ export function ArticleCard({ article }: { article: Article }) {
   const thumbnail = article.thumbnail?.trim() ? article.thumbnail.trim() : "";
 
   return (
-    <article className="card-premium group flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgb(11_37_69/0.28)]">
+    <article className="card-premium group flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-16px_rgb(10_74_51/0.28)]">
       {thumbnail ? (
         <img
           src={thumbnail}

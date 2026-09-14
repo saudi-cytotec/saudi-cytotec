@@ -81,7 +81,7 @@ Information → trust → safety/context → FAQ → next step → relevant reso
 This is implemented via:
 
 - contextual links on homepage, cluster pages, FAQ hub, service-area hub and article pages;
-- `ContactCta` using approved WhatsApp `00966538159747` for general website/content navigation only;
+- `ContactCta` using the approved official WhatsApp `00966530945626` for general website/content navigation only;
 - `CareReferral` for official emergency and health-line routing;
 - no Drug/Product/Offer/Review/AggregateRating schema.
 

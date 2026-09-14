@@ -1,8 +1,16 @@
+import {
+  WHATSAPP_NUMBER_DIGITS,
+  WHATSAPP_NUMBER_DISPLAY,
+  WHATSAPP_NUMBER_RAW,
+  WHATSAPP_URL,
+} from "./conversion";
+
 /**
  * Contact channels — official health lines + approved WhatsApp editorial channel.
  *
- * Commit 8ac2a34: WhatsApp 00966530945626 as the official editorial/drug-info
- * channel (green identity). Health lines remain the primary medical channels.
+ * The WhatsApp number/link below is DERIVED from src/data/conversion.ts, which
+ * is the single source of truth (00966530945626 / wa.me/966530945626).
+ * Health lines remain the primary medical channels.
  *
  * Verified sources:
  *  - Saudi Ministry of Health contact centre: 937 (inside KSA), +966 920005937
@@ -27,10 +35,10 @@ export interface HealthLine {
 }
 
 export const WHATSAPP_CHANNEL = {
-  digits: "966530945626",
-  display: "+966 53 094 5626",
-  raw: "00966530945626",
-  url: "https://wa.me/966530945626",
+  digits: WHATSAPP_NUMBER_DIGITS,
+  display: WHATSAPP_NUMBER_DISPLAY,
+  raw: WHATSAPP_NUMBER_RAW,
+  url: WHATSAPP_URL,
   note: "للاستفسارات التحريرية والدوائية العامة فقط — بلا وصفات فردية ولا بيع مباشر",
 };
 

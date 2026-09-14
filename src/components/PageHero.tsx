@@ -2,8 +2,9 @@ import type { ReactNode } from "react";
 import { Breadcrumbs, type Crumb } from "./Breadcrumbs";
 
 /**
- * Shared navy page header — the internal-page counterpart of the homepage
- * hero: deep-navy gradient panel, white display title, light breadcrumbs.
+ * Shared green page header — the internal-page counterpart of the homepage
+ * hero: deep-green gradient panel (unified green identity), white display
+ * title, light breadcrumbs. High-contrast text throughout.
  */
 export function PageHero({
   crumbs,
@@ -17,7 +18,7 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden rounded-[1.75rem] bg-gradient-to-bl from-brand-deep via-[#102c52] to-brand text-white ring-1 ring-line/60">
+    <section className="relative overflow-hidden rounded-[1.75rem] bg-gradient-to-bl from-brand-deep via-[#0d5c40] to-brand text-white ring-1 ring-line/60">
       <span className="pointer-events-none absolute -top-20 -start-20 h-64 w-64 rounded-full bg-sky/25 blur-3xl" aria-hidden="true" />
       <span className="pointer-events-none absolute -bottom-24 -end-16 h-64 w-64 rounded-full bg-accent/15 blur-3xl" aria-hidden="true" />
       <div className="relative px-6 py-9 sm:px-10 sm:py-11">

@@ -1,24 +1,35 @@
 /**
- * prerender — generate static HTML for 129 sitemap URLs.
- * Commit 8ac2a34: prerender + WhatsApp 00966530945626 + green identity + production fixes.
+ * prerender — generate static HTML for every sitemap URL.
  *
- * - Reads public/sitemap.xml (129 URLs) + dist/index.html (single-file bundle)
- * - Renders each URL in jsdom (same harness as verifyRendered) to capture
- *   the fully-rendered DOM after React hydration
- * - Writes dist/<path>/index.html for each route with:
- *   - rendered <title>, meta description, canonical, robots, JSON-LD
- *   - rendered #root innerHTML (production rendering fix)
- *   - preserved green identity + WhatsApp CTAs in the static shell
- *   - <meta name="prerender" content="129"> marker
+ * Production rendering fix:
+ *   - Reads public/sitemap.xml (129 canonical/indexable URLs) + the built
+ *     single-file bundle (dist/index.html).
+ *   - Renders each URL in jsdom (same harness as verifyRendered) so the DOM
+ *     is the fully-rendered React tree (post-hydration behavior) at that URL.
+ *   - Writes dist/<path>/index.html for each route with:
+ *       * the page's OWN <title>, meta description, canonical, robots meta,
+ *         Open Graph / Twitter / article metas (extracted from the rendered
+ *         head produced by react-helmet-async),
+ *       * the rendered #root innerHTML (real per-page content, page-specific
+ *         H1), so crawlers without JS see the page itself — never the
+ *         homepage HTML on a deep route,
+ *       * a <noscript> shell block removed (the prerendered #root replaces
+ *         it; guarantees exactly one H1 per page),
+ *       * markers: <meta name="prerender">, <meta name="prerender-path">,
+ *         <meta name="whatsapp" content="00966530945626"> (from the shell).
+ *   - The inlined module bundle is preserved in every file, so the SPA
+ *     (React Router) fully boots in the browser after the static shell.
  *
- * This ensures crawlers without JS see real content, not just "جاري تحميل...".
- * Vercel serves these static files directly (rewrites fallback still works for
- * unknown routes). Build remains single-file for SPA navigation.
+ * Vercel serves these static files with filesystem precedence (an existing
+ * dist/<path>/index.html wins over the `/(.*) → /index.html` rewrite), so
+ * public pages are never served as a SPA catch-all. /api/*, redirects and
+ * headers are untouched (see vercel.json).
  */
 
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { JSDOM } from "jsdom";
 
@@ -122,42 +133,103 @@ async function render(urlPath) {
 
   await import(BUNDLE_IMPORT + "?u=" + encodeURIComponent(urlPath));
 
-  const settled = await waitFor(
-    () => {
-      const root = window.document.getElementById("root");
-      return root && root.innerHTML.length > 200;
-    },
-    20000,
-  );
-
-  if (!settled) {
-    console.warn(`[prerender] timeout rendering ${urlPath}`);
+  // Settle only on STABLE rendered content. The catalog provider fills its
+  // state in a post-mount effect, so the first paint of an article URL can be
+  // the transient 404 fallback; capturing that would ship a wrong page.
+  // Requiring two identical snapshots 250ms apart rules the transient out.
+  const doc0 = window.document;
+  let stable = null;
+  let settled = false;
+  const start = Date.now();
+  while (Date.now() - start < 25000) {
+    const root = doc0.getElementById("root");
+    const now = root ? root.innerHTML : "";
+    if (now.length > 200) {
+      if (now === stable) {
+        settled = true;
+        break;
+      }
+      stable = now;
+    } else {
+      stable = null;
+    }
+    await new Promise((r) => setTimeout(r, 250));
   }
 
   const doc = window.document;
-  const title = doc.title || "";
-  const headInner = doc.head ? doc.head.innerHTML : "";
+
+  // Per-page head elements produced by react-helmet-async at this URL.
+  const head = {
+    title: doc.querySelector("title")?.outerHTML ?? "",
+    description: doc.querySelector('meta[name="description"]')?.outerHTML ?? "",
+    canonical: doc.querySelector('link[rel="canonical"]')?.outerHTML ?? "",
+    robots: doc.querySelector('meta[name="robots"]')?.outerHTML ?? "",
+    keywords: doc.querySelector('meta[name="keywords"]')?.outerHTML ?? "",
+    formatDetection: doc.querySelector('meta[name="format-detection"]')?.outerHTML ?? "",
+    social: [...doc.querySelectorAll('meta[property^="og:"], meta[property^="article:"], meta[name^="twitter:"]')]
+      .map((el) => el.outerHTML),
+  };
+
   const bodyRoot = doc.getElementById("root") ? doc.getElementById("root").innerHTML : "";
 
   window.close();
 
-  return { title, headInner, bodyRoot };
+  return { head, bodyRoot, settled };
 }
 
 function ensureDir(filePath) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 }
 
+/** Remove the generic homepage SEO elements from the shell head. */
+function stripShellSeo(shell) {
+  let out = shell;
+  out = out.replace(/<title>[\s\S]*?<\/title>\n?/, "");
+  out = out.replace(/<!--\s*Homepage SEO shell:[\s\S]*?-->\n?/, "");
+  // Defensive: drop any prerender markers / per-page comment from an already
+  // enhanced shell so re-runs never accumulate stale meta sets.
+  out = out.replace(/<meta name="prerender[^"]*" content="[^"]*" \/>/g, "");
+  out = out.replace(/<!--\s*Prerendered per-page SEO head:[\s\S]*?-->\n?/, "");
+  out = out.replace(/<meta\s+name="description"[\s\S]*?\/>\n?/, "");
+  out = out.replace(/<link rel="canonical" href="[^"]*" \/>/g, "");
+  out = out.replace(/<meta name="robots" content="[^"]*" \/>/g, "");
+  out = out.replace(/<meta property="og:[^"]*" content="[^"]*" \/>/g, "");
+  out = out.replace(/<meta name="twitter:[^"]*" content="[^"]*" \/>/g, "");
+  // The prerendered #root is the no-JS content itself; the shell's generic
+  // noscript block (with its own H1) must not ship on prerendered pages.
+  out = out.replace(/<noscript>[\s\S]*?<\/noscript>\n?/, "");
+  return out;
+}
+
+/** Build the per-page head block to inject before </head>. */
+function seoBlock(head, urlPath, total) {
+  const lines = [`    <!-- Prerendered per-page SEO head: ${urlPath} -->`];
+  if (head.title) lines.push(`    ${head.title}`);
+  if (head.description) lines.push(`    ${head.description}`);
+  if (head.canonical) lines.push(`    ${head.canonical}`);
+  if (head.robots) lines.push(`    ${head.robots}`);
+  if (head.keywords) lines.push(`    ${head.keywords}`);
+  for (const meta of head.social) lines.push(`    ${meta}`);
+  if (head.formatDetection) lines.push(`    ${head.formatDetection}`);
+  lines.push(`    <meta name="prerender" content="${total}" />`);
+  lines.push(`    <meta name="prerender-path" content="${urlPath}" />`);
+  return lines.join("\n");
+}
+
 async function main() {
   let renderedCount = 0;
+  let fallbacks = 0;
+  const failures = [];
+
+  // The pristine vite shell, read ONCE before any page is written. Each page
+  // must be enhanced from this original — never from a previously enhanced
+  // output (dist/index.html is overwritten with the home's enhanced HTML
+  // during the loop and must not become the template for the other pages).
+  const ORIGINAL_SHELL = fs.readFileSync(DIST_HTML, "utf8");
+
   for (const urlPath of paths) {
     try {
-      const { headInner, bodyRoot } = await render(urlPath);
-
-      // Build output path: / => dist/index.html (already exists, but we enhance)
-      // /blog/foo => dist/blog/foo/index.html
-      // For root, we will write an enhanced version that still contains the bundle
-      // plus prerendered content inside #root and head.
+      const { head, bodyRoot, settled } = await render(urlPath);
 
       let outPath;
       if (urlPath === "/" || urlPath === "") {
@@ -167,28 +239,22 @@ async function main() {
         outPath = path.join(DIST_DIR, clean, "index.html");
       }
 
-      // Read original shell to preserve bundle
-      const shell = fs.readFileSync(DIST_HTML, "utf8");
+      // The shell is the single-file bundle: keep its <script type="module">
+      // (hydration/boot) while replacing the generic head + #root content.
+      let enhanced = stripShellSeo(ORIGINAL_SHELL);
 
-      // Inject prerendered head (merge) and body
-      // Replace <div id="root">...</div> with prerendered content
-      // And inject <meta name="prerender" content="129"> + WhatsApp marker
+      const headOk = Boolean(settled && head.title && head.canonical && head.description);
 
-      let enhanced = shell;
-
-      // Add prerender marker into head if not present
-      if (!enhanced.includes('name="prerender"')) {
-        enhanced = enhanced.replace(
-          "</head>",
-          `  <meta name="prerender" content="${paths.length}" />\n  <meta name="whatsapp" content="00966530945626" />\n  <meta name="prerender-path" content="${urlPath}" />\n</head>`
-        );
+      if (headOk) {
+        enhanced = enhanced.replace("</head>", `${seoBlock(head, urlPath, paths.length)}\n  </head>`);
+      } else {
+        // Unsettled render or missing head — keep the shell head as a
+        // degraded (but still functional) fallback for this page only.
+        enhanced = enhanced.replace("</head>", `  <meta name="prerender" content="${paths.length}" />\n  <meta name="prerender-path" content="${urlPath}" />\n  <meta name="prerender-fallback" content="no-head" />\n  </head>`);
+        if (settled) fallbacks++;
       }
 
-      // Replace root content with prerendered version for crawlers
-      // Keep the original bundle script intact for hydration
       if (bodyRoot) {
-        // The shell has a placeholder "جاري تحميل..." inside #root
-        // We replace it with the rendered HTML, but keep it inside #root
         enhanced = enhanced.replace(
           /<div id="root">[\s\S]*?<\/div>\s*<!--/,
           `<div id="root">${bodyRoot}</div>\n    <!--`
@@ -196,28 +262,21 @@ async function main() {
         // Fallback if pattern not matched (single-file may have different structure)
         if (!enhanced.includes(bodyRoot.slice(0, 50))) {
           enhanced = enhanced.replace(
-            /<div id="root\">.*?<\/div>/s,
+            /<div id="root".*?<\/div>/s,
             `<div id="root">${bodyRoot}</div>`
           );
         }
       }
 
-      // For non-root paths, write separate file; for root, overwrite with enhanced
-      if (urlPath !== "/") {
-        ensureDir(outPath);
-        fs.writeFileSync(outPath, enhanced, "utf8");
-      } else {
-        // For root, we already have enhanced version
-        fs.writeFileSync(outPath, enhanced, "utf8");
-      }
-
+      ensureDir(outPath);
+      fs.writeFileSync(outPath, enhanced, "utf8");
       renderedCount++;
       if (renderedCount % 20 === 0) {
         console.log(`[prerender] ${renderedCount}/${paths.length} rendered`);
       }
     } catch (err) {
-      console.error(`[prerender] failed ${urlPath}:`, err.message);
-      // Fallback: copy shell as-is
+      failures.push(`${urlPath}: ${err.message}`);
+      // Fallback: copy shell as-is (still a working SPA shell)
       const clean = urlPath.replace(/\/$/, "");
       const outPath = urlPath === "/" ? path.join(DIST_DIR, "index.html") : path.join(DIST_DIR, clean, "index.html");
       ensureDir(outPath);
@@ -227,17 +286,28 @@ async function main() {
     }
   }
 
-  console.log(`[prerender] completed ${renderedCount}/${paths.length} pages — WhatsApp 00966530945626 — green identity #0f6b4a`);
+  let commit = "unknown";
+  try {
+    commit = execSync("git rev-parse --short=7 HEAD", { cwd: ROOT }).toString().trim();
+  } catch {
+    // no git context — leave "unknown"
+  }
 
-  // Write prerender manifest for verification
+  // Write prerender manifest for verification (dist only — never tracked).
   const manifest = {
     pages: paths.length,
     whatsapp: "00966530945626",
     identity: "green #0f6b4a",
+    commit,
     generatedAt: new Date().toISOString(),
-    commit: "8ac2a34",
   };
   fs.writeFileSync(path.join(DIST_DIR, "prerender-manifest.json"), JSON.stringify(manifest, null, 2));
+
+  console.log(`[prerender] completed ${renderedCount}/${paths.length} pages — head-merged: ${renderedCount - fallbacks}, head fallbacks: ${fallbacks}, hard failures: ${failures.length}`);
+  if (failures.length) {
+    console.error("[prerender] failures:");
+    for (const f of failures) console.error(`  - ${f}`);
+  }
 }
 
 main().catch((err) => {
