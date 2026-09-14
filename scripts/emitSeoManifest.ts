@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import type { Plugin } from "vite";
 import { articles } from "../src/data/articles";
+import { HOME_SEO } from "../src/data/home";
 import { staticPages } from "../src/data/pages";
 import { clusters, SITE } from "../src/data/site";
 import { bodyStructure } from "../src/utils/bodyWordCount";
@@ -219,8 +220,11 @@ export function emitSeoManifest(): Plugin {
       pushRoute({
         path: "/",
         url: `${SITE.domain}/`,
-        title: "الرئيسية",
-        metaDescription: SITE.description,
+        // The homepage is the site's primary SEO entry point: the manifest must
+        // describe the title/description the page really renders (see
+        // src/data/home.ts and src/pages/Home.tsx).
+        title: HOME_SEO.title,
+        metaDescription: HOME_SEO.description,
         canonical: `${SITE.domain}/`,
         kind: "index",
         expectedRobots: INDEXABLE,

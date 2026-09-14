@@ -1,12 +1,12 @@
 # Content Map Report
 
-Date: 2026-09-06 · source: `content/map.json` + built `dist/seo-manifest.json`
+Date: 2026-09-14 · source: `content/map.json` + built `dist/seo-manifest.json`
 
 ## Search-intent ownership
 
 | Query / role | One owning URL | Supporting layer | Policy |
 |---|---|---|---|
-| سايتوتك في السعودية | `/service-areas` | 20 geographic articles + regional articles | The service-area hub is the only pillar for this national query; supporting pages must not copy its title/intent wholesale. |
+| سايتوتك في السعودية | `/` (homepage) | `/service-areas` + regional/geographic articles | The homepage is the pillar for this national query; the care-access hub at `/service-areas` must keep a distinct title/intent. |
 | ما هو سايتوتك / التعريف | `/what-is-cytotec` | definition articles | Educational definition, not a transactional or geographic substitute. |
 | الأمان والتحذيرات | `/safety` | safety and emergency articles | Safety support cluster; no dosing or commercial intent. |
 
@@ -47,7 +47,7 @@ Date: 2026-09-06 · source: `content/map.json` + built `dist/seo-manifest.json`
 
 ## Guardrails
 
-- Keep `/service-areas` indexable, self-canonical and in the sitemap.
+- Keep `/service-areas` indexable, self-canonical and in the sitemap, with an intent distinct from the homepage pillar.
 - Keep the 20 geographic articles; do not create thin city pages or doorway variants.
 - Keep supporting articles informational and distinct; do not optimize every article for the national pillar query.
 - Content-map IDEA items are planning records, not permission to mass-publish.
