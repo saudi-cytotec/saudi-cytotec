@@ -93,7 +93,7 @@ export function Header() {
       </div>
 
       {/* ── White branded header ─────────────────────────────────────── */}
-      <div className="border-b border-line bg-white shadow-[0_1px_10px_-4px_rgb(11_37_69/0.12)]">
+      <div className="border-b border-line bg-white shadow-[0_1px_10px_-4px_rgb(10_74_51/0.12)]">
         <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3">
           {/* Brand lockup — the exact supplied logo */}
           <Link to="/" className="shrink-0" aria-label={`${SITE.name} — الرئيسية`}>
@@ -169,11 +169,14 @@ export function Header() {
               href={WHATSAPP_CHANNEL.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden items-center gap-2 rounded-full bg-[#16a34a] px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgb(22_107_74/0.6)] transition hover:bg-[#15803d] md:inline-flex"
-              aria-label={`واتساب ${WHATSAPP_CHANNEL.raw}`}
+              className="hidden items-center gap-2 rounded-full bg-[#16a34a] px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgb(21_128_61/0.6)] transition hover:bg-[#15803d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#16a34a] focus-visible:ring-offset-2 md:inline-flex"
+              aria-label={`تواصل معنا عبر واتساب ${WHATSAPP_CHANNEL.raw}`}
             >
               <WhatsAppIcon className="h-4 w-4" />
-              واتساب
+              <span>تواصل معنا عبر واتساب</span>
+              <span dir="ltr" className="hidden font-mono text-xs font-bold xl:inline">
+                {WHATSAPP_CHANNEL.raw}
+              </span>
             </a>
             <Link
               to="/contact"

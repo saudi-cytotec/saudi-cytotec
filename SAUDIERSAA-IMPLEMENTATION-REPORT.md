@@ -24,7 +24,7 @@ It was removed in full, and replaced with `src/components/CareReferral.tsx`,
 which routes readers to government-operated services. Verified:
 
 ```
-grep -rn "CONTACT_PHONE\|WHATSAPP_MESSAGE\|wa\.me\|966538159747" src/
+grep -rn "CONTACT_PHONE\|WHATSAPP_MESSAGE\|wa\.me\|966530945626" src/
 → NONE
 ```
 
