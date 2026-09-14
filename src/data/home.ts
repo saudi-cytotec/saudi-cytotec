@@ -1,28 +1,33 @@
 /**
  * Homepage content model.
  *
- * The homepage is the strongest SEO entry point of the site and the only URL
- * that owns the national query «سايتوتك في السعودية». The copy below is
- * educational awareness content written for humans first:
+ * Positioning: Saudiersaa is a Saudi pharmaceutical/pharmacy platform for
+ * women's health — the homepage must read as a commercial service page (drug
+ * information + regulated dispensing guidance + contact), not as an
+ * educational-only blog.
  *
- *   - no doses, no usage instructions, no abortion instructions,
- *   - no prices, no availability claims, no pharmacy or clinic names,
- *   - no purchase routes, no private contact numbers or WhatsApp,
- *   - no unsupported commercial claims and no city keyword stuffing.
+ * Honesty rules that this file must keep obeying:
+ *   - no invented prices, stock, availability, delivery, branches, licences,
+ *     ratings, reviews, physicians or medical reviewers,
+ *   - no dosing, no home protocols, no abortion instructions, no purchase
+ *     routes, no private contact numbers or WhatsApp sales channels,
+ *   - no fabricated "24/7" or "nationwide delivery" claims: the only contact
+ *     capability that exists in this project is the /contact page,
+ *   - no city keyword stuffing. Coverage is explained once and linked to
+ *     /service-areas.
  *
- * Every `to` value must resolve to a route that really exists (static pages,
- * cluster pages or published articles). This is verified by
- * `scripts/auditIndexability.mjs` and `npm run verify`.
+ * Every `to` value must resolve to a route that really exists; this is checked
+ * by `scripts/auditIndexability.mjs` and `npm run verify`.
  */
 
 export const HOME_SEO = {
-  /** Rendered <title> and og:title — the exact approved homepage title. */
+  /** Rendered <title> and og:title — the approved homepage title. */
   title: "سايتوتك في السعودية | صحة المرأة السعودية",
   /** Visible <h1> — identical to the title by editorial decision. */
   h1: "سايتوتك في السعودية | صحة المرأة السعودية",
-  /** Meta description: natural sentence, one use of each core term. */
+  /** Meta description: one natural mention of each core term. */
   description:
-    "دليل توعوي عن سايتوتك في السعودية: ما هو سايتوتك وميزوبروستول، الاستخدامات الطبية، الأمان الدوائي، ومتى تستشيرين الطبيب. تعليمي فقط من صحة المرأة السعودية، بلا بيع.",
+    "دليل دوائي عن سايتوتك في السعودية: ما هو سايتوتك وميزوبروستول، الوصفة الطبية والإشراف، الأمان الدوائي، ومسار الصرف النظامي، مع معلومات موثوقة عن صحة المرأة.",
 } as const;
 
 export interface HomeLink {
@@ -30,177 +35,113 @@ export interface HomeLink {
   label: string;
 }
 
-export interface HomeTopicSection {
-  /** Anchor id used by the on-page table of contents. */
-  id: string;
-  eyebrow: string;
+/** Short factual bullets under the "سايتوتك في السعودية" section. */
+export const HOME_QUICK_FACTS: string[] = [
+  "سايتوتك اسم تجاري، والمادة الفعالة فيه هي ميزوبروستول (Misoprostol)، وهو نظير صناعي للبروستاغلاندين E1.",
+  "دواء خاضع للتنظيم الدوائي في المملكة، ويُصرف بوصفة طبية وبإشراف طبي، لا بقرار ذاتي.",
+  "النشرات التنظيمية تحمل تحذيراً بارزاً بشأن الحمل، وهذا التحذير جزء من هوية الدواء لا معلومة هامشية.",
+  "الصرف يتم عبر الصيدليات المرخّصة وفق أنظمة الهيئة العامة للغذاء والدواء ووزارة الصحة.",
+];
+
+/** The paragraphs of the "سايتوتك في السعودية" section (kept short on purpose). */
+export const HOME_CYTOTEC_INTRO: string[] = [
+  "سايتوتك (Cytotec) هو الاسم التجاري لدواء مادته الفعالة ميزوبروستول. عُرف في الأصل باستطباب يتعلق بحماية المعدة لدى فئات محددة من المرضى، وتُناقش له استخدامات أخرى داخل الأنظمة الصحية تحت إشراف مختصين وضمن بروتوكولات مؤسسية.",
+  "ما يهم القارئة في السعودية قبل أي خطوة: أن الدواء لا يُصرف جزافاً، وأن الوصفة الطبية هي الأداة التي تربط الدواء بحالة مفحوصة وموانع مستبعدة ومتابعة واضحة. لذلك نبني هذا الموقع حول المعلومات الدوائية الموثوقة ومسار الصرف النظامي، لا حول وعود تجارية.",
+];
+
+export interface HomeService {
+  /** Presentation key (icon + hue resolved in the page component). */
+  key: "information" | "prescription" | "dispensing" | "safety" | "contact";
   title: string;
-  paragraphs: string[];
-  bullets?: string[];
-  /** Optional emphasis line rendered inside a safety callout. */
-  callout?: string;
-  primary: HomeLink;
-  links: HomeLink[];
+  text: string;
+  to: string;
+  label: string;
 }
 
-/** Main educational body of the homepage, in reading order. */
-export const HOME_TOPIC_SECTIONS: HomeTopicSection[] = [
+/**
+ * Services the site can honestly claim today: verified drug information, the
+ * prescription/supervision pathway, the regulated dispensing route, safety and
+ * emergency guidance, and the contact channel. Nothing here promises stock,
+ * price, delivery or a physical branch, because the project holds no such data.
+ */
+export const HOME_SERVICES: HomeService[] = [
   {
-    id: "definition",
-    eyebrow: "التعريف",
-    title: "ما هو سايتوتك وما علاقته بميزوبروستول؟",
-    paragraphs: [
-      "سايتوتك اسم تجاري لدواء مادته الفعالة ميزوبروستول، وهي نظير صناعي للبروستاغلاندين E1 يحاكي بعض تأثيراته الطبيعية في الجسم. المادة نفسها قد تُسجَّل تحت أسماء تجارية أخرى أو تُصرف كمستحضر عام، ولهذا لا يكفي الاسم المتداول لفهم الدواء.",
-      "الاختلاف في الاسم لا يغيّر القاعدة: الاستطباب المعتمد في النشرة، والموانع، والتداخلات، والحالة الصحية الفردية هي ما يحدد هل الدواء مناسب أصلاً. لذلك يبدأ أي سؤال جدي عن سايتوتك من التعريف الطبي، لا من التجارب المتناقلة أو من صور المنتجات.",
-    ],
-    bullets: [
-      "سايتوتك اسم تجاري، وميزوبروستول هي المادة الفعالة التي تتبعه التحذيرات.",
-      "المادة مقيّدة تنظيمياً وتُصرف بوصفة وإشراف طبي، لا بقرار شخصي.",
-      "المرجع الموثوق هو النشرة الرسمية والجهة التنظيمية، وليس المنشورات المتداولة.",
-    ],
-    primary: { to: "/what-is-cytotec", label: "ما هو سايتوتك؟ التعريف الكامل" },
-    links: [
-      { to: "/misoprostol", label: "ميزوبروستول: المادة الفعالة" },
-      { to: "/blog/cluster/ma-huwa-saytotek", label: "محور التعريف الدوائي" },
-    ],
+    key: "information",
+    title: "معلومات دوائية موثّقة",
+    text: "شرح للمادة الفعالة والاستطبابات المعتمدة والتحذيرات، مستند إلى النشرات التنظيمية الرسمية.",
+    to: "/medical-sources",
+    label: "منهج المصادر",
   },
   {
-    id: "medical-uses",
-    eyebrow: "الاستخدامات الطبية",
-    title: "الاستخدامات الطبية: ما يقرره الطبيب وما لا يُدار منزلياً",
-    paragraphs: [
-      "الاستطباب المعتمد في النشرة التنظيمية الأمريكية يتعلق بتقليل خطر القرحة المعدية المرتبطة بمضادات الالتهاب غير الستيرويدية لدى فئات محددة من المرضى، مع شروط مشددة لنساء سن الإنجاب. هذا الاستطباب لا يُستعمل أثناء الحمل، ولا يُعطى إلا بعد تقييم طبي.",
-      "تناقش هيئات سريرية دولية دوراً آخر لميزوبروستول في حالات توليدية داخل المستشفى، مثل نزيف ما بعد الولادة عند عدم توفر الأوكسيتوسين. هذه توصيات موجهة لمقدمي الرعاية ضمن بروتوكولات مؤسسية، وليست خياراً فردياً متاحاً في المنزل.",
-      "«الاستخدام خارج النشرة» مصطلح طبي يعني أن الطبيب قد يقرر استخداماً مختلفاً بمسوغ علمي وموافقة مستنيرة داخل نظام صحي مرخّص. وهو لا يعني بأي حال أن الدواء مناسب للتجربة الذاتية أو أن مصدراً غير طبي يمكنه تقييم الحالة.",
-    ],
-    bullets: [
-      "القرار العلاجي فردي، ويُبنى على تشخيص وفحص لا على مقال أو منشور.",
-      "الاستخدامات التوليدية تبقى داخل المستشفى وتحت إشراف مباشر.",
-      "هذه الصفحة لا تتضمن جرعات ولا بروتوكولات ولا تعليمات استخدام.",
-    ],
-    primary: { to: "/medical-uses", label: "الاستخدامات الطبية ضمن الإطار النظامي" },
-    links: [{ to: "/blog/cluster/alestekhdamat-altebbiya", label: "محور الاستخدامات الطبية" }],
+    key: "prescription",
+    title: "التزام بالوصفة الطبية",
+    text: "توضيح لشروط الاستخدام والإشراف الطبي، ولماذا تُقيَّم الموانع والتداخلات قبل أي صرف.",
+    to: "/safety",
+    label: "شروط الأمان",
   },
   {
-    id: "safety",
-    eyebrow: "الأمان الدوائي",
-    title: "الأمان والتحذيرات: لماذا الإشراف الطبي شرط لا خيار؟",
-    paragraphs: [
-      "تحمل نشرات ميزوبروستول تحذيراً بارزاً بشأن الحمل، إذ قد يسبب تشوهات خلقية أو إجهاضاً أو ولادة مبكرة، مع تقارير عن مضاعفات رحمية في سياقات محددة. هذه التحذيرات مرتبطة بالمادة والاستطباب، ولا تُلغيها النيّة الحسنة ولا ثقة المتابعين ولا كثرة القصص المتشابهة على الإنترنت.",
-      "في المملكة العربية السعودية تشرف الهيئة العامة للغذاء والدواء على تسجيل الأدوية ومراقبة تداولها، وتشرف وزارة الصحة على الخدمات والمنشآت. الحصول على دواء من خارج القنوات النظامية يكسر هذه السلسلة كاملة: مصدر مجهول، وتخزين غير معروف، وانعدام تقييم الموانع والتداخلات والمتابعة.",
-    ],
-    bullets: [
-      "الوصفة الطبية أداة لتقييم الموانع والتداخلات واحتمال الحمل، وليست إجراءً شكلياً.",
-      "المصادر التي تبيع الدواء عبر تطبيقات أو أرقام خاصة ليست مصادر طبية مهما بدت واثقة.",
-      "غياب أعراض بعد استخدام غير منضبط لا يثبت الأمان، لأن المضاعفات قد تتأخر.",
-    ],
-    callout:
-      "إذا كنتِ حاملاً أو تشكين في حمل، أو ظهرت أعراض حادة، فالمسار الصحيح هو جهة صحية مرخّصة فوراً، لا مقارنة الحالات ولا البحث عن تجربة مشابهة.",
-    primary: { to: "/safety", label: "صفحة الأمان الدوائي الكاملة" },
-    links: [
-      { to: "/blog/cluster/alaman-walthahdhirat", label: "محور الأمان والتحذيرات" },
-      { to: "/medical-disclaimer", label: "إخلاء المسؤولية الطبية" },
-    ],
+    key: "dispensing",
+    title: "مسار الصرف النظامي",
+    text: "الأدوية الخاضعة للتنظيم تُصرف من الصيدليات المرخّصة، وتوضع هنا القنوات الرسمية للوصول إلى الرعاية.",
+    to: "/service-areas",
+    label: "الرعاية في السعودية",
   },
   {
-    id: "side-effects",
-    eyebrow: "الآثار الجانبية",
-    title: "الآثار الجانبية: ما هو متوقع وما يستدعي رعاية عاجلة",
-    paragraphs: [
-      "تذكر النشرات آثاراً شائعة تتركز في الجهاز الهضمي مثل الإسهال وألم البطن والغثيان، وقد يظهر صداع أو دوخة، أو حمى وقشعريرة في بعض السياقات. معرفة هذه القائمة لا تعني تشخيص نفسك، بل تعني أن تعرفي الفرق بين عرض مزعج يمكن ترتيبه في عيادة وعلامة لا تحتمل الانتظار.",
-      "تختلف شدة الآثار بين شخص وآخر حسب الاستطباب والجرعة الموصوفة والحالة الصحية والأدوية المرافقة. لذلك لا تُستخدم تجربة قريبة أو منشور عابر كمرجع لتحمّل العرض أو تجاهله.",
-    ],
-    bullets: [
-      "إسهال أو ألم وتقلصات بطنية أو غثيان أو قيء أو صداع.",
-      "حمى أو قشعريرة في بعض الاستخدامات الموصوفة.",
-      "نزيف غزير أو إغماء أو ألم بطني حاد مفاجئ أو حمى مرتفعة مستمرة: رعاية عاجلة فوراً.",
-      "ضيق تنفس أو ألم صدر أو تورم في الوجه: حالة طارئة تستدعي الإسعاف.",
-    ],
-    primary: { to: "/side-effects", label: "تفاصيل الآثار الجانبية" },
-    links: [{ to: "/blog/cluster/alathar-aljanibiyya", label: "محور الآثار الجانبية" }],
+    key: "safety",
+    title: "تحذيرات وعلامات طارئة",
+    text: "تفريق واضح بين أثر جانبي محتمل وبين علامة تستدعي مراجعة عاجلة أو طوارئ فوراً.",
+    to: "/when-to-see-doctor",
+    label: "علامات تستدعي الطبيب",
   },
   {
-    id: "pregnancy",
-    eyebrow: "الحمل المبكر",
-    title: "الحمل المبكر والصحة الإنجابية",
-    paragraphs: [
-      "الحمل المبكر مرحلة تتشابه فيها علامات حالات مطمئنة مع حالات تحتاج تقييماً عاجلاً. اختبار الحمل المنزلي يؤكد وجود الحمل ولا يحدد مكانه، لذلك فإن الألم في جانب واحد من البطن، أو النزيف، أو الدوخة، أو الإغماء أسباب كافية لفحص في منشأة مرخّصة دون تأجيل.",
-      "الأدوية في هذه المرحلة لا تُختار بالتخمين، لأن أسابيع التكوين الأولى حساسة، ولبعض الأدوية ومنها ميزوبروستول تحذيرات خاصة خلال الحمل. لا تبدئي دواءً ولا توقفي دواءً موصوفاً بناءً على منشور، بل بناءً على تقييم طبي مباشر.",
-    ],
-    bullets: [
-      "نزيف غير معتاد أو ألم متزايد يستحق تقييماً في العيادة أو الطوارئ.",
-      "الدوخة الشديدة أو الإغماء مع حمل محتمل علامة لا يُنتظر معها.",
-      "المتابعة السريرية أفضل من تفسير الأعراض ذاتياً أو الانتظار.",
-    ],
-    primary: { to: "/early-pregnancy", label: "دليل الحمل المبكر" },
-    links: [
-      { to: "/blog/cluster/alhaml-walsehha-alenjabiyya", label: "محور الحمل والصحة الإنجابية" },
-      { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب؟" },
-    ],
+    key: "contact",
+    title: "قناة تواصل للاستفسارات",
+    text: "استفسارات عن المعلومات الدوائية والخدمات وملاحظات تصحيح المصادر عبر صفحة الاتصال.",
+    to: "/contact",
+    label: "تواصل معنا",
+  },
+];
+
+/** Support pages around the product itself (short links, not long articles). */
+export const HOME_SUPPORT_PAGES: { to: string; label: string; note: string }[] = [
+  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟", note: "تعريف الاسم التجاري وحدود دوره." },
+  { to: "/misoprostol", label: "ميزوبروستول", note: "المادة الفعالة والتصنيف الدوائي." },
+  { to: "/medical-uses", label: "الاستخدامات الطبية", note: "ما يُقرَّر تحت إشراف طبي فقط." },
+  { to: "/safety", label: "الأمان والتحذيرات", note: "التحذيرات والتنظيم وسلسلة الصرف." },
+  { to: "/side-effects", label: "الآثار الجانبية", note: "الشائع مقابل العلامة التي لا تنتظر." },
+];
+
+/** Why Saudiersaa — only claims backed by something already in the project. */
+export const HOME_VALUE: { title: string; text: string; to: string; label: string }[] = [
+  {
+    title: "معلومات دوائية قابلة للتحقق",
+    text: "كل صفحة تُدرج مراجعها من نشرات وهيئات تنظيمية رسمية، بلا اختلاق دراسات أو نسب.",
+    to: "/medical-sources",
+    label: "المصادر الطبية",
   },
   {
-    id: "womens-health",
-    eyebrow: "صحة المرأة",
-    title: "صحة المرأة: الإطار الأوسع الذي يخدم كل الأسئلة",
-    paragraphs: [
-      "الأسئلة عن دواء واحد تكون غالباً جزءاً من سؤال أوسع: انتظام الدورة الشهرية، تكيس المبايض، ألم الحوض، فقر الدم، الخصوبة، الفحوصات الدورية، والصحة النفسية المرتبطة بالحمل أو فقدانه. هذا المحور يجمع معلومات تعليمية موثوقة تساعدك على فهم جسدك وترتيب أولويات المراجعة الطبية.",
-      "التوعية الجيدة لا تعني الاكتفاء بالمعلومة، بل معرفة متى تحتاجين فحصاً. بعض الحالات مثل فقر الدم الشديد أو الانتباذ البطاني أو الحمل خارج الرحم لا تُشخّص من مقال، بل من فحص سريري وتحاليل.",
-    ],
-    bullets: [
-      "تغيّر مفاجئ في انتظام الدورة أو إعياء مستمر يستحق تقييماً.",
-      "ألم الحوض المتكرر الذي يعيق النوم أو العمل سبب كافٍ للمراجعة.",
-      "الفحوصات الدورية واللقاحات جزء من صحة المرأة الوقائية.",
-    ],
-    primary: { to: "/womens-health", label: "بوابة صحة المرأة" },
-    links: [{ to: "/blog/cluster/sehhat-almarah", label: "محور صحة المرأة" }],
+    title: "تعامل منضبط مع الأدوية الخاضعة للتنظيم",
+    text: "الوصفة والإشراف الطبي شرط، ولا ننشر جرعات ولا طرق استخدام ولا تعليمات منزلية.",
+    to: "/medical-uses",
+    label: "الاستخدامات الطبية",
   },
   {
-    id: "emergency",
-    eyebrow: "الطوارئ",
-    title: "متى يجب مراجعة الطبيب أو الطوارئ؟",
-    paragraphs: [
-      "هذه القائمة لا تُستخدم للتشخيص، لكنها علامات موثقة تستدعي طلب رعاية عاجلة دون انتظار ولا مقارنة: نزيف يغمر فوطة في أقل من ساعة ويستمر، إغماء أو تشوّش شديد أو عدم القدرة على الوقوف، ألم بطني حاد مفاجئ خاصة مع حمل معروف أو محتمل، حمى مرتفعة مع قشعريرة وتدهور سريع، ضيق تنفس أو ألم صدر أو تورم في الوجه والشفتين.",
-      "تأخير الرعاية من أخطر القرارات التي تُبنى على قراءة عامة. في المملكة يمكن البدء من مراكز الرعاية الأولية أو العيادات المرخّصة للحالات غير الإسعافية، أما العلامات الحادة فمسارها الطوارئ مباشرة.",
-    ],
-    callout:
-      "الحمل خارج الرحم حالة طارئة محتملة: ألم في جانب البطن مع دوخة أو نزيف أو إغماء يستدعي تقييماً فورياً حتى لو كان الحمل غير مؤكد.",
-    primary: { to: "/when-to-see-doctor", label: "علامات تستدعي الطبيب أو الطوارئ" },
-    links: [{ to: "/blog/cluster/mata-murajaa-altabeeb", label: "محور متى تراجعين الطبيب" }],
+    title: "وضوح في المخاطر",
+    text: "التحذيرات والعلامات الطارئة مذكورة في مكان بارز، مع أرقام القنوات الرسمية.",
+    to: "/safety",
+    label: "الأمان الدوائي",
   },
   {
-    id: "sources",
-    eyebrow: "المصادر",
-    title: "المصادر الطبية الموثوقة: كيف نبني المعلومة؟",
-    paragraphs: [
-      "يعتمد المحتوى التعليمي في هذا الموقع على نشرات تنظيمية رسمية مثل نشرة سايتوتك الصادرة عن إدارة الغذاء والدواء الأمريكية وملخصات DailyMed، وعلى مواد منظمة الصحة العالمية والهيئة العامة للغذاء والدواء ووزارة الصحة السعودية وMedlinePlus. كل صفحة تُدرج مراجعها، ولا ننشر دراسات لا يمكن التحقق من وجودها.",
-      "جودة المصدر لا تلغي حدوده: المرجع الممتاز يشرح القاعدة العامة ولا يعرف تاريخك المرضي. وجود المرجع يعني «هنا الأصل العام»، ولا يعني أن ما فيه يناسب حالتك الفردية.",
-    ],
-    bullets: [
-      "نشرات وهيئات تنظيمية رسمية قابلة للتحقق بدل القصص التسويقية.",
-      "رفض أي محتوى يبيع دواءً أو يطلب تواصلاً خاصاً أو يعرض جرعات.",
-      "المراجعة الطبية الفردية تبقى عند طبيب مرخّص، لا عند موقع تعليمي.",
-    ],
-    primary: { to: "/medical-sources", label: "منهج المصادر الطبية" },
-    links: [{ to: "/blog/cluster/aladilla-walmasader", label: "محور الأدلة والمصادر" }],
+    title: "تغطية وطنية بمسار نظامي",
+    text: "المعلومة الدوائية موحّدة في كل مناطق المملكة؛ ما يختلف هو مسار الوصول للرعاية، وقد جمعناه في صفحة واحدة.",
+    to: "/service-areas",
+    label: "مناطق الخدمة",
   },
   {
-    id: "saudi-care",
-    eyebrow: "الرعاية في السعودية",
-    title: "الرعاية الصحية في السعودية: من أين تبدأين؟",
-    paragraphs: [
-      "يبدأ الوصول إلى الرعاية الصحية للمرأة في المملكة عادة من مراكز الرعاية الأولية أو العيادات المرخّصة، مع إمكانية الوصول إلى المستشفيات الحكومية والخاصة عند الحاجة. الصيدليات المرخّصة من الهيئة العامة للغذاء والدواء هي القناة النظامية الوحيدة للدواء، ولا يوجد بديل نظامي عن الوصفة الطبية.",
-      "المعلومة الدوائية والتحذيرات موحدة على مستوى المملكة، وما يختلف هو مسار الوصول إلى الرعاية. لذلك يعرض الموقع توجيهاً عاماً يخدم جميع المناطق بدل صفحات مكررة بأسماء مدن لا تضيف قيمة طبية، ويمكنك البدء من صفحة الرعاية في السعودية.",
-    ],
-    bullets: [
-      "مركز اتصال وزارة الصحة للاستفسارات غير الإسعافية وللإرشاد إلى المسار المناسب.",
-      "الإسعاف للحالات الطارئة مثل النزيف الشديد أو الإغماء أو الألم الحاد أو ضيق التنفس.",
-      "للملاحظات التحريرية وتصحيح المصادر يمكن استخدام صفحة الاتصال فقط.",
-    ],
-    primary: { to: "/service-areas", label: "الرعاية الصحية في السعودية" },
-    links: [
-      { to: "/blog/saudi-drug-regulation-context", label: "تنظيم الدواء في السعودية" },
-      { to: "/contact", label: "الاتصال التحريري" },
-    ],
+    title: "قناة تواصل واضحة",
+    text: "للاستفسارات عن المحتوى الدوائي أو الخدمات أو تصحيح مصدر، عبر صفحة الاتصال.",
+    to: "/contact",
+    label: "تواصل معنا",
   },
 ];
 
@@ -210,89 +151,73 @@ export interface HomeFaq {
   links: HomeLink[];
 }
 
-/** Short, homepage-level answers. Deeper answers live on /faq. */
+/** FAQ serving both commercial and medical intent, without dosing content. */
 export const HOME_FAQS: HomeFaq[] = [
   {
-    q: "هل سايتوتك هو نفسه ميزوبروستول؟",
-    a: "سايتوتك اسم تجاري، وميزوبروستول هي المادة الفعالة التي تتبعها التحذيرات والتصنيف الدوائي. قد تظهر المادة نفسها تحت أسماء تجارية أخرى أو كمستحضر عام حسب البلد والجهة المصنّعة.",
+    q: "ما هو سايتوتك؟",
+    a: "سايتوتك اسم تجاري لدواء مادته الفعالة ميزوبروستول. تُحدد طبيعة استخدامه بحسب الاستطباب المعتمد في النشرة، والحالة الصحية الفردية، وتقييم الطبيب للموانع والتداخلات.",
     links: [
       { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
-      { to: "/misoprostol", label: "ميزوبروستول" },
-    ],
-  },
-  {
-    q: "هل يقدّم الموقع جرعات أو خطة علاج أو وسيلة للحصول على الدواء؟",
-    a: "لا. الموقع منصة توعوية تعليمية فقط: لا يبيع أدوية، ولا يصف، ولا ينشر جرعات أو تعليمات استخدام أو طرق شراء. أي قرار علاجي فردي يجب أن يصدر من جهة صحية مرخّصة يمكنها الفحص والمتابعة.",
-    links: [
-      { to: "/medical-disclaimer", label: "إخلاء المسؤولية" },
       { to: "/medical-uses", label: "الاستخدامات الطبية" },
     ],
   },
   {
-    q: "لماذا يُذكر التحذير من الحمل في كل صفحة تقريباً؟",
-    a: "لأن نشرات ميزوبروستول تتضمن تحذيراً بارزاً بشأن الحمل، وهو جزء من هوية الدواء التنظيمية لا معلومة هامشية. تكرار التحذير مقصود لحماية القارئة، وليس حشواً ولا مبالغة.",
+    q: "ما هي المادة الفعالة؟",
+    a: "المادة الفعالة هي ميزوبروستول، وهي نظير صناعي للبروستاغلاندين E1 يحاكي بعض تأثيراته، ولهذا تظهر له تأثيرات على المعدة وعلى الرحم تُفسَّر طبقاً للسياق الطبي.",
+    links: [{ to: "/misoprostol", label: "ميزوبروستول" }],
+  },
+  {
+    q: "هل يحتاج سايتوتك إلى وصفة طبية؟",
+    a: "نعم. الدواء خاضع للتنظيم الدوائي في المملكة، ويُصرف بوصفة طبية عبر الصيدليات المرخّصة. الوصفة ليست إجراءً شكلياً؛ هي توثيق لتقييم الموانع واحتمال الحمل والتداخلات والمتابعة.",
     links: [
-      { to: "/safety", label: "الأمان الدوائي" },
-      { to: "/blog/cluster/alaman-walthahdhirat", label: "محور التحذيرات" },
+      { to: "/safety", label: "الأمان والتحذيرات" },
+      { to: "/service-areas", label: "مسار الصرف والرعاية" },
     ],
   },
   {
-    q: "متى تصبح الأعراض حالة طارئة؟",
-    a: "النزيف الغزير، الإغماء، الألم البطني الحاد المفاجئ، الحمى المرتفعة المستمرة، وضيق التنفس أو ألم الصدر علامات تستدعي رعاية عاجلة فوراً، خاصة مع حمل معروف أو محتمل.",
-    links: [{ to: "/when-to-see-doctor", label: "علامات الطوارئ" }],
-  },
-  {
-    q: "كيف أتحقق من معلومة طبية قرأتها في مكان آخر؟",
-    a: "ابدئي من مصدر تنظيمي أو هيئة صحية رسمية، وارفضي المحتوى الذي يبيع دواءً أو يطلب تواصلاً خاصاً أو يعرض جرعات، ثم اسألي طبيباً أو صيدلياً مرخّصاً عن حالتك تحديداً.",
+    q: "كيف أعرف المعلومات الدوائية الصحيحة؟",
+    a: "ابدئي من النشرة الرسمية والجهات التنظيمية مثل الهيئة العامة للغذاء والدواء ووزارة الصحة، ومن مراجع تنظيمية دولية مثل FDA وWHO وMedlinePlus. نرفض أي محتوى يبيع دواءً أو يعرض جرعات أو يطلب تواصلاً خاصاً.",
     links: [
-      { to: "/medical-sources", label: "المصادر الطبية" },
+      { to: "/medical-sources", label: "منهج المصادر" },
       { to: "/blog/how-to-verify-medical-information", label: "كيف تتحققين من المعلومة؟" },
     ],
   },
   {
-    q: "هل يغطي الموقع جميع مناطق السعودية؟",
-    a: "نعم. المحتوى توعوي موحّد لكل مناطق المملكة، لأن المعلومة الدوائية والتحذيرات لا تختلف من مدينة لأخرى. ما يختلف هو مسار الوصول إلى الرعاية، وقد جمعناه في صفحة الرعاية في السعودية بدل صفحات مدن مكررة.",
-    links: [{ to: "/service-areas", label: "الرعاية في السعودية" }],
+    q: "أين أجد معلومات الأمان والعلامات الطارئة؟",
+    a: "تحذير الحمل والموانع والتداخلات في صفحة الأمان، والآثار الجانبية في صفحتها، والعلامات التي تستدعي عيادة أو طوارئ في صفحة مخصصة مع أرقام القنوات الرسمية.",
+    links: [
+      { to: "/safety", label: "الأمان الدوائي" },
+      { to: "/side-effects", label: "الآثار الجانبية" },
+      { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب" },
+    ],
+  },
+  {
+    q: "كيف أتواصل مع الخدمة؟",
+    a: "عبر صفحة الاتصال، للاستفسارات عن المعلومات الدوائية والخدمات، أو لتصحيح مصدر. لا يمكن إصدار وصفة أو تحديد جرعة أو تشخيص حالة فردية عبر الموقع، والحالات العاجلة مسارها الطوارئ.",
+    links: [{ to: "/contact", label: "تواصل معنا" }],
   },
 ];
 
-/** Strong internal-link hub: the cornerstone pages of the site. */
-export const HOME_CORE_PAGES: { to: string; label: string; note: string }[] = [
-  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟", note: "تعريف توعوي للاسم التجاري وحدوده." },
-  { to: "/misoprostol", label: "ميزوبروستول", note: "المادة الفعالة والتصنيف الدوائي." },
-  { to: "/medical-uses", label: "الاستخدامات الطبية", note: "ما يُقرَّر تحت إشراف طبي فقط." },
-  { to: "/safety", label: "الأمان الدوائي", note: "التحذيرات والتنظيم ومخاطر المصادر غير الموثوقة." },
-  { to: "/side-effects", label: "الآثار الجانبية", note: "الشائع مقابل العلامة التي لا تنتظر." },
-  { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب", note: "علامات العيادة وعلامات الطوارئ." },
-  { to: "/womens-health", label: "صحة المرأة", note: "الدورة، الخصوبة، الفحوصات، الصحة النفسية." },
-  { to: "/early-pregnancy", label: "الحمل المبكر", note: "المتابعة الآمنة والأعراض المقلقة." },
-  { to: "/medical-sources", label: "المصادر الطبية", note: "كيف نختار المصادر ونرفض غيرها." },
-  { to: "/faq", label: "الأسئلة الشائعة", note: "إجابات مختصرة تقود إلى تفاصيل أعمق." },
-  { to: "/topics", label: "محاور المحتوى", note: "بوابة تجمع المجموعات التعليمية كاملة." },
-  { to: "/service-areas", label: "الرعاية في السعودية", note: "القنوات الرسمية ومسار الوصول للرعاية." },
-  { to: "/blog", label: "المقالات", note: "كل المقالات التعليمية مرتبة بالمحاور." },
-];
-
-/** On-page table of contents (ids must match HOME_TOPIC_SECTIONS). */
-export const HOME_TOC: { id: string; label: string }[] = [
-  { id: "definition", label: "التعريف" },
-  { id: "medical-uses", label: "الاستخدامات الطبية" },
-  { id: "safety", label: "الأمان والتحذيرات" },
-  { id: "side-effects", label: "الآثار الجانبية" },
-  { id: "pregnancy", label: "الحمل المبكر" },
-  { id: "womens-health", label: "صحة المرأة" },
-  { id: "emergency", label: "الطوارئ" },
-  { id: "sources", label: "المصادر الطبية" },
-  { id: "saudi-care", label: "الرعاية في السعودية" },
-  { id: "core-pages", label: "الصفحات الأساسية" },
-  { id: "faq", label: "الأسئلة الشائعة" },
-  { id: "latest", label: "أحدث المقالات" },
+/** Internal-link hub: the cornerstone pages of the site (crawl + authority flow). */
+export const HOME_CORE_PAGES: { to: string; label: string }[] = [
+  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
+  { to: "/misoprostol", label: "ميزوبروستول" },
+  { to: "/medical-uses", label: "الاستخدامات الطبية" },
+  { to: "/safety", label: "الأمان الدوائي" },
+  { to: "/side-effects", label: "الآثار الجانبية" },
+  { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب" },
+  { to: "/womens-health", label: "صحة المرأة" },
+  { to: "/early-pregnancy", label: "الحمل المبكر" },
+  { to: "/medical-sources", label: "المصادر الطبية" },
+  { to: "/faq", label: "الأسئلة الشائعة" },
+  { to: "/topics", label: "محاور المحتوى" },
+  { to: "/service-areas", label: "الرعاية في السعودية" },
+  { to: "/blog", label: "المقالات" },
 ];
 
 /**
- * Curated starting points for the homepage. Slugs are matched against the live
- * catalog; missing entries are skipped, and the first catalog rows are used as
- * a fallback so the section is never empty.
+ * Curated starting points. Slugs are matched against the live catalog; missing
+ * entries are skipped and the first catalog rows are used as a fallback.
  */
 export const HOME_FEATURED_SLUGS = [
   "cytotec-definition",
@@ -301,4 +226,4 @@ export const HOME_FEATURED_SLUGS = [
 ] as const;
 
 /** Reference ids rendered on the homepage (verified registrations only). */
-export const HOME_REFERENCE_IDS = ["fdaLabel", "dailyMed", "whoEml", "whoPph", "medlinePlus", "sfda", "moh"] as const;
+export const HOME_REFERENCE_IDS = ["fdaLabel", "dailyMed", "whoEml", "sfda", "moh"] as const;

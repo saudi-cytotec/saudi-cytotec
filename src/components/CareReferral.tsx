@@ -4,9 +4,9 @@ import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
  * Replaces the former "ConsultCTA" / "WhatsAppFloat" components.
  *
  * Those linked to a private mobile number framed as a "private medical
- * consultation", which contradicted the site's own /about and /safety pages and
- * functioned as a sales funnel for a prescription-controlled drug. This
- * component instead routes the reader to government-operated services.
+ * consultation". This component instead routes the reader to government-operated
+ * services and states the site's own limits plainly: no diagnosis, no prescribing
+ * and no private sales channel.
  *
  * Do not add private numbers, WhatsApp links, or "order/consult" CTAs here.
  */
@@ -18,10 +18,11 @@ export function CareReferral({ compact = false }: { compact?: boolean }) {
     >
       <div className="border-b border-line bg-brand-deep px-6 py-4">
         <h2 id="care-referral-heading" className="text-xl font-bold text-white md:text-2xl">
-          أين تحصلين على رعاية حقيقية
+          القنوات الرسمية للرعاية والصرف
         </h2>
         <p className="mt-1 text-sm text-white/85">
-          هذا الموقع تعليمي. لا نشخّص، ولا نصف أدوية، ولا نرتّب أي خدمة علاجية أو دوائية.
+          لا نشخّص الحالات الفردية عبر الموقع ولا نصدر وصفات. التقييم والوصف مسؤولية طبيب مرخّص، والصرف يتم عبر الصيدليات
+          المرخّصة وبالشروط النظامية.
         </p>
       </div>
 
@@ -64,7 +65,7 @@ export function CareReferral({ compact = false }: { compact?: boolean }) {
           تنتظري رد رسالة.
         </p>
         <p className="mt-2 text-xs text-ink-soft">
-          للملاحظات التحريرية وتصحيح المصادر فقط:{" "}
+          للاستفسارات وملاحظات تصحيح المصادر:{" "}
           <a href={`mailto:${EDITORIAL_EMAIL}`} className="text-brand underline underline-offset-4">
             {EDITORIAL_EMAIL}
           </a>

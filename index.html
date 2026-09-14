@@ -31,9 +31,43 @@
   <body>
     <div id="root">
       <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Tahoma,sans-serif;color:#062345;background:#f5f7fb">
-        جاري تحميل المحتوى التعليمي...
+        جاري تحميل المحتوى...
       </div>
     </div>
+    <!--
+      No-JS fallback: crawlers or readers without JavaScript still get the page's
+      purpose, the main entry points and the contact channel. Keep in sync with
+      src/data/home.ts.
+    -->
+    <noscript>
+      <div style="max-width:56rem;margin:0 auto;padding:1.5rem;font-family:Tahoma,sans-serif;line-height:1.9;color:#1b2a44">
+        <h1 style="color:#0b2545">سايتوتك في السعودية | صحة المرأة السعودية</h1>
+        <p>
+          منصة سعودية للخدمات والمعلومات الدوائية المرتبطة بصحة المرأة: دليل موثّق عن دواء سايتوتك ومادته الفعالة
+          ميزوبروستول، وشروط الصرف بالوصفة الطبية عبر الصيدليات المرخّصة وفق أنظمة الهيئة العامة للغذاء والدواء ووزارة
+          الصحة، ومعلومات عن الحمل المبكر والصحة الإنجابية والأمان الدوائي.
+        </p>
+        <ul>
+          <li><a href="/what-is-cytotec">ما هو سايتوتك؟</a></li>
+          <li><a href="/misoprostol">ميزوبروستول — المادة الفعالة</a></li>
+          <li><a href="/medical-uses">الاستخدامات الطبية والإطار النظامي</a></li>
+          <li><a href="/safety">الأمان والتحذيرات</a></li>
+          <li><a href="/side-effects">الآثار الجانبية</a></li>
+          <li><a href="/when-to-see-doctor">متى تراجعين الطبيب أو الطوارئ</a></li>
+          <li><a href="/womens-health">صحة المرأة</a></li>
+          <li><a href="/early-pregnancy">الحمل المبكر</a></li>
+          <li><a href="/medical-sources">المصادر الطبية</a></li>
+          <li><a href="/service-areas">الرعاية والصرف في السعودية</a></li>
+          <li><a href="/faq">الأسئلة الشائعة</a></li>
+          <li><a href="/blog">المقالات</a></li>
+          <li><a href="/contact">تواصل معنا</a></li>
+        </ul>
+        <p>
+          للاستفسارات: <a href="mailto:info@saudiersaa.com">info@saudiersaa.com</a> · للحالات العاجلة: الإسعاف 997 ·
+          مركز وزارة الصحة 937. لا تُصرف الأدوية الخاضعة للتنظيم إلا بوصفة طبية عبر صيدلية مرخّصة.
+        </p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

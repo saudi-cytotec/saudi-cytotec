@@ -14,8 +14,9 @@ export function ContactCta({ compact = false, topic = "سؤال عام" }: { com
       <p className="text-xs font-bold text-brand">الخطوة التالية</p>
       <h2 className="mt-1 text-xl font-bold text-brand-deep">تحتاجين توجيهاً لصفحة مناسبة؟</h2>
       <p className="mt-2 text-sm leading-7 text-ink-soft">
-        هذا الموقع تعليمي عام حول {topic}. لا نبيع أدوية، ولا نقدم جرعات أو تشخيصاً فردياً. للرعاية الطبية استخدمي القنوات
-        الرسمية: وزارة الصحة <span dir="ltr" className="font-mono font-bold">{moh}</span> والطوارئ{" "}
+        خدمات ومعلومات دوائية حول {topic}. لا ننشر جرعات ولا نقدّم تشخيصاً فردياً عبر الموقع، والصرف بوصفة طبية عبر
+        صيدلية مرخّصة. للرعاية الطبية استخدمي القنوات الرسمية: وزارة الصحة{" "}
+        <span dir="ltr" className="font-mono font-bold">{moh}</span> والطوارئ{" "}
         <span dir="ltr" className="font-mono font-bold">{ems}</span>.
       </p>
       <div className="mt-4 flex flex-wrap gap-3">
