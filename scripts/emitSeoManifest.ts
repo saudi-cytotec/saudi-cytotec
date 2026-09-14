@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import type { Plugin } from "vite";
 import { articles } from "../src/data/articles";
+import { HOME_SEO } from "../src/data/home";
 import { staticPages } from "../src/data/pages";
 import { clusters, SITE } from "../src/data/site";
 import { bodyStructure } from "../src/utils/bodyWordCount";
@@ -219,8 +220,11 @@ export function emitSeoManifest(): Plugin {
       pushRoute({
         path: "/",
         url: `${SITE.domain}/`,
-        title: "الرئيسية",
-        metaDescription: SITE.description,
+        // The homepage is the site's primary SEO entry point: the manifest must
+        // describe the title/description the page really renders (see
+        // src/data/home.ts and src/pages/Home.tsx).
+        title: HOME_SEO.title,
+        metaDescription: HOME_SEO.description,
         canonical: `${SITE.domain}/`,
         kind: "index",
         expectedRobots: INDEXABLE,
@@ -271,17 +275,23 @@ export function emitSeoManifest(): Plugin {
       pushRoute({
         path: "/topics",
         url: `${SITE.domain}/topics`,
-        title: "محاور المحتوى",
-        metaDescription: "محاور المحتوى وخريطة الموضوعات في سايتوتك في السعودية",
+        title: "محاور المحتوى والموضوعات",
+        metaDescription:
+          "مركز اكتشاف يربط محاور سايتوتك وميزوبروستول، الأمان، الحمل المبكر، صحة المرأة، الأسئلة، الموارد، والمناطق.",
         canonical: `${SITE.domain}/topics`,
         kind: "page",
         expectedRobots: INDEXABLE,
       });
+      // The national query «سايتوتك في السعودية» is owned by the homepage.
+      // /service-areas is the service/regions hub, so this entry must carry the
+      // title and description the page really renders (see src/pages/ServiceAreas.tsx)
+      // and must not duplicate the homepage intent.
       pushRoute({
         path: "/service-areas",
         url: `${SITE.domain}/service-areas`,
-        title: "سايتوتك في السعودية",
-        metaDescription: "المركز السعودي الرئيسي لصفحات المدن والمعلومات الطبية العامة عن ميزوبروستول",
+        title: "الرعاية الصحية للمرأة في السعودية | دليل الوصول للخدمات",
+        metaDescription:
+          "دليل تعليمي عن كيفية الوصول إلى الرعاية الصحية المرخصة للمرأة في السعودية: دور وزارة الصحة والهيئة العامة للغذاء والدواء، القنوات الرسمية 937 و997، ومعلومات توعوية عن سلامة الأدوية بما في ذلك سايتوتك وميزوبروستول كمادة توعوية فقط.",
         canonical: `${SITE.domain}/service-areas`,
         kind: "page",
         expectedRobots: INDEXABLE,

@@ -1,5 +1,12 @@
 # Article Quality Audit - 100 Static Articles
 
+> **Execution status (2026-09-14, PR #33):** the recommendations below were executed in the
+> content-recovery pass — 85 KEEP · 10–15 REWRITE (14 surviving slugs hand-written) · 5 MERGE
+> (100 → 95 articles) · 0 NOINDEX · 0 REMOVE. Result: repeated paragraph instances 52.1% → 6.7%
+> (only required safety warnings still repeat), 0 paragraphs left in ≥50 articles, and all 5 retired
+> URLs 301-redirect to their survivor. Full measurements, decisions and verification:
+> [`docs/article-content-recovery-report.md`](./article-content-recovery-report.md).
+
 Date: 2026-09-06
 Commit: c64f97f
 Build: PASS (101 articles incl. 1 CMS, 130 sitemap, 0 orphans)

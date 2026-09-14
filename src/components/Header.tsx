@@ -49,7 +49,7 @@ export function Header() {
           <div className="flex items-center gap-3 font-semibold">
             <span className="flex items-center gap-1.5">
               <IconShieldCheck className="h-4 w-4 text-[#7fd4a8]" />
-              منصة توعوية موثوقة لصحة المرأة السعودية
+              خدمات ومعلومات دوائية لصحة المرأة السعودية
             </span>
             <span className="hidden sm:inline-flex items-center gap-2 text-white/80">
               <span>وزارة الصحة</span>
@@ -156,7 +156,7 @@ export function Header() {
               to="/contact"
               className="hidden items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgb(22_53_107/0.6)] transition hover:bg-brand-deep md:inline-flex"
             >
-              تواصل تحريري
+              تواصل معنا
             </Link>
             <button
               type="button"
@@ -233,7 +233,7 @@ export function Header() {
               onClick={() => setOpen(false)}
               className="mt-3 flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 text-sm font-bold text-white"
             >
-              تواصل تحريري
+              تواصل معنا
             </Link>
           </div>
         ) : null}

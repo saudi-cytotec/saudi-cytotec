@@ -13,21 +13,21 @@ export function Contact() {
   return (
     <div className="mx-auto max-w-5xl space-y-8 px-4 py-8">
       <Seo
-        title="اتصل بنا - تواصل تحريري"
-        description="تواصل تحريري بشأن منصة صحة المرأة السعودية التعليمية. لا يُستخدم النموذج للتشخيص أو صرف الأدوية أو بيعها."
+        title="تواصل معنا - استفسارات دوائية وتحريرية"
+        description="قناة التواصل مع منصة صحة المرأة السعودية - سعودي إرساء للاستفسارات عن المعلومات الدوائية والخدمات وملاحظات تصحيح المصادر. لا تشخيص ولا وصفات ولا جرعات عبر الموقع."
         path="/contact"
       />
       <PageHero
         crumbs={[{ name: "تواصل معنا", path: "/contact" }]}
-        title="تواصل تحريري مع منصة صحة المرأة السعودية"
-        description="للأسئلة عن المحتوى المنشور أو ملاحظات تحريرية على المنصة التعليمية. لا نقدم استشارة طبية فردية ولا نبيع أدوية."
+        title="تواصل مع منصة صحة المرأة السعودية"
+        description="للاستفسارات عن المعلومات الدوائية والخدمات، أو لتصحيح مصدر طبي، أو لملاحظة تحريرية. لا يمكن إصدار وصفة أو تحديد جرعة أو تشخيص حالة فردية عبر الموقع."
       />
 
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="card-premium p-6">
           <h2 className="font-display text-lg font-extrabold text-brand-deep">القنوات الرسمية للرعاية الصحية</h2>
           <p className="mt-2 text-sm leading-8 text-ink-soft">
-            هذا الموقع تعليمي فقط. للرعاية الصحية استخدمي القنوات الرسمية لوزارة الصحة السعودية.
+            الصرف والمتابعة الطبية يتمّان عبر الجهات المرخّصة، وهذه هي قنوات وزارة الصحة الرسمية للرعاية والطوارئ.
           </p>
           <div className="mt-5 grid gap-3">
             <div className="rounded-2xl bg-cream p-4">
@@ -47,10 +47,10 @@ export function Contact() {
           </div>
           <div className="mt-5 flex items-center gap-2 rounded-xl bg-brand-soft px-4 py-3 text-xs font-semibold text-brand">
             <IconShieldCheck className="h-4.5 w-4.5" />
-            المحتوى تعليمي عام — لا تشخيص ولا وصف دوائي ولا بيع أدوية.
+            لا تشخيص فردي ولا وصفات ولا جرعات عبر الموقع أو الرسائل.
           </div>
           <p className="mt-4 text-sm text-ink-soft">
-            البريد التحريري (ملاحظات تحريرية فقط):{" "}
+            البريد (استفسارات وملاحظات وتصحيح المصادر):{" "}
             <a href={`mailto:${EDITORIAL_EMAIL}`} className="font-bold text-brand hover:text-accent">
               {EDITORIAL_EMAIL}
             </a>
@@ -59,20 +59,21 @@ export function Contact() {
 
         <div className="space-y-6">
           <div className="card-premium p-6">
-            <h2 className="font-display text-lg font-extrabold text-brand-deep">ما الذي لا نقدمه</h2>
+            <h2 className="font-display text-lg font-extrabold text-brand-deep">حدود الخدمة</h2>
             <ul className="mt-3 list-disc space-y-2 pr-5 text-sm leading-7 text-ink-soft">
-              <li>لا نبيع أدوية ولا نوسط للحصول عليها</li>
-              <li>لا نقدم جرعات أو طرق استخدام أو تعليمات لإنهاء الحمل</li>
-              <li>لا نشخص عبر الرسائل أو النماذج</li>
-              <li>لا نعرض أرقام بائعين أو أسعار أو روابط تجارية</li>
-              <li>لا ندعي وجود عيادة معتمدة أو فريق طبي - نحن منصة توعوية تعليمية</li>
+              <li>لا نصدر وصفات طبية ولا نحدد جرعات عبر الموقع أو الرسائل.</li>
+              <li>لا نشخّص الحالات الفردية؛ التشخيص والوصف للطبيب المرخّص.</li>
+              <li>لا ننشر أسعاراً أو مخزوناً أو مواعيد توصيل، لأنها تحتاج تأكيداً من الجهة المرخّصة.</li>
+              <li>لا نتعامل بأي بيع عبر قنوات تواصل خاصة، وأي ادعاء من هذا النوع باسمنا كاذب.</li>
+              <li>لا نقدّم تعليمات استخدام منزلية أو تعليمات لإنهاء الحمل.</li>
             </ul>
           </div>
           <div className="card-premium p-6">
             <h3 className="font-bold text-brand-deep">التزامنا</h3>
             <p className="mt-2 text-sm leading-7 text-ink-soft">
-              منصة صحة المرأة السعودية - سعودي إرساء منصة توعوية موثوقة. نعتمد على وزارة الصحة، الهيئة العامة للغذاء
-              والدواء، FDA، WHO، MedlinePlus. لا نستخدم حشو أسماء المدن لأغراض SEO ولا ننشئ صفحات doorway مكررة.
+              منصة صحة المرأة السعودية - سعودي إرساء: خدمات ومعلومات دوائية لصحة المرأة، نعتمد فيها على وزارة الصحة،
+              الهيئة العامة للغذاء والدواء، FDA، WHO، MedlinePlus. لا نستخدم حشو أسماء المدن لأغراض SEO ولا ننشئ صفحات
+              doorway مكررة، ولا ننشر بيانات تجارية غير مثبتة.
             </p>
           </div>
         </div>
@@ -80,7 +81,7 @@ export function Contact() {
 
       {sent ? (
         <div className="card-premium border-brand/20 bg-brand-soft/50 p-5 leading-8">
-          تم استلام رسالتك محلياً في هذا المتصفح لأغراض العرض. إن كان لديك تصحيح لمصدر طبي، أرسليه أيضاً عبر البريد التحريري.
+          تم استلام رسالتك محلياً في هذا المتصفح لأغراض العرض. إن كان لديك استفسار أو تصحيح لمصدر طبي، أرسليه أيضاً عبر البريد.
         </div>
       ) : (
         <form
@@ -90,10 +91,10 @@ export function Contact() {
             setSent(true);
           }}
         >
-          <h2 className="font-display text-lg font-extrabold text-brand-deep">أرسلي ملاحظة تحريرية</h2>
+          <h2 className="font-display text-lg font-extrabold text-brand-deep">أرسلي رسالتك</h2>
           <p className="text-sm text-ink-soft">
-            هذا النموذج لملاحظات تحريرية أو أسئلة عن الموقع التعليمي فقط. لا يمكن للفريق تشخيص حالتك أو وصف دواء أو ترتيب أي
-            خدمة علاجية أو بيع أدوية.
+            يُستخدم النموذج للاستفسارات عن المعلومات الدوائية والخدمات وملاحظات تصحيح المصادر. لا يمكن للفريق تشخيص حالتك
+            أو وصف دواء أو تحديد جرعة عبر النموذج، والحالات العاجلة مسارها الطوارئ.
           </p>
           <label className="block text-sm font-bold text-brand-deep">
             الاسم
@@ -104,11 +105,11 @@ export function Contact() {
             <input type="email" required className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20" />
           </label>
           <label className="block text-sm font-bold text-brand-deep">
-            الرسالة التحريرية
+            الرسالة
             <textarea required rows={5} className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20" />
           </label>
           <button type="submit" className="rounded-full bg-brand px-6 py-2.5 text-sm font-bold text-white transition hover:bg-brand-deep">
-            إرسال ملاحظة تحريرية
+            إرسال
           </button>
         </form>
       )}

@@ -19,6 +19,11 @@ interface SeoProps {
   /** Explicit canonical override (defaults to the page's own URL). */
   canonical?: string;
   type?: "website" | "article";
+  /**
+   * Render `title` exactly as given, without appending `| ${SITE.name}`.
+   * Used by the homepage, whose approved title already names the platform.
+   */
+  absoluteTitle?: boolean;
   publishedAt?: string;
   updatedAt?: string;
   noindex?: boolean;
@@ -36,6 +41,7 @@ export function Seo({
   ogDescription,
   canonical,
   type = "website",
+  absoluteTitle = false,
   publishedAt,
   updatedAt,
   noindex = false,
@@ -48,8 +54,12 @@ export function Seo({
   const realImage = image && image.trim() ? image.trim() : "";
   const socialImage = realImage || GLOBAL_SOCIAL_SHARE_IMAGE;
   const imageUrl = socialImage.startsWith("http") ? socialImage : `${SITE.domain}${socialImage}`;
-  const fullTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
-  const socialTitle = ogTitle && ogTitle.includes(SITE.name) ? ogTitle : ogTitle ? `${ogTitle} | ${SITE.name}` : fullTitle;
+  const fullTitle = absoluteTitle || title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
+  const socialTitle = ogTitle
+    ? absoluteTitle || ogTitle.includes(SITE.name)
+      ? ogTitle
+      : `${ogTitle} | ${SITE.name}`
+    : fullTitle;
   const socialDescription = ogDescription || description;
   return (
     <Helmet>

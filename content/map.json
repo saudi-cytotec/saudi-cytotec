@@ -3540,13 +3540,13 @@
       "targetUrl": "/blog/what-to-say-in-emergency",
       "parent": "/when-to-see-doctor",
       "related": [
-        "/blog/womens-emergency-preparedness",
+        "/blog/danger-of-delaying-care",
         "/when-to-see-doctor"
       ],
       "status": "PUBLISHED",
       "internalLinks": [
         "/when-to-see-doctor",
-        "/blog/womens-emergency-preparedness",
+        "/blog/danger-of-delaying-care",
         "/faq",
         "/safety"
       ],

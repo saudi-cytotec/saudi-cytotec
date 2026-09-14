@@ -122,11 +122,21 @@ const noindexArticles = articles.filter((a) => a.expectedRobots === NOINDEX);
   h("Articles missing title", missingTitle);
   h("Articles missing meta description", missingDesc);
 
+  const shortOfDeepDive = articles.filter((a) => a.wordCount && a.wordCount < 2000);
+  if (shortOfDeepDive.length) {
+    ok(
+      "Body depth (informational)",
+      `${shortOfDeepDive.length}/${articles.length} article(s) below the 2000-word deep-dive target; ` +
+        `catalog floor is 700 unique-content words (docs/article-quality-audit.md), shortest ${Math.min(
+          ...shortOfDeepDive.map((a) => a.wordCount),
+        )}`,
+    );
+  }
   for (const a of articles) {
     const descLen = (a.metaDescription ?? "").length;
     if (descLen && (descLen < 50 || descLen > 165)) warn("Meta description length", `${a.slug}: ${descLen} chars`);
     if ((a.metaTitle ?? "").length > 70) warn("Title length", `${a.slug}: ${(a.metaTitle ?? "").length} chars`);
-    if (a.wordCount && a.wordCount < 2000) warn("Body word count", `${a.slug}: ${a.wordCount} words (< 2000, advisory)`);
+    if (a.wordCount && a.wordCount < 700) warn("Body word count", `${a.slug}: ${a.wordCount} words (< 700 thin-content floor)`);
   }
 }
 

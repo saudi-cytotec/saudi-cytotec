@@ -30,7 +30,7 @@ export const cluster08 = [
     metaTitle: "تداخلات ميزوبروستول الدوائية",
     metaDescription: "مبادئ تعليمية عن التداخلات ولماذا تُذكر كل الأدوية بما فيها المسكنات.",
     excerpt: "التداخل قد يزيد أثراً جانبياً أو يغيّر فعالية علاج آخر.",
-    related: ["medicines-that-may-increase-risk", "discussing-medication-history", "nsaid-stomach-protection"],
+    related: ["medicines-that-may-increase-risk", "discussing-medication-history", "misoprostol-gastric-ulcers"],
     points: [
       "مضادات الالتهاب نفسها جزء من قصة الاستطباب المعدي وقد تزيد خطر النزف في سياقات أخرى.",
       "أدوية الإسهال المعاكس قد تُناقش لأن الإسهال أثر شائع.",
@@ -140,7 +140,7 @@ export const cluster08 = [
     metaTitle: "أدوية قد تزيد الخطر مع ميزوبروستول",
     metaDescription: "إطار تعليمي عن تجمع أدوية النزف أو الجفاف أو التأثير الرحمي دون قوائم مرعبة غير مكتملة.",
     excerpt: "الخطر غالباً تراكمي: مسكن + سيولة + جفاف + تأخير رعاية.",
-    related: ["basic-drug-interactions", "abnormal-bleeding", "nsaid-stomach-protection"],
+    related: ["basic-drug-interactions", "abnormal-bleeding", "misoprostol-gastric-ulcers"],
     points: [
       "أدوية تؤثر على التجلط تستحق انتباهاً خاصاً مع أي نزيف.",
       "تكرار مضادات الالتهاب يرفع العبء الهضمي.",

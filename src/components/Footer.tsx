@@ -14,9 +14,9 @@ export function Footer() {
         <div>
           <BrandLogo className="h-14" tone="light" />
           <p className="mt-5 max-w-xl text-sm leading-8 text-white/75">
-            منصة سعودية توعوية موثوقة لصحة المرأة: معلومات طبية مبسطة عن الحمل، الخصوبة، الدورة الشهرية، الصحة
-            الإنجابية، سلامة الأدوية، والطوارئ النسائية. يتضمن المحتوى معلومات تعليمية عن سايتوتك وميزوبروستول كمادة
-            دوائية ضمن إطار التوعية الدوائية فقط، دون وصف أو بيع.
+            منصة سعودية للخدمات والمعلومات الدوائية المرتبطة بصحة المرأة: الحمل، الخصوبة، الدورة الشهرية، الصحة
+            الإنجابية، سلامة الأدوية، والطوارئ النسائية. تتضمن دليلاً دوائياً موثّقاً عن سايتوتك وميزوبروستول وشروط
+            الصرف بالوصفة الطبية عبر الصيدليات المرخّصة، دون جرعات أو وصفات عبر الموقع.
           </p>
           <div className="mt-5 rounded-2xl border border-white/15 bg-white/5 p-4">
             <p className="text-xs font-bold">لرعاية طبية حقيقية - القنوات الرسمية</p>
@@ -35,17 +35,17 @@ export function Footer() {
                 to="/contact"
                 className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold text-white ring-1 ring-white/20 transition hover:bg-white/20"
               >
-                تواصل تحريري
+                تواصل معنا
               </Link>
             </p>
             <p className="mt-2 text-xs text-white/75">
-              ملاحظات تحريرية فقط:{" "}
+              للاستفسارات وتصحيح المصادر:{" "}
               <a href={`mailto:${EDITORIAL_EMAIL}`} className="underline underline-offset-4 transition hover:text-white">
                 {EDITORIAL_EMAIL}
               </a>
             </p>
             <p className="mt-2 text-[11px] leading-5 text-white/60">
-              هذا الموقع لا يقدم تشخيصاً ولا وصفاً دوائياً ولا يبيع أدوية. المحتوى تعليمي عام فقط.
+              لا نقدّم تشخيصاً ولا وصفاً دوائياً ولا جرعات عبر الموقع. الصرف يتم بوصفة طبية وعبر صيدلية مرخّصة.
             </p>
           </div>
         </div>

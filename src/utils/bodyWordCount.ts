@@ -1,6 +1,22 @@
 import type { ContentBlock } from "../types";
 
+/** Depth target used by the CMS generation pipeline for NEW drafts. */
 export const MIN_BODY_WORDS = 2000;
+
+/**
+ * Catalog floor for the 95 published articles.
+ *
+ * docs/article-quality-audit.md sets the review policy for the static catalog as
+ * "700-1500 words of UNIQUE content per article, not 2000+ with 50% boilerplate".
+ * The catalog is therefore measured against that floor: an article below it is
+ * genuinely thin, while a longer article that repeats shared boilerplate is not
+ * better. Depth beyond the floor is optional and belongs to the editorial layer
+ * (per-article enrichment in src/data/articles/enrich.ts).
+ */
+export const CATALOG_MIN_BODY_WORDS = 700;
+
+/** Informational only: how many articles go beyond the deep-dive target. */
+export const DEEP_DIVE_BODY_WORDS = 2000;
 
 const DISCLAIMER_RE = /إخلاء المسؤولية|لا يُعد استشارة طبية|لا يغني عن مراجعة|لا يغني عن الاستشارة/;
 

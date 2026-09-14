@@ -1,13 +1,13 @@
 # Internal Link & Orphan Report
 
-Date: 2026-09-06 · generated from the built article graph
+Date: 2026-09-14 · generated from the built article graph
 
 **Result: PASS — no published article orphans**
 
 | Metric | Count |
 |---|---:|
-| Indexable articles | 101 |
-| Articles with at least one incoming article link | 101 |
+| Indexable articles | 96 |
+| Articles with at least one incoming article link | 96 |
 | Article orphans | 0 |
 | Unresolved article targets in declared graph | 0 |
 
@@ -29,17 +29,15 @@ No indexable article is orphaned in the declared editorial graph.
 | `misoprostol-other-brand-names` | `difference-cytotec-misoprostol`, `cytotec-pharmaceutical-forms`, `brand-name-vs-active-ingredient` |
 | `misoprostol-in-clinical-references` | `difference-cytotec-misoprostol`, `history-development-misoprostol`, `who-clinical-references` |
 | `key-facts-before-reading-cytotec` | `cytotec-definition`, `general-info-vs-personal-advice` |
-| `approved-medical-uses-misoprostol` | `misoprostol-gastric-ulcers`, `nsaid-stomach-protection`, `off-label-use-meaning`, `not-all-uses-are-alike` |
-| `misoprostol-gastric-ulcers` | `approved-medical-uses-misoprostol`, `nsaid-stomach-protection`, `gastrointestinal-effects`, `why-contraindicated-in-pregnancy-ulcer-use` |
-| `nsaid-stomach-protection` | `misoprostol-gastric-ulcers`, `basic-drug-interactions`, `medicines-that-may-increase-risk` |
-| `obstetric-uses-under-supervision` | `postpartum-hemorrhage-education`, `labor-induction-hospital-setting`, `not-all-uses-are-alike` |
-| `postpartum-hemorrhage-education` | `obstetric-uses-under-supervision`, `who-clinical-references` |
-| `labor-induction-hospital-setting` | `obstetric-uses-under-supervision`, `hospital-clinic-limits` |
+| `approved-medical-uses-misoprostol` | `misoprostol-gastric-ulcers`, `off-label-use-meaning`, `not-all-uses-are-alike` |
+| `misoprostol-gastric-ulcers` | `approved-medical-uses-misoprostol`, `gastrointestinal-effects`, `why-contraindicated-in-pregnancy-ulcer-use`, `basic-drug-interactions`, `medicines-that-may-increase-risk` |
+| `obstetric-uses-under-supervision` | `postpartum-hemorrhage-education`, `not-all-uses-are-alike` |
+| `postpartum-hemorrhage-education` | `obstetric-uses-under-supervision`, `hospital-clinic-limits`, `who-clinical-references` |
 | `off-label-use-meaning` | `approved-medical-uses-misoprostol`, `not-all-uses-are-alike`, `common-medical-terms-misoprostol` |
-| `unsafe-unsupervised-use` | `off-label-use-meaning`, `why-not-home-treatment`, `why-medical-supervision-required`, `risks-of-random-use`, `unreliable-medicine-sources`, `use-without-prescription`, `myths-about-home-dosing` |
-| `hospital-clinic-limits` | `approved-medical-uses-misoprostol`, `obstetric-uses-under-supervision`, `labor-induction-hospital-setting`, `why-not-home-treatment`, `follow-up-after-medical-care` |
-| `why-not-home-treatment` | `labor-induction-hospital-setting`, `unsafe-unsupervised-use`, `hospital-clinic-limits`, `myths-about-home-dosing`, `danger-of-delaying-care` |
-| `general-safety-warnings` | `pregnancy-boxed-warning`, `why-medical-supervision-required`, `medicine-storage-home-safety`, `is-cytotec-safe-for-everyone`, `cytotec-uses` |
+| `unsafe-unsupervised-use` | `off-label-use-meaning`, `why-not-home-treatment`, `why-medical-supervision-required`, `risks-of-random-use`, `unreliable-medicine-sources`, `common-myths-cytotec`, `use-without-prescription` |
+| `hospital-clinic-limits` | `approved-medical-uses-misoprostol`, `obstetric-uses-under-supervision`, `why-not-home-treatment`, `follow-up-after-medical-care` |
+| `why-not-home-treatment` | `obstetric-uses-under-supervision`, `unsafe-unsupervised-use`, `hospital-clinic-limits`, `danger-of-delaying-care` |
+| `general-safety-warnings` | `pregnancy-boxed-warning`, `why-medical-supervision-required`, `medicine-storage-home-safety`, `common-myths-cytotec`, `is-cytotec-safe-for-everyone`, `cytotec-uses` |
 | `pregnancy-boxed-warning` | `general-safety-warnings`, `uterine-reproductive-effects`, `why-contraindicated-in-pregnancy-ulcer-use`, `pregnancy-contraindication-ulcer-indication`, `fda-cytotec-warnings`, `cytotec-uses` |
 | `why-medical-supervision-required` | `general-safety-warnings`, `use-without-prescription`, `conditions-needing-prior-assessment` |
 | `risks-of-random-use` | `unsafe-unsupervised-use`, `unreliable-medicine-sources` |
@@ -79,18 +77,16 @@ No indexable article is orphaned in the declared editorial graph.
 | `reproductive-age-preventive-care` | `womens-health-life-stages`, `routine-womens-screening` |
 | `nutrition-hormonal-health` | `anemia-womens-health` |
 | `reliable-womens-health-sources` | `womens-health-life-stages`, `routine-womens-screening`, `nutrition-hormonal-health`, `trusted-sources-further-reading` |
-| `common-myths-cytotec` | `is-cytotec-safe-for-everyone`, `myths-about-home-dosing` |
-| `is-cytotec-safe-for-everyone` | `common-myths-cytotec`, `frequent-warning-questions` |
+| `common-myths-cytotec` | `is-cytotec-safe-for-everyone` |
+| `is-cytotec-safe-for-everyone` | `common-myths-cytotec` |
 | `use-without-prescription` | `unsafe-unsupervised-use` |
 | `internet-not-a-doctor` | `key-facts-before-reading-cytotec`, `general-info-vs-personal-advice`, `education-vs-individual-treatment`, `how-to-verify-medical-information`, `limits-of-online-medical-info` |
 | `brand-name-vs-active-ingredient` | `difference-cytotec-misoprostol`, `common-myths-cytotec` |
 | `not-all-uses-are-alike` | `approved-medical-uses-misoprostol` |
-| `myths-about-home-dosing` | `common-myths-cytotec` |
 | `mild-symptoms-not-always-safe` | `annoying-symptom-vs-emergency` |
-| `frequent-warning-questions` | `common-myths-cytotec` |
 | `how-to-verify-medical-information` | `reproductive-health-reliable-info`, `reliable-womens-health-sources`, `internet-not-a-doctor`, `official-drug-leaflets`, `limits-of-online-medical-info` |
 | `contraindications-misoprostol` | `is-cytotec-safe-for-everyone`, `prostaglandin-allergy`, `conditions-needing-prior-assessment`, `pregnancy-contraindication-ulcer-indication` |
-| `basic-drug-interactions` | `nsaid-stomach-protection`, `liver-kidney-considerations`, `medicines-that-may-increase-risk`, `discussing-medication-history` |
+| `basic-drug-interactions` | `liver-kidney-considerations`, `medicines-that-may-increase-risk`, `discussing-medication-history` |
 | `prostaglandin-allergy` | `misoprostol-pharmacologic-class`, `rare-serious-complications`, `contraindications-misoprostol` |
 | `heart-vascular-considerations` | `conditions-needing-prior-assessment` |
 | `liver-kidney-considerations` | `conditions-needing-prior-assessment` |
@@ -98,17 +94,16 @@ No indexable article is orphaned in the declared editorial graph.
 | `medicines-that-may-increase-risk` | `basic-drug-interactions` |
 | `conditions-needing-prior-assessment` | `why-medical-supervision-required`, `contraindications-misoprostol`, `heart-vascular-considerations`, `liver-kidney-considerations` |
 | `pregnancy-contraindication-ulcer-indication` | `why-contraindicated-in-pregnancy-ulcer-use`, `contraindications-misoprostol` |
-| `discussing-medication-history` | `pregnancy-and-medicines-faq`, `basic-drug-interactions`, `heart-vascular-considerations`, `breastfeeding-considerations`, `what-to-say-in-emergency` |
-| `when-to-see-doctor-immediately` | `when-symptoms-are-emergencies`, `warning-signs-in-pregnancy`, `pelvic-pain-when-to-see-doctor`, `reproductive-tract-infections-awareness`, `frequent-warning-questions`, `dizziness-and-fainting`, `womens-emergency-preparedness`, `danger-of-delaying-care` |
+| `discussing-medication-history` | `misoprostol-gastric-ulcers`, `pregnancy-and-medicines-faq`, `basic-drug-interactions`, `heart-vascular-considerations`, `breastfeeding-considerations`, `what-to-say-in-emergency` |
+| `when-to-see-doctor-immediately` | `when-symptoms-are-emergencies`, `warning-signs-in-pregnancy`, `pelvic-pain-when-to-see-doctor`, `reproductive-tract-infections-awareness`, `dizziness-and-fainting`, `danger-of-delaying-care` |
 | `signs-of-dangerous-bleeding` | `postpartum-hemorrhage-education`, `abnormal-bleeding`, `rare-serious-complications`, `bleeding-in-early-pregnancy`, `when-to-see-doctor-immediately`, `dizziness-and-fainting`, `what-to-say-in-emergency` |
 | `high-fever-and-infection` | `fever-and-chills`, `follow-up-after-medical-care` |
 | `severe-abdominal-pain` | `diarrhea-abdominal-pain`, `pelvic-pain-when-to-see-doctor`, `when-to-see-doctor-immediately` |
 | `dizziness-and-fainting` | `nausea-and-vomiting`, `heart-vascular-considerations`, `when-to-see-doctor-immediately` |
-| `what-to-say-in-emergency` | `what-to-do-if-side-effects`, `frequent-warning-questions`, `prostaglandin-allergy`, `discussing-medication-history`, `signs-of-dangerous-bleeding`, `womens-emergency-preparedness` |
+| `what-to-say-in-emergency` | `what-to-do-if-side-effects`, `prostaglandin-allergy`, `discussing-medication-history`, `signs-of-dangerous-bleeding`, `danger-of-delaying-care` |
 | `follow-up-after-medical-care` | `hospital-clinic-limits`, `miscarriage-educational-overview`, `high-fever-and-infection`, `what-to-say-in-emergency` |
 | `annoying-symptom-vs-emergency` | `when-symptoms-are-emergencies`, `mild-symptoms-not-always-safe` |
-| `womens-emergency-preparedness` | `danger-of-delaying-care` |
-| `danger-of-delaying-care` | `why-not-home-treatment`, `womens-emergency-preparedness` |
+| `danger-of-delaying-care` | `why-not-home-treatment` |
 | `how-to-evaluate-medical-evidence` | `clinical-studies-vs-anecdotes`, `reading-a-paper-as-non-specialist`, `why-medical-recommendations-change` |
 | `who-clinical-references` | `misoprostol-in-clinical-references`, `postpartum-hemorrhage-education`, `family-planning-education`, `trusted-sources-further-reading` |
 | `fda-cytotec-warnings` | `misoprostol-in-clinical-references`, `how-to-read-package-insert`, `regulatory-drug-warnings`, `official-drug-leaflets` |

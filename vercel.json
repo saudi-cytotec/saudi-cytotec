@@ -602,6 +602,56 @@
       "source": "/blog/cluster/almojazat-aljograyiya/",
       "destination": "/service-areas",
       "statusCode": 301
+    },
+    {
+      "source": "/blog/nsaid-stomach-protection",
+      "destination": "/blog/misoprostol-gastric-ulcers",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/nsaid-stomach-protection/",
+      "destination": "/blog/misoprostol-gastric-ulcers",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/labor-induction-hospital-setting",
+      "destination": "/blog/postpartum-hemorrhage-education",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/labor-induction-hospital-setting/",
+      "destination": "/blog/postpartum-hemorrhage-education",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/myths-about-home-dosing",
+      "destination": "/blog/common-myths-cytotec",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/myths-about-home-dosing/",
+      "destination": "/blog/common-myths-cytotec",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/frequent-warning-questions",
+      "destination": "/blog/is-cytotec-safe-for-everyone",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/frequent-warning-questions/",
+      "destination": "/blog/is-cytotec-safe-for-everyone",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/womens-emergency-preparedness",
+      "destination": "/blog/what-to-say-in-emergency",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/womens-emergency-preparedness/",
+      "destination": "/blog/what-to-say-in-emergency",
+      "statusCode": 301
     }
   ]
 }
