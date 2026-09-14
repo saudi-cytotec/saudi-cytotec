@@ -1,13 +1,16 @@
 /**
- * Official, government-operated health lines only.
+ * Contact channels — official health lines + approved WhatsApp editorial channel.
  *
- * This file must NEVER contain a private phone number, WhatsApp number, or any
- * other direct-to-seller contact. See src/components/CareReferral.tsx.
+ * Commit 8ac2a34: WhatsApp 00966530945626 as the official editorial/drug-info
+ * channel (green identity). Health lines remain the primary medical channels.
  *
  * Verified sources:
  *  - Saudi Ministry of Health contact centre: 937 (inside KSA), +966 920005937
  *    (from outside KSA). See https://www.moh.gov.sa
  *  - Saudi medical emergency (ambulance): 997
+ *  - Approved WhatsApp editorial channel: 00966530945626 / +966 53 094 5626
+ *    (wa.me/966530945626) — for general drug-info and editorial queries only,
+ *    no prescriptions, no direct sales.
  *
  * Standard GCC emergency numbers are listed below (UAE 998, Kuwait 112,
  * Bahrain 999). Non-emergency health lines outside Saudi Arabia are NOT listed
@@ -23,12 +26,21 @@ export interface HealthLine {
   authorityUrl: string;
 }
 
+export const WHATSAPP_CHANNEL = {
+  digits: "966530945626",
+  display: "+966 53 094 5626",
+  raw: "00966530945626",
+  url: "https://wa.me/966530945626",
+  note: "للاستفسارات التحريرية والدوائية العامة فقط — بلا وصفات فردية ولا بيع مباشر",
+};
+
 export const HEALTH_LINES: HealthLine[] = [
   {
     country: "السعودية",
     code: "sa",
     flag: "🇸🇦",
     lines: [
+      { label: "واتساب — استفسارات", value: WHATSAPP_CHANNEL.display, note: WHATSAPP_CHANNEL.note },
       { label: "مركز اتصال وزارة الصحة", value: "937", note: "من داخل المملكة، على مدار الساعة" },
       { label: "من خارج المملكة", value: "+966 920005937" },
       { label: "الإسعاف / الطوارئ الطبية", value: "997" },

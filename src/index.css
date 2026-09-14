@@ -5,40 +5,41 @@
   --font-display: "Cairo", "IBM Plex Sans Arabic", "Noto Sans Arabic", sans-serif;
   --font-article: "Noto Naskh Arabic", "IBM Plex Sans Arabic", "Noto Sans Arabic", serif;
 
-  /* ── Canonical brand tokens: Navy + Red/Pink + White + Light Blue ─────
-     The approved visual identity (see approved homepage reference):
-     deep navy as the primary institutional colour, a red/pink
-     consultation accent, white surfaces, and subtle cool light-blue
-     backgrounds for a clean, premium medical look. */
-  --color-brand: #16356b;         /* primary navy (buttons, links, headings) */
-  --color-brand-deep: #0b2545;    /* top bar / footer / dark surfaces        */
-  --color-brand-soft: #e9f0fa;    /* navy-tinted surfaces                    */
-  --color-sky: #1d5db8;           /* secondary blue (logo blue, icons)       */
-  --color-sky-soft: #e5eefb;      /* blue-tinted surfaces                    */
+  /* ── Canonical brand tokens: Green Medical Identity ─────────────────
+     Production-approved green identity for Saudiersaa:
+     deep forest green as primary institutional colour, emerald accent
+     for CTAs, white surfaces, and soft mint backgrounds for a clean,
+     trustworthy medical look. This replaces the previous navy/red
+     scheme per 8ac2a34 (green identity + WhatsApp + prerender). */
+  --color-brand: #0f6b4a;         /* primary green (buttons, links, headings) */
+  --color-brand-deep: #0a4a33;    /* top bar / footer / dark surfaces         */
+  --color-brand-soft: #e6f4ec;    /* green-tinted surfaces                    */
+  --color-sky: #15803d;           /* secondary green (logo, icons)            */
+  --color-sky-soft: #dcfce7;      /* green-tinted surfaces                    */
 
-  --color-accent: #d81f3c;        /* red/pink — consultation CTA / highlights */
-  --color-accent-deep: #b01229;   /* red hover state                         */
-  --color-accent-soft: #fbe9ee;   /* red-tinted surfaces                     */
+  --color-accent: #16a34a;        /* emerald — WhatsApp CTA / highlights      */
+  --color-accent-deep: #15803d;   /* green hover state                        */
+  --color-accent-soft: #f0fdf4;   /* green-tinted surfaces                    */
 
   /* ── Warning / danger (safety surfaces only — never branding) ───────── */
   --color-warn: #b7791f;          /* amber for medical caution callouts   */
   --color-warn-soft: #fdf3e2;     /* amber-tinted surface                 */
   --color-clay: #c03221;          /* emergency red (danger)               */
 
-  /* ── Ink / neutrals (cool clinical) ─────────────────────────────────── */
-  --color-ink: #1b2a44;
-  --color-ink-soft: #5a6b87;
-  --color-cream: #f5f8fc;         /* page background: subtle light blue   */
+  /* ── Ink / neutrals (green clinical) ────────────────────────────────── */
+  --color-ink: #14261f;
+  --color-ink-soft: #4a6359;
+  --color-cream: #f4f8f5;         /* page background: soft mint white     */
   --color-paper: #ffffff;         /* cards & surfaces                     */
-  --color-line: #dce5f1;          /* borders                              */
-  --color-sand: #edf2f9;          /* hover fills, muted chips             */
+  --color-line: #d1e3d9;          /* borders — green tint                 */
+  --color-sand: #e2ebe6;          /* hover fills, muted chips             */
 
   /* ── Legacy aliases ───────────────────────────────────────────────────
      Older components use teal/sage/gold names; they resolve to the
-     approved navy/red palette so the whole site re-skins consistently. */
+     approved green palette so the whole site re-skins consistently. */
   --color-teal: var(--color-brand);
   --color-teal-deep: var(--color-brand-deep);
-  --color-sage: #46649c;
+  --color-sage: #2f7d62;
   --color-gold: var(--color-accent);
 }
 
