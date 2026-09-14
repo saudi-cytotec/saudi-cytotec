@@ -12,7 +12,8 @@ import {
   IconYoutube,
 } from "./icons";
 import { mainNav, moreNav, SITE } from "../data/site";
-import { HEALTH_LINES } from "../data/contact";
+import { HEALTH_LINES, WHATSAPP_CHANNEL } from "../data/contact";
+import { WhatsAppIcon } from "./WhatsAppContact";
 
 const SOCIALS = [
   { label: "إنستغرام", Icon: IconInstagram },
@@ -42,16 +43,28 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40">
-      {/* ── Top navy bar ─────────────────────────────────────────────── */}
+      {/* ── Top green bar — 8ac2a34 green identity + WhatsApp 00966530945626 ── */}
       <div className="bg-brand-deep text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 text-xs sm:text-[13px]">
-          {/* Start (right in RTL): Official health lines */}
+          {/* Start (right in RTL): Official health lines + WhatsApp */}
           <div className="flex items-center gap-3 font-semibold">
             <span className="flex items-center gap-1.5">
-              <IconShieldCheck className="h-4 w-4 text-[#7fd4a8]" />
+              <IconShieldCheck className="h-4 w-4 text-[#86efac]" />
               خدمات ومعلومات دوائية لصحة المرأة السعودية
             </span>
             <span className="hidden sm:inline-flex items-center gap-2 text-white/80">
+              <a
+                href={WHATSAPP_CHANNEL.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-1 text-white transition hover:bg-white/20"
+                aria-label={`واتساب ${WHATSAPP_CHANNEL.raw}`}
+              >
+                <WhatsAppIcon className="h-3.5 w-3.5" />
+                <span dir="ltr" className="font-mono font-bold">
+                  {WHATSAPP_CHANNEL.display}
+                </span>
+              </a>
               <span>وزارة الصحة</span>
               <span dir="ltr" className="font-mono font-bold text-white">
                 {SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value ?? "937"}
@@ -141,7 +154,7 @@ export function Header() {
             </div>
           </nav>
 
-          {/* Actions */}
+          {/* Actions — green identity + WhatsApp CTA 00966530945626 */}
           <div className="ms-auto flex items-center gap-2">
             <button
               type="button"
@@ -152,9 +165,19 @@ export function Header() {
             >
               <IconSearch className="h-5 w-5" />
             </button>
+            <a
+              href={WHATSAPP_CHANNEL.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden items-center gap-2 rounded-full bg-[#16a34a] px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgb(22_107_74/0.6)] transition hover:bg-[#15803d] md:inline-flex"
+              aria-label={`واتساب ${WHATSAPP_CHANNEL.raw}`}
+            >
+              <WhatsAppIcon className="h-4 w-4" />
+              واتساب
+            </a>
             <Link
               to="/contact"
-              className="hidden items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgb(22_53_107/0.6)] transition hover:bg-brand-deep md:inline-flex"
+              className="hidden items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white shadow-[0_6px_16px_-6px_rgb(15_107_74/0.6)] transition hover:bg-brand-deep md:inline-flex"
             >
               تواصل معنا
             </Link>

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { BrandLogo } from "./Logo";
 import { IconArrowLeft } from "./icons";
-import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
+import { EDITORIAL_EMAIL, HEALTH_LINES, WHATSAPP_CHANNEL } from "../data/contact";
 import { clusters, mainNav, moreNav, SITE } from "../data/site";
+import { WhatsAppIcon } from "./WhatsAppContact";
 
 const SA = HEALTH_LINES.find((c) => c.code === "sa");
 
@@ -19,9 +20,19 @@ export function Footer() {
             الصرف بالوصفة الطبية عبر الصيدليات المرخّصة، دون جرعات أو وصفات عبر الموقع.
           </p>
           <div className="mt-5 rounded-2xl border border-white/15 bg-white/5 p-4">
-            <p className="text-xs font-bold">لرعاية طبية حقيقية - القنوات الرسمية</p>
+            <p className="text-xs font-bold">لرعاية طبية حقيقية - القنوات الرسمية + واتساب 00966530945626</p>
             <p className="mt-1 text-xs leading-6 text-white/75">
-              الإسعاف{" "}
+              واتساب{" "}
+              <a
+                href={WHATSAPP_CHANNEL.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 font-mono font-bold text-white underline underline-offset-4"
+              >
+                <WhatsAppIcon className="h-3 w-3" />
+                {WHATSAPP_CHANNEL.display}
+              </a>{" "}
+              · الإسعاف{" "}
               <span dir="ltr" className="font-mono font-bold text-white">
                 {SA?.lines.find((l) => l.label.includes("الإسعاف"))?.value}
               </span>{" "}
@@ -30,7 +41,16 @@ export function Footer() {
                 {SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value}
               </span>
             </p>
-            <p className="mt-3">
+            <p className="mt-3 flex flex-wrap gap-2">
+              <a
+                href={WHATSAPP_CHANNEL.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-[#16a34a] px-4 py-1.5 text-xs font-bold text-white ring-1 ring-[#16a34a] transition hover:bg-[#15803d]"
+              >
+                <WhatsAppIcon className="h-3.5 w-3.5" />
+                واتساب {WHATSAPP_CHANNEL.raw}
+              </a>
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold text-white ring-1 ring-white/20 transition hover:bg-white/20"
