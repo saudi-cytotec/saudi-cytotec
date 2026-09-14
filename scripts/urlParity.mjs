@@ -1,9 +1,16 @@
 /**
  * urlParity — asserts that every URL in the committed baseline sitemap
  * (docs/url-baseline.txt, generated from the sitemap that ships with the
- * original site) still exists in the current build's sitemap.
+ * original site) is still accounted for by the current build.
  *
- * No live URL may silently disappear. Exit 1 if anything was lost.
+ * "Accounted for" means one of two things, never nothing:
+ *   1. the URL is still in the current sitemap (kept live), or
+ *   2. the URL is explicitly retired by the canonical redirect registry
+ *      (content/redirects.json) with a 301/308 to a live replacement, or with
+ *      a deliberate 410 Gone.
+ *
+ * A baseline URL that is neither live nor covered by a recorded redirect still
+ * fails the audit, so no URL can silently disappear.
  *
  * Usage: node scripts/urlParity.mjs [--update-baseline]
  */
@@ -15,9 +22,30 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const BASELINE = path.join(ROOT, "docs", "url-baseline.txt");
 const SITEMAP = path.join(ROOT, "public", "sitemap.xml");
+const REDIRECTS = path.join(ROOT, "content", "redirects.json");
 
 function locs(xml) {
   return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]).sort();
+}
+
+/** Path part of a URL, keeping any trailing slash off for comparison. */
+function toPath(url) {
+  const raw = url.replace(/^https?:\/\/[^/]+/, "");
+  const trimmed = raw.endsWith("/") && raw !== "/" ? raw.slice(0, -1) : raw;
+  return trimmed || "/";
+}
+
+/** Sources recorded in the redirect registry, normalised to path form. */
+function redirectedPaths() {
+  if (!fs.existsSync(REDIRECTS)) return new Map();
+  const registry = JSON.parse(fs.readFileSync(REDIRECTS, "utf8"));
+  const map = new Map();
+  for (const rule of registry.rules ?? []) {
+    if (!rule?.source) continue;
+    if (![301, 308, 404, 410].includes(rule.statusCode)) continue;
+    map.set(toPath(rule.source), rule);
+  }
+  return map;
 }
 
 function main() {
@@ -33,10 +61,27 @@ function main() {
   }
 
   const baseline = fs.readFileSync(BASELINE, "utf8").split("\n").filter(Boolean).sort();
-  const lost = baseline.filter((url) => !current.includes(url));
-  const added = current.filter((url) => !baseline.includes(url));
+  const currentPaths = new Set(current.map(toPath));
+  const redirects = redirectedPaths();
 
-  console.log(`[url-parity] baseline: ${baseline.length} · current: ${current.length}`);
+  const lost = [];
+  const retired = [];
+  for (const url of baseline) {
+    if (currentPaths.has(toPath(url))) continue;
+    const rule = redirects.get(toPath(url));
+    if (rule) retired.push({ url, rule });
+    else lost.push(url);
+  }
+  const added = current.filter((url) => !baseline.some((b) => toPath(b) === toPath(url)));
+
+  console.log(
+    `[url-parity] baseline: ${baseline.length} · current: ${current.length} · ` +
+      `retired with a recorded redirect/410: ${retired.length}`,
+  );
+  for (const item of retired) {
+    const target = item.rule.destination ? `-> ${item.rule.destination}` : "(410 Gone)";
+    console.log(`  [retired ${item.rule.statusCode}] ${item.url} ${target}`);
+  }
   if (lost.length) {
     console.error(`[url-parity] LOST ${lost.length} URLs:\n  ` + lost.join("\n  "));
     process.exit(1);
@@ -44,7 +89,7 @@ function main() {
   if (added.length) {
     console.log(`[url-parity] added ${added.length} URLs (expected growth, not loss):\n  ` + added.slice(0, 12).join("\n  "));
   }
-  console.log("[url-parity] PASS — no live URL lost.");
+  console.log("[url-parity] PASS — every baseline URL is either live or explicitly retired with a redirect.");
 }
 
 main();

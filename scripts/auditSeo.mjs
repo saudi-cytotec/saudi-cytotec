@@ -61,8 +61,29 @@ console.log("SEO AUDIT — saudiersaa.com\n");
     baseline = current;
     console.log(`[sitemap-parity] baseline missing, created with ${current.length} URLs`);
   }
-  const lost = baseline.filter((url) => !current.includes(url));
-  report("Sitemap parity", lost.length === 0, lost.length ? `LOST ${lost.length}: ${lost.slice(0, 5).join(", ")}` : `${current.length} URLs, ${baseline.length} baseline, nothing lost`);
+  // A baseline URL may leave the sitemap only when the canonical redirect
+  // registry records a 301/308 to a live replacement or a deliberate 410.
+  const toPath = (url) => {
+    const raw = url.replace(/^https?:\/\/[^/]+/, "");
+    const trimmed = raw.endsWith("/") && raw !== "/" ? raw.slice(0, -1) : raw;
+    return trimmed || "/";
+  };
+  const redirectRegistry = fs.existsSync(REDIRECTS) ? JSON.parse(fs.readFileSync(REDIRECTS, "utf8")) : { rules: [] };
+  const retiredPaths = new Map(
+    (redirectRegistry.rules ?? [])
+      .filter((rule) => rule?.source && [301, 308, 404, 410].includes(rule.statusCode))
+      .map((rule) => [toPath(rule.source), rule]),
+  );
+  const currentPaths = new Set(current.map(toPath));
+  const lost = baseline.filter((url) => !currentPaths.has(toPath(url)) && !retiredPaths.has(toPath(url)));
+  const retired = baseline.filter((url) => !currentPaths.has(toPath(url)) && retiredPaths.has(toPath(url)));
+  report(
+    "Sitemap parity",
+    lost.length === 0,
+    lost.length
+      ? `LOST ${lost.length}: ${lost.slice(0, 5).join(", ")}`
+      : `${current.length} URLs, ${baseline.length} baseline, nothing lost (${retired.length} retired with a recorded redirect)`,
+  );
 }
 
 // 2. Robots

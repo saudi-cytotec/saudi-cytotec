@@ -14,7 +14,7 @@ Date: 2026-09-14 · source: `content/map.json` + built `dist/seo-manifest.json`
 
 - Content-map topics: **100**
 - Content-map items marked PUBLISHED/UPDATED: **36**
-- Built article records: **101** (101 indexable, 0 intentional noindex)
+- Built article records: **96** (96 indexable, 0 intentional noindex)
 - Geographic articles protected by the editorial plan: **20**; no city page was added or removed by this audit.
 - Published/updated map targets missing from a built route: **0**
 - Planning-only target paths not yet built: **64**; these are IDEA records, not live URLs or mass-publishing instructions.

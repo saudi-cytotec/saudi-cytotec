@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-09-06",
+  "updatedAt": "2026-09-14",
   "wwwToApex": true,
   "rules": [
     {
@@ -723,6 +723,76 @@
       "statusCode": 301,
       "reason": "Geographic cluster removed in repositioning - consolidated to Saudi care access guide",
       "createdAt": "2026-09-06"
+    },
+    {
+      "source": "/blog/nsaid-stomach-protection",
+      "destination": "/blog/misoprostol-gastric-ulcers",
+      "statusCode": 301,
+      "reason": "Content-recovery pass: «nsaid-stomach-protection» merged into «misoprostol-gastric-ulcers» (duplicate intent, one stronger article). The old URL keeps its search equity via 301.",
+      "createdAt": "2026-09-14"
+    },
+    {
+      "source": "/blog/nsaid-stomach-protection/",
+      "destination": "/blog/misoprostol-gastric-ulcers",
+      "statusCode": 301,
+      "reason": "Content-recovery pass: «nsaid-stomach-protection» merged into «misoprostol-gastric-ulcers» (duplicate intent, one stronger article). The old URL keeps its search equity via 301.",
+      "createdAt": "2026-09-14"
+    },
+    {
+      "source": "/blog/labor-induction-hospital-setting",
+      "destination": "/blog/postpartum-hemorrhage-education",
+      "statusCode": 301,
+      "reason": "Content-recovery pass: «labor-induction-hospital-setting» merged into «postpartum-hemorrhage-education» (duplicate intent, one stronger article). The old URL keeps its search equity via 301.",
+      "createdAt": "2026-09-14"
+    },
+    {
+      "source": "/blog/labor-induction-hospital-setting/",
+      "destination": "/blog/postpartum-hemorrhage-education",
+      "statusCode": 301,
+      "reason": "Content-recovery pass: «labor-induction-hospital-setting» merged into «postpartum-hemorrhage-education» (duplicate intent, one stronger article). The old URL keeps its search equity via 301.",
+      "createdAt": "2026-09-14"
+    },
+    {
+      "source": "/blog/myths-about-home-dosing",
+      "destination": "/blog/common-myths-cytotec",
+      "statusCode": 301,
+      "reason": "Content-recovery pass: «myths-about-home-dosing» merged into «common-myths-cytotec» (duplicate intent, one stronger article). The old URL keeps its search equity via 301.",
+      "createdAt": "2026-09-14"
+    },
+    {
+      "source": "/blog/myths-about-home-dosing/",
+      "destination": "/blog/common-myths-cytotec",
+      "statusCode": 301,
+      "reason": "Content-recovery pass: «myths-about-home-dosing» merged into «common-myths-cytotec» (duplicate intent, one stronger article). The old URL keeps its search equity via 301.",
+      "createdAt": "2026-09-14"
+    },
+    {
+      "source": "/blog/frequent-warning-questions",
+      "destination": "/blog/is-cytotec-safe-for-everyone",
+      "statusCode": 301,
+      "reason": "Content-recovery pass: «frequent-warning-questions» merged into «is-cytotec-safe-for-everyone» (duplicate intent, one stronger article). The old URL keeps its search equity via 301.",
+      "createdAt": "2026-09-14"
+    },
+    {
+      "source": "/blog/frequent-warning-questions/",
+      "destination": "/blog/is-cytotec-safe-for-everyone",
+      "statusCode": 301,
+      "reason": "Content-recovery pass: «frequent-warning-questions» merged into «is-cytotec-safe-for-everyone» (duplicate intent, one stronger article). The old URL keeps its search equity via 301.",
+      "createdAt": "2026-09-14"
+    },
+    {
+      "source": "/blog/womens-emergency-preparedness",
+      "destination": "/blog/what-to-say-in-emergency",
+      "statusCode": 301,
+      "reason": "Content-recovery pass: «womens-emergency-preparedness» merged into «what-to-say-in-emergency» (duplicate intent, one stronger article). The old URL keeps its search equity via 301.",
+      "createdAt": "2026-09-14"
+    },
+    {
+      "source": "/blog/womens-emergency-preparedness/",
+      "destination": "/blog/what-to-say-in-emergency",
+      "statusCode": 301,
+      "reason": "Content-recovery pass: «womens-emergency-preparedness» merged into «what-to-say-in-emergency» (duplicate intent, one stronger article). The old URL keeps its search equity via 301.",
+      "createdAt": "2026-09-14"
     }
   ]
 }
