@@ -140,7 +140,7 @@ export const cluster05 = [
     metaTitle: "تنظيم الأسرة معلومات تعليمية",
     metaDescription: "إطار عام عن أهمية المشورة الموثوقة في تنظيم الأسرة بعيداً عن الشائعات.",
     excerpt: "الخيارات تُناقش حسب العمر والرضاعة والأمراض والرغبة في الحمل لاحقاً.",
-    related: ["reproductive-health-reliable-info", "who-clinical-references", "education-vs-individual-treatment"],
+    related: ["reproductive-health-reliable-info", "official-drug-leaflets", "education-vs-individual-treatment"],
     points: [
       "معايير الأهلية الطبية تصدر عن هيئات مهنية للممارسين.",
       "المعلومات الإعلانية ليست مشورة.",

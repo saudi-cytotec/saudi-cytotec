@@ -184,7 +184,7 @@ export const cluster01 = [
     metaTitle: "ميزوبروستول في المراجع السريرية",
     metaDescription: "توضيح الفرق بين مرجع مهني موجّه للممارسين وبين مقال تعليمي للعموم.",
     excerpt: "المراجع السريرية تُكتب لمن يديرون بروتوكولات، لا لمن يبحثون عن حل سريع في المنزل.",
-    related: ["who-clinical-references", "official-drug-leaflets", "fda-cytotec-warnings"],
+    related: ["official-drug-leaflets", "fda-cytotec-warnings", "how-misoprostol-works-in-body"],
     points: [
       "منظمة الصحة العالمية وهيئات التوليد تناقش أدواراً مؤسسية محددة، بشروط موارد ومتابعة.",
       "اقتطاع جملة من دليل سريري دون بروتوكوله يحوّل الدليل إلى مضلل.",

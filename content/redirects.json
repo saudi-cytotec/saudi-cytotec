@@ -793,6 +793,118 @@
       "statusCode": 301,
       "reason": "Content-recovery pass: «womens-emergency-preparedness» merged into «what-to-say-in-emergency» (duplicate intent, one stronger article). The old URL keeps its search equity via 301.",
       "createdAt": "2026-09-14"
+    },
+    {
+      "source": "/my-account",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy WooCommerce URL indexed in Google - redirected to educational cornerstone",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/category-all.html",
+      "destination": "/blog",
+      "statusCode": 301,
+      "reason": "Legacy category page indexed in Google - redirected to blog index",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/article-hubool-sitetok-saudi.html",
+      "destination": "/safety",
+      "statusCode": 301,
+      "reason": "Legacy HTML article indexed in Google - redirected to safety pillar",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/cytotec-gulf-medical-information",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy Gulf article indexed in Google - redirected to definition pillar",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/cytotec-gulf-medical-information/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Trailing-slash variant of legacy Gulf article",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83-2",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy Arabic duplicate slug indexed in Google - redirected to cornerstone",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83-2/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Trailing-slash variant of legacy Arabic duplicate slug",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/2021/01/why-did-nypd-solve-fewer-crimes-last_30.html",
+      "destination": "/404",
+      "statusCode": 410,
+      "reason": "Legacy 2021 NYT scraped spam post - intentionally gone",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/2021/01/impeachment-is-call-for-moral-clarity_14.html",
+      "destination": "/404",
+      "statusCode": 410,
+      "reason": "Legacy 2021 NYT scraped spam post - intentionally gone",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/2021/08/taliban-quash-protests-and-seize_20.html",
+      "destination": "/404",
+      "statusCode": 410,
+      "reason": "Legacy 2021 NYT scraped spam post - intentionally gone",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/2021/09/george-holliday-who-taped-police_23.html",
+      "destination": "/404",
+      "statusCode": 410,
+      "reason": "Legacy 2021 NYT scraped spam post - intentionally gone",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/2020/11/deprived-of-quick-decision-democrats.html",
+      "destination": "/404",
+      "statusCode": 410,
+      "reason": "Legacy 2020 NYT scraped spam post - intentionally gone",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/blog/liver-kidney-considerations",
+      "destination": "/blog/contraindications-misoprostol",
+      "statusCode": 301,
+      "reason": "Content merge: liver-kidney-considerations consolidated into contraindications-misoprostol",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/blog/liver-kidney-considerations/",
+      "destination": "/blog/contraindications-misoprostol",
+      "statusCode": 301,
+      "reason": "Trailing-slash variant of merged article",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/blog/who-clinical-references",
+      "destination": "/blog/official-drug-leaflets",
+      "statusCode": 301,
+      "reason": "Content merge: who-clinical-references consolidated into official-drug-leaflets",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/blog/who-clinical-references/",
+      "destination": "/blog/official-drug-leaflets",
+      "statusCode": 301,
+      "reason": "Trailing-slash variant of merged article",
+      "createdAt": "2026-09-15"
     }
   ]
 }

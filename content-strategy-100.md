@@ -25,8 +25,8 @@ Publishing is always human-reviewed — the map plans, the editor decides.
 | Dimension | Value |
 |---|---|
 | Topics | 100 |
-| By status | PUBLISHED 35 · UPDATED 1 · IDEA 64 |
-| By priority | P2 28 · P1 44 · P0 27 · P3 1 |
+| By status | PUBLISHED 36 · UPDATED 1 · IDEA 63 |
+| By priority | P2 28 · P1 45 · P0 27 |
 | P0 topics | C-011, C-015, C-016, C-017, C-018, C-021, C-027, C-028, C-029, C-030, C-031, C-034, C-041, C-042, C-053, C-055, C-056, C-058, C-067, C-068, C-079, C-080, C-082, C-085, C-089, C-090, C-095 |
 | P0 complete | 9/27 |
 
@@ -60,7 +60,7 @@ Pillar: `/safety` · Site cluster: `safety`
 | C-011 | مخاطر الحصول على أدوية خارج الصيدلية المرخصة | شراء أدوية من الإنترنت | أدوية مجهولة المصدر، مخاطر | medical safety | GCC | — | P0 | `/blog/unreliable-medicine-sources` | `/safety` | `/blog/risks-of-random-use` `/blog/saudi-drug-regulation-context` | `/safety` `/blog/risks-of-random-use` `/blog/saudi-drug-regulation-context` `/faq` `/when-to-see-doctor` | ما أهم ما يجب فهمه عن شراء أدوية من الإنترنت؟؛ متى يجب طلب رعاية طبية عاجلة؟ | fdaLabel، sfda، moh، dailyMed | راجعي علامات الطوارئ ثم استخدمي صفحة الاتصال للاستفسار العام فقط إذا لم تكن الحالة عاجلة. | PUBLISHED |
 | C-012 | ماذا يحدث في قسم الطوارئ عند النزيف | نزيف حاد طوارئ | رعاية طارئة، ماذا أتوقع | medical safety | neutral | — | P1 | `/blog/emergency-room-bleeding` | `/when-to-see-doctor` | `/blog/signs-of-dangerous-bleeding` `/when-to-see-doctor` | `/when-to-see-doctor` `/blog/signs-of-dangerous-bleeding` `/faq` `/safety` | ما أهم ما يجب فهمه عن نزيف حاد طوارئ؟؛ متى يجب طلب رعاية طبية عاجلة؟ | fdaLabel، sfda، moh، dailyMed | راجعي علامات الطوارئ ثم استخدمي صفحة الاتصال للاستفسار العام فقط إذا لم تكن الحالة عاجلة. | IDEA (تُغطى جزئياً اليوم في what-to-say-in-emergency — مقال مخصص يشرح مسار قسم الطوارئ عند النزيف.) |
 | C-013 | الرعاية بعد الإجهاض الطبي: المتابعة | متابعة بعد الإجهاض | رعاية لاحقة، متابعة طبية | medical safety | neutral | — | P1 | `/blog/follow-up-after-medical-care` | `/womens-health` | `/blog/annoying-symptom-vs-emergency` `/blog/danger-of-delaying-care` | `/womens-health` `/blog/annoying-symptom-vs-emergency` `/blog/danger-of-delaying-care` `/faq` `/when-to-see-doctor` `/safety` | ما أهم ما يجب فهمه عن متابعة بعد الإجهاض؟؛ متى يجب طلب رعاية طبية عاجلة؟ | fdaLabel، sfda، moh، dailyMed | راجعي علامات الطوارئ ثم استخدمي صفحة الاتصال للاستفسار العام فقط إذا لم تكن الحالة عاجلة. | PUBLISHED |
-| C-014 | الجوانب النظامية للإجهاض في الخليج: لماذا تختلف | قانون الإجهاض السعودية | أنظمة صحية، اختلاف الدول | local | GCC | — | P3 | `/blog/abortion-regulation-gulf-legal-context` | `/medical-sources` | `/blog/saudi-drug-regulation-context` | `/medical-sources` `/blog/saudi-drug-regulation-context` `/faq` `/when-to-see-doctor` `/safety` | ما أهم ما يجب فهمه عن قانون الإجهاض السعودية؟؛ متى يجب طلب رعاية طبية عاجلة؟ | fdaLabel، sfda، moh، dailyMed | راجعي علامات الطوارئ ثم استخدمي صفحة الاتصال للاستفسار العام فقط إذا لم تكن الحالة عاجلة. | IDEA |
+| C-014 | بدائل سايتوتك الطبية في المستشفيات السعودية | بدائل سايتوتك في المستشفيات السعودية | بديل سايتوتك، بدائل ميزوبروستول في السعودية، بدائل قرحة المعدة للحامل | informational | SA | — | P1 | `/blog/cytotec-alternatives-saudi` | `/safety` | `/blog/contraindications-misoprostol` `/safety` | `/safety` `/blog/contraindications-misoprostol` `/service-areas` `/faq` | ما هي البدائل الطبية الآمنة لحماية المعدة بدلاً من ميزوبروستول؟؛ هل توجد بدائل لسايتوتك يمكن استخدامها منزلياً؟ | sfda، moh، fdaLabel، dailyMed | راجعي /safety ثم استشيري طبيبك أو تواصلي مع مركز صحة 937 للتعرف على الخيارات المعتمدة. | PUBLISHED |
 
 ---
 
@@ -218,15 +218,15 @@ Pillar: `/medical-sources` · Site cluster: `evidence`
 | C-097 | كيف تقيّمين مصداقية المعلومة الطبية | مصداقية المعلومة الطبية | تقييم مصادر | informational | neutral | — | P1 | `/blog/how-to-verify-medical-information` | `/medical-sources` | `/blog/limits-of-online-medical-info` `/medical-sources` | `/medical-sources` `/blog/limits-of-online-medical-info` `/faq` | ما أهم ما يجب فهمه عن مصداقية المعلومة الطبية؟؛ ما المصدر الرسمي المناسب للتحقق؟ | fdaLabel، whoEml، cochrane، nice، sfda | راجعي /medical-sources ثم احفظي المراجع المستخدمة في مسودة المقال. | PUBLISHED |
 | C-098 | الفرق بين المحتوى التعليمي والاستشارة الطبية | استشارة طبية أونلاين | حدود الإنترنت | informational | neutral | — | P1 | `/blog/internet-not-a-doctor` | `/medical-sources` | `/blog/general-info-vs-personal-advice` `/blog/limits-of-online-medical-info` | `/medical-sources` `/blog/general-info-vs-personal-advice` `/blog/limits-of-online-medical-info` `/faq` | ما أهم ما يجب فهمه عن استشارة طبية أونلاين؟؛ ما المصدر الرسمي المناسب للتحقق؟ | fdaLabel، whoEml، cochrane، nice، sfda | راجعي /medical-sources ثم احفظي المراجع المستخدمة في مسودة المقال. | PUBLISHED |
 | C-099 | كيف تقرأين دراسة طبية | قراءة الدراسات الطبية | أدلة، منهجية | navigational | neutral | — | P2 | `/blog/reading-a-paper-as-non-specialist` | `/medical-sources` | `/blog/how-to-evaluate-medical-evidence` `/medical-sources` | `/medical-sources` `/blog/how-to-evaluate-medical-evidence` `/faq` | ما أهم ما يجب فهمه عن قراءة الدراسات الطبية؟؛ ما المصدر الرسمي المناسب للتحقق؟ | fdaLabel، whoEml، cochrane، nice، sfda | راجعي /medical-sources ثم احفظي المراجع المستخدمة في مسودة المقال. | PUBLISHED |
-| C-100 | المصادر الطبية الرسمية بالعربية | مصادر طبية موثوقة عربية | وزارة الصحة، WHO | navigational | GCC | — | P1 | `/blog/trusted-sources-further-reading` | `/medical-sources` | `/blog/who-clinical-references` `/medical-sources` | `/medical-sources` `/blog/who-clinical-references` `/faq` | ما أهم ما يجب فهمه عن مصادر طبية موثوقة عربية؟؛ ما المصدر الرسمي المناسب للتحقق؟ | fdaLabel، whoEml، cochrane، nice، sfda | راجعي /medical-sources ثم احفظي المراجع المستخدمة في مسودة المقال. | PUBLISHED |
+| C-100 | المصادر الطبية الرسمية بالعربية | مصادر طبية موثوقة عربية | وزارة الصحة، WHO | navigational | GCC | — | P1 | `/blog/trusted-sources-further-reading` | `/medical-sources` | `/blog/official-drug-leaflets` `/medical-sources` | `/medical-sources` `/blog/official-drug-leaflets` `/faq` | ما أهم ما يجب فهمه عن مصادر طبية موثوقة عربية؟؛ ما المصدر الرسمي المناسب للتحقق؟ | fdaLabel، whoEml، cochrane، nice، sfda | راجعي /medical-sources ثم احفظي المراجع المستخدمة في مسودة المقال. | PUBLISHED |
 
 ---
 
 ## Sequencing
 
 **P0** topics carry the highest intent-to-effort ratio and establish the topical
-spine the rest of the map links into. P1 (44) fills out each cluster once its
-P0 pillar is live. P2 (28) adds depth and long-tail. P3 (1) is gated on
+spine the rest of the map links into. P1 (45) fills out each cluster once its
+P0 pillar is live. P2 (28) adds depth and long-tail. P3 (0) is gated on
 verified official sourcing per country (topic C-014).
 
 ## What is deliberately excluded

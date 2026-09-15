@@ -100,11 +100,18 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   report("Robots", ok, ok ? "public allowed; /admin,/api excluded; sitemap declared; assets allowed" : robots.split("\n").slice(0, 8).join(" | "));
 }
 
-// 3. Forbidden schema types (bundle-inlined ld+json templates)
+// 3. Forbidden schema types (bundle ld+json templates)
 {
   const html = fs.readFileSync(DIST, "utf8");
+  let allJs = html;
+  const assetsDir = path.join(ROOT, "dist", "assets");
+  if (fs.existsSync(assetsDir)) {
+    for (const f of fs.readdirSync(assetsDir)) {
+      if (f.endsWith(".js")) allJs += "\n" + fs.readFileSync(path.join(assetsDir, f), "utf8");
+    }
+  }
   const found = [];
-  for (const match of html.matchAll(/"@type"\s*:\s*(\[[^\]]*\]|"[^"]+")/g)) {
+  for (const match of allJs.matchAll(/"@type"\s*:\s*(\[[^\]]*\]|"[^"]+")/g)) {
     const raw = match[1];
     if (raw.startsWith("[")) {
       for (const item of raw.matchAll(/"([^"]+)"/g)) found.push(item[1]);

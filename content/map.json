@@ -574,40 +574,41 @@
     {
       "id": "C-014",
       "cluster": "B",
-      "topic": "الجوانب النظامية للإجهاض في الخليج: لماذا تختلف",
-      "primaryKeyword": "قانون الإجهاض السعودية",
+      "topic": "بدائل سايتوتك الطبية في المستشفيات السعودية",
+      "primaryKeyword": "بدائل سايتوتك في المستشفيات السعودية",
       "secondaryKeywords": [
-        "أنظمة صحية",
-        "اختلاف الدول"
+        "بديل سايتوتك",
+        "بدائل ميزوبروستول في السعودية",
+        "بدائل قرحة المعدة للحامل"
       ],
-      "searchIntent": "local",
-      "country": "GCC",
+      "searchIntent": "informational",
+      "country": "SA",
       "cityRelevance": [],
-      "priority": "P3",
-      "targetUrl": "/blog/abortion-regulation-gulf-legal-context",
-      "parent": "/medical-sources",
+      "priority": "P1",
+      "targetUrl": "/blog/cytotec-alternatives-saudi",
+      "parent": "/safety",
       "related": [
-        "/blog/saudi-drug-regulation-context"
-      ],
-      "status": "IDEA",
-      "internalLinks": [
-        "/medical-sources",
-        "/blog/saudi-drug-regulation-context",
-        "/faq",
-        "/when-to-see-doctor",
+        "/blog/contraindications-misoprostol",
         "/safety"
       ],
+      "status": "PUBLISHED",
+      "internalLinks": [
+        "/safety",
+        "/blog/contraindications-misoprostol",
+        "/service-areas",
+        "/faq"
+      ],
       "faqOpportunities": [
-        "ما أهم ما يجب فهمه عن قانون الإجهاض السعودية؟",
-        "متى يجب طلب رعاية طبية عاجلة؟"
+        "ما هي البدائل الطبية الآمنة لحماية المعدة بدلاً من ميزوبروستول؟",
+        "هل توجد بدائل لسايتوتك يمكن استخدامها منزلياً؟"
       ],
       "relevantReferences": [
-        "fdaLabel",
         "sfda",
         "moh",
+        "fdaLabel",
         "dailyMed"
       ],
-      "cta": "راجعي علامات الطوارئ ثم استخدمي صفحة الاتصال للاستفسار العام فقط إذا لم تكن الحالة عاجلة."
+      "cta": "راجعي /safety ثم استشيري طبيبك أو تواصلي مع مركز صحة 937 للتعرف على الخيارات المعتمدة."
     },
     {
       "id": "C-015",
@@ -3803,13 +3804,13 @@
       "targetUrl": "/blog/trusted-sources-further-reading",
       "parent": "/medical-sources",
       "related": [
-        "/blog/who-clinical-references",
+        "/blog/official-drug-leaflets",
         "/medical-sources"
       ],
       "status": "PUBLISHED",
       "internalLinks": [
         "/medical-sources",
-        "/blog/who-clinical-references",
+        "/blog/official-drug-leaflets",
         "/faq"
       ],
       "faqOpportunities": [

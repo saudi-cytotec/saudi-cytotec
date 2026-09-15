@@ -1,0 +1,49 @@
+# Google Search Console Disavow File for https://saudiersaa.com/
+# Generated: 2026-09-15
+# Reason: Disavowing toxic legacy scraper backlinks, PBN syndication, and black-market competitor link injection
+
+# -----------------------------------------------------------------------------
+# Toxic / Black-Market Commercial Competitors & PBN Link Networks
+# -----------------------------------------------------------------------------
+domain:saudi-cytotec.com
+domain:cytotecmedicine.com
+domain:cytotecsa.com
+domain:cytotec-saudi.com
+domain:saytotek-saudi.com
+domain:cytotec-riyadh.com
+domain:cytotec-jeddah.com
+domain:saudi-misoprostol.com
+domain:buy-cytotec-online.com
+domain:cytotecdubai.com
+domain:cytoteckwt.com
+domain:cytotec-gulf.com
+domain:cytotecpill.com
+
+# -----------------------------------------------------------------------------
+# Automated Scraper Blogs & Low-Quality Syndication Networks (2020-2021 legacy)
+# -----------------------------------------------------------------------------
+domain:huboolsitetok.blogspot.com
+domain:sitehubool.blogspot.com
+domain:saudicytotec2021.blogspot.com
+domain:cytotecjeddah2020.wordpress.com
+domain:cytotecriyadh2021.wordpress.com
+domain:medcare-gulf.wixsite.com
+domain:saudihealthinfo.weebly.com
+domain:womenshealth-sa.site123.me
+
+# -----------------------------------------------------------------------------
+# Automated Link Farms, SEO Spam Generators, and Scraping Directories
+# -----------------------------------------------------------------------------
+domain:topseosites.top
+domain:seodirectory.icu
+domain:backlinkgenerator.xyz
+domain:pingfarm.com
+domain:linkcenter.co
+domain:trafficbot.life
+domain:spamlinkhub.biz
+domain:freebacklinkspro.info
+domain:webindexer.online
+domain:rankbooster.site
+domain:crawler-traffic.com
+domain:bestpills-directory.club
+domain:pharmacy-finder-online.xyz

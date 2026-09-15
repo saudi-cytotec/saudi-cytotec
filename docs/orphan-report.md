@@ -1,13 +1,13 @@
 # Internal Link & Orphan Report
 
-Date: 2026-09-14 · generated from the built article graph
+Date: 2026-09-15 · generated from the built article graph
 
 **Result: PASS — no published article orphans**
 
 | Metric | Count |
 |---|---:|
-| Indexable articles | 96 |
-| Articles with at least one incoming article link | 96 |
+| Indexable articles | 95 |
+| Articles with at least one incoming article link | 95 |
 | Article orphans | 0 |
 | Unresolved article targets in declared graph | 0 |
 
@@ -24,15 +24,15 @@ No indexable article is orphaned in the declared editorial graph.
 | `difference-cytotec-misoprostol` | `cytotec-definition`, `cytotec-pharmaceutical-forms`, `misoprostol-other-brand-names`, `brand-name-vs-active-ingredient`, `cytotec-uses` |
 | `history-development-misoprostol` | `misoprostol-pharmacologic-class` |
 | `misoprostol-pharmacologic-class` | `misoprostol-active-ingredient`, `history-development-misoprostol`, `how-misoprostol-works-in-body`, `common-medical-terms-misoprostol` |
-| `how-misoprostol-works-in-body` | `misoprostol-active-ingredient`, `misoprostol-pharmacologic-class`, `uterine-reproductive-effects`, `liver-kidney-considerations` |
+| `how-misoprostol-works-in-body` | `misoprostol-active-ingredient`, `misoprostol-pharmacologic-class`, `misoprostol-in-clinical-references`, `uterine-reproductive-effects` |
 | `cytotec-pharmaceutical-forms` | `misoprostol-other-brand-names` |
 | `misoprostol-other-brand-names` | `difference-cytotec-misoprostol`, `cytotec-pharmaceutical-forms`, `brand-name-vs-active-ingredient` |
-| `misoprostol-in-clinical-references` | `difference-cytotec-misoprostol`, `history-development-misoprostol`, `who-clinical-references` |
+| `misoprostol-in-clinical-references` | `difference-cytotec-misoprostol`, `history-development-misoprostol` |
 | `key-facts-before-reading-cytotec` | `cytotec-definition`, `general-info-vs-personal-advice` |
 | `approved-medical-uses-misoprostol` | `misoprostol-gastric-ulcers`, `off-label-use-meaning`, `not-all-uses-are-alike` |
 | `misoprostol-gastric-ulcers` | `approved-medical-uses-misoprostol`, `gastrointestinal-effects`, `why-contraindicated-in-pregnancy-ulcer-use`, `basic-drug-interactions`, `medicines-that-may-increase-risk` |
 | `obstetric-uses-under-supervision` | `postpartum-hemorrhage-education`, `not-all-uses-are-alike` |
-| `postpartum-hemorrhage-education` | `obstetric-uses-under-supervision`, `hospital-clinic-limits`, `who-clinical-references` |
+| `postpartum-hemorrhage-education` | `obstetric-uses-under-supervision`, `hospital-clinic-limits` |
 | `off-label-use-meaning` | `approved-medical-uses-misoprostol`, `not-all-uses-are-alike`, `common-medical-terms-misoprostol` |
 | `unsafe-unsupervised-use` | `off-label-use-meaning`, `why-not-home-treatment`, `why-medical-supervision-required`, `risks-of-random-use`, `unreliable-medicine-sources`, `common-myths-cytotec`, `use-without-prescription` |
 | `hospital-clinic-limits` | `approved-medical-uses-misoprostol`, `obstetric-uses-under-supervision`, `why-not-home-treatment`, `follow-up-after-medical-care` |
@@ -85,14 +85,14 @@ No indexable article is orphaned in the declared editorial graph.
 | `not-all-uses-are-alike` | `approved-medical-uses-misoprostol` |
 | `mild-symptoms-not-always-safe` | `annoying-symptom-vs-emergency` |
 | `how-to-verify-medical-information` | `reproductive-health-reliable-info`, `reliable-womens-health-sources`, `internet-not-a-doctor`, `official-drug-leaflets`, `limits-of-online-medical-info` |
-| `contraindications-misoprostol` | `is-cytotec-safe-for-everyone`, `prostaglandin-allergy`, `conditions-needing-prior-assessment`, `pregnancy-contraindication-ulcer-indication` |
-| `basic-drug-interactions` | `liver-kidney-considerations`, `medicines-that-may-increase-risk`, `discussing-medication-history` |
+| `contraindications-misoprostol` | `is-cytotec-safe-for-everyone`, `prostaglandin-allergy`, `cytotec-alternatives-saudi`, `conditions-needing-prior-assessment`, `pregnancy-contraindication-ulcer-indication` |
+| `basic-drug-interactions` | `cytotec-alternatives-saudi`, `medicines-that-may-increase-risk`, `discussing-medication-history` |
 | `prostaglandin-allergy` | `misoprostol-pharmacologic-class`, `rare-serious-complications`, `contraindications-misoprostol` |
 | `heart-vascular-considerations` | `conditions-needing-prior-assessment` |
-| `liver-kidney-considerations` | `conditions-needing-prior-assessment` |
+| `cytotec-alternatives-saudi` | `conditions-needing-prior-assessment` |
 | `breastfeeding-considerations` | `pregnancy-and-medicines-faq` |
 | `medicines-that-may-increase-risk` | `basic-drug-interactions` |
-| `conditions-needing-prior-assessment` | `why-medical-supervision-required`, `contraindications-misoprostol`, `heart-vascular-considerations`, `liver-kidney-considerations` |
+| `conditions-needing-prior-assessment` | `why-medical-supervision-required`, `contraindications-misoprostol`, `heart-vascular-considerations`, `cytotec-alternatives-saudi` |
 | `pregnancy-contraindication-ulcer-indication` | `why-contraindicated-in-pregnancy-ulcer-use`, `contraindications-misoprostol` |
 | `discussing-medication-history` | `misoprostol-gastric-ulcers`, `pregnancy-and-medicines-faq`, `basic-drug-interactions`, `heart-vascular-considerations`, `breastfeeding-considerations`, `what-to-say-in-emergency` |
 | `when-to-see-doctor-immediately` | `when-symptoms-are-emergencies`, `warning-signs-in-pregnancy`, `pelvic-pain-when-to-see-doctor`, `reproductive-tract-infections-awareness`, `dizziness-and-fainting`, `danger-of-delaying-care` |
@@ -104,14 +104,13 @@ No indexable article is orphaned in the declared editorial graph.
 | `follow-up-after-medical-care` | `hospital-clinic-limits`, `miscarriage-educational-overview`, `high-fever-and-infection`, `what-to-say-in-emergency` |
 | `annoying-symptom-vs-emergency` | `when-symptoms-are-emergencies`, `mild-symptoms-not-always-safe` |
 | `danger-of-delaying-care` | `why-not-home-treatment` |
-| `how-to-evaluate-medical-evidence` | `clinical-studies-vs-anecdotes`, `reading-a-paper-as-non-specialist`, `why-medical-recommendations-change` |
-| `who-clinical-references` | `misoprostol-in-clinical-references`, `postpartum-hemorrhage-education`, `family-planning-education`, `trusted-sources-further-reading` |
+| `how-to-evaluate-medical-evidence` | `clinical-studies-vs-anecdotes`, `reading-a-paper-as-non-specialist`, `why-medical-recommendations-change`, `trusted-sources-further-reading` |
 | `fda-cytotec-warnings` | `misoprostol-in-clinical-references`, `how-to-read-package-insert`, `regulatory-drug-warnings`, `official-drug-leaflets` |
-| `official-drug-leaflets` | `misoprostol-in-clinical-references`, `how-to-read-package-insert`, `regulatory-drug-warnings`, `breastfeeding-considerations`, `fda-cytotec-warnings`, `common-medical-terms-misoprostol`, `trusted-sources-further-reading` |
+| `official-drug-leaflets` | `misoprostol-in-clinical-references`, `postpartum-hemorrhage-education`, `how-to-read-package-insert`, `regulatory-drug-warnings`, `family-planning-education`, `breastfeeding-considerations`, `fda-cytotec-warnings`, `common-medical-terms-misoprostol`, `trusted-sources-further-reading` |
 | `clinical-studies-vs-anecdotes` | `how-to-evaluate-medical-evidence`, `reading-a-paper-as-non-specialist` |
 | `reading-a-paper-as-non-specialist` | `how-to-evaluate-medical-evidence`, `clinical-studies-vs-anecdotes`, `why-medical-recommendations-change` |
 | `limits-of-online-medical-info` | `internet-not-a-doctor`, `how-to-verify-medical-information`, `clinical-studies-vs-anecdotes` |
 | `common-medical-terms-misoprostol` | `how-to-evaluate-medical-evidence` |
 | `why-medical-recommendations-change` | `reading-a-paper-as-non-specialist` |
-| `trusted-sources-further-reading` | `saudi-drug-regulation-context`, `reproductive-health-reliable-info`, `reliable-womens-health-sources`, `how-to-verify-medical-information`, `how-to-evaluate-medical-evidence`, `who-clinical-references` |
+| `trusted-sources-further-reading` | `saudi-drug-regulation-context`, `reproductive-health-reliable-info`, `reliable-womens-health-sources`, `how-to-verify-medical-information`, `how-to-evaluate-medical-evidence` |
 | `cytotec-uses` | `cytotec-definition` |

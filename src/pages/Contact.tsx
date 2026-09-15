@@ -90,14 +90,28 @@ export function Contact() {
       </div>
 
       {sent ? (
-        <div className="card-premium border-brand/20 bg-brand-soft/50 p-5 leading-8">
-          تم استلام رسالتك محلياً في هذا المتصفح لأغراض العرض. إن كان لديك استفسار أو تصحيح لمصدر طبي، أرسليه أيضاً عبر البريد.
+        <div className="card-premium border-brand/20 bg-brand-soft/50 p-6 leading-8">
+          <h3 className="font-bold text-brand-deep">شكراً لتواصلك مع منصة صحة المرأة السعودية</h3>
+          <p className="mt-2 text-sm text-ink-soft">
+            تم تجهيز رسالتك للإرسال إلى البريد التحريري الرسمي:{" "}
+            <a href={`mailto:${EDITORIAL_EMAIL}`} className="font-bold text-brand hover:underline">
+              {EDITORIAL_EMAIL}
+            </a>
+            . في حال لم يُفتح برنامج البريد تلقائياً، يمكنك مراسلتنا مباشرة على هذا العنوان، وسيقوم الفريق بمراجعة الملاحظات والرد خلال 24 ساعة عمل.
+          </p>
         </div>
       ) : (
         <form
           className="card-premium space-y-4 p-6"
           onSubmit={(e) => {
             e.preventDefault();
+            const form = e.currentTarget;
+            const name = (form.elements.namedItem("name") as HTMLInputElement)?.value || "";
+            const email = (form.elements.namedItem("email") as HTMLInputElement)?.value || "";
+            const message = (form.elements.namedItem("message") as HTMLTextAreaElement)?.value || "";
+            const subject = encodeURIComponent(`استفسار تحريري من: ${name}`);
+            const body = encodeURIComponent(`الاسم: ${name}\nالبريد الإلكتروني: ${email}\n\nالرسالة:\n${message}`);
+            window.location.href = `mailto:${EDITORIAL_EMAIL}?subject=${subject}&body=${body}`;
             setSent(true);
           }}
         >
@@ -108,18 +122,18 @@ export function Contact() {
           </p>
           <label className="block text-sm font-bold text-brand-deep">
             الاسم
-            <input required className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20" />
+            <input name="name" required className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20" />
           </label>
           <label className="block text-sm font-bold text-brand-deep">
             البريد
-            <input type="email" required className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20" />
+            <input name="email" type="email" required className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20" />
           </label>
           <label className="block text-sm font-bold text-brand-deep">
             الرسالة
-            <textarea required rows={5} className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20" />
+            <textarea name="message" required rows={5} className="mt-1.5 w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20" />
           </label>
           <button type="submit" className="rounded-full bg-brand px-6 py-2.5 text-sm font-bold text-white transition hover:bg-brand-deep">
-            إرسال
+            إرسال عبر البريد الإلكتروني
           </button>
         </form>
       )}

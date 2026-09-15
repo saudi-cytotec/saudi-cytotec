@@ -76,7 +76,7 @@ export const cluster02 = [
     metaTitle: "نزيف ما بعد الولادة ومعلومات تعليمية",
     metaDescription: "معلومات عامة عن خطورة نزيف ما بعد الولادة ولماذا تُدار أدوية التقلص الرحمي داخل النظام الصحي.",
     excerpt: "النزيف بعد الولادة سبب رئيس لمضاعفات الأمومة عالمياً، وإدارته بروتوكول مؤسسي.",
-    related: ["obstetric-uses-under-supervision", "signs-of-dangerous-bleeding", "who-clinical-references"],
+    related: ["obstetric-uses-under-supervision", "signs-of-dangerous-bleeding", "official-drug-leaflets"],
     points: [
       "توصيات منظمة الصحة العالمية بشأن أدوية التقلص موجّهة لمقدمي الخدمة عند غياب بدائل أو ضمن حزم رعاية.",
       "التعرف المبكر على النزيف وإنعاش الأم أهم من اسم أي دواء بمفرده.",
