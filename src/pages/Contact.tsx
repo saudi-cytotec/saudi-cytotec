@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { CareReferral } from "../components/CareReferral";
 import { IconShieldCheck } from "../components/icons";
+import { LegacyClinicCard } from "../components/LegacyClinicCard";
 import { PageHero } from "../components/PageHero";
 import { Seo } from "../components/Seo";
+import { WhatsAppContactCard } from "../components/WhatsAppContact";
 import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
 
 const SA = HEALTH_LINES.find((c) => c.code === "sa");
@@ -77,6 +79,14 @@ export function Contact() {
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="max-w-3xl">
+        <LegacyClinicCard />
+      </div>
+
+      <div className="max-w-3xl">
+        <WhatsAppContactCard />
       </div>
 
       {sent ? (

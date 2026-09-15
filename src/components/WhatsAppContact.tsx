@@ -1,29 +1,25 @@
 /**
  * WhatsApp contact components — production-approved green identity.
- * Commit 8ac2a34: WhatsApp + prerender + green identity + production rendering fixes.
  *
- * - Official WhatsApp channel: 00966530945626 (966530945626)
- * - Green medical identity (#0f6b4a / #16a34a) replaces navy/red
+ * - The official WhatsApp number/link are defined ONCE in
+ *   src/data/conversion.ts (00966530945626 / https://wa.me/966530945626).
+ *   This file only imports and presents them — no second definition here.
+ * - Green medical identity (#0f6b4a / #16a34a) per the approved brand tokens
+ *   in src/index.css.
  * - Prerender-ready: no window access at module top-level, all CTAs are
- *   static <a> with proper rel and aria-labels for crawler visibility
- * - Production rendering fixes: floating button uses fixed positioning
- *   with safe-area insets, banner image uses approved Bannerrr.png
+ *   static <a> with proper rel and aria-labels for crawler visibility.
+ * - Floating button: fixed, WhatsApp green, does not cover the content
+ *   column; desktop shows the number, mobile shows the compact icon.
  */
 
 import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
-
-export const INFO_WHATSAPP_DIGITS = "966530945626";
-export const INFO_WHATSAPP_DISPLAY = "+966 53 094 5626";
-export const INFO_WHATSAPP_RAW = "00966530945626";
-
-export function whatsappInfoUrl(): string {
-  return `https://wa.me/${INFO_WHATSAPP_DIGITS}`;
-}
-
-export function whatsappInfoUrlWithText(text: string): string {
-  const encoded = encodeURIComponent(text);
-  return `https://wa.me/${INFO_WHATSAPP_DIGITS}?text=${encoded}`;
-}
+import {
+  WHATSAPP_NUMBER_DIGITS,
+  WHATSAPP_NUMBER_DISPLAY,
+  WHATSAPP_NUMBER_RAW,
+  WHATSAPP_URL,
+  whatsappUrlWithText,
+} from "../data/conversion";
 
 export const ARTICLE_WHATSAPP_BANNER_SRC = "/images/Bannerrr.png";
 
@@ -38,9 +34,7 @@ export function ArticleWhatsAppBanner() {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-start gap-4">
             <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#dcfce7] text-[#0f6b4a] ring-1 ring-[#bbf7d0]">
-              <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden="true">
-                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.04c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.04 14.08c-.22.62-1.29 1.18-1.8 1.26-.48.07-.94.22-3.12-.65-2.64-1.06-4.33-3.72-4.46-3.89-.13-.17-1.07-1.42-1.07-2.71 0-1.29.68-1.92.92-2.18.24-.26.52-.33.69-.33h.5c.16 0 .38-.06.58.44.2.5.69 1.73.75 1.85.06.12.1.26.02.42-.08.16-.12.26-.24.4-.12.14-.25.29-.36.39-.12.11-.24.23-.1.45.14.22.62 1.02 1.33 1.65.91.81 1.68 1.06 1.92 1.18.24.12.38.1.52-.06.14-.16.6-.7.76-.94.16-.24.32-.2.54-.12.22.08 1.4.66 1.64.78.24.12.4.18.46.28.06.1.06.58-.16 1.2z" />
-              </svg>
+              <WhatsAppIcon className="h-7 w-7" />
             </span>
             <div>
               <h2 id="whatsapp-banner-heading" className="font-display text-lg font-extrabold text-[#0a4a33] md:text-xl">
@@ -50,20 +44,18 @@ export function ArticleWhatsAppBanner() {
                 قناة تواصل سريعة للاستفسارات التحريرية والدوائية العامة. لا تُصرف أدوية عبر واتساب، ولا تُقدم وصفات فردية.
               </p>
               <p className="mt-2 font-mono text-sm font-bold text-[#0f6b4a]" dir="ltr">
-                {INFO_WHATSAPP_DISPLAY} — {INFO_WHATSAPP_RAW}
+                {WHATSAPP_NUMBER_DISPLAY} — {WHATSAPP_NUMBER_RAW}
               </p>
             </div>
           </div>
           <a
-            href={whatsappInfoUrl()}
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="تواصل واتساب 00966530945626"
+            aria-label={`تواصل واتساب ${WHATSAPP_NUMBER_RAW}`}
             className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#16a34a] px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[#15803d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#16a34a] focus-visible:ring-offset-2"
           >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.04c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.04 14.08c-.22.62-1.29 1.18-1.8 1.26-.48.07-.94.22-3.12-.65-2.64-1.06-4.33-3.72-4.46-3.89-.13-.17-1.07-1.42-1.07-2.71 0-1.29.68-1.92.92-2.18.24-.26.52-.33.69-.33h.5c.16 0 .38-.06.58.44.2.5.69 1.73.75 1.85.06.12.1.26.02.42-.08.16-.12.26-.24.4-.12.14-.25.29-.36.39-.12.11-.24.23-.1.45.14.22.62 1.02 1.33 1.65.91.81 1.68 1.06 1.92 1.18.24.12.38.1.52-.06.14-.16.6-.7.76-.94.16-.24.32-.2.54-.12.22.08 1.4.66 1.64.78.24.12.4.18.46.28.06.1.06.58-.16 1.2z" />
-            </svg>
+            <WhatsAppIcon className="h-5 w-5" />
             واتساب مباشر
           </a>
         </div>
@@ -73,7 +65,7 @@ export function ArticleWhatsAppBanner() {
 }
 
 export const INFO_CONTACT_NOTE =
-  "هذا الموقع للتوعية الدوائية العامة. للرعاية الطبية راجعي جهة صحية مرخصة، وللطوارئ اتصلي بالإسعاف 997 أو مركز وزارة الصحة 937. واتساب 00966530945626 للاستفسارات التحريرية والدوائية العامة فقط، بلا وصفات فردية ولا بيع مباشر. للملاحظات التحريرية: info@saudiersaa.com";
+  `هذا الموقع للتوعية الدوائية العامة. للرعاية الطبية راجعي جهة صحية مرخصة، وللطوارئ اتصلي بالإسعاف 997 أو مركز وزارة الصحة 937. واتساب ${WHATSAPP_NUMBER_RAW} للاستفسارات التحريرية والدوائية العامة فقط، بلا وصفات فردية ولا بيع مباشر. للملاحظات التحريرية: info@saudiersaa.com`;
 
 export function WhatsAppIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
@@ -86,14 +78,14 @@ export function WhatsAppIcon({ className = "h-5 w-5" }: { className?: string }) 
 export function WhatsAppContactLink({ className = "" }: { className?: string }) {
   return (
     <a
-      href={whatsappInfoUrl()}
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
       className={`inline-flex items-center gap-2 rounded-full bg-[#16a34a] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#15803d] ${className}`}
-      aria-label={`تواصل واتساب ${INFO_WHATSAPP_DISPLAY}`}
+      aria-label={`تواصل واتساب ${WHATSAPP_NUMBER_DISPLAY}`}
     >
       <WhatsAppIcon className="h-4 w-4" />
-      <span>واتساب {INFO_WHATSAPP_DISPLAY}</span>
+      <span>واتساب {WHATSAPP_NUMBER_DISPLAY}</span>
     </a>
   );
 }
@@ -109,7 +101,7 @@ export function WhatsAppContactCard({ compact = false }: { compact?: boolean }) 
       <div className={`${compact ? "p-5" : "p-6 md:p-7"}`}>
         <div className="flex items-start gap-4">
           <span
-            className="grid h-13 w-13 shrink-0 place-items-center rounded-2xl bg-[#dcfce7] text-[#0f6b4a] ring-1 ring-[#bbf7d0]"
+            className="grid shrink-0 place-items-center rounded-2xl bg-[#dcfce7] text-[#0f6b4a] ring-1 ring-[#bbf7d0]"
             style={{ width: "3.25rem", height: "3.25rem" }}
           >
             <WhatsAppIcon className="h-7 w-7" />
@@ -126,16 +118,16 @@ export function WhatsAppContactCard({ compact = false }: { compact?: boolean }) 
 
         <div className="mt-5 grid gap-3">
           <a
-            href={whatsappInfoUrl()}
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-2xl bg-[#f0fdf4] p-4 ring-1 ring-[#bbf7d0] transition hover:bg-[#dcfce7]"
           >
             <p className="text-xs font-bold text-[#0a4a33]">واتساب — استفسارات</p>
             <p className="mt-1 font-mono text-lg font-bold text-[#0f6b4a]" dir="ltr">
-              {INFO_WHATSAPP_DISPLAY}
+              {WHATSAPP_NUMBER_DISPLAY}
             </p>
-            <p className="mt-1 text-xs text-[#4a6359]" dir="ltr">{INFO_WHATSAPP_RAW} — wa.me/{INFO_WHATSAPP_DIGITS}</p>
+            <p className="mt-1 text-xs text-[#4a6359]" dir="ltr">{WHATSAPP_NUMBER_RAW} — wa.me/{WHATSAPP_NUMBER_DIGITS}</p>
             <p className="mt-1 text-xs text-[#4a6359]">رد خلال ساعات العمل، بلا وصفات فردية</p>
           </a>
           <div className="rounded-2xl bg-[#f4f8f5] p-4">
@@ -156,7 +148,7 @@ export function WhatsAppContactCard({ compact = false }: { compact?: boolean }) 
 
         <div className="mt-5 flex flex-col gap-2 sm:flex-row">
           <a
-            href={whatsappInfoUrl()}
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#16a34a] px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[#15803d]"
@@ -180,18 +172,31 @@ export function WhatsAppContactCard({ compact = false }: { compact?: boolean }) 
   );
 }
 
+/**
+ * Floating WhatsApp button — present on every public page (via Layout).
+ * - Fixed bottom corner, WhatsApp green, does not cover the content column.
+ * - Desktop: pill with icon + label + the full number.
+ * - Mobile: compact 56px circle (icon only), safe-area aware.
+ * - Clear aria-label carrying both number formats.
+ */
 export function WhatsAppFloat() {
   return (
     <a
-      href={whatsappInfoUrl()}
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`واتساب ${INFO_WHATSAPP_DISPLAY} — 00966530945626`}
-      className="fixed bottom-4 left-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#16a34a] text-white shadow-lg ring-1 ring-[#15803d] transition hover:bg-[#15803d] hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#16a34a] focus-visible:ring-offset-2 md:bottom-6 md:left-6 md:h-16 md:w-16"
+      aria-label={`واتساب ${WHATSAPP_NUMBER_DISPLAY} — ${WHATSAPP_NUMBER_RAW}`}
+      className="fixed bottom-4 left-4 z-50 flex h-14 items-center rounded-full bg-[#16a34a] text-white shadow-lg ring-1 ring-[#15803d] transition hover:bg-[#15803d] hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#16a34a] focus-visible:ring-offset-2 md:bottom-6 md:left-6"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <WhatsAppIcon className="h-7 w-7 md:h-8 md:w-8" />
-      <span className="sr-only">واتساب {INFO_WHATSAPP_DISPLAY}</span>
+      <span className="grid h-14 w-14 shrink-0 place-items-center md:h-12 md:w-12">
+        <WhatsAppIcon className="h-7 w-7" />
+      </span>
+      <span className="hidden flex-col items-start md:flex" aria-hidden="true">
+        <span className="pl-4 text-[11px] font-bold leading-4">واتساب — استفسارات</span>
+        <span dir="ltr" className="pl-4 pr-4 font-mono text-xs font-bold leading-5">{WHATSAPP_NUMBER_RAW}</span>
+      </span>
+      <span className="sr-only">واتساب {WHATSAPP_NUMBER_DISPLAY} — {WHATSAPP_NUMBER_RAW}</span>
     </a>
   );
 }
@@ -205,14 +210,14 @@ export function WhatsAppCTA({
   className?: string;
   source?: string;
 }) {
-  const url = whatsappInfoUrlWithText(`${text} — ${source} — saudiersaa.com`);
+  const url = whatsappUrlWithText(`${text} — ${source} — saudiersaa.com`);
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
       className={`inline-flex items-center justify-center gap-2 rounded-full bg-[#16a34a] px-5 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[#15803d] ${className}`}
-      aria-label={`واتساب ${INFO_WHATSAPP_DISPLAY}`}
+      aria-label={`واتساب ${WHATSAPP_NUMBER_DISPLAY}`}
     >
       <WhatsAppIcon className="h-5 w-5" />
       {text}

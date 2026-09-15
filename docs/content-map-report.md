@@ -1,6 +1,6 @@
 # Content Map Report
 
-Date: 2026-09-14 · source: `content/map.json` + built `dist/seo-manifest.json`
+Date: 2026-09-15 · source: `content/map.json` + built `dist/seo-manifest.json`
 
 ## Search-intent ownership
 

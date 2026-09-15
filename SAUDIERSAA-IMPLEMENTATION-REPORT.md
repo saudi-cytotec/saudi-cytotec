@@ -24,7 +24,7 @@ It was removed in full, and replaced with `src/components/CareReferral.tsx`,
 which routes readers to government-operated services. Verified:
 
 ```
-grep -rn "CONTACT_PHONE\|WHATSAPP_MESSAGE\|wa\.me\|966538159747" src/
+grep -rn "CONTACT_PHONE\|WHATSAPP_MESSAGE\|wa\.me\|966530945626" src/
 → NONE
 ```
 
@@ -387,3 +387,43 @@ No secret value is recorded anywhere in this repository or this report.
 - No existing URL changed; no redirects were needed because no slug moved.
 - No existing article content rewritten — that needs an editorial or medical
   reason, not a redesign.
+
+---
+
+## N — Old clinic data: preserved, and fenced off from the WhatsApp CTA
+
+Date: 2026-09-14 · Branch: `arena/01a0a23b-saudi-cytotec` · Base commit: `9326ca7`
+
+The official WhatsApp channel (`00966530945626`) was introduced into dedicated
+CTA slots only: the header top bar, the header CTA, the homepage hero button,
+the floating button, the article banner, the `/contact` WhatsApp card, the
+footer WhatsApp button, and the `<meta name="whatsapp">` / no-JS line in
+`index.html`. That work must not consume the clinic's own record, so the old
+clinic data is now restored and pinned:
+
+- **Doctor name:** دكتور هيثم الخطيب
+- **Clinic phone:** `00966599287172` (kept in its original `00966…` format —
+  not re-styled, not re-formatted)
+- **Single definition:** `src/data/clinic.ts`
+- **Rendered where the clinic data belongs:** `src/components/Footer.tsx`
+  (site-wide, so it is inside every prerendered page) and
+  `<LegacyClinicCard />` on `/contact`, plus the no-JS fallback in
+  `index.html` and one `/about` line stating that the record was preserved.
+- **Deliberately NOT merged** into `src/data/contact.ts` (official ministry and
+  emergency lines) and never used as a `wa.me` link: the clinic phone is a
+  `tel:` link only, so old data and the new CTA cannot conflict.
+- `scripts/auditWhatsApp.mjs` rule 4 now whitelists the preserved phone in its
+  own files instead of banning it, and rule 7 does **not** list it as retired.
+
+A dedicated check enforces all of this in both directions — it fails if the
+clinic pair disappears, if the name is orphaned from its phone, or if the
+WhatsApp number leaks into a non-CTA place:
+
+```bash
+node scripts/auditLegacyClinic.mjs   # = npm run audit:clinic
+```
+
+It runs inside `npm run build` (postbuild), `npm run audit` and `npm run verify`.
+Verified by mutation: substituting the old phone with the CTA number, deleting
+the doctor name from the no-JS fallback, and deleting the footer block each make
+it exit 1; with the data in place it reports PASS (27/27).

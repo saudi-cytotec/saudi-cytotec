@@ -1,6 +1,6 @@
 # Internal Link & Orphan Report
 
-Date: 2026-09-14 · generated from the built article graph
+Date: 2026-09-15 · generated from the built article graph
 
 **Result: PASS — no published article orphans**
 

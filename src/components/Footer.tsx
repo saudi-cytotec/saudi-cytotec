@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BrandLogo } from "./Logo";
 import { IconArrowLeft } from "./icons";
 import { EDITORIAL_EMAIL, HEALTH_LINES, WHATSAPP_CHANNEL } from "../data/contact";
+import { LEGACY_CLINIC } from "../data/clinic";
 import { clusters, mainNav, moreNav, SITE } from "../data/site";
 import { WhatsAppIcon } from "./WhatsAppContact";
 
@@ -40,6 +41,17 @@ export function Footer() {
               <span dir="ltr" className="font-mono font-bold text-white">
                 {SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value}
               </span>
+            </p>
+            {/* بيانات العيادة القديمة — محفوظة كما هي، ولا تُستبدل برقم واتساب الرسمي */}
+            <p className="mt-1 text-xs leading-6 text-white/75">
+              {LEGACY_CLINIC.label}: <span className="font-bold text-white">{LEGACY_CLINIC.doctorName}</span> · هاتف{" "}
+              <a
+                href={LEGACY_CLINIC.phoneHref}
+                dir="ltr"
+                className="font-mono font-bold text-white underline underline-offset-4 transition hover:text-white"
+              >
+                {LEGACY_CLINIC.phone}
+              </a>
             </p>
             <p className="mt-3 flex flex-wrap gap-2">
               <a

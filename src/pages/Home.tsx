@@ -23,8 +23,10 @@ import {
   IconVenus,
 } from "../components/icons";
 import { JsonLd, Seo } from "../components/Seo";
+import { WhatsAppIcon } from "../components/WhatsAppContact";
 import { useCatalog } from "../cms/CatalogContext";
 import { HEALTH_LINES } from "../data/contact";
+import { WHATSAPP_NUMBER_RAW, WHATSAPP_URL } from "../data/conversion";
 import {
   HOME_CORE_PAGES,
   HOME_CYTOTEC_INTRO,
@@ -83,7 +85,7 @@ function HeroBrandPanel() {
       <HexBadge className="absolute top-10 -end-6 hidden text-white/80 lg:grid" Icon={IconCross} />
       <HexBadge className="absolute -bottom-8 start-10 hidden text-white/80 lg:grid" Icon={IconHeartPulse} />
 
-      <div className="relative overflow-hidden rounded-[1.75rem] bg-brand-deep p-8 shadow-[0_28px_60px_-24px_rgb(11_37_69/0.55)] ring-1 ring-white/10 sm:p-10">
+      <div className="relative overflow-hidden rounded-[1.75rem] bg-brand-deep p-8 shadow-[0_28px_60px_-24px_rgb(10_74_51/0.55)] ring-1 ring-white/10 sm:p-10">
         <span className="pointer-events-none absolute -top-16 -start-16 h-56 w-56 rounded-full bg-sky/25 blur-3xl" aria-hidden="true" />
         <span className="pointer-events-none absolute -bottom-20 -end-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
         <div className="relative flex min-h-[16rem] items-center justify-center sm:min-h-[19rem]">
@@ -222,7 +224,7 @@ export function Home() {
       />
 
       {/* ── 1. HERO ──────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#f2f8fe] via-[#e7f0fc] to-[#d9e8f9] ring-1 ring-line/60">
+      <section className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#f2faf6] via-[#e6f4ec] to-[#d5ebde] ring-1 ring-line/60">
         <div className="pointer-events-none absolute -top-24 -end-24 h-80 w-80 rounded-full bg-sky/10 blur-3xl" aria-hidden="true" />
         <div className="relative grid items-center gap-10 px-6 pb-20 pt-10 sm:px-10 sm:pt-14 lg:grid-cols-2 lg:gap-8 lg:px-12">
           <div>
@@ -256,9 +258,20 @@ export function Home() {
             </ul>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-[#16a34a] px-7 py-3.5 text-sm font-bold text-white shadow-[0_14px_28px_-12px_rgb(22_163_74/0.7)] transition hover:bg-[#15803d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#16a34a] focus-visible:ring-offset-2"
+                aria-label={`تواصل معنا عبر واتساب ${WHATSAPP_NUMBER_RAW}`}
+              >
+                <WhatsAppIcon className="h-5 w-5" />
+                تواصلي عبر واتساب
+                <span dir="ltr" className="hidden font-mono text-xs font-bold sm:inline">{WHATSAPP_NUMBER_RAW}</span>
+              </a>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-bold text-white shadow-[0_14px_28px_-12px_rgb(216_31_60/0.7)] transition hover:bg-accent-deep"
+                className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-white/80 px-6 py-3.5 text-sm font-bold text-brand transition hover:border-brand/50 hover:bg-white"
               >
                 تواصلي معنا للاستفسار
                 <IconArrowLeft className="h-4.5 w-4.5" />
