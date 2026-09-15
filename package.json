@@ -13,13 +13,14 @@
     "test:cms": "node scripts/cmsWorkflowTest.mjs",
     "prebuild": "node scripts/emitRedirects.mjs && node scripts/emitStrategyMd.mjs",
     "build": "vite build",
-    "postbuild": "node scripts/stampBuild.mjs && node scripts/urlParity.mjs && node scripts/prerender.mjs && node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs && node scripts/auditImages.mjs && node scripts/auditArchitecture.mjs && node scripts/auditPrerender.mjs && node scripts/auditWhatsApp.mjs && node scripts/auditGreenIdentity.mjs",
+    "postbuild": "node scripts/stampBuild.mjs && node scripts/urlParity.mjs && node scripts/prerender.mjs && node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs && node scripts/auditImages.mjs && node scripts/auditArchitecture.mjs && node scripts/auditPrerender.mjs && node scripts/auditWhatsApp.mjs && node scripts/auditGreenIdentity.mjs && node scripts/auditLegacyClinic.mjs",
     "prerender": "node scripts/prerender.mjs",
     "preview": "vite preview",
     "preview:static": "node scripts/previewStatic.mjs",
     "typecheck": "tsc --noEmit",
-    "audit": "node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs && node scripts/auditImages.mjs && node scripts/auditArchitecture.mjs && node scripts/auditPrerender.mjs && node scripts/auditWhatsApp.mjs && node scripts/auditGreenIdentity.mjs",
-    "verify": "node scripts/verifyRendered.mjs"
+    "audit": "node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs && node scripts/auditImages.mjs && node scripts/auditArchitecture.mjs && node scripts/auditPrerender.mjs && node scripts/auditWhatsApp.mjs && node scripts/auditGreenIdentity.mjs && node scripts/auditLegacyClinic.mjs",
+    "audit:clinic": "node scripts/auditLegacyClinic.mjs",
+    "verify": "node scripts/verifyRendered.mjs && node scripts/auditLegacyClinic.mjs"
   },
   "dependencies": {
     "clsx": "2.1.1",

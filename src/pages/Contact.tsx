@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CareReferral } from "../components/CareReferral";
 import { IconShieldCheck } from "../components/icons";
+import { LegacyClinicCard } from "../components/LegacyClinicCard";
 import { PageHero } from "../components/PageHero";
 import { Seo } from "../components/Seo";
 import { WhatsAppContactCard } from "../components/WhatsAppContact";
@@ -78,6 +79,10 @@ export function Contact() {
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="max-w-3xl">
+        <LegacyClinicCard />
       </div>
 
       <div className="max-w-3xl">
