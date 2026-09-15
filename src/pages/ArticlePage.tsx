@@ -13,6 +13,7 @@ import { relatedArticles as pickRelated } from "../data/articles";
 import { clusterPath, getCluster, readingMinutes } from "../utils/content";
 import { CareReferral } from "../components/CareReferral";
 import { LOGO_SRC } from "../components/Logo";
+import { GLOBAL_SOCIAL_SHARE_IMAGE } from "../data/media";
 import type { ManagedArticle } from "../types";
 import { NotFound } from "./NotFound";
 
@@ -78,6 +79,7 @@ export function ArticlePage() {
               "@context": "https://schema.org",
               "@type": ["Article", "MedicalWebPage"],
               headline: article.h1,
+              image: [`${SITE.domain}${article.ogImage?.trim() || article.image?.trim() || GLOBAL_SOCIAL_SHARE_IMAGE}`],
               author: { "@type": "Organization", name: SITE.name, url: SITE.domain },
               publisher: {
                 "@type": "Organization",

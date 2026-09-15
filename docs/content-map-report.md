@@ -1,6 +1,6 @@
 # Content Map Report
 
-Date: 2026-09-14 · source: `content/map.json` + built `dist/seo-manifest.json`
+Date: 2026-09-15 · source: `content/map.json` + built `dist/seo-manifest.json`
 
 ## Search-intent ownership
 
@@ -13,21 +13,21 @@ Date: 2026-09-14 · source: `content/map.json` + built `dist/seo-manifest.json`
 ## Catalog snapshot
 
 - Content-map topics: **100**
-- Content-map items marked PUBLISHED/UPDATED: **36**
-- Built article records: **96** (96 indexable, 0 intentional noindex)
+- Content-map items marked PUBLISHED/UPDATED: **37**
+- Built article records: **95** (95 indexable, 0 intentional noindex)
 - Geographic articles protected by the editorial plan: **20**; no city page was added or removed by this audit.
 - Published/updated map targets missing from a built route: **0**
-- Planning-only target paths not yet built: **64**; these are IDEA records, not live URLs or mass-publishing instructions.
+- Planning-only target paths not yet built: **63**; these are IDEA records, not live URLs or mass-publishing instructions.
 
 | Status | Count |
 |---|---:|
-| IDEA | 64 |
+| IDEA | 63 |
 | RESEARCH | 0 |
 | OUTLINE | 0 |
 | DRAFT | 0 |
 | REVIEW | 0 |
 | READY | 0 |
-| PUBLISHED | 35 |
+| PUBLISHED | 36 |
 | UPDATED | 1 |
 
 ## Cluster pillars

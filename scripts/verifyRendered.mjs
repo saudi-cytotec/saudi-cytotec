@@ -46,17 +46,29 @@ if (!fs.existsSync(DIST_HTML)) {
   process.exit(1);
 }
 
-// ---------------------------------------------------------------- extract the inlined module bundle
+// ---------------------------------------------------------------- extract the module bundle
 const html = fs.readFileSync(DIST_HTML, "utf8");
-const chunks = [...html.matchAll(/<script type="module"[^>]*>([\s\S]*?)<\/script>/g)]
-  .map((m) => m[1])
-  .filter((c) => c.trim().length > 0);
-if (!chunks.length) {
-  console.error("[verify] no inlined module script found in dist/index.html (is vite-plugin-singlefile active?)");
+let bundlePath;
+const assetsDir = path.join(ROOT, "dist", "assets");
+if (fs.existsSync(assetsDir)) {
+  const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
+  if (assetJs) {
+    bundlePath = path.join(assetsDir, assetJs);
+  }
+}
+if (!bundlePath) {
+  const chunks = [...html.matchAll(/<script type="module"[^>]*>([\s\S]*?)<\/script>/g)]
+    .map((m) => m[1])
+    .filter((c) => c.trim().length > 0);
+  if (chunks.length) {
+    bundlePath = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "saudiersaa-verify-")), "bundle.mjs");
+    fs.writeFileSync(bundlePath, chunks.join("\n"));
+  }
+}
+if (!bundlePath) {
+  console.error("[verify] no module script found in dist/assets or dist/index.html");
   process.exit(1);
 }
-const bundlePath = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "saudiersaa-verify-")), "bundle.mjs");
-fs.writeFileSync(bundlePath, chunks.join("\n"));
 
 // ---------------------------------------------------------------- URL plan
 const sitemapXml = fs.readFileSync(SITEMAP, "utf8");

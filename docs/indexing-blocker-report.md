@@ -1,14 +1,14 @@
 # Indexing Blocker Report
 
-Date: 2026-09-14 · generated from the built catalog
+Date: 2026-09-15 · generated from the built catalog
 
 **Result: PASS — no known blocker**
 
 | Area | Result | Evidence |
 |---|---|---|
-| Indexable articles | PASS | 96 indexable; 0 intentional noindex |
+| Indexable articles | PASS | 95 indexable; 0 intentional noindex |
 | Canonical consistency | PASS | indexable records self-canonicalize |
-| Sitemap | PASS | 129 unique URLs; no noindex article is advertised |
+| Sitemap | PASS | 128 unique URLs; no noindex article is advertised |
 | Robots | PASS | public content allowed; admin/search/API excluded |
 
 ## Decision log

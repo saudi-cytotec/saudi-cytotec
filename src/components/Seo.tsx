@@ -54,11 +54,17 @@ export function Seo({
   const realImage = image && image.trim() ? image.trim() : "";
   const socialImage = realImage || GLOBAL_SOCIAL_SHARE_IMAGE;
   const imageUrl = socialImage.startsWith("http") ? socialImage : `${SITE.domain}${socialImage}`;
-  const fullTitle = absoluteTitle || title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
+  const cleanTitle = title.trim();
+  const hasBrand =
+    cleanTitle.includes("صحة المرأة السعودية") ||
+    cleanTitle.includes("سعودي إرساء") ||
+    cleanTitle.includes(SITE.nameEn) ||
+    cleanTitle.includes(SITE.name);
+  const fullTitle = absoluteTitle || hasBrand ? cleanTitle : `${cleanTitle} | صحة المرأة السعودية`;
   const socialTitle = ogTitle
-    ? absoluteTitle || ogTitle.includes(SITE.name)
-      ? ogTitle
-      : `${ogTitle} | ${SITE.name}`
+    ? absoluteTitle || ogTitle.includes("صحة المرأة") || ogTitle.includes(SITE.name)
+      ? ogTitle.trim()
+      : `${ogTitle.trim()} | صحة المرأة السعودية`
     : fullTitle;
   const socialDescription = ogDescription || description;
   return (

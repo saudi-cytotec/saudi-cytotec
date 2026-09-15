@@ -207,11 +207,6 @@ export function Home() {
             url: SITE.domain,
             inLanguage: SITE.locale,
             description: SITE.description,
-            potentialAction: {
-              "@type": "SearchAction",
-              target: `${SITE.domain}/search?q={search_term_string}`,
-              "query-input": "required name=search_term_string",
-            },
           },
           {
             // The homepage is the root of the trail: a single-item list, no

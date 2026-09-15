@@ -3,27 +3,20 @@
  *
  * Production rendering fix:
  *   - Reads public/sitemap.xml (129 canonical/indexable URLs) + the built
- *     single-file bundle (dist/index.html).
+ *     assets bundle (dist/assets/ or dist/index.html).
  *   - Renders each URL in jsdom (same harness as verifyRendered) so the DOM
  *     is the fully-rendered React tree (post-hydration behavior) at that URL.
  *   - Writes dist/<path>/index.html for each route with:
  *       * the page's OWN <title>, meta description, canonical, robots meta,
  *         Open Graph / Twitter / article metas (extracted from the rendered
  *         head produced by react-helmet-async),
- *       * the rendered #root innerHTML (real per-page content, page-specific
- *         H1), so crawlers without JS see the page itself — never the
- *         homepage HTML on a deep route,
- *       * a <noscript> shell block removed (the prerendered #root replaces
- *         it; guarantees exactly one H1 per page),
+ *       * exactly ONE canonical link tag per page, pointing to the page's own URL,
+ *       * exactly ONE meta description tag per page,
+ *       * the rendered #root innerHTML (real per-page content, page-specific H1),
+ *       * a <noscript> shell block removed (the prerendered #root replaces it),
  *       * markers: <meta name="prerender">, <meta name="prerender-path">,
  *         <meta name="whatsapp" content="00966530945626"> (from the shell).
- *   - The inlined module bundle is preserved in every file, so the SPA
- *     (React Router) fully boots in the browser after the static shell.
- *
- * Vercel serves these static files with filesystem precedence (an existing
- * dist/<path>/index.html wins over the `/(.*) → /index.html` rewrite), so
- * public pages are never served as a SPA catch-all. /api/*, redirects and
- * headers are untouched (see vercel.json).
+ *   - Emits dist/404.html for true HTTP 404 handling on unknown URLs.
  */
 
 import fs from "node:fs";
@@ -46,17 +39,30 @@ if (!fs.existsSync(DIST_HTML)) {
 }
 
 const html = fs.readFileSync(DIST_HTML, "utf8");
-const chunks = [...html.matchAll(/<script type="module"[^>]*>([\s\S]*?)<\/script>/g)]
-  .map((m) => m[1])
-  .filter((c) => c.trim().length > 0);
 
-if (!chunks.length) {
-  console.error("[prerender] no inlined module script found");
-  process.exit(1);
+let bundlePath;
+const assetsDir = path.join(ROOT, "dist", "assets");
+if (fs.existsSync(assetsDir)) {
+  const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
+  if (assetJs) {
+    bundlePath = path.join(assetsDir, assetJs);
+  }
 }
 
-const bundlePath = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "saudiersaa-prerender-")), "bundle.mjs");
-fs.writeFileSync(bundlePath, chunks.join("\n"));
+if (!bundlePath) {
+  const chunks = [...html.matchAll(/<script type="module"[^>]*>([\s\S]*?)<\/script>/g)]
+    .map((m) => m[1])
+    .filter((c) => c.trim().length > 0);
+  if (chunks.length) {
+    bundlePath = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "saudiersaa-prerender-")), "bundle.mjs");
+    fs.writeFileSync(bundlePath, chunks.join("\n"));
+  }
+}
+
+if (!bundlePath) {
+  console.error("[prerender] no module script found in dist/assets or dist/index.html");
+  process.exit(1);
+}
 
 const sitemapXml = fs.readFileSync(SITEMAP, "utf8");
 const sitemapUrls = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
@@ -184,20 +190,16 @@ function ensureDir(filePath) {
 /** Remove the generic homepage SEO elements from the shell head. */
 function stripShellSeo(shell) {
   let out = shell;
-  out = out.replace(/<title>[\s\S]*?<\/title>\n?/, "");
-  out = out.replace(/<!--\s*Homepage SEO shell:[\s\S]*?-->\n?/, "");
-  // Defensive: drop any prerender markers / per-page comment from an already
-  // enhanced shell so re-runs never accumulate stale meta sets.
-  out = out.replace(/<meta name="prerender[^"]*" content="[^"]*" \/>/g, "");
-  out = out.replace(/<!--\s*Prerendered per-page SEO head:[\s\S]*?-->\n?/, "");
-  out = out.replace(/<meta\s+name="description"[\s\S]*?\/>\n?/, "");
-  out = out.replace(/<link rel="canonical" href="[^"]*" \/>/g, "");
-  out = out.replace(/<meta name="robots" content="[^"]*" \/>/g, "");
-  out = out.replace(/<meta property="og:[^"]*" content="[^"]*" \/>/g, "");
-  out = out.replace(/<meta name="twitter:[^"]*" content="[^"]*" \/>/g, "");
-  // The prerendered #root is the no-JS content itself; the shell's generic
-  // noscript block (with its own H1) must not ship on prerendered pages.
-  out = out.replace(/<noscript>[\s\S]*?<\/noscript>\n?/, "");
+  out = out.replace(/<title>[\s\S]*?<\/title>\n?/gi, "");
+  out = out.replace(/<!--\s*Homepage SEO shell:[\s\S]*?-->\n?/gi, "");
+  out = out.replace(/<meta\s+name=["']prerender[^"']*["'][^>]*>\n?/gi, "");
+  out = out.replace(/<!--\s*Prerendered per-page SEO head:[\s\S]*?-->\n?/gi, "");
+  out = out.replace(/<meta\s+name=["']description["'][^>]*>\n?/gi, "");
+  out = out.replace(/<link\s+rel=["']canonical["'][^>]*>\n?/gi, "");
+  out = out.replace(/<meta\s+name=["']robots["'][^>]*>\n?/gi, "");
+  out = out.replace(/<meta\s+property=["']og:[^"']*["'][^>]*>\n?/gi, "");
+  out = out.replace(/<meta\s+name=["']twitter:[^"']*["'][^>]*>\n?/gi, "");
+  out = out.replace(/<noscript>[\s\S]*?<\/noscript>\n?/gi, "");
   return out;
 }
 
@@ -206,7 +208,8 @@ function seoBlock(head, urlPath, total) {
   const lines = [`    <!-- Prerendered per-page SEO head: ${urlPath} -->`];
   if (head.title) lines.push(`    ${head.title}`);
   if (head.description) lines.push(`    ${head.description}`);
-  if (head.canonical) lines.push(`    ${head.canonical}`);
+  const expectedCanonical = `${DOMAIN}${urlPath === "/" ? "/" : urlPath.replace(/\/$/, "")}`;
+  lines.push(`    <link rel="canonical" href="${expectedCanonical}" />`);
   if (head.robots) lines.push(`    ${head.robots}`);
   if (head.keywords) lines.push(`    ${head.keywords}`);
   for (const meta of head.social) lines.push(`    ${meta}`);
@@ -221,10 +224,6 @@ async function main() {
   let fallbacks = 0;
   const failures = [];
 
-  // The pristine vite shell, read ONCE before any page is written. Each page
-  // must be enhanced from this original — never from a previously enhanced
-  // output (dist/index.html is overwritten with the home's enhanced HTML
-  // during the loop and must not become the template for the other pages).
   const ORIGINAL_SHELL = fs.readFileSync(DIST_HTML, "utf8");
 
   for (const urlPath of paths) {
@@ -239,8 +238,6 @@ async function main() {
         outPath = path.join(DIST_DIR, clean, "index.html");
       }
 
-      // The shell is the single-file bundle: keep its <script type="module">
-      // (hydration/boot) while replacing the generic head + #root content.
       let enhanced = stripShellSeo(ORIGINAL_SHELL);
 
       const headOk = Boolean(settled && head.title && head.canonical && head.description);
@@ -248,8 +245,6 @@ async function main() {
       if (headOk) {
         enhanced = enhanced.replace("</head>", `${seoBlock(head, urlPath, paths.length)}\n  </head>`);
       } else {
-        // Unsettled render or missing head — keep the shell head as a
-        // degraded (but still functional) fallback for this page only.
         enhanced = enhanced.replace("</head>", `  <meta name="prerender" content="${paths.length}" />\n  <meta name="prerender-path" content="${urlPath}" />\n  <meta name="prerender-fallback" content="no-head" />\n  </head>`);
         if (settled) fallbacks++;
       }
@@ -259,7 +254,6 @@ async function main() {
           /<div id="root">[\s\S]*?<\/div>\s*<!--/,
           `<div id="root">${bodyRoot}</div>\n    <!--`
         );
-        // Fallback if pattern not matched (single-file may have different structure)
         if (!enhanced.includes(bodyRoot.slice(0, 50))) {
           enhanced = enhanced.replace(
             /<div id="root".*?<\/div>/s,
@@ -276,7 +270,6 @@ async function main() {
       }
     } catch (err) {
       failures.push(`${urlPath}: ${err.message}`);
-      // Fallback: copy shell as-is (still a working SPA shell)
       const clean = urlPath.replace(/\/$/, "");
       const outPath = urlPath === "/" ? path.join(DIST_DIR, "index.html") : path.join(DIST_DIR, clean, "index.html");
       ensureDir(outPath);
@@ -286,14 +279,33 @@ async function main() {
     }
   }
 
+  // Prerender 404 page for true HTTP 404 responses
+  try {
+    const { bodyRoot } = await render("/404");
+    let notFoundShell = stripShellSeo(ORIGINAL_SHELL);
+    notFoundShell = notFoundShell.replace(
+      "</head>",
+      `    <title>الصفحة غير موجودة 404 | صحة المرأة السعودية</title>\n    <meta name="robots" content="noindex,nofollow">\n  </head>`
+    );
+    if (bodyRoot) {
+      notFoundShell = notFoundShell.replace(
+        /<div id="root".*?<\/div>/s,
+        `<div id="root">${bodyRoot}</div>`
+      );
+    }
+    fs.writeFileSync(path.join(DIST_DIR, "404.html"), notFoundShell, "utf8");
+    console.log("[prerender] wrote dist/404.html for true HTTP 404 responses");
+  } catch (e) {
+    console.warn("[prerender] 404.html generation warning:", e.message);
+  }
+
   let commit = "unknown";
   try {
     commit = execSync("git rev-parse --short=7 HEAD", { cwd: ROOT }).toString().trim();
   } catch {
-    // no git context — leave "unknown"
+    // no git context
   }
 
-  // Write prerender manifest for verification (dist only — never tracked).
   const manifest = {
     pages: paths.length,
     whatsapp: "00966530945626",

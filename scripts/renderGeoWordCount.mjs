@@ -47,11 +47,21 @@ if (!fs.existsSync(DIST_HTML)) {
 }
 
 const html = fs.readFileSync(DIST_HTML, "utf8");
-const chunks = [...html.matchAll(/<script type="module"[^>]*>([\s\S]*?)<\/script>/g)]
-  .map((m) => m[1])
-  .filter((c) => c.trim().length > 0);
-const bundlePath = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "saudiersaa-count-")), "bundle.mjs");
-fs.writeFileSync(bundlePath, chunks.join("\n"));
+let bundlePath;
+const assetsDir = path.join(ROOT, "dist", "assets");
+if (fs.existsSync(assetsDir)) {
+  const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
+  if (assetJs) {
+    bundlePath = path.join(assetsDir, assetJs);
+  }
+}
+if (!bundlePath) {
+  const chunks = [...html.matchAll(/<script type="module"[^>]*>([\s\S]*?)<\/script>/g)]
+    .map((m) => m[1])
+    .filter((c) => c.trim().length > 0);
+  bundlePath = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "saudiersaa-count-")), "bundle.mjs");
+  fs.writeFileSync(bundlePath, chunks.join("\n"));
+}
 
 const countWords = (t) => (t || "").trim().split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
 
