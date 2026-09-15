@@ -70,13 +70,32 @@ const server = http.createServer((req, res) => {
     }
   }
 
-  // Vercel rewrite fallback: `/(.*) → /index.html` (SPA shell, 200)
+  if (pathname === "/admin" || pathname.startsWith("/admin/") || pathname === "/search" || pathname.startsWith("/search/")) {
+    const shell = path.join(DIST, "index.html");
+    if (!fs.existsSync(shell)) {
+      res.writeHead(503, { "Content-Type": "text/plain" }).end("dist/index.html missing — run `npm run build` first");
+      return;
+    }
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-cache" });
+    fs.createReadStream(shell).pipe(res);
+    return;
+  }
+
+  // Edge 404 response for unknown routes
+  const notFound = path.join(DIST, "404.html");
+  if (fs.existsSync(notFound)) {
+    res.writeHead(404, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-cache" });
+    fs.createReadStream(notFound).pipe(res);
+    return;
+  }
+
+  // Fallback if 404.html missing
   const shell = path.join(DIST, "index.html");
   if (!fs.existsSync(shell)) {
     res.writeHead(503, { "Content-Type": "text/plain" }).end("dist/index.html missing — run `npm run build` first");
     return;
   }
-  res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-cache" });
+  res.writeHead(404, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-cache" });
   fs.createReadStream(shell).pipe(res);
 });
 
