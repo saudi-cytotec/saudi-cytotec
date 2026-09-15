@@ -72,6 +72,7 @@ const NEW_NUMBER_ALLOW = new Set([
   path.join("scripts", "auditLegacyClinic.mjs"),
   path.join("scripts", "prerender.mjs"),
   path.join("docs", "competitor-research.md"),
+  path.join("docs", "final-audit-2026.md"),
   "SAUDIERSAA-IMPLEMENTATION-REPORT.md",
 ]);
 
