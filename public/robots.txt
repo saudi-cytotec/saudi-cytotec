@@ -6,3 +6,4 @@ Disallow: /admin
 Disallow: /api
 
 Sitemap: https://saudiersaa.com/sitemap.xml
+Sitemap: https://saudiersaa.com/image-sitemap.xml
