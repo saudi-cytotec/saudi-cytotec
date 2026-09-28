@@ -30,7 +30,7 @@ export const cluster08 = [
     title: "تداخلات دوائية أساسية",
     h1: "الدواء لا يعيش وحده في الجسم",
     metaTitle: "تداخلات ميزوبروستول الدوائية",
-    metaDescription: "مبادئ تعليمية عن التداخلات ولماذا تُذكر كل الأدوية بما فيها المسكنات.",
+    metaDescription: "مبادئ تعليمية لفهم التداخلات الدوائية مع ميزوبروستول ولماذا يجب إبلاغ الطبيب أو الصيدلي بكل الأدوية المستخدمة.",
     excerpt: "التداخل قد يزيد أثراً جانبياً أو يغيّر فعالية علاج آخر.",
     related: ["medicines-that-may-increase-risk", "discussing-medication-history", "misoprostol-gastric-ulcers"],
     points: [
@@ -52,7 +52,7 @@ export const cluster08 = [
     title: "الحساسية تجاه البروستاغلاندين",
     h1: "الحساسية سابقة تستحق أن تُروى بدقة",
     metaTitle: "الحساسية تجاه البروستاغلاندين",
-    metaDescription: "لماذا يُسأل عن تفاعلات سابقة مع نظائر البروستاغلاندين قبل أي وصف.",
+    metaDescription: "شرح أهمية معرفة التفاعلات التحسسية السابقة مع البروستاغلاندينات أو الأدوية المشابهة قبل أي قرار دوائي.",
     excerpt: "وصف «حساسية أدوية» عام جداً. تفاصيل الطفح أو الضيق أو الإغماء تغيّر القرار.",
     related: ["contraindications-misoprostol", "rare-serious-complications", "what-to-say-in-emergency"],
     points: [
@@ -74,7 +74,7 @@ export const cluster08 = [
     title: "اعتبارات القلب والأوعية",
     h1: "القلب يغيّر حساب المنفعة والخطر",
     metaTitle: "اعتبارات قلبية ووعائية",
-    metaDescription: "لماذا يجب ذكر أمراض القلب والأوعية قبل أي قرار دوائي حساس.",
+    metaDescription: "توضيح لماذا يجب ذكر أمراض القلب والأوعية والتاريخ الطبي للطبيب قبل تقييم أي قرار دوائي حساس.",
     excerpt: "بعض الحالات القلبية تجعل فقدان السوائل أو التقلصات أو فقر الدم أخطر.",
     related: ["conditions-needing-prior-assessment", "dizziness-and-fainting", "discussing-medication-history"],
     points: [
@@ -119,7 +119,7 @@ export const cluster08 = [
     title: "اعتبارات الرضاعة",
     h1: "الرضاعة سؤال مستقل عن الحمل",
     metaTitle: "ميزوبروستول والرضاعة اعتبارات تعليمية",
-    metaDescription: "لماذا تُناقش الرضاعة بشكل منفصل مع أي دواء، دون تعليمات فردية.",
+    metaDescription: "معلومات تعليمية عن مناقشة الرضاعة مع الأدوية، ولماذا يعتمد التقييم على المستحضر والحالة والسياق الطبي.",
     excerpt: "ما يصل إلى الحليب وكيفية مراقبة الرضيع قرار يُتخذ مع الطبيب لا مع المنشور.",
     related: ["pregnancy-and-medicines-faq", "discussing-medication-history", "official-drug-leaflets"],
     points: [
