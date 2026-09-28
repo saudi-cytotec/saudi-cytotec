@@ -4,6 +4,7 @@ import { Header } from "./Header";
 import { WhatsAppFloat } from "./WhatsAppContact";
 import { MedicalBanner, ConsultationBanner } from "./SiteWideBanners";
 
+// Vercel redeploy trigger: keep production build in sync with main.
 export function Layout() {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
