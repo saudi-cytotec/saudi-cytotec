@@ -37,6 +37,7 @@ import {
   HOME_SEO,
   HOME_SERVICES,
   HOME_SUPPORT_PAGES,
+  HOME_SAUDI_CITY_PAGES,
   HOME_VALUE,
   type HomeService,
 } from "../data/home";
@@ -602,6 +603,18 @@ export function Home() {
           {clusters.map((cluster) => (
             <CategoryCard key={cluster.id} cluster={cluster} count={publicArticles.filter((a) => a.cluster === cluster.id).length} />
           ))}
+        </div>
+      </section>
+
+
+      <section aria-labelledby="saudi-city-heading" className="card-premium p-6">
+        <div className="mb-5">
+          <h2 id="saudi-city-heading" className={SECTION_HEADING}>سايتوتك في المدن السعودية</h2>
+          <span className="mt-3 block h-1 w-14 rounded-full bg-accent" aria-hidden="true" />
+          <p className="mt-4 max-w-4xl text-sm leading-8 text-ink-soft">أدلة محلية جديدة للرياض وجدة ومكة والمدينة والدمام، تجمع عبارات البحث المحلية مع المعلومات الطبية والسلامة والمصادر الرسمية. لا تعني صفحات المدن توفر دواء معيناً أو تمثيل صيدلية بعينها.</p>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {HOME_SAUDI_CITY_PAGES.map((item) => <Link key={item.to} to={item.to} className="rounded-2xl border border-line bg-cream p-4 text-center font-bold text-brand-deep transition hover:border-brand/40 hover:bg-brand-soft">{item.label}</Link>)}
         </div>
       </section>
 
