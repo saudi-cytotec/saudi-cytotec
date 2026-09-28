@@ -3,6 +3,7 @@ import { CareReferral } from "../components/CareReferral";
 import { ContactCta } from "../components/ContactCta";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { PageHero } from "../components/PageHero";
+import { ConsultationBanner } from "../components/SiteWideBanners";
 import { ReferencesList } from "../components/ReferencesList";
 import { JsonLd, Seo } from "../components/Seo";
 import { serviceAreaLinks } from "../data/serviceAreas";
@@ -159,6 +160,8 @@ export function ServiceAreas() {
       <div className="max-w-3xl">
         <DisclaimerBanner />
       </div>
+
+      <ConsultationBanner />
 
       <section className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
         <article className="card-premium p-6">
