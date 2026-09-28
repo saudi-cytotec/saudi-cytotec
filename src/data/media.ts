@@ -3,8 +3,8 @@ import mediaRegistry from "../../content/media.json";
 
 /**
  * Media registry - repositioned.
- * Permanent approved assets now: logo, homepage banner, social-share.
- * Article WhatsApp banner removed as part of women's health repositioning.
+ * Permanent approved assets: logo, homepage banner, social-share, and the two approved site-wide banners.
+ * No legacy or auto-assigned article images are permitted.
  * No private WhatsApp funnel.
  */
 
