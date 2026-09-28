@@ -228,7 +228,34 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   report("Internal links", broken.length === 0 && brokenPaths.length === 0, `${slugs.size} slugs; related broken: ${broken.length}; cornerstone broken: ${brokenPaths.length}${broken.length ? ` (${broken.slice(0, 3).join(", ")})` : ""}${brokenPaths.length ? ` (${brokenPaths.slice(0, 3).join(", ")})` : ""}`);
 }
 
-// 9. Referenced images exist AND are from the approved assets only.
+// 9. Legacy WordPress / clinic data must never return to the production bundle.
+{
+  const forbiddenLegacyData = [
+    "00966599287172",
+    "+966 59 928 7172",
+    "دكتور هيثم الخطيب",
+    "بيانات العيادة",
+  ];
+  let bundle = "";
+  const filesToScan = [path.join(ROOT, "index.html"), DIST];
+  for (const file of filesToScan) {
+    if (fs.existsSync(file)) bundle += "\\n" + fs.readFileSync(file, "utf8");
+  }
+  const assetsDir = path.join(ROOT, "dist", "assets");
+  if (fs.existsSync(assetsDir)) {
+    for (const file of fs.readdirSync(assetsDir)) {
+      if (file.endsWith(".js")) bundle += "\\n" + fs.readFileSync(path.join(assetsDir, file), "utf8");
+    }
+  }
+  const found = forbiddenLegacyData.filter((token) => bundle.includes(token));
+  report(
+    "Legacy clinic data",
+    found.length === 0,
+    found.length ? `FORBIDDEN LEGACY DATA: ${found.join(", ")}` : "old WordPress clinic number/name are absent from the production bundle",
+  );
+}
+
+// 10. Referenced images exist AND are from the approved assets only.
 //
 // APPROVED_ASSETS — the exact owner-approved image set (logo, homepage hero,
 // social share, medical banner, consultation banner). Any other /images/ reference is a
