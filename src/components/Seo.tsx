@@ -93,6 +93,7 @@ export function Seo({
       {/* Custom OG > approved global social-share fallback. This is metadata
           only; neither value is rendered as an article body image here. */}
       <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:alt" content={description} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={socialTitle} />
       <meta name="twitter:description" content={socialDescription} />
