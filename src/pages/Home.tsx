@@ -300,6 +300,32 @@ export function Home() {
         <HeroWaves />
       </section>
 
+      {/* ── 2. شريط الخدمات السريع ──────────────────────────────────────── */}
+      <section aria-label="الخدمات السريعة" className="rounded-[1.75rem] bg-brand-deep p-4 shadow-[0_20px_45px_-25px_rgb(10_74_51/0.7)] sm:p-5">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <Link to="/what-is-cytotec" className="group rounded-2xl bg-white/10 p-4 text-white ring-1 ring-white/10 transition hover:bg-white/15">
+            <span className="text-xs font-bold text-white/70">دليل دوائي</span>
+            <span className="mt-1 block font-display text-base font-extrabold">سايتوتك في السعودية</span>
+            <span className="mt-2 block text-xs leading-5 text-white/75">تعريف ومعلومات وتحذيرات موثوقة</span>
+          </Link>
+          <Link to="/misoprostol" className="group rounded-2xl bg-white/10 p-4 text-white ring-1 ring-white/10 transition hover:bg-white/15">
+            <span className="text-xs font-bold text-white/70">المادة الفعالة</span>
+            <span className="mt-1 block font-display text-base font-extrabold">ميزوبروستول</span>
+            <span className="mt-2 block text-xs leading-5 text-white/75">الاستخدامات الطبية وإرشادات الأمان</span>
+          </Link>
+          <Link to="/safety" className="group rounded-2xl bg-white/10 p-4 text-white ring-1 ring-white/10 transition hover:bg-white/15">
+            <span className="text-xs font-bold text-white/70">الأمان</span>
+            <span className="mt-1 block font-display text-base font-extrabold">السلامة والتحذيرات</span>
+            <span className="mt-2 block text-xs leading-5 text-white/75">متى تحتاجين إلى رعاية طبية</span>
+          </Link>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="group rounded-2xl bg-[#16a34a] p-4 text-white shadow-lg transition hover:bg-[#15803d]">
+            <span className="flex items-center gap-2 text-xs font-bold text-white/85"><WhatsAppIcon className="h-4 w-4" /> تواصل مباشر</span>
+            <span className="mt-1 block font-display text-base font-extrabold">استفسري عبر واتساب</span>
+            <span dir="ltr" className="mt-2 block text-xs font-mono font-bold text-white/90">{WHATSAPP_NUMBER_RAW}</span>
+          </a>
+        </div>
+      </section>
+
       {/* ── 2. سايتوتك في السعودية ───────────────────────────────────────── */}
       <section aria-labelledby="cytotec-section" className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="card-premium scroll-mt-32 p-6 md:p-7">
