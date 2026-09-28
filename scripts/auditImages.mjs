@@ -5,8 +5,8 @@
  *
  * Owner-approved policy (hard rules):
  *   1. The only PERMANENT assets under public/images/ are the owner-approved
- *      files (logo, homepage hero, article WhatsApp banner, social share). Admin-uploaded
- *      CMS media lives separately under public/media/ and is registered in
+ *      files (logo, homepage hero, article WhatsApp banner, medical banner, social share).
+ *      Admin-uploaded CMS media lives separately under public/media/ and is registered in
  *      content/media.json — every such file must be registered, and every
  *      registered file must exist.
  *   2. No image reference may point at any deleted/legacy asset
@@ -30,9 +30,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 
 const APPROVED = [
-  "/images/لوجو.png",
+  "/images/logo.png",
   "/images/Bannerrr.png",
   "/images/saudiersaa-social-share.png",
+  "/images/site-medical-banner.png",
+  "/images/site-consultation-banner.png",
 ];
 
 /** Admin-uploaded CMS media: registered in content/media.json, served from /media/. */
@@ -65,8 +67,6 @@ function walk(dir, out = []) {
 }
 
 const IMAGE_EXT = /\.(png|jpe?g|gif|svg|webp|avif|ico)$/i;
-const IMAGE_PATH_RE = /\/images\/[^"')\s,;]+\.(?:png|jpe?g|gif|svg|webp|avif)/gi;
-// Any /images/ or root image path (also matches Arabic/Unicode names).
 const ANY_IMG_PATH_RE = /(?:^|["'`(])(\/(?:images\/|favicon|apple-touch-icon)[^"')\s,;]+\.(?:png|jpe?g|gif|svg|webp|avif|ico))/gi;
 
 console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
@@ -98,7 +98,6 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
     pass(`Permanent image file count = ${APPROVED.length}`, `${permanent.length} files`);
   }
 
-  // Uploaded CMS media must be exactly what the registry says it is.
   const uploadPaths = uploads.map((f) => "/" + f.replace(/^public\//, ""));
   const unregistered = uploadPaths.filter((f) => !REGISTERED_UPLOADS.includes(f));
   const missingUploads = REGISTERED_UPLOADS.filter((f) => !uploadPaths.includes(f));
@@ -112,8 +111,6 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
 
 // ------------------------------------------------- 2. no forbidden tokens in code
 {
-  // Source/config only (scripts are tooling that legitimately reference legacy
-  // names inside their own assertions, so they are excluded).
   const searchable = ["src", "api", "content"];
   const forbiddenTokens = [
     /og-default/i,
@@ -132,9 +129,7 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
     /\/images\/emergency\./i,
     /\/images\/womens-health\./i,
     /\/images\/whatsapp-consult\./i,
-    /\/images\/logo\.png/i,
   ];
-  // Ignore comment lines; only code/JSON values count.
   const isComment = (line) =>
     /^\s*(?:\/\/|\*|\/\*|#|<!--)/.test(line) || /^\s*$/.test(line);
   const hits = [];
@@ -153,7 +148,6 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
       }
     }
   }
-  // index.html carries real markup; HTML comments are stripped before scanning.
   for (const extra of [path.join(ROOT, "index.html"), path.join(ROOT, "vercel.json"), path.join(ROOT, "package.json")]) {
     if (!fs.existsSync(extra)) continue;
     const text = fs.readFileSync(extra, "utf8").replace(/<!--[\s\S]*?-->/g, "");
@@ -204,7 +198,6 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
     for (const m of text.matchAll(ANY_IMG_PATH_RE)) {
       const ref = m[1];
       const norm = ref.startsWith("/") ? ref : "/" + ref;
-      // Normalize URL-encoded unicode to the literal file path.
       const decoded = decodeURIComponent(norm);
       if (!isAllowedRef(decoded)) badRefs.push(`${path.relative(ROOT, p)}: ${decoded}`);
       else refs.add(decoded);
@@ -226,9 +219,6 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
 
 // ------------------------------------------------- 4. article image values are approved-only
 {
-  // Path fields: any non-empty value must be one of the approved assets.
-  // "No selected image" (absent or "") is a fully valid state. Alt fields are
-  // free text and only matter when a path is actually set.
   const PATH_KEYS = ["image", "thumbnail", "bannerImage", "ogImage"];
   const publishedDir = path.join(ROOT, "content", "published");
   let files = 0;
@@ -240,7 +230,7 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
     for (const key of PATH_KEYS) {
       if (!Object.prototype.hasOwnProperty.call(a, key)) continue;
       const value = String(a[key] ?? "").trim();
-      if (!value) continue; // explicitly no selected image — valid
+      if (!value) continue;
       if (!isAllowedRef(value)) withImage++, offenders.push(`${a.slug || f}:${key}=${value}`);
     }
   }
@@ -250,7 +240,6 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
     fail("Published article image values are allowed-only", `${withImage}: ${offenders.slice(0, 5).join(", ")}`);
   }
 
-  // Static TS articles must not invent images either.
   const staticDir = path.join(ROOT, "src", "data", "articles");
   let staticHits = [];
   for (const f of fs.readdirSync(staticDir).filter((x) => x.endsWith(".ts"))) {
