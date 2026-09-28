@@ -4,7 +4,6 @@ import { ContentBlocks } from "../components/ContentBlocks";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { IconArrowLeft } from "../components/icons";
 import { PageHero } from "../components/PageHero";
-import { ConsultationBanner } from "../components/SiteWideBanners";
 import { Seo } from "../components/Seo";
 import type { StaticPage as StaticPageType } from "../types";
 
@@ -16,8 +15,6 @@ export function StaticPage({ page }: { page: StaticPageType }) {
       <div className="max-w-3xl">
         <DisclaimerBanner />
       </div>
-      <ConsultationBanner />
-
       <div className="max-w-3xl">
         <ContentBlocks blocks={page.blocks} />
       </div>
