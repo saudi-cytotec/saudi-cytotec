@@ -12,7 +12,6 @@ import { relatedArticles as pickRelated } from "../data/articles";
 import { clusterPath, getCluster, readingMinutes } from "../utils/content";
 import { CareReferral } from "../components/CareReferral";
 import { LOGO_SRC } from "../components/Logo";
-import { ConsultationBanner } from "../components/SiteWideBanners";
 import { GLOBAL_SOCIAL_SHARE_IMAGE } from "../data/media";
 import type { ManagedArticle } from "../types";
 import { NotFound } from "./NotFound";
@@ -155,8 +154,6 @@ export function ArticlePage() {
       <div className="mt-6 max-w-3xl">
         <DisclaimerBanner />
       </div>
-
-      <ConsultationBanner />
 
       <div className="mt-10">
         <ContentBlocks blocks={article.blocks} />
