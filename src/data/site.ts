@@ -23,24 +23,24 @@ export const BRAND_TAGLINE = "منصة سعودية موثوقة للتوعية 
 
 export const mainNav: NavItem[] = [
   { to: "/", label: "الرئيسية" },
-  { to: "/topics", label: "محاور المحتوى" },
+  { to: "/what-is-cytotec", label: "سايتوتك في السعودية" },
+  { to: "/service-areas", label: "خدماتنا" },
   { to: "/blog", label: "المقالات" },
   { to: "/womens-health", label: "صحة المرأة" },
-  { to: "/early-pregnancy", label: "الحمل المبكر" },
-  { to: "/safety", label: "الأمان الدوائي" },
   { to: "/faq", label: "الأسئلة الشائعة" },
+  { to: "/contact", label: "تواصل معنا" },
 ];
 
 export const moreNav: NavItem[] = [
-  { to: "/what-is-cytotec", label: "ما هو سايتوتك؟ (توعوي)" },
   { to: "/misoprostol", label: "ميزوبروستول (توعوي)" },
   { to: "/medical-uses", label: "الاستخدامات الطبية" },
+  { to: "/safety", label: "الأمان الدوائي" },
   { to: "/side-effects", label: "الآثار الجانبية" },
   { to: "/when-to-see-doctor", label: "متى تراجعين الطبيب" },
   { to: "/medical-sources", label: "المصادر الطبية" },
-  { to: "/service-areas", label: "الرعاية في السعودية" },
+  { to: "/topics", label: "محاور المحتوى" },
+  { to: "/early-pregnancy", label: "الحمل المبكر" },
   { to: "/about", label: "من نحن" },
-  { to: "/contact", label: "اتصل بنا" },
   { to: "/medical-disclaimer", label: "إخلاء المسؤولية" },
   { to: "/privacy", label: "الخصوصية" },
   { to: "/sitemap", label: "خريطة الموقع" },
