@@ -138,7 +138,7 @@ export const cluster04 = [
     title: "متى تصبح الأعراض طارئة؟",
     h1: "خط التحول من العرض إلى الطارئ",
     metaTitle: "متى تصبح الأعراض طارئة",
-    metaDescription: "قائمة تعليمية لعلامات تستدعي الطوارئ بدل المراقبة المنزلية.",
+    metaDescription: "علامات تعليمية تساعد على فهم متى تتحول الأعراض إلى حالة تستدعي تقييماً عاجلاً أو رعاية طوارئ بدلاً من الانتظار.",
     excerpt: "الطوارئ ليست مبالغة؛ هي اعتراف بأن بعض التغيرات لا تحتمل جدولاً عادياً.",
     related: ["when-to-see-doctor-immediately", "annoying-symptom-vs-emergency", "rare-serious-complications"],
     points: [
