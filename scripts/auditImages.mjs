@@ -21,6 +21,7 @@
  *   5. Every referenced image must exist on disk.
  *
  * Exit 1 on any violation.
+ * Approved permanent site assets are synchronized with src/data/media.ts.
  */
 import fs from "node:fs";
 import path from "node:path";
