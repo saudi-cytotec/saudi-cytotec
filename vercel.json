@@ -92,6 +92,11 @@
   ],
   "redirects": [
     {
+      "source": "/image-sitemap.xml",
+      "destination": "/api/image-sitemap",
+      "statusCode": 301
+    },
+    {
       "source": "/:path*",
       "has": [
         {
