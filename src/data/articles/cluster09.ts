@@ -6,7 +6,7 @@ export const cluster09 = [
     title: "متى تراجعين الطبيب فوراً",
     h1: "عتبة الفورية أوضح مما يظن كثيرون",
     metaTitle: "متى تراجعين الطبيب فوراً",
-    metaDescription: "علامات تستدعي مراجعة فورية أو طوارئ دون انتظار موعد روتيني.",
+    metaDescription: "علامات وأعراض تستدعي مراجعة الطبيب فوراً أو طلب رعاية عاجلة، مع توضيح متى لا يكفي الانتظار لموعد روتيني.",
     excerpt: "الفورية تعني الآن: نزيف غزير، إغماء، ألم حاد، حمى متدهورة، ضيق تنفس.",
     related: ["signs-of-dangerous-bleeding", "severe-abdominal-pain", "dizziness-and-fainting"],
     points: [
@@ -50,7 +50,7 @@ export const cluster09 = [
     title: "الحمى المرتفعة والعدوى",
     h1: "الحمى مع تدهور عام ليست انتظاراً",
     metaTitle: "الحمى المرتفعة والعدوى",
-    metaDescription: "متى تشير الحمى إلى حاجة عاجلة، خاصة مع ألم حوض أو نزيف أو حمل.",
+    metaDescription: "متى قد تشير الحمى المرتفعة إلى عدوى أو مضاعفة تحتاج تقييماً عاجلاً، خصوصاً مع الألم أو النزيف أو الحمل.",
     excerpt: "العدوى قد تتسارع. الرعشة والارتباك وانخفاض البول علامات سوء.",
     related: ["fever-and-chills", "when-symptoms-are-emergencies", "follow-up-after-medical-care"],
     points: [
@@ -72,7 +72,7 @@ export const cluster09 = [
     title: "ألم البطن الشديد",
     h1: "الألم الذي يثنيك عن الحركة",
     metaTitle: "ألم البطن الشديد متى يكون طارئاً",
-    metaDescription: "إطار تعليمي لألم البطن الحاد وارتباطه بالحمل والمضاعفات الجراحية.",
+    metaDescription: "إطار تعليمي لفهم ألم البطن الشديد وعلامات الخطر التي قد تستدعي تقييماً عاجلاً، خصوصاً أثناء الحمل.",
     excerpt: "الألم المفاجئ الكاسر مع قيء أو إغماء أو بطن قاسٍ مسار طوارئ.",
     related: ["pelvic-pain-when-to-see-doctor", "warning-signs-in-pregnancy", "uterine-reproductive-effects"],
     points: [
@@ -94,7 +94,7 @@ export const cluster09 = [
     title: "الدوخة والإغماء",
     h1: "فقدان الوعي ليس تعباً عابراً",
     metaTitle: "الدوخة والإغماء علامات خطر",
-    metaDescription: "ربط تعليمي بين الدوخة والإغماء والنزف أو الجفاف أو الحمل خارج الرحم.",
+    metaDescription: "شرح تعليمي للدوخة والإغماء وعلاقتهما المحتملين بالنزف أو الجفاف أو حالات تستدعي تقييماً عاجلاً.",
     excerpt: "الإغماء مع نزيف أو ألم بطني يغيّر الأولوية إلى الإنقاذ.",
     related: ["signs-of-dangerous-bleeding", "when-to-see-doctor-immediately", "anemia-womens-health"],
     points: [
