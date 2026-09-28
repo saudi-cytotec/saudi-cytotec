@@ -215,28 +215,28 @@
     },
     {
       "source": "/سايتوتك_الرياض/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
       "reason": "Legacy seller-era city page — educational replacement.",
       "createdAt": "2026-08-29"
     },
     {
       "source": "/سايتوتك_في_الرياض/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
       "reason": "Legacy seller-era city page — educational replacement.",
       "createdAt": "2026-08-29"
     },
     {
       "source": "/سايتوتك_في_الرياض-2/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
       "reason": "Legacy seller-era duplicate city page.",
       "createdAt": "2026-08-29"
     },
     {
       "source": "/سايتوتك_في_جدة/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
       "reason": "Legacy seller-era city page — educational replacement.",
       "createdAt": "2026-08-29"
@@ -271,14 +271,14 @@
     },
     {
       "source": "/حبوب_سايتوتك_الرياض/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
       "reason": "Legacy seller-era city page — educational replacement.",
       "createdAt": "2026-08-29"
     },
     {
       "source": "/حبوب_سايتوتك_للبيع_في_الرياض/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
       "reason": "Legacy seller-era page — educational replacement.",
       "createdAt": "2026-08-29"
