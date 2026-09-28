@@ -26,7 +26,7 @@ export type CountryBlock =
 
 export interface CountrySpec {
   /** Lower-case country code used for lookups. */
-  code: "sa" | "ae" | "kw" | "bh";
+  code: "sa" | "ae" | "kw" | "bh" | "qa";
   /** Public route, e.g. /abortion-pills-uae */
   path: string;
   /** Human label used in navigation chips and breadcrumbs. */
