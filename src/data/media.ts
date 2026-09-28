@@ -20,7 +20,7 @@ export interface MediaItem {
 }
 
 export const APPROVED_IMAGE_FILES = [
-  "/images/لوجو.png",
+  "/images/logo.png",
   "/images/Bannerrr.png",
   "/images/saudiersaa-social-share.png",
 ] as const;
@@ -29,7 +29,7 @@ export const GLOBAL_SOCIAL_SHARE_IMAGE = "/images/saudiersaa-social-share.png" a
 
 export const approvedAssets: MediaItem[] = [
   {
-    file: "/images/لوجو.png",
+    file: "/images/logo.png",
     alt: "شعار سعودي إرساء — صحة المرأة السعودية",
     width: 1536,
     height: 1024,
