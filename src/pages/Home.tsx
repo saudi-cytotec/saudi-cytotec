@@ -8,7 +8,6 @@ import { CareReferral } from "../components/CareReferral";
 import { ReferencesList } from "../components/ReferencesList";
 import { Wordmark } from "../components/Logo";
 import { LOGO_SRC } from "../components/Logo";
-import { MedicalBanner, ConsultationBanner } from "../components/SiteWideBanners";
 import {
   IconArrowLeft,
   IconBook,
@@ -327,7 +326,6 @@ export function Home() {
         </div>
       </section>
 
-      <MedicalBanner />
 
       {/* ── 2. سايتوتك في السعودية ───────────────────────────────────────── */}
       <section aria-labelledby="cytotec-section" className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
@@ -610,7 +608,6 @@ export function Home() {
       <ReferencesList ids={[...HOME_REFERENCE_IDS]} />
 
       <CareReferral />
-      <ConsultationBanner />
       <ContactCta topic="سايتوتك وصحة المرأة في السعودية" />
     </div>
   );
