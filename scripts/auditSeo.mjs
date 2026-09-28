@@ -11,7 +11,7 @@
  *   5. Content map — 100 topics, unique ids/urls, valid cross-references
  *   6. Bundle SEO shell — title, description, canonical, robots meta present
  *   7. Internal links from article data — no broken related/cornerstone targets
- *   8. Images — referenced images exist
+ *   8. Image sitemap — emitted as a production asset and valid XML\n *   9. Images — referenced images exist
  *
  * Writes docs/seo-audit.md with the full report.
  */
@@ -23,6 +23,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const DIST = path.join(ROOT, "dist", "index.html");
 const SITEMAP = path.join(ROOT, "public", "sitemap.xml");
+const IMAGE_SITEMAP = path.join(ROOT, "dist", "image-sitemap.xml");
 const ROBOTS = path.join(ROOT, "public", "robots.txt");
 const BASELINE = path.join(ROOT, "docs", "url-baseline.txt");
 const REDIRECTS = path.join(ROOT, "content", "redirects.json");
@@ -86,7 +87,21 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   );
 }
 
-// 2. Robots
+// 2. Image sitemap production asset
+{
+  const exists = fs.existsSync(IMAGE_SITEMAP);
+  let valid = false;
+  let detail = "missing from dist/";
+  if (exists) {
+    const xml = fs.readFileSync(IMAGE_SITEMAP, "utf8");
+    valid = xml.includes('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"') &&
+      /<image:image>\\s*<image:loc>https:\\/\\/saudiersaa\\.com\\/images\\/[^<]+<\\/image:loc>\\s*<\\/image:image>/.test(xml);
+    detail = valid ? "present in dist/ with valid image namespace and image references" : "present but malformed or missing image tags";
+  }
+  report("Image sitemap", exists && valid, detail);
+}
+
+// 3. Robots
 {
   const robots = fs.readFileSync(ROBOTS, "utf8");
   const ok =
@@ -100,7 +115,7 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   report("Robots", ok, ok ? "public allowed; /admin,/api excluded; sitemap declared; assets allowed" : robots.split("\n").slice(0, 8).join(" | "));
 }
 
-// 3. Forbidden schema types (bundle ld+json templates)
+// 4. Forbidden schema types (bundle ld+json templates)
 {
   const html = fs.readFileSync(DIST, "utf8");
   let allJs = html;
@@ -124,7 +139,7 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   report("Schema", violations.length === 0, violations.length ? `FORBIDDEN: ${violations.join(", ")}` : `types in bundle: ${unique.join(", ")}`);
 }
 
-// 4. Redirects
+// 5. Redirects
 {
   const registry = JSON.parse(fs.readFileSync(REDIRECTS, "utf8"));
   const sitemapUrls = locs(fs.readFileSync(SITEMAP, "utf8")).map((url) => url.replace("https://saudiersaa.com", ""));
@@ -150,7 +165,7 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   );
 }
 
-// 5. Content map
+// 6. Content map
 {
   const map = JSON.parse(fs.readFileSync(MAP, "utf8"));
   const ids = map.items.map((item) => item.id);
@@ -174,7 +189,7 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   );
 }
 
-// 6. Bundle SEO shell (static shell + runtime emission in bundle)
+// 7. Bundle SEO shell (static shell + runtime emission in bundle)
 {
   const html = fs.readFileSync(DIST, "utf8");
   const hasTitle = /<title>[^<]+<\/title>/.test(html);
@@ -188,7 +203,7 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   report("Bundle shell", hasTitle && hasCanonical && hasRobots && hasBuildMarker && runtimeMeta, `shell title/canonical/robots/build-marker ${hasTitle && hasCanonical && hasRobots && hasBuildMarker ? "present" : "MISSING"}; runtime meta ${runtimeMeta ? "present" : "MISSING"}`);
 }
 
-// 7. Internal links from article data
+// 8. Internal links from article data
 {
   const files = fs.readdirSync(ARTICLES_DIR).filter((file) => file.endsWith(".ts"));
   let all = "";
@@ -212,7 +227,7 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   report("Internal links", broken.length === 0 && brokenPaths.length === 0, `${slugs.size} slugs; related broken: ${broken.length}; cornerstone broken: ${brokenPaths.length}${broken.length ? ` (${broken.slice(0, 3).join(", ")})` : ""}${brokenPaths.length ? ` (${brokenPaths.slice(0, 3).join(", ")})` : ""}`);
 }
 
-// 8. Referenced images exist AND are from the approved assets only.
+// 9. Referenced images exist AND are from the approved assets only.
 //
 // APPROVED_ASSETS — the exact owner-approved image set (logo, homepage hero,
 // social share, medical banner, consultation banner). Any other /images/ reference is a
