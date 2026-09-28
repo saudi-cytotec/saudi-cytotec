@@ -8,7 +8,7 @@ export const cluster01 = [
     metaTitle: "تعريف سايتوتك بعيداً عن الشائعات",
     metaDescription: "مقال تعليمي يوضح أن سايتوتك اسم تجاري لمادة ميزوبروستول، ولماذا لا يكفي الاسم لفهم التحذيرات أو اتخاذ قرار صحي.",
     excerpt: "البحث عن الاسم الشائع يبدأ غالباً من القلق. هذا المقال يضع التعريف في سياقه التنظيمي ويفصل بين الشهرة والمعلومة.",
-    related: ["misoprostol-active-ingredient", "difference-cytotec-misoprostol", "key-facts-before-reading-cytotec", "cytotec-uses"],
+    related: ["misoprostol-active-ingredient", "difference-cytotec-misoprostol", "key-facts-before-reading-cytotec", "approved-medical-uses-misoprostol"],
     points: [
       "سايتوتك علامة تجارية، والتعريف الطبي يبدأ من المادة والاستطباب والتحذير لا من سهولة حفظ الاسم.",
       "نشرة إدارة الغذاء والدواء تربط الاسم بتحذير حمل بارز واستطباب مشروط لحماية المعدة.",
@@ -182,7 +182,7 @@ export const cluster01 = [
     title: "ميزوبروستول في المراجع السريرية",
     h1: "كيف يظهر ميزوبروستول في المراجع المهنية؟",
     metaTitle: "ميزوبروستول في المراجع السريرية",
-    metaDescription: "توضيح الفرق بين مرجع مهني موجّه للممارسين وبين مقال تعليمي للعموم.",
+    metaDescription: "شرح تعليمي لكيف يظهر ميزوبروستول في المراجع السريرية، والفرق بين الدليل المهني والمعلومة العامة وحدود نقل البروتوكولات.",
     excerpt: "المراجع السريرية تُكتب لمن يديرون بروتوكولات، لا لمن يبحثون عن حل سريع في المنزل.",
     related: ["official-drug-leaflets", "fda-cytotec-warnings", "how-misoprostol-works-in-body"],
     points: [
