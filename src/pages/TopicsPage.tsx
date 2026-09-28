@@ -4,7 +4,6 @@ import { mapRegistry } from "../cms/registrySource";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CategoryCard } from "../components/CategoryCard";
 import { Seo } from "../components/Seo";
-import { ConsultationBanner } from "../components/SiteWideBanners";
 import { clusters } from "../data/site";
 import { clusterPath } from "../utils/content";
 
@@ -73,8 +72,6 @@ export function TopicsPage() {
           </Link>
         </div>
       </section>
-
-      <ConsultationBanner />
 
       <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {clusters.map((cluster) => (
