@@ -261,21 +261,21 @@ export function Home() {
                 aria-label={`تواصل معنا عبر واتساب ${WHATSAPP_NUMBER_RAW}`}
               >
                 <WhatsAppIcon className="h-5 w-5" />
-                تواصلي عبر واتساب
+                استفسري عبر واتساب
                 <span dir="ltr" className="hidden font-mono text-xs font-bold sm:inline">{WHATSAPP_NUMBER_RAW}</span>
               </a>
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-white/80 px-6 py-3.5 text-sm font-bold text-brand transition hover:border-brand/50 hover:bg-white"
               >
-                تواصلي معنا للاستفسار
+                تواصلي مع فريق الموقع
                 <IconArrowLeft className="h-4.5 w-4.5" />
               </Link>
               <Link
                 to="/what-is-cytotec"
                 className="inline-flex items-center rounded-full border border-brand/25 bg-white/70 px-6 py-3.5 text-sm font-bold text-brand transition hover:border-brand/50 hover:bg-white"
               >
-                ما هو سايتوتك؟ (المعلومات الطبية)
+                دليل سايتوتك والمعلومات الطبية
               </Link>
             </div>
             <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-semibold text-brand-deep">
@@ -338,10 +338,10 @@ export function Home() {
 
         {/* ── 3. الخدمات الدوائية والصيدلية ──────────────────────────────── */}
         <div className="card-premium p-5">
-          <h2 className="font-display text-lg font-extrabold text-brand-deep">الخدمات الدوائية والصيدلية</h2>
+          <h2 className="font-display text-lg font-extrabold text-brand-deep">خدماتنا ومعلوماتنا الدوائية</h2>
           <p className="mt-1.5 text-xs leading-6 text-ink-soft">
-            ما يقدّمه الموقع فعلياً: معلومات موثّقة، ومسار نظامي واضح، وقناة تواصل. لا نعرض أسعاراً ولا مخزوناً ولا
-            مواعيد توصيل لأنها تحتاج تأكيداً من الجهة المرخّصة.
+            دليل دوائي منظم، صفحات مرجعية، معلومات أمان، مسار رعاية نظامي، ومصادر رسمية — مع قناة تواصل واضحة
+            للاستفسارات العامة. لا نعرض أسعاراً أو مخزوناً أو وعود توصيل غير موثقة.
           </p>
           <div className="mt-4 space-y-3">
             {HOME_SERVICES.map((service) => {
