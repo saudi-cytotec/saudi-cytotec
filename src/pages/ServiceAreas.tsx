@@ -268,6 +268,28 @@ export function ServiceAreas() {
         </div>
       </section>
 
+
+      <section className="card-premium p-6">
+        <h2 className="font-display text-2xl font-extrabold text-brand-deep">أدلة أدوية إجهاض الحمل حسب الدولة</h2>
+        <p className="mt-3 max-w-4xl text-sm leading-8 text-ink-soft">
+          إذا كان بحثك مرتبطاً بدولة خليجية أخرى، استخدمي الدليل المحلي المناسب. كل صفحة تشرح المعلومات الدوائية
+          والسلامة والسياق التنظيمي للدولة، ولا تقدم بيعاً أو جرعات أو خطوات استخدام.
+        </p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {[
+            ["/abortion-pills-saudi-arabia", "أدوية إجهاض الحمل في السعودية"],
+            ["/abortion-pills-uae", "أدوية إجهاض الحمل في الإمارات"],
+            ["/abortion-pills-kuwait", "أدوية إجهاض الحمل في الكويت"],
+            ["/abortion-pills-bahrain", "أدوية إجهاض الحمل في البحرين"],
+            ["/abortion-pills-qatar", "أدوية إجهاض الحمل في قطر"],
+          ].map(([to, label]) => (
+            <Link key={to} to={to} className="rounded-2xl border border-line bg-cream p-4 font-bold text-brand-deep transition hover:bg-brand-soft">
+              {label}
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <ReferencesList ids={["sfda", "moh", "fdaLabel", "dailyMed", "medlinePlus"]} />
       <CareReferral />
       <ContactCta topic="سؤال عن الرعاية الصحية للمرأة في السعودية" />
