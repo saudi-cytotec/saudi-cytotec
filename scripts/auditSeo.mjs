@@ -215,19 +215,21 @@ console.log("SEO AUDIT — saudiersaa.com\n");
 // 8. Referenced images exist AND are from the approved assets only.
 //
 // APPROVED_ASSETS — the exact owner-approved image set (logo, homepage hero,
-// social share). WhatsApp banner removed in repositioning. Any other /images/ reference is a
+// social share, medical banner, consultation banner). Any other /images/ reference is a
 // violation: no og-default, no generated article image, no favicon, no legacy
 // contextual images. Admin uploads live under /media/, not /images/, and are
 // covered by scripts/auditImages.mjs against content/media.json.
 const APPROVED_ASSETS = new Set([
-  "/images/لوجو.png",
+  "/images/logo.png",
   "/images/Bannerrr.png",
   "/images/saudiersaa-social-share.png",
+  "/images/site-medical-banner.png",
+  "/images/site-consultation-banner.png",
 ]);
 {
   const html = fs.readFileSync(DIST, "utf8");
   const media = fs.readFileSync(path.join(ROOT, "src", "data", "media.ts"), "utf8");
-  // Unicode-aware: approved filenames include Arabic (لوجو.png).
+  // Unicode-aware image reference scan.
   const srcRefs = [...html.matchAll(/\/images\/[^"'()\s,;]+\.(?:jpg|jpeg|png|svg|webp|avif)/gi)].map((m) => m[0]);
   const mediaRefs = [...media.matchAll(/\/images\/[^"'()\s,;]+\.(?:jpg|jpeg|png|svg|webp|avif)/gi)].map((m) => m[0]);
   const refs = [...new Set([...srcRefs, ...mediaRefs])].map((src) => decodeURIComponent(src));
