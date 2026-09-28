@@ -79,7 +79,7 @@ export function ArticlePage() {
               "@type": ["Article", "MedicalWebPage"],
               headline: article.h1,
               image: [`${SITE.domain}${article.ogImage?.trim() || article.image?.trim() || GLOBAL_SOCIAL_SHARE_IMAGE}`],
-              author: { "@type": "Organization", name: SITE.name, url: SITE.domain },
+              author: { "@type": "Organization", name: SITE.name, url: `${SITE.domain}/about` },
               publisher: {
                 "@type": "Organization",
                 name: SITE.name,

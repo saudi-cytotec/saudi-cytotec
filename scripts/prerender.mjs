@@ -85,7 +85,7 @@ for (const p of extraPaths) {
   if (!paths.includes(p)) paths.push(p);
 }
 
-console.log(`[prerender] discovered ${paths.length} URLs from sitemap + extras (target 129)`);
+console.log(`[prerender] discovered ${paths.length} URLs from sitemap + extras`);
 
 function pathToFileUrlSafe(file) {
   return "file://" + file.split(path.sep).join("/");

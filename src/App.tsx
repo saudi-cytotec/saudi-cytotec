@@ -15,6 +15,7 @@ import { FaqHub } from "./pages/FaqHub";
 import { SearchPage } from "./pages/SearchPage";
 import { SaudiCityPage, getSaudiCitySpec } from "./pages/SaudiCityPage";
 import { ServiceAreas } from "./pages/ServiceAreas";
+import { saudiCityPages } from "./data/saudiCities";
 import { SitemapPage } from "./pages/SitemapPage";
 import { StaticPage } from "./pages/StaticPage";
 import { TopicsPage } from "./pages/TopicsPage";
@@ -38,7 +39,7 @@ export default function App() {
           <Route path="/topics" element={<TopicsPage />} />
           <Route path="/faq" element={<FaqHub />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
-          {["riyadh","jeddah","makkah","medina","dammam"].map((slug) => <Route key={slug} path={`/cytotec-${slug}`} element={<SaudiCityPage spec={getSaudiCitySpec(slug)!} />} />)}
+          {saudiCityPages.map((city) => <Route key={city.slug} path={`/cytotec-${city.slug}`} element={<SaudiCityPage spec={getSaudiCitySpec(city.slug)!} />} />}
           {staticPages
             .filter((page) => page.path !== "/faq" && !countryPagePaths.has(page.path))
             .map((page) => (

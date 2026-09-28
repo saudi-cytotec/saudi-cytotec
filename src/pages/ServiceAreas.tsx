@@ -6,31 +6,11 @@ import { PageHero } from "../components/PageHero";
 import { ReferencesList } from "../components/ReferencesList";
 import { JsonLd, Seo } from "../components/Seo";
 import { serviceAreaLinks } from "../data/serviceAreas";
+import { saudiCityPages } from "../data/saudiCities";
 import { SITE } from "../data/site";
 
 
-const saudiCities = [
-  "الرياض",
-  "جدة",
-  "مكة المكرمة",
-  "المدينة المنورة",
-  "الدمام",
-  "الخبر",
-  "الطائف",
-  "تبوك",
-  "بريدة",
-  "عنيزة",
-  "حائل",
-  "أبها",
-  "خميس مشيط",
-  "جازان",
-  "نجران",
-  "الجبيل",
-  "الأحساء",
-  "الهفوف",
-  "القطيف",
-  "صفوى",
-];
+
 
 const faqItems = [
   {
@@ -247,23 +227,22 @@ export function ServiceAreas() {
       </section>
 
       <section className="card-premium p-6">
-        <h2 className="font-display text-2xl font-extrabold text-brand-deep">سايتوتك في مدن السعودية</h2>
+        <h2 className="font-display text-2xl font-extrabold text-brand-deep">أدلة المدن المنشورة</h2>
         <p className="mt-3 max-w-4xl text-sm leading-8 text-ink-soft">
-          يبحث المستخدمون عن معلومات سايتوتك بأسماء المدن مثل الرياض وجدة والدمام ومكة والمدينة وغيرها.
-          هذه الصفحة الوطنية تجمع المعلومات الدوائية والتنظيمية في مكان واحد؛ لا ننشئ صفحات مدن متطابقة ولا ندّعي
-          وجود فرع أو مخزون أو خدمة بيع في مدينة بعينها. اختلاف المدينة يغيّر جهة الوصول إلى الرعاية المرخّصة فقط.
+          أطلقنا أدلة محلية للمدن التي يتوفر لها محتوى مستقل في الموقع. كل دليل يشرح السياق المحلي دون افتراض توفر دواء
+          أو وجود فرع أو علاقة تجارية، ويربط إلى المصادر الطبية والتنظيمية ذات الصلة.
         </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {saudiCities.map((city) => (
-            <span key={city} className="rounded-full border border-line bg-cream px-3 py-2 text-sm font-semibold text-brand-deep">
-              سايتوتك في {city}
-            </span>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {saudiCityPages.map((city) => (
+            <Link key={city.slug} to={`/cytotec-${city.slug}`} className="rounded-2xl border border-line bg-cream p-4 font-bold text-brand-deep transition hover:bg-brand-soft">
+              سايتوتك في {city.city}
+            </Link>
           ))}
         </div>
         <div className="mt-5 grid gap-3 md:grid-cols-3">
           <Link to="/abortion-pills-saudi-arabia" className="rounded-2xl bg-cream p-4 hover:bg-brand-soft">
-            <strong className="text-brand-deep">أدوية إجهاض الحمل في السعودية</strong>
-            <p className="mt-1 text-sm leading-7 text-ink-soft">الصفحة الوطنية للمصطلح البحثي والمعلومات التوعوية.</p>
+            <strong className="text-brand-deep">المعلومات الوطنية</strong>
+            <p className="mt-1 text-sm leading-7 text-ink-soft">المرجع الوطني للمعلومات الدوائية والسياق التنظيمي.</p>
           </Link>
           <Link to="/medical-sources" className="rounded-2xl bg-cream p-4 hover:bg-brand-soft">
             <strong className="text-brand-deep">المصادر الطبية</strong>
@@ -275,7 +254,6 @@ export function ServiceAreas() {
           </Link>
         </div>
       </section>
-
 
       <section className="card-premium p-6">
         <h2 className="font-display text-2xl font-extrabold text-brand-deep">أدلة أدوية إجهاض الحمل حسب الدولة</h2>

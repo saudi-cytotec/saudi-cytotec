@@ -5,9 +5,9 @@ import { clusterMeta } from "../components/CategoryCard";
 import { CareReferral } from "../components/CareReferral";
 import { IconArrowLeft } from "../components/icons";
 import { PageHero } from "../components/PageHero";
-import { Seo } from "../components/Seo";
+import { JsonLd, Seo } from "../components/Seo";
 import { faqGroups } from "../data/faqs";
-import { clusters } from "../data/site";
+import { clusters, SITE } from "../data/site";
 import { clusterPath } from "../utils/content";
 
 export function ClusterPage() {
@@ -34,6 +34,29 @@ export function ClusterPage() {
   return (
     <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
       <Seo title={cluster.title} description={cluster.description} path={clusterPath(cluster)} />
+      <JsonLd
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: cluster.title,
+            url: `${SITE.domain}${clusterPath(cluster)}`,
+            inLanguage: SITE.locale,
+            description: cluster.description,
+            isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE.domain },
+            publisher: { "@type": "Organization", name: SITE.name, url: SITE.domain },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "الرئيسية", item: `${SITE.domain}/` },
+              { "@type": "ListItem", position: 2, name: "المقالات", item: `${SITE.domain}/blog` },
+              { "@type": "ListItem", position: 3, name: cluster.title, item: `${SITE.domain}${clusterPath(cluster)}` },
+            ],
+          },
+        ]}
+      />
       <PageHero
         crumbs={[
           { name: "المقالات", path: "/blog" },
