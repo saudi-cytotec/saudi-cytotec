@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import { useCatalog } from "../cms/CatalogContext";
-import { ArticleWhatsAppBanner } from "../components/WhatsAppContact";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { ContentBlocks } from "../components/ContentBlocks";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
@@ -193,9 +192,6 @@ export function ArticlePage() {
 
       <div className="mt-12 max-w-3xl">
         <CareReferral />
-      </div>
-      <div className="mt-2 max-w-3xl">
-        <ArticleWhatsAppBanner />
       </div>
       <ReferencesList ids={article.references} />
       <div className="mt-8 flex flex-wrap gap-3 text-sm">
