@@ -2,7 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { WhatsAppFloat } from "./WhatsAppContact";
-import { MedicalBanner, ConsultationBanner } from "./SiteWideBanners";
+import { MedicalBanner } from "./SiteWideBanners";
 
 // Vercel redeploy trigger: keep production build in sync with main.
 export function Layout() {
@@ -18,7 +18,6 @@ export function Layout() {
       <main id="content">
         <Outlet />
       </main>
-      {!isHome ? <ConsultationBanner /> : null}
       <Footer />
       <WhatsAppFloat />
     </>
