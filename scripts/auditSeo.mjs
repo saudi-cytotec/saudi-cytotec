@@ -11,7 +11,7 @@
  *   5. Content map — 100 topics, unique ids/urls, valid cross-references
  *   6. Bundle SEO shell — title, description, canonical, robots meta present
  *   7. Internal links from article data — no broken related/cornerstone targets
- *   8. Image sitemap — emitted as a production asset and valid XML\n *   9. Images — referenced images exist
+ *   8. Image sitemap — present as a public deployable asset and valid XML\n *   9. Images — referenced images exist
  *
  * Writes docs/seo-audit.md with the full report.
  */
@@ -23,7 +23,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const DIST = path.join(ROOT, "dist", "index.html");
 const SITEMAP = path.join(ROOT, "public", "sitemap.xml");
-const IMAGE_SITEMAP = path.join(ROOT, "dist", "image-sitemap.xml");
+const IMAGE_SITEMAP = path.join(ROOT, "public", "image-sitemap.xml");
 const ROBOTS = path.join(ROOT, "public", "robots.txt");
 const BASELINE = path.join(ROOT, "docs", "url-baseline.txt");
 const REDIRECTS = path.join(ROOT, "content", "redirects.json");
@@ -87,7 +87,7 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   );
 }
 
-// 2. Image sitemap production asset
+// 2. Image sitemap public asset
 {
   const exists = fs.existsSync(IMAGE_SITEMAP);
   let valid = false;
