@@ -111,26 +111,16 @@ for (const f of [...srcFiles, INDEX_HTML, HOME_HTML].filter((f) => fs.existsSync
 }
 report("every wa.me link is wa.me/966530945626", waBad.length === 0, waBad.length === 0 ? "src/ + index.html + dist home" : waBad.join("; "));
 
-// 4. no other Saudi mobile-format numbers in src/ — with ONE documented
-//    exception: the preserved old clinic phone, allowed only where the clinic
-//    record lives (src/data/clinic.ts definition + the /about text that quotes
-//    it) and never inside the WhatsApp channel modules.
+// 4. no other Saudi mobile-format numbers in src/
 const otherNumbers = new Set();
 for (const f of srcFiles) {
-  const relSrc = path.relative(SRC, f);
   for (const m of read(f).matchAll(/\b(00966\d{9}|966\d{9})\b/g)) {
     const n = m[1];
     if (n === RAW || n === DIGITS) continue;
-    if (n === LEGACY_CLINIC_PHONE && LEGACY_ALLOWED.has(relSrc)) continue;
     otherNumbers.add(`${n} in ${path.relative(ROOT, f)}`);
   }
 }
-report("no other 00966…/966… numbers in src/", otherNumbers.size === 0, otherNumbers.size === 0 ? "approved WhatsApp CTA + the preserved clinic phone (its own files only)" : [...otherNumbers].join("; "));
-report(`old clinic phone preserved (${LEGACY_CLINIC_PHONE} — دكتور هيثم الخطيب)`, srcFiles.some((f) => f.endsWith(LEGACY_CLINIC_FILE) && read(f).includes(LEGACY_CLINIC_PHONE)), `defined in ${LEGACY_CLINIC_FILE}, quoted by the /about text — never replaced by the CTA number`);
-{
-  const leaked = LEGACY_FORBIDDEN.map((p) => path.join(SRC, p)).filter((f) => fs.existsSync(f) && read(f).includes(LEGACY_CLINIC_PHONE)).map((f) => path.relative(ROOT, f));
-  report("clinic phone never merged into the WhatsApp channel modules", leaked.length === 0, leaked.length === 0 ? "no old/new data conflict" : leaked.join(", "));
-}
+report("no other 00966…/966… numbers in src/", otherNumbers.size === 0, otherNumbers.size === 0 ? "only the approved WhatsApp channel number is present" : [...otherNumbers].join("; "));
 
 // 5. built home meta
 if (!fs.existsSync(HOME_HTML)) {
