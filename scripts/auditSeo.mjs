@@ -94,8 +94,9 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   let detail = "missing from public/";
   if (exists) {
     const xml = fs.readFileSync(IMAGE_SITEMAP, "utf8");
-    valid = xml.includes('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"') &&
-      /<image:image>\\s*<image:loc>https:\\/\\/saudiersaa\\.com\\/images\\/[^<]+<\\/image:loc>\\s*<\\/image:image>/.test(xml);
+    const hasNamespace = xml.includes('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
+    const hasImageRef = new RegExp("<image:image>\\\\s*<image:loc>https://saudiersaa\\\\.com/images/[^<]+</image:loc>\\\\s*</image:image>").test(xml);
+    valid = hasNamespace && hasImageRef;
     detail = valid ? "present in public/ with valid image namespace and image references" : "present but malformed or missing image tags";
   }
   report("Image sitemap", exists && valid, detail);
