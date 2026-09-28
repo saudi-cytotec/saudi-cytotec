@@ -227,3 +227,12 @@ export const HOME_FEATURED_SLUGS = [
 
 /** Reference ids rendered on the homepage (verified registrations only). */
 export const HOME_REFERENCE_IDS = ["fdaLabel", "dailyMed", "whoEml", "sfda", "moh"] as const;
+
+
+export const HOME_SAUDI_CITY_PAGES = [
+  { to: "/cytotec-riyadh", label: "سايتوتك الرياض" },
+  { to: "/cytotec-jeddah", label: "سايتوتك جدة" },
+  { to: "/cytotec-makkah", label: "سايتوتك مكة المكرمة" },
+  { to: "/cytotec-medina", label: "سايتوتك المدينة المنورة" },
+  { to: "/cytotec-dammam", label: "سايتوتك الدمام" },
+] as const;
