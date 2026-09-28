@@ -39,6 +39,8 @@ export function FaqHub() {
         ))}
       </nav>
 
+      <ConsultationBanner />
+
       <div className="mt-10 space-y-8">
         {faqGroups.map((group) => (
           <section id={group.id} key={group.id} className="scroll-mt-32 rounded-3xl border border-line bg-paper p-6 shadow-sm">
