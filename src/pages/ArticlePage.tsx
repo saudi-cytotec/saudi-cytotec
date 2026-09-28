@@ -79,7 +79,20 @@ export function ArticlePage() {
               "@type": ["Article", "MedicalWebPage"],
               headline: article.h1,
               image: [`${SITE.domain}${article.ogImage?.trim() || article.image?.trim() || GLOBAL_SOCIAL_SHARE_IMAGE}`],
-              author: { "@type": "Organization", name: SITE.name, url: `${SITE.domain}/about` },
+              url: canonical,
+              articleSection: cluster.title,
+              author: managedArticle?.author
+                ? { "@type": "Person", name: managedArticle.author }
+                : { "@type": "Organization", name: SITE.name, url: `${SITE.domain}/about` },
+              ...(managedArticle?.medicalReviewer
+                ? {
+                    reviewedBy: {
+                      "@type": "Person",
+                      name: managedArticle.medicalReviewer,
+                    },
+                    dateReviewed: managedArticle.lastReviewedAt,
+                  }
+                : {}),
               publisher: {
                 "@type": "Organization",
                 name: SITE.name,
