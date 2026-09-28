@@ -5,6 +5,7 @@ import { ArticleCard } from "../components/ArticleCard";
 import { CareReferral } from "../components/CareReferral";
 import { IconArrowLeft, IconSearch } from "../components/icons";
 import { PageHero } from "../components/PageHero";
+import { ConsultationBanner } from "../components/SiteWideBanners";
 import { Seo } from "../components/Seo";
 import { clusters } from "../data/site";
 
@@ -76,6 +77,8 @@ export function BlogIndex() {
         </label>
         <p className="text-sm text-ink-soft">{filtered.length} مقالاً</p>
       </div>
+
+      <ConsultationBanner />
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {filtered.length ? (
