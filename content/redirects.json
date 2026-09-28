@@ -4,6 +4,11 @@
   "wwwToApex": true,
   "rules": [
     {
+      "source": "/image-sitemap.xml",
+      "destination": "/api/image-sitemap",
+      "statusCode": 301
+    },
+    {
       "source": "/blog/cytotec-in-saudi-arabia/",
       "destination": "/service-areas",
       "statusCode": 301,
