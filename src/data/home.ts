@@ -24,7 +24,7 @@ export const HOME_SEO = {
   /** Rendered <title> and og:title — the approved homepage title. */
   title: "حبوب إجهاض الحمل في السعودية | سايتوتك وميزوبروستول",
   /** Visible <h1> — identical to the title by editorial decision. */
-  h1: "سايتوتك في السعودية | صحة المرأة السعودية",
+  h1: "حبوب إجهاض الحمل في السعودية | صحة المرأة السعودية",
   /** Meta description: one natural mention of each core term. */
   description:
     "دليل توعوي عن حبوب إجهاض الحمل في السعودية ومعلومات سايتوتك وميزوبروستول وميفيبرستون: التعريف، الأمان والتحذيرات، الصرف النظامي، ومصادر صحية موثوقة.",
