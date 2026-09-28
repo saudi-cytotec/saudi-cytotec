@@ -243,7 +243,7 @@
     },
     {
       "source": "/سايتوتك_الشرقية/",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
       "reason": "Legacy seller-era region page — educational replacement.",
       "createdAt": "2026-08-29"
@@ -285,7 +285,7 @@
     },
     {
       "source": "/حبوب-سايتوتك-للبيع-في-مكه-السعودية",
-      "destination": "/what-is-cytotec",
+      "destination": "/service-areas",
       "statusCode": 301,
       "reason": "Legacy seller-era page — educational replacement.",
       "createdAt": "2026-08-29"
