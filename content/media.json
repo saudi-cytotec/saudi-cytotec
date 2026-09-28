@@ -1,4 +1,40 @@
 {
   "version": 1,
-  "items": []
+  "items": [
+    {
+      "file": "/media/seo-city-riyadh.svg",
+      "alt": "بانر معلومات صحية عن سايتوتك وميزوبروستول في الرياض",
+      "width": 1600,
+      "height": 600,
+      "uploadedAt": "2026-09-28"
+    },
+    {
+      "file": "/media/seo-city-jeddah.svg",
+      "alt": "بانر معلومات صحية عن سايتوتك وميزوبروستول في جدة",
+      "width": 1600,
+      "height": 600,
+      "uploadedAt": "2026-09-28"
+    },
+    {
+      "file": "/media/seo-city-makkah.svg",
+      "alt": "بانر معلومات صحية عن سايتوتك وميزوبروستول في مكة المكرمة",
+      "width": 1600,
+      "height": 600,
+      "uploadedAt": "2026-09-28"
+    },
+    {
+      "file": "/media/seo-city-medina.svg",
+      "alt": "بانر معلومات صحية عن سايتوتك وميزوبروستول في المدينة المنورة",
+      "width": 1600,
+      "height": 600,
+      "uploadedAt": "2026-09-28"
+    },
+    {
+      "file": "/media/seo-city-dammam.svg",
+      "alt": "بانر معلومات صحية عن سايتوتك وميزوبروستول في الدمام",
+      "width": 1600,
+      "height": 600,
+      "uploadedAt": "2026-09-28"
+    }
+  ]
 }
