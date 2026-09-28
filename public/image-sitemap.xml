@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://saudiersaa.com/</loc>
+    <image:image><image:loc>https://saudiersaa.com/images/Bannerrr.png</image:loc></image:image>
+    <image:image><image:loc>https://saudiersaa.com/images/logo.png</image:loc></image:image>
+    <image:image><image:loc>https://saudiersaa.com/images/site-medical-banner.png</image:loc></image:image>
+    <image:image><image:loc>https://saudiersaa.com/images/site-consultation-banner.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://saudiersaa.com/what-is-cytotec</loc>
+    <image:image><image:loc>https://saudiersaa.com/images/site-medical-banner.png</image:loc></image:image>
+    <image:image><image:loc>https://saudiersaa.com/images/site-consultation-banner.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://saudiersaa.com/service-areas</loc>
+    <image:image><image:loc>https://saudiersaa.com/images/site-medical-banner.png</image:loc></image:image>
+    <image:image><image:loc>https://saudiersaa.com/images/site-consultation-banner.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://saudiersaa.com/blog</loc>
+    <image:image><image:loc>https://saudiersaa.com/images/site-medical-banner.png</image:loc></image:image>
+    <image:image><image:loc>https://saudiersaa.com/images/site-consultation-banner.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://saudiersaa.com/womens-health</loc>
+    <image:image><image:loc>https://saudiersaa.com/images/site-medical-banner.png</image:loc></image:image>
+    <image:image><image:loc>https://saudiersaa.com/images/site-consultation-banner.png</image:loc></image:image>
+  </url>
+</urlset>
