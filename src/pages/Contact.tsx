@@ -3,7 +3,6 @@ import { CareReferral } from "../components/CareReferral";
 import { IconShieldCheck } from "../components/icons";
 import { PageHero } from "../components/PageHero";
 import { Seo } from "../components/Seo";
-import { ConsultationBanner } from "../components/SiteWideBanners";
 import { WhatsAppContactCard } from "../components/WhatsAppContact";
 import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
 
@@ -80,8 +79,6 @@ export function Contact() {
           </div>
         </div>
       </div>
-
-      <ConsultationBanner />
 
       <div className="max-w-3xl">
         <WhatsAppContactCard />
