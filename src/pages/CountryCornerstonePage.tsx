@@ -4,7 +4,6 @@ import { useCatalog } from "../cms/CatalogContext";
 import { CareReferral } from "../components/CareReferral";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { PageHero } from "../components/PageHero";
-import { ConsultationBanner } from "../components/SiteWideBanners";
 import { ReferencesList } from "../components/ReferencesList";
 import { RelatedArticles } from "../components/RelatedArticles";
 import { JsonLd, Seo } from "../components/Seo";
@@ -169,8 +168,6 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
           <Paragraph text={spec.directAnswer} />
         </div>
       </section>
-
-      <ConsultationBanner />
 
       <div className="max-w-3xl">
         <DisclaimerBanner />
