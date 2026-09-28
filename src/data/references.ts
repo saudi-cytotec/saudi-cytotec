@@ -141,6 +141,20 @@ export const references: Record<string, Reference> = {
     url: "https://www.moh.gov.kw/en/pages/DRUGCA.aspx",
     note: "الإدارة المعنية بتسجيل المستحضرات الطبية واعتماد الوكلاء المحليين والإفراج الجمركي عن الأدوية.",
   },
+  mophqa: {
+    id: "mophqa",
+    title: "Ministry of Public Health — State of Qatar",
+    source: "وزارة الصحة العامة في دولة قطر",
+    url: "https://www.moph.gov.qa/",
+    note: "الجهة الصحية الرسمية في قطر، وتشمل اختصاصاتها جوانب من تنظيم الأدوية والخدمات الصحية والصيدليات.",
+  },
+  almeezan: {
+    id: "almeezan",
+    title: "Qatar Legal Portal — Penal Code, Articles 315–317",
+    source: "البوابة القانونية القطرية - الميزان",
+    url: "https://www.almeezan.qa/LawArticles.aspx?LawTreeSectionID=267&language=ar&lawId=26",
+    note: "النص القانوني الرسمي المنشور لأحكام الإجهاض في قانون العقوبات القطري.",
+  },
   mohbh: {
     id: "mohbh",
     title: "Ministry of Health — Kingdom of Bahrain",
