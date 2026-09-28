@@ -140,6 +140,32 @@ const noindexArticles = articles.filter((a) => a.expectedRobots === NOINDEX);
   }
 }
 
+// ---------------------------------------------------------------- 5. public route metadata hygiene
+{
+  const publicRoutes = routes.filter((r) => r.kind !== "protected");
+  const missing = publicRoutes.filter((r) => !r.title?.trim() || !r.metaDescription?.trim());
+  const titles = new Map();
+  for (const r of publicRoutes) {
+    const key = r.title.trim();
+    if (!key) continue;
+    titles.set(key, [...(titles.get(key) ?? []), r.path]);
+  }
+  const duplicateTitles = [...titles.entries()].filter(([, paths]) => paths.length > 1);
+  if (missing.length) fail("Public route metadata", `${missing.length}: ${missing.map((r) => r.path).slice(0, 8).join(", ")}`);
+  else ok("Public route metadata", `${publicRoutes.length} public routes have titles and meta descriptions`);
+  if (duplicateTitles.length) {
+    fail("Duplicate route titles", duplicateTitles.slice(0, 5).map(([title, paths]) => `${title}: ${paths.join(" | ")}`).join("; "));
+  } else {
+    ok("Duplicate route titles", "0 duplicate titles among public routes");
+  }
+  for (const r of publicRoutes) {
+    const titleLength = r.title?.trim().length ?? 0;
+    const descLength = r.metaDescription?.trim().length ?? 0;
+    if (titleLength && (titleLength < 20 || titleLength > 70)) warn("Route title length", `${r.path}: ${titleLength} chars`);
+    if (descLength && (descLength < 70 || descLength > 165)) warn("Route meta description length", `${r.path}: ${descLength} chars`);
+  }
+}
+
 // ---------------------------------------------------------------- 5. sitemap entries without a page
 {
   const knownUrls = new Set([
