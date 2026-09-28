@@ -142,12 +142,12 @@ async function render(urlPath) {
   // Settle only on STABLE rendered content. The catalog provider fills its
   // state in a post-mount effect, so the first paint of an article URL can be
   // the transient 404 fallback; capturing that would ship a wrong page.
-  // Requiring two identical snapshots 250ms apart rules the transient out.
+  // Requiring two identical snapshots 100ms apart rules the transient out; the hard cap prevents one slow route from stalling the whole production build.
   const doc0 = window.document;
   let stable = null;
   let settled = false;
   const start = Date.now();
-  while (Date.now() - start < 25000) {
+  while (Date.now() - start < 5000) {
     const root = doc0.getElementById("root");
     const now = root ? root.innerHTML : "";
     if (now.length > 200) {
@@ -159,7 +159,7 @@ async function render(urlPath) {
     } else {
       stable = null;
     }
-    await new Promise((r) => setTimeout(r, 250));
+    await new Promise((r) => setTimeout(r, 100));
   }
 
   const doc = window.document;
