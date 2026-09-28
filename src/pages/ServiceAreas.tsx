@@ -8,6 +8,30 @@ import { JsonLd, Seo } from "../components/Seo";
 import { serviceAreaLinks } from "../data/serviceAreas";
 import { SITE } from "../data/site";
 
+
+const saudiCities = [
+  "الرياض",
+  "جدة",
+  "مكة المكرمة",
+  "المدينة المنورة",
+  "الدمام",
+  "الخبر",
+  "الطائف",
+  "تبوك",
+  "بريدة",
+  "عنيزة",
+  "حائل",
+  "أبها",
+  "خميس مشيط",
+  "جازان",
+  "نجران",
+  "الجبيل",
+  "الأحساء",
+  "الهفوف",
+  "القطيف",
+  "صفوى",
+];
+
 const faqItems = [
   {
     q: "هل يقدم هذا الموقع أدوية أو يبيعها؟",
@@ -210,6 +234,37 @@ export function ServiceAreas() {
               <p className="mt-2 text-sm leading-7 text-ink-soft">{item.text}</p>
             </Link>
           ))}
+        </div>
+      </section>
+
+
+      <section className="card-premium p-6">
+        <h2 className="font-display text-2xl font-extrabold text-brand-deep">سايتوتك في مدن السعودية</h2>
+        <p className="mt-3 max-w-4xl text-sm leading-8 text-ink-soft">
+          يبحث المستخدمون عن معلومات سايتوتك بأسماء المدن مثل الرياض وجدة والدمام ومكة والمدينة وغيرها.
+          هذه الصفحة الوطنية تجمع المعلومات الدوائية والتنظيمية في مكان واحد؛ لا ننشئ صفحات مدن متطابقة ولا ندّعي
+          وجود فرع أو مخزون أو خدمة بيع في مدينة بعينها. اختلاف المدينة يغيّر جهة الوصول إلى الرعاية المرخّصة فقط.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {saudiCities.map((city) => (
+            <span key={city} className="rounded-full border border-line bg-cream px-3 py-2 text-sm font-semibold text-brand-deep">
+              سايتوتك في {city}
+            </span>
+          ))}
+        </div>
+        <div className="mt-5 grid gap-3 md:grid-cols-3">
+          <Link to="/abortion-pills-saudi-arabia" className="rounded-2xl bg-cream p-4 hover:bg-brand-soft">
+            <strong className="text-brand-deep">أدوية إجهاض الحمل في السعودية</strong>
+            <p className="mt-1 text-sm leading-7 text-ink-soft">الصفحة الوطنية للمصطلح البحثي والمعلومات التوعوية.</p>
+          </Link>
+          <Link to="/medical-sources" className="rounded-2xl bg-cream p-4 hover:bg-brand-soft">
+            <strong className="text-brand-deep">المصادر الطبية</strong>
+            <p className="mt-1 text-sm leading-7 text-ink-soft">النشرات والجهات التنظيمية التي نعتمد عليها.</p>
+          </Link>
+          <Link to="/safety" className="rounded-2xl bg-cream p-4 hover:bg-brand-soft">
+            <strong className="text-brand-deep">الأمان والتحذيرات</strong>
+            <p className="mt-1 text-sm leading-7 text-ink-soft">معلومات السلامة وحدود المعلومات العامة.</p>
+          </Link>
         </div>
       </section>
 
