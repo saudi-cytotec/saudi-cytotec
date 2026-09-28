@@ -28,7 +28,7 @@ export const cluster06 = [
     title: "اضطراب الدورة الشهرية",
     h1: "عندما يتغيّر الإيقاع المعتاد",
     metaTitle: "اضطراب الدورة الشهرية معلومات تعليمية",
-    metaDescription: "إطار تعليمي لاضطراب الدورة وأسباب تستدعي التقييم بدل التفسير الذاتي.",
+    metaDescription: "إطار تعليمي لفهم اضطراب الدورة الشهرية وأسبابه المحتملة والعلامات التي تجعل التقييم الطبي مهماً.",
     excerpt: "التغير المفاجئ في الغزارة أو المدة أو التباعد معلومة سريرية، لا مجرد إزعاج.",
     related: ["anemia-womens-health", "pelvic-pain-when-to-see-doctor", "family-planning-education"],
     points: [
@@ -94,7 +94,7 @@ export const cluster06 = [
     title: "الصحة النفسية والإنجابية",
     h1: "القلق والاكتئاب جزء من الصورة الطبية",
     metaTitle: "الصحة النفسية والإنجابية",
-    metaDescription: "ربط تعليمي بين الصحة النفسية والحمل والفقدان والبحث الصحي القهري.",
+    metaDescription: "معلومات تعليمية عن العلاقة بين الصحة النفسية والصحة الإنجابية، وكيفية التعامل مع القلق والبحث الطبي المتكرر.",
     excerpt: "البحث المتكرر عن مضاعفات نادرة قد يكون عرضاً لقلق يستحق دعماً، لا مزيداً من الصفحات فقط.",
     related: ["miscarriage-educational-overview", "education-vs-individual-treatment", "womens-health-life-stages"],
     points: [
@@ -138,7 +138,7 @@ export const cluster06 = [
     title: "التوعية بعدوى الجهاز التناسلي",
     h1: "أعراض تستحق فحصاً لا حرجاً",
     metaTitle: "التوعية بعدوى الجهاز التناسلي",
-    metaDescription: "معلومات توعوية عن أعراض قد تشير إلى التهاب وتستدعي تقييماً مهنياً.",
+    metaDescription: "توعية بأعراض قد ترتبط بعدوى الجهاز التناسلي، ومتى تحتاج الأعراض إلى تقييم طبي ومصدر معلومات موثوق.",
     excerpt: "الحكة أو الإفراز غير المعتاد أو الألم أو الحمى لا تُعالج بوصفة صديقة.",
     related: ["pelvic-pain-when-to-see-doctor", "routine-womens-screening", "when-to-see-doctor-immediately"],
     points: [
@@ -182,7 +182,7 @@ export const cluster06 = [
     title: "التغذية والصحة الهرمونية",
     h1: "الغذاء داعم لا بروتوكول هرموني سري",
     metaTitle: "التغذية والصحة الهرمونية",
-    metaDescription: "حدود ما يمكن أن تفعله التغذية في صحة المرأة دون ادعاءات مفرطة.",
+    metaDescription: "شرح حدود دور التغذية في الصحة الهرمونية وصحة المرأة، مع تجنب الادعاءات التي تستبدل التقييم الطبي.",
     excerpt: "النمط الغذائي المتوازن يدعم الطاقة والدورة والحمل، لكنه لا يعالج كل اضطراب هرموني.",
     related: ["anemia-womens-health", "womens-health-life-stages", "reliable-womens-health-sources"],
     points: [
