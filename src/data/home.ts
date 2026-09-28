@@ -22,12 +22,12 @@
 
 export const HOME_SEO = {
   /** Rendered <title> and og:title — the approved homepage title. */
-  title: "سايتوتك في السعودية | صحة المرأة السعودية",
+  title: "سايتوتك في السعودية | معلومات حبوب سايتوتك وميزوبروستول",
   /** Visible <h1> — identical to the title by editorial decision. */
   h1: "سايتوتك في السعودية | صحة المرأة السعودية",
   /** Meta description: one natural mention of each core term. */
   description:
-    "منصة سايتوتك في السعودية لصحة المرأة: معلومات دوائية موثوقة، دليل سايتوتك وميزوبروستول، الأمان الدوائي، مسار الرعاية والصرف النظامي، وخدمات التواصل والاستفسارات.",
+    "دليل سايتوتك في السعودية ومعلومات حبوب سايتوتك وميزوبروستول: تعريف الدواء، الاستخدامات الطبية، الأمان والتحذيرات، شروط الصرف النظامي، ومصادر صحية موثوقة.",
 } as const;
 
 export interface HomeLink {
