@@ -94,7 +94,7 @@ export const cluster10 = [
     title: "قراءة ورقة علمية لغير المتخصص",
     h1: "ماذا يمكن أن تفهمي دون ادعاء الخبرة؟",
     metaTitle: "قراءة ورقة علمية لغير المتخصص",
-    metaDescription: "نصائح لقراءة ملخص دراسة: السؤال، العيّنة، الحدود، والتمويل.",
+    metaDescription: "دليل مبسط لقراءة ورقة علمية: سؤال البحث، العينة، المقارنة، النتائج، الحدود، والتمويل دون القفز إلى استنتاجات فردية.",
     excerpt: "قراءة الملخص بذكاء خير من مشاركة العنوان فقط.",
     related: ["how-to-evaluate-medical-evidence", "clinical-studies-vs-anecdotes", "why-medical-recommendations-change"],
     points: [
@@ -116,7 +116,7 @@ export const cluster10 = [
     title: "حدود المعلومات الطبية على الإنترنت",
     h1: "الشبكة واسعة… والمسؤولية ضيقة",
     metaTitle: "حدود المعلومات الطبية على الإنترنت",
-    metaDescription: "لماذا تبقى المعلومات الإلكترونية قاصرة عن الفحص والمتابعة والمساءلة.",
+    metaDescription: "لماذا لا تعوّض المعلومات الطبية على الإنترنت الفحص والمتابعة والسجل الطبي، وكيف تُستخدم المصادر الإلكترونية بأمان.",
     excerpt: "لا يوجد على الصفحة من يتحمل نتيجة قرارك الفردي.",
     related: ["internet-not-a-doctor", "how-to-verify-medical-information", "education-vs-individual-treatment"],
     points: [
@@ -138,7 +138,7 @@ export const cluster10 = [
     title: "مصطلحات طبية شائعة حول ميزوبروستول",
     h1: "قاموس صغير يمنع سوء الفهم",
     metaTitle: "مصطلحات طبية شائعة حول ميزوبروستول",
-    metaDescription: "تعريف مبسط لمصطلحات: استطباب، مانع، خارج النشرة، نشرة، بروستاغلاندين.",
+    metaDescription: "قاموس مبسط لمصطلحات ميزوبروستول مثل الاستطباب والمانع وخارج النشرة والمادة الفعالة لتقليل سوء الفهم.",
     excerpt: "المصطلح إن لم يُعرَّف يتحول إلى رهبة أو إلى جرأة فارغة.",
     related: ["off-label-use-meaning", "misoprostol-pharmacologic-class", "official-drug-leaflets"],
     points: [
@@ -160,7 +160,7 @@ export const cluster10 = [
     title: "لماذا تتغير التوصيات الطبية؟",
     h1: "التغيير علامة علم لا علامة فوضى بالضرورة",
     metaTitle: "لماذا تتغير التوصيات الطبية",
-    metaDescription: "أسباب تحديث الإرشادات: أدلة جديدة، سلامة، موارد، وسياق محلي.",
+    metaDescription: "أسباب تغير التوصيات الطبية مع ظهور أدلة جديدة وتحديثات السلامة واختلاف الموارد والسياق التنظيمي المحلي.",
     excerpt: "ما دُرّس قبل عشر سنوات قد يُقيَّد اليوم بعد رصد أوسع.",
     related: ["how-to-evaluate-medical-evidence", "regulatory-drug-warnings", "reading-a-paper-as-non-specialist"],
     points: [

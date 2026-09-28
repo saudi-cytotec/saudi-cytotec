@@ -54,7 +54,7 @@ export const cluster07 = [
     title: "الاستخدام دون وصفة",
     h1: "تجاوز الوصفة يتجاوز تقييم الخطر",
     metaTitle: "استخدام سايتوتك دون وصفة",
-    metaDescription: "لماذا يُعد تجاوز الوصفة تجاوزاً لتقييم الحمل والموانع والجودة.",
+    metaDescription: "توضيح مخاطر استخدام سايتوتك دون وصفة، ولماذا يحتاج القرار إلى تقييم طبي للحمل والموانع ومصدر المستحضر.",
     excerpt: "الوصفة وثيقة أمان لا عقبة بيروقراطية.",
     related: ["unsafe-unsupervised-use", "unreliable-medicine-sources", "why-medical-supervision-required", "saudi-drug-regulation-context"],
     points: [
@@ -142,7 +142,7 @@ export const cluster07 = [
     title: "الأعراض الخفيفة ليست دائماً مطمئنة",
     h1: "الخفة الحالية لا تضمن المسار",
     metaTitle: "لماذا الأعراض الخفيفة ليست دائماً آمنة",
-    metaDescription: "شرح أن بعض المضاعفات تبدأ بأعراض متواضعة ثم تتفاقم.",
+    metaDescription: "لماذا لا تعني الأعراض الخفيفة دائماً غياب الخطر، ومتى قد تتطلب الأعراض المتغيرة أو المتفاقمة تقييماً طبياً.",
     excerpt: "الاطمئنان المبكر شائع في الحمل خارج الرحم وبعض النزوف قبل التدهور.",
     related: ["annoying-symptom-vs-emergency", "warning-signs-in-pregnancy", "mild-symptoms-not-always-safe"],
     points: [
@@ -164,7 +164,7 @@ export const cluster07 = [
     title: "كيف تتحققين من المعلومة الطبية؟",
     h1: "منهج تحقق بسيط قبل التصديق",
     metaTitle: "كيف تتحققين من المعلومة الطبية",
-    metaDescription: "خطوات عملية للتحقق من معلومة عن دواء أو حمل: المصدر والتاريخ والحدود.",
+    metaDescription: "خطوات عملية للتحقق من المعلومات الطبية عن الأدوية والحمل عبر المصدر والتاريخ والسياق وحدود المعلومة.",
     excerpt: "التحقق مهارة تقلل الضرر أكثر مما تزيد المعرفة فقط.",
     related: ["limits-of-online-medical-info", "trusted-sources-further-reading", "internet-not-a-doctor"],
     points: [

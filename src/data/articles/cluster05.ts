@@ -49,7 +49,7 @@ export const cluster05 = [
     slug: "pregnancy-follow-up-care",
     title: "متابعة الحمل الآمنة",
     h1: "المتابعة تحوّل القلق إلى خطة",
-    metaTitle: "متابعة الحمل الآمنة",
+    metaTitle: "متابعة الحمل والرعاية الطبية بعد الأعراض",
     metaDescription: "لماذا تُعد زيارات المتابعة والفحوصات المبكرة جزءاً من الأمان لا أمراً شكلياً.",
     excerpt: "المتابعة تلتقط ارتفاع الضغط وفقر الدم ومشكلات المكان والجنين في وقت قابل للتدخل.",
     related: ["early-pregnancy-overview", "warning-signs-in-pregnancy", "routine-womens-screening"],
@@ -72,7 +72,7 @@ export const cluster05 = [
     title: "علامات تحذيرية في الحمل",
     h1: "علامات لا تُؤجَّل إلى الغد",
     metaTitle: "علامات تحذيرية في الحمل",
-    metaDescription: "قائمة تعليمية لعلامات الحمل التي تستدعي مراجعة عاجلة أو طوارئ.",
+    metaDescription: "علامات تحذيرية أثناء الحمل قد تستدعي تقييماً عاجلاً، مع توضيح حدود المعلومات العامة وأهمية الرعاية الطبية.",
     excerpt: "النزيف، الألم الشديد، الصداع غير المعتاد مع تشوش الرؤية، وانخفاض حركة الجين في مراحل لاحقة أمثلة شائعة للإنذار.",
     related: ["bleeding-in-early-pregnancy", "when-to-see-doctor-immediately", "early-pregnancy-overview"],
     points: [
@@ -116,7 +116,7 @@ export const cluster05 = [
     title: "النزيف في الحمل المبكر",
     h1: "النزيف المبكر يستدعي تفسيراً طبياً",
     metaTitle: "النزيف في الحمل المبكر",
-    metaDescription: "معلومات تعليمية عن أسباب محتملة للنزيف المبكر وعلامات الخطورة.",
+    metaDescription: "معلومات تعليمية عن النزيف في الحمل المبكر، أسبابه المحتملة وعلامات الخطر التي تستدعي تقييماً طبياً.",
     excerpt: "بعض النزيف يكون محدوداً وبعضه إنذار. التمييز ليس عبر لون الصورة في هاتف صديقة.",
     related: ["warning-signs-in-pregnancy", "abnormal-bleeding", "signs-of-dangerous-bleeding"],
     points: [
@@ -160,7 +160,7 @@ export const cluster05 = [
     title: "معلومات موثوقة في الصحة الإنجابية",
     h1: "كيف تميزين المعلومة الإنجابية الموثوقة؟",
     metaTitle: "معلومات موثوقة في الصحة الإنجابية",
-    metaDescription: "معايير تعليمية للحكم على مصادر صحة المرأة والحمل بعيداً عن التسويق.",
+    metaDescription: "معايير عملية للتحقق من موثوقية المعلومات الصحية عن الحمل والصحة الإنجابية بعيداً عن التسويق والمصادر المجهولة.",
     excerpt: "المحتوى الجيد يذكر حدوده، ويحيل إلى هيئات، ولا يبيع دواء في الهامش.",
     related: ["how-to-verify-medical-information", "trusted-sources-further-reading", "family-planning-education"],
     points: [
@@ -182,7 +182,7 @@ export const cluster05 = [
     title: "التعليم مقابل العلاج الفردي",
     h1: "خط فاصل يحمي القارئة",
     metaTitle: "التعليم مقابل العلاج الفردي في الحمل",
-    metaDescription: "لماذا يبقى التعليم العام قاصراً عن إدارة حمل أو دواء أو نزيف فردي.",
+    metaDescription: "توضيح الفرق بين المعلومات التعليمية والعلاج الفردي في الحمل، ولماذا لا تكفي المقالات لإدارة حالة أو دواء أو نزيف.",
     excerpt: "كلما اقترب السؤال من «ماذا أفعل الليلة؟» ابتعد المقال واقتربت العيادة.",
     related: ["general-info-vs-personal-advice", "pregnancy-follow-up-care", "internet-not-a-doctor"],
     points: [
@@ -204,7 +204,7 @@ export const cluster05 = [
     title: "أسئلة شائعة عن الأدوية والحمل",
     h1: "أدوية الحمل: أسئلة تتكرر وإجابات محدودة عمداً",
     metaTitle: "أسئلة شائعة عن الأدوية والحمل",
-    metaDescription: "إجابات تعليمية عن التعامل مع الأدوية أثناء الحمل دون قوائم جرعات.",
+    metaDescription: "إجابات تعليمية عن الأدوية والحمل، وكيفية التعامل مع المعلومات العامة دون تحويل الأسئلة الشائعة إلى وصفات فردية.",
     excerpt: "القاعدة الذهبية: لا تبدئي ولا توقفي دواءاً مزمناً فجأة دون سؤال الجهة المعالجة.",
     related: ["early-pregnancy-overview", "why-contraindicated-in-pregnancy-ulcer-use", "discussing-medication-history", "breastfeeding-considerations"],
     points: [

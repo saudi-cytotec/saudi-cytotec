@@ -120,7 +120,7 @@ export const cluster02 = [
     title: "لماذا الاستخدام دون إشراف غير آمن؟",
     h1: "غياب الإشراف ليس تفصيلاً إجرائياً",
     metaTitle: "مخاطر الاستخدام غير الخاضع للإشراف",
-    metaDescription: "شرح تعليمي لمخاطر استخدام ميزوبروستول دون تقييم طبي أو مصدر نظامي.",
+    metaDescription: "شرح تعليمي لمخاطر استخدام ميزوبروستول دون تقييم طبي، مع التركيز على الموانع والمصدر النظامي ومتى يلزم طلب الرعاية.",
     excerpt: "الخطر لا يأتي فقط من المركب، بل من غياب التشخيص والجودة والمتابعة.",
     related: ["why-not-home-treatment", "risks-of-random-use", "unreliable-medicine-sources", "use-without-prescription"],
     points: [
