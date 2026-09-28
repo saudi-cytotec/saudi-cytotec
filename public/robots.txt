@@ -3,7 +3,6 @@ Allow: /
 
 Disallow: /search
 Disallow: /admin
-Allow: /api/image-sitemap
 Disallow: /api
 
 Sitemap: https://saudiersaa.com/sitemap.xml
