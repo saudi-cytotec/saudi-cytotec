@@ -239,6 +239,14 @@ export function ServiceAreas() {
 
 
       <section className="card-premium p-6">
+        <h2 className="font-display text-2xl font-extrabold text-brand-deep">سايتوتك حسب المدينة</h2>
+        <p className="mt-3 max-w-4xl text-sm leading-8 text-ink-soft">أدلة محلية تغطي أسئلة البحث عن سايتوتك وميزوبروستول في المدن السعودية الرئيسية، مع معلومات طبية وتنظيمية ومصادر رسمية. لا تعني صفحة المدينة توفر دواء معيناً في صيدلية بعينها.</p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {[["/cytotec-riyadh","سايتوتك الرياض"],["/cytotec-jeddah","سايتوتك جدة"],["/cytotec-makkah","سايتوتك مكة المكرمة"],["/cytotec-medina","سايتوتك المدينة المنورة"],["/cytotec-dammam","سايتوتك الدمام"]].map(([to,label]) => <Link key={to} to={to} className="rounded-2xl border border-line bg-cream p-4 font-bold text-brand-deep transition hover:bg-brand-soft">{label}</Link>)}
+        </div>
+      </section>
+
+      <section className="card-premium p-6">
         <h2 className="font-display text-2xl font-extrabold text-brand-deep">سايتوتك في مدن السعودية</h2>
         <p className="mt-3 max-w-4xl text-sm leading-8 text-ink-soft">
           يبحث المستخدمون عن معلومات سايتوتك بأسماء المدن مثل الرياض وجدة والدمام ومكة والمدينة وغيرها.
