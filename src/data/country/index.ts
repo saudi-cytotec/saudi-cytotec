@@ -2,6 +2,7 @@ import { saudi } from "./saudi";
 import { uae } from "./uae";
 import { kuwait } from "./kuwait";
 import { bahrain } from "./bahrain";
+import { qatar } from "./qatar";
 import type { CountrySpec } from "./types";
 
 /**
@@ -10,7 +11,7 @@ import type { CountrySpec } from "./types";
  * official sources and internal links. Nothing here is generated or copied
  * between countries beyond the shared helper builders.
  */
-export const countryPages: CountrySpec[] = [saudi, uae, kuwait, bahrain];
+export const countryPages: CountrySpec[] = [saudi, uae, kuwait, bahrain, qatar];
 
 export const countryPageByPath = new Map<string, CountrySpec>(
   countryPages.map((spec) => [spec.path, spec]),
