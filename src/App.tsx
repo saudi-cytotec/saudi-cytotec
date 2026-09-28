@@ -47,7 +47,6 @@ export default function App() {
           <Route path="/blog/:slug" element={<ArticlePage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/sitemap" element={<SitemapPage />} />
-          <Route path="/service-areas" element={<ServiceAreas />} />
           <Route path="/contact" element={<Contact />} />
           {countryPages.map((spec) => (
             <Route key={spec.path} path={spec.path} element={<CountryCornerstonePage spec={spec} />} />
