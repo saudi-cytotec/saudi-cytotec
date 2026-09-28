@@ -6,13 +6,14 @@ import { defineConfig } from "vite";
 import { emitVerifiedStats } from "./scripts/emitVerifiedStats";
 import { emitSitemap } from "./scripts/emitSitemap";
 import { emitSeoManifest } from "./scripts/emitSeoManifest";
+import { emitImageSitemap } from "./scripts/emitImageSitemap";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), emitVerifiedStats(), emitSitemap(), emitSeoManifest()],
+  plugins: [react(), tailwindcss(), emitVerifiedStats(), emitSitemap(), emitImageSitemap(), emitSeoManifest()],
   server: {
     host: "0.0.0.0",
     // Dev preview only. `server` config does not affect the production build.
