@@ -5,6 +5,7 @@ import { articles } from "../src/data/articles";
 import { HOME_SEO } from "../src/data/home";
 import { staticPages } from "../src/data/pages";
 import { clusters, SITE } from "../src/data/site";
+import { saudiCityPages } from "../src/data/saudiCities";
 import { bodyStructure } from "../src/utils/bodyWordCount";
 
 /**
@@ -250,6 +251,21 @@ export function emitSeoManifest(): Plugin {
           metaDescription: cluster.description,
           canonical: `${SITE.domain}/blog/cluster/${cluster.slug}`,
           kind: "cluster",
+          expectedRobots: INDEXABLE,
+        });
+      }
+
+      // Saudi city pages are first-class public routes and must be present
+      // in the SEO manifest so sitemap/indexability audits can verify them.
+      for (const city of saudiCityPages) {
+        const path = `/cytotec-${city.slug}`;
+        pushRoute({
+          path,
+          url: `${SITE.domain}${path}`,
+          title: city.metaTitle,
+          metaDescription: city.metaDescription,
+          canonical: `${SITE.domain}${path}`,
+          kind: "page",
           expectedRobots: INDEXABLE,
         });
       }
