@@ -91,12 +91,12 @@ console.log("SEO AUDIT — saudiersaa.com\n");
 {
   const exists = fs.existsSync(IMAGE_SITEMAP);
   let valid = false;
-  let detail = "missing from dist/";
+  let detail = "missing from public/";
   if (exists) {
     const xml = fs.readFileSync(IMAGE_SITEMAP, "utf8");
     valid = xml.includes('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"') &&
       /<image:image>\\s*<image:loc>https:\\/\\/saudiersaa\\.com\\/images\\/[^<]+<\\/image:loc>\\s*<\\/image:image>/.test(xml);
-    detail = valid ? "present in dist/ with valid image namespace and image references" : "present but malformed or missing image tags";
+    detail = valid ? "present in public/ with valid image namespace and image references" : "present but malformed or missing image tags";
   }
   report("Image sitemap", exists && valid, detail);
 }
