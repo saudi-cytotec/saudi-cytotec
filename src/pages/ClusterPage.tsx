@@ -5,7 +5,6 @@ import { clusterMeta } from "../components/CategoryCard";
 import { CareReferral } from "../components/CareReferral";
 import { IconArrowLeft } from "../components/icons";
 import { PageHero } from "../components/PageHero";
-import { ConsultationBanner } from "../components/SiteWideBanners";
 import { Seo } from "../components/Seo";
 import { faqGroups } from "../data/faqs";
 import { clusters } from "../data/site";
@@ -73,8 +72,6 @@ export function ClusterPage() {
           </div>
         </section>
       ) : null}
-
-      <ConsultationBanner />
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {list.map((article) => (
