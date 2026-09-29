@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-09-14",
+  "updatedAt": "2026-09-30",
   "wwwToApex": true,
   "rules": [
     {
@@ -19,17 +19,17 @@
     },
     {
       "source": "/cytotec-saudi-arabia/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/https-saudiersaa-com-cytotec-saudi-arabia/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Mangled duplicate of the legacy Saudi geographic query.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك/",
@@ -292,17 +292,17 @@
     },
     {
       "source": "/حبوب_سايتوتك_صيدليه/",
-      "destination": "/what-is-cytotec",
+      "destination": "/cytotec-nahdi-pharmacy",
       "statusCode": 301,
-      "reason": "Legacy seller-era pharmacy page — educational replacement.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/صيدليه-سايتوتك",
-      "destination": "/what-is-cytotec",
+      "destination": "/cytotec-nahdi-pharmacy",
       "statusCode": 301,
-      "reason": "Legacy seller-era pharmacy page — educational replacement.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/صيدليه-حياة-الناس/",
@@ -810,10 +810,10 @@
     },
     {
       "source": "/article-hubool-sitetok-saudi.html",
-      "destination": "/safety",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy HTML article indexed in Google - redirected to safety pillar",
-      "createdAt": "2026-09-15"
+      "reason": "Legacy commercial/search URL mapped to the corresponding research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/cytotec-gulf-medical-information",
@@ -905,6 +905,69 @@
       "statusCode": 301,
       "reason": "Trailing-slash variant of merged article",
       "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/article-medical-consultation.html",
+      "destination": "/contact",
+      "statusCode": 301,
+      "reason": "Legacy URL mapped to the current canonical research or information hub.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-womens-health.html",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy URL mapped to the current canonical research or information hub.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-dosage-guide.html",
+      "destination": "/safety",
+      "statusCode": 301,
+      "reason": "Legacy URL mapped to the current canonical research or information hub.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-after-effects.html",
+      "destination": "/side-effects",
+      "statusCode": 301,
+      "reason": "Legacy URL mapped to the current canonical research or information hub.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-side-effects.html",
+      "destination": "/side-effects",
+      "statusCode": 301,
+      "reason": "Legacy URL mapped to the current canonical research or information hub.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-faq.html",
+      "destination": "/faq",
+      "statusCode": 301,
+      "reason": "Legacy URL mapped to the current canonical research or information hub.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-pills-comparison.html",
+      "destination": "/cytotec-saudi-arabia",
+      "statusCode": 301,
+      "reason": "Legacy URL mapped to the current canonical research or information hub.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/cytotec-mecca",
+      "destination": "/cytotec-makkah",
+      "statusCode": 301,
+      "reason": "Legacy URL mapped to the current canonical research or information hub.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/cytotec-madinah",
+      "destination": "/cytotec-medina",
+      "statusCode": 301,
+      "reason": "Legacy URL mapped to the current canonical research or information hub.",
+      "createdAt": "2026-09-30"
     }
   ]
 }

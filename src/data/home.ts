@@ -200,6 +200,9 @@ export const HOME_FAQS: HomeFaq[] = [
 
 /** Internal-link hub: the cornerstone pages of the site (crawl + authority flow). */
 export const HOME_CORE_PAGES: { to: string; label: string }[] = [
+  { to: "/cytotec-saudi-arabia", label: "سايتوتك في السعودية" },
+  { to: "/cytotec-nahdi-pharmacy", label: "سايتوتك صيدلية النهدي" },
+  { to: "/abortion-pills-saudi-arabia", label: "حبوب إجهاض الحمل في السعودية" },
   { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
   { to: "/misoprostol", label: "ميزوبروستول" },
   { to: "/medical-uses", label: "الاستخدامات الطبية" },
