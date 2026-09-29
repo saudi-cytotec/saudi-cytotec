@@ -901,6 +901,46 @@
       "source": "/%D8%AD%D8%A8%D9%88%D8%A8-%D8%A5%D8%AC%D9%87%D8%A7%D8%B6-%D8%A7%D9%84%D8%AD%D9%85%D9%84-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/",
       "destination": "/%D8%AD%D8%A8%D9%88%D8%A8-%D8%A5%D8%AC%D9%87%D8%A7%D8%B6-%D8%A7%D9%84%D8%AD%D9%85%D9%84-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9",
       "statusCode": 301
+    },
+    {
+      "source": "/abortion-pills-uae",
+      "destination": "/حبوب-إجهاض-الحمل-في-الإمارات",
+      "statusCode": 301
+    },
+    {
+      "source": "/abortion-pills-uae/",
+      "destination": "/حبوب-إجهاض-الحمل-في-الإمارات",
+      "statusCode": 301
+    },
+    {
+      "source": "/abortion-pills-kuwait",
+      "destination": "/حبوب-إجهاض-الحمل-في-الكويت",
+      "statusCode": 301
+    },
+    {
+      "source": "/abortion-pills-kuwait/",
+      "destination": "/حبوب-إجهاض-الحمل-في-الكويت",
+      "statusCode": 301
+    },
+    {
+      "source": "/abortion-pills-bahrain",
+      "destination": "/حبوب-إجهاض-الحمل-في-البحرين",
+      "statusCode": 301
+    },
+    {
+      "source": "/abortion-pills-bahrain/",
+      "destination": "/حبوب-إجهاض-الحمل-في-البحرين",
+      "statusCode": 301
+    },
+    {
+      "source": "/abortion-pills-qatar",
+      "destination": "/حبوب-إجهاض-الحمل-في-قطر",
+      "statusCode": 301
+    },
+    {
+      "source": "/abortion-pills-qatar/",
+      "destination": "/حبوب-إجهاض-الحمل-في-قطر",
+      "statusCode": 301
     }
   ],
   "updatedAt": "2026-09-29T05:54:38.664Z"
