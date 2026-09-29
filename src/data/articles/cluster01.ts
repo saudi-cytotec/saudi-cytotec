@@ -8,7 +8,7 @@ export const cluster01 = [
     metaTitle: "تعريف سايتوتك بعيداً عن الشائعات",
     metaDescription: "مقال تعليمي يوضح أن سايتوتك اسم تجاري لمادة ميزوبروستول، ولماذا لا يكفي الاسم لفهم التحذيرات أو اتخاذ قرار صحي.",
     excerpt: "البحث عن الاسم الشائع يبدأ غالباً من القلق. هذا المقال يضع التعريف في سياقه التنظيمي ويفصل بين الشهرة والمعلومة.",
-    related: ["misoprostol-active-ingredient", "difference-cytotec-misoprostol", "key-facts-before-reading-cytotec", "approved-medical-uses-misoprostol"],
+    related: ["misoprostol-active-ingredient", "difference-cytotec-misoprostol", "key-facts-before-reading-cytotec", "approved-medical-uses-misoprostol", "cytotec-uses"],
     points: [
       "سايتوتك علامة تجارية، والتعريف الطبي يبدأ من المادة والاستطباب والتحذير لا من سهولة حفظ الاسم.",
       "نشرة إدارة الغذاء والدواء تربط الاسم بتحذير حمل بارز واستطباب مشروط لحماية المعدة.",
