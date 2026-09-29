@@ -5,6 +5,7 @@ import { CategoryCard } from "../components/CategoryCard";
 import { ContactCta } from "../components/ContactCta";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { CareReferral } from "../components/CareReferral";
+import { HomeNationalDirectory } from "../components/HomeNationalDirectory";
 import { ReferencesList } from "../components/ReferencesList";
 import { Wordmark } from "../components/Logo";
 import { LOGO_SRC } from "../components/Logo";
@@ -617,6 +618,8 @@ export function Home() {
           {HOME_SAUDI_CITY_PAGES.map((item) => <Link key={item.to} to={item.to} className="rounded-2xl border border-line bg-cream p-4 text-center font-bold text-brand-deep transition hover:border-brand/40 hover:bg-brand-soft">{item.label}</Link>)}
         </div>
       </section>
+
+      <HomeNationalDirectory />
 
       <ReferencesList ids={[...HOME_REFERENCE_IDS]} />
 
