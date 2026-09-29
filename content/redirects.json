@@ -1,35 +1,35 @@
 {
   "version": 2,
-  "updatedAt": "2026-09-14",
+  "updatedAt": "2026-09-30",
   "wwwToApex": true,
   "rules": [
     {
       "source": "/blog/cytotec-in-saudi-arabia/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Trailing-slash variant of the legacy Saudi blog URL now resolves to the single authoritative Saudi hub.",
-      "createdAt": "2026-08-30"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/blog/cytotec-in-saudi-arabia",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi blog URL now resolves to the single authoritative Saudi hub.",
-      "createdAt": "2026-08-30"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/cytotec-saudi-arabia/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/https-saudiersaa-com-cytotec-saudi-arabia/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Mangled duplicate of the legacy Saudi geographic query.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك/",
@@ -47,10 +47,10 @@
     },
     {
       "source": "/سايتوتك_في_السعوديه/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سياسة-التحرير/",
@@ -145,17 +145,17 @@
     },
     {
       "source": "/سايتوتك-السعوديه/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك-السعوديه",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك-السعوديهجرعة",
@@ -166,17 +166,17 @@
     },
     {
       "source": "/سايتوتك-في-السعودية/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك-في-السعودية",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك-في-الامارات/",
@@ -250,17 +250,17 @@
     },
     {
       "source": "/سايتوتك_في_السعودية/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك_في_السعودية-2/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy duplicate Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك_في_الكويت/",
@@ -292,24 +292,24 @@
     },
     {
       "source": "/حبوب_سايتوتك_صيدليه/",
-      "destination": "/what-is-cytotec",
+      "destination": "/cytotec-nahdi-pharmacy",
       "statusCode": 301,
-      "reason": "Legacy seller-era pharmacy page — educational replacement.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/صيدليه-سايتوتك",
-      "destination": "/what-is-cytotec",
+      "destination": "/cytotec-nahdi-pharmacy",
       "statusCode": 301,
-      "reason": "Legacy seller-era pharmacy page — educational replacement.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/صيدليه-حياة-الناس/",
-      "destination": "/what-is-cytotec",
+      "destination": "/cytotec-nahdi-pharmacy",
       "statusCode": 301,
-      "reason": "Legacy seller-era pharmacy page — educational replacement.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy commercial/search URL mapped to the corresponding commercial-research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/الحمل-خارج-الرحم-والعوامل-المؤدية-لذلك/",
