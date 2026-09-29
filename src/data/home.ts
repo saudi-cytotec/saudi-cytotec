@@ -157,6 +157,7 @@ export const HOME_FAQS: HomeFaq[] = [
     q: "ما هو سايتوتك؟",
     a: "سايتوتك اسم تجاري لدواء مادته الفعالة ميزوبروستول. تُحدد طبيعة استخدامه بحسب الاستطباب المعتمد في النشرة، والحالة الصحية الفردية، وتقييم الطبيب للموانع والتداخلات.",
     links: [
+      { to: "/cytotec-saudi-arabia", label: "سايتوتك في السعودية" },
       { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
       { to: "/medical-uses", label: "الاستخدامات الطبية" },
     ],
@@ -171,6 +172,7 @@ export const HOME_FAQS: HomeFaq[] = [
     a: "نعم. الدواء خاضع للتنظيم الدوائي في المملكة، ويُصرف بوصفة طبية عبر الصيدليات المرخّصة. الوصفة ليست إجراءً شكلياً؛ هي توثيق لتقييم الموانع واحتمال الحمل والتداخلات والمتابعة.",
     links: [
       { to: "/safety", label: "الأمان والتحذيرات" },
+      { to: "/cytotec-nahdi-pharmacy", label: "بحث سايتوتك صيدلية النهدي" },
       { to: "/service-areas", label: "مسار الصرف والرعاية" },
     ],
   },
@@ -200,6 +202,9 @@ export const HOME_FAQS: HomeFaq[] = [
 
 /** Internal-link hub: the cornerstone pages of the site (crawl + authority flow). */
 export const HOME_CORE_PAGES: { to: string; label: string }[] = [
+  { to: "/cytotec-saudi-arabia", label: "سايتوتك في السعودية" },
+  { to: "/cytotec-nahdi-pharmacy", label: "سايتوتك صيدلية النهدي" },
+  { to: "/abortion-pills-saudi-arabia", label: "حبوب إجهاض الحمل في السعودية" },
   { to: "/what-is-cytotec", label: "ما هو سايتوتك؟" },
   { to: "/misoprostol", label: "ميزوبروستول" },
   { to: "/medical-uses", label: "الاستخدامات الطبية" },
