@@ -8,7 +8,7 @@ export const cluster02 = [
     metaTitle: "الاستطبابات المعتمدة لميزوبروستول",
     metaDescription: "شرح تعليمي للاستطباب المعتمد في النشرة الأمريكية وحدود نقل هذا الاستطباب إلى قرارات فردية.",
     excerpt: "الاعتماد التنظيمي وصف قانوني وعلمي مشروط، وليس دعوة عامة للاستخدام.",
-    related: ["misoprostol-gastric-ulcers", "off-label-use-meaning", "hospital-clinic-limits", "not-all-uses-are-alike", "cytotec-uses"],
+    related: ["misoprostol-gastric-ulcers", "off-label-use-meaning", "hospital-clinic-limits", "not-all-uses-are-alike", "obstetric-uses-under-supervision"],
     points: [
       "النشرة الأمريكية تربط سايتوتك بتقليل خطر قرحة مرتبطة بمضادات الالتهاب في فئات مختارة.",
       "حتى الاستطباب المعتمد مشروط باستبعاد الحمل ومتابعة طبية.",
