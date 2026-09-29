@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "updatedAt": "2026-09-29",
   "wwwToApex": true,
   "rules": [
@@ -1128,6 +1128,1322 @@
       "destination": null,
       "statusCode": 410,
       "reason": "Non-Saudi country page retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/cytotec-definition",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/cytotec-definition/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-active-ingredient",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-active-ingredient/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/difference-cytotec-misoprostol",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/difference-cytotec-misoprostol/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/history-development-misoprostol",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/history-development-misoprostol/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-pharmacologic-class",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-pharmacologic-class/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-misoprostol-works-in-body",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-misoprostol-works-in-body/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/cytotec-pharmaceutical-forms",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/cytotec-pharmaceutical-forms/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-other-brand-names",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-other-brand-names/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-in-clinical-references",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-in-clinical-references/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/key-facts-before-reading-cytotec",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/key-facts-before-reading-cytotec/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/approved-medical-uses-misoprostol",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/approved-medical-uses-misoprostol/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-gastric-ulcers",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-gastric-ulcers/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/obstetric-uses-under-supervision",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/obstetric-uses-under-supervision/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/postpartum-hemorrhage-education",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/postpartum-hemorrhage-education/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/off-label-use-meaning",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/off-label-use-meaning/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/unsafe-unsupervised-use",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/unsafe-unsupervised-use/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/hospital-clinic-limits",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/hospital-clinic-limits/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-not-home-treatment",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-not-home-treatment/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/general-safety-warnings",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/general-safety-warnings/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-boxed-warning",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-boxed-warning/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-medical-supervision-required",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-medical-supervision-required/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/risks-of-random-use",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/risks-of-random-use/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/medicine-storage-home-safety",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/medicine-storage-home-safety/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-to-read-package-insert",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-to-read-package-insert/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/general-info-vs-personal-advice",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/general-info-vs-personal-advice/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/regulatory-drug-warnings",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/regulatory-drug-warnings/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/unreliable-medicine-sources",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/unreliable-medicine-sources/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/saudi-drug-regulation-context",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/saudi-drug-regulation-context/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/common-side-effects",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/common-side-effects/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/diarrhea-abdominal-pain",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/diarrhea-abdominal-pain/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/fever-and-chills",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/fever-and-chills/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/nausea-and-vomiting",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/nausea-and-vomiting/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/abnormal-bleeding",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/abnormal-bleeding/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/rare-serious-complications",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/rare-serious-complications/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/when-symptoms-are-emergencies",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/when-symptoms-are-emergencies/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/gastrointestinal-effects",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/gastrointestinal-effects/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/uterine-reproductive-effects",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/uterine-reproductive-effects/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/what-to-do-if-side-effects",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/what-to-do-if-side-effects/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/early-pregnancy-overview",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/early-pregnancy-overview/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-contraindicated-in-pregnancy-ulcer-use",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-contraindicated-in-pregnancy-ulcer-use/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-follow-up-care",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-follow-up-care/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/warning-signs-in-pregnancy",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/warning-signs-in-pregnancy/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/miscarriage-educational-overview",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/miscarriage-educational-overview/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/bleeding-in-early-pregnancy",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/bleeding-in-early-pregnancy/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/family-planning-education",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/family-planning-education/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reproductive-health-reliable-info",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reproductive-health-reliable-info/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/education-vs-individual-treatment",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/education-vs-individual-treatment/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-and-medicines-faq",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-and-medicines-faq/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/womens-health-life-stages",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/womens-health-life-stages/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/irregular-menstrual-cycle",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/irregular-menstrual-cycle/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pelvic-pain-when-to-see-doctor",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pelvic-pain-when-to-see-doctor/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/anemia-womens-health",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/anemia-womens-health/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/mental-and-reproductive-health",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/mental-and-reproductive-health/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/routine-womens-screening",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/routine-womens-screening/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reproductive-tract-infections-awareness",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reproductive-tract-infections-awareness/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reproductive-age-preventive-care",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reproductive-age-preventive-care/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/nutrition-hormonal-health",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/nutrition-hormonal-health/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reliable-womens-health-sources",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reliable-womens-health-sources/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/common-myths-cytotec",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/common-myths-cytotec/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/is-cytotec-safe-for-everyone",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/is-cytotec-safe-for-everyone/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/use-without-prescription",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/use-without-prescription/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/internet-not-a-doctor",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/internet-not-a-doctor/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/brand-name-vs-active-ingredient",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/brand-name-vs-active-ingredient/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/not-all-uses-are-alike",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/not-all-uses-are-alike/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/mild-symptoms-not-always-safe",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/mild-symptoms-not-always-safe/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-to-verify-medical-information",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-to-verify-medical-information/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/contraindications-misoprostol",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/contraindications-misoprostol/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/basic-drug-interactions",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/basic-drug-interactions/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/prostaglandin-allergy",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/prostaglandin-allergy/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/heart-vascular-considerations",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/heart-vascular-considerations/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/cytotec-alternatives-saudi",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/cytotec-alternatives-saudi/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/breastfeeding-considerations",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/breastfeeding-considerations/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/medicines-that-may-increase-risk",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/medicines-that-may-increase-risk/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/conditions-needing-prior-assessment",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/conditions-needing-prior-assessment/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-contraindication-ulcer-indication",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-contraindication-ulcer-indication/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/discussing-medication-history",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/discussing-medication-history/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/when-to-see-doctor-immediately",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/when-to-see-doctor-immediately/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/signs-of-dangerous-bleeding",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/signs-of-dangerous-bleeding/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/high-fever-and-infection",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/high-fever-and-infection/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/severe-abdominal-pain",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/severe-abdominal-pain/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/dizziness-and-fainting",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/dizziness-and-fainting/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/what-to-say-in-emergency",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/what-to-say-in-emergency/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/follow-up-after-medical-care",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/follow-up-after-medical-care/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/annoying-symptom-vs-emergency",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/annoying-symptom-vs-emergency/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/danger-of-delaying-care",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/danger-of-delaying-care/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-to-evaluate-medical-evidence",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-to-evaluate-medical-evidence/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/fda-cytotec-warnings",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/fda-cytotec-warnings/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/official-drug-leaflets",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/official-drug-leaflets/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/clinical-studies-vs-anecdotes",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/clinical-studies-vs-anecdotes/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reading-a-paper-as-non-specialist",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reading-a-paper-as-non-specialist/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/limits-of-online-medical-info",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/limits-of-online-medical-info/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/common-medical-terms-misoprostol",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/common-medical-terms-misoprostol/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-medical-recommendations-change",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-medical-recommendations-change/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/trusted-sources-further-reading",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/trusted-sources-further-reading/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Legacy article retired during the clean-slate rebuild.",
       "createdAt": "2026-09-29"
     }
   ]
