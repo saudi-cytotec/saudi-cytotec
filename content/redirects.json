@@ -905,6 +905,34 @@
       "statusCode": 301,
       "reason": "Trailing-slash variant of merged article",
       "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/cytotec-mecca",
+      "destination": "/cytotec-makkah",
+      "statusCode": 301,
+      "reason": "Correct legacy city spelling mapped to the canonical Makkah city page.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/cytotec-mecca/",
+      "destination": "/cytotec-makkah",
+      "statusCode": 301,
+      "reason": "Correct legacy city spelling mapped to the canonical Makkah city page.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/cytotec-madinah",
+      "destination": "/cytotec-medina",
+      "statusCode": 301,
+      "reason": "Correct legacy city spelling mapped to the canonical Medina city page.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/cytotec-madinah/",
+      "destination": "/cytotec-medina",
+      "statusCode": 301,
+      "reason": "Correct legacy city spelling mapped to the canonical Medina city page.",
+      "createdAt": "2026-09-30"
     }
   ]
 }
