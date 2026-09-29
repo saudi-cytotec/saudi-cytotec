@@ -746,6 +746,162 @@
       "source": "/blog/who-clinical-references/",
       "destination": "/blog/official-drug-leaflets",
       "statusCode": 301
+    },
+    {
+      "source": "/cytotec-saudi-arabia",
+      "destination": "/%D8%AD%D8%A8%D9%88%D8%A8-%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9",
+      "statusCode": 301
+    },
+    {
+      "source": "/abortion-pills-saudi-arabia",
+      "destination": "/%D8%AD%D8%A8%D9%88%D8%A8-%D8%A5%D8%AC%D9%87%D8%A7%D8%B6-%D8%A7%D9%84%D8%AD%D9%85%D9%84-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9",
+      "statusCode": 301
+    },
+    {
+      "source": "/abortion-pills-saudi-arabia/",
+      "destination": "/%D8%AD%D8%A8%D9%88%D8%A8-%D8%A5%D8%AC%D9%87%D8%A7%D8%B6-%D8%A7%D9%84%D8%AD%D9%85%D9%84-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9",
+      "statusCode": 301
+    },
+    {
+      "source": "/what-is-cytotec",
+      "destination": "/%D9%85%D8%A7-%D9%87%D9%88-%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83",
+      "statusCode": 301
+    },
+    {
+      "source": "/what-is-cytotec/",
+      "destination": "/%D9%85%D8%A7-%D9%87%D9%88-%D8%B3%D8%A7%D9%8A%D8%AA%D9%88%D8%AA%D9%83",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-riyadh",
+      "destination": "/سايتوتك-في-الرياض",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-riyadh/",
+      "destination": "/سايتوتك-في-الرياض",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-jeddah",
+      "destination": "/سايتوتك-في-جدة",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-jeddah/",
+      "destination": "/سايتوتك-في-جدة",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-makkah",
+      "destination": "/سايتوتك-في-مكة",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-makkah/",
+      "destination": "/سايتوتك-في-مكة",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-madinah",
+      "destination": "/سايتوتك-في-المدينة-المنورة",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-madinah/",
+      "destination": "/سايتوتك-في-المدينة-المنورة",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-dammam",
+      "destination": "/سايتوتك-في-الدمام",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-dammam/",
+      "destination": "/سايتوتك-في-الدمام",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-khobar",
+      "destination": "/سايتوتك-في-الخبر",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-khobar/",
+      "destination": "/سايتوتك-في-الخبر",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-abha",
+      "destination": "/سايتوتك-في-أبها",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-abha/",
+      "destination": "/سايتوتك-في-أبها",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-tabuk",
+      "destination": "/سايتوتك-في-تبوك",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-tabuk/",
+      "destination": "/سايتوتك-في-تبوك",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-jazan",
+      "destination": "/سايتوتك-في-جازان",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-jazan/",
+      "destination": "/سايتوتك-في-جازان",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-najran",
+      "destination": "/سايتوتك-في-نجران",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-najran/",
+      "destination": "/سايتوتك-في-نجران",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-buraydah",
+      "destination": "/سايتوتك-في-بريدة",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-buraydah/",
+      "destination": "/سايتوتك-في-بريدة",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-taif",
+      "destination": "/سايتوتك-في-الطائف",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-taif/",
+      "destination": "/سايتوتك-في-الطائف",
+      "statusCode": 301
+    },
+    {
+      "source": "/%D8%AD%D8%A8%D9%88%D8%A8-%D8%A5%D8%AC%D9%87%D8%A7%D8%B6-%D8%A7%D9%84%D8%AD%D9%85%D9%84-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9",
+      "destination": "/%D8%AD%D8%A8%D9%88%D8%A8-%D8%A5%D8%AC%D9%87%D8%A7%D8%B6-%D8%A7%D9%84%D8%AD%D9%85%D9%84-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9",
+      "statusCode": 301
+    },
+    {
+      "source": "/%D8%AD%D8%A8%D9%88%D8%A8-%D8%A5%D8%AC%D9%87%D8%A7%D8%B6-%D8%A7%D9%84%D8%AD%D9%85%D9%84-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/",
+      "destination": "/%D8%AD%D8%A8%D9%88%D8%A8-%D8%A5%D8%AC%D9%87%D8%A7%D8%B6-%D8%A7%D9%84%D8%AD%D9%85%D9%84-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9",
+      "statusCode": 301
     }
-  ]
+  ],
+  "updatedAt": "2026-09-29T05:54:38.664Z"
 }
