@@ -42,7 +42,7 @@ export default function App() {
           {saudiCityPages.map((city) => (
             <Route
               key={city.slug}
-              path={`/cytotec-${city.slug}`}
+              path={`/سايتوتك-في-${city.city}`}
               element={<SaudiCityPage spec={getSaudiCitySpec(city.slug)!} />}
             />
           ))}
