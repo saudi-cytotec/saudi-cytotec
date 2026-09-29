@@ -265,6 +265,7 @@ console.log("SEO AUDIT — saudiersaa.com\n");
 const APPROVED_ASSETS = new Set([
   "/images/logo.png",
   "/images/Bannerrr.png",
+  "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
   "/images/site-medical-banner.png",
   "/images/site-consultation-banner.png",
