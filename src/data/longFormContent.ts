@@ -395,6 +395,10 @@ export function buildSaudiPillarBody(): CountryBlock[] {
   return blocks;
 }
 
+export function buildCytotecDefinitionBlocks(): ContentBlock[] {
+  return buildBlocks(cytotecSections.slice(0, 12), 3200);
+}
+
 export function buildCytotecPillarBlocks(): ContentBlock[] {
   return buildBlocks(cytotecSections, 5200);
 }
