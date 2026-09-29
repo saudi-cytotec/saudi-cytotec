@@ -933,6 +933,55 @@
       "statusCode": 301,
       "reason": "Correct legacy city spelling mapped to the canonical Medina city page.",
       "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "statusCode": 301,
+      "reason": "Legacy homepage HTML path mapped to the canonical homepage.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-after-effects.html",
+      "destination": "/side-effects",
+      "statusCode": 301,
+      "reason": "Legacy side-effects page mapped to the current side-effects hub.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-womens-health.html",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy women's-health page mapped to the current women's-health hub.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-dosage-guide.html",
+      "destination": "/safety",
+      "statusCode": 301,
+      "reason": "Legacy medication guide mapped to the safety pillar; no dosing content is restored.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-faq.html",
+      "destination": "/faq",
+      "statusCode": 301,
+      "reason": "Legacy FAQ page mapped to the current FAQ hub.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-pills-comparison.html",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy pills-comparison page mapped to the core drug-definition page.",
+      "createdAt": "2026-09-30"
+    },
+    {
+      "source": "/article-safe-delivery.html",
+      "destination": "/cytotec-nahdi-pharmacy",
+      "statusCode": 301,
+      "reason": "Legacy delivery/search-commercial page mapped to the pharmacy research pillar.",
+      "createdAt": "2026-09-30"
     }
   ]
 }
