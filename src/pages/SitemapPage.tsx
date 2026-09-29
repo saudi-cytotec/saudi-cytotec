@@ -4,6 +4,8 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { Seo } from "../components/Seo";
 import { staticPages } from "../data/pages";
 import { clusters } from "../data/site";
+import { countryPages } from "../data/country";
+import { saudiCityPages } from "../data/saudiCities";
 
 export function SitemapPage() {
   const { articles } = useCatalog();
@@ -23,13 +25,30 @@ export function SitemapPage() {
             </li>
           ))}
           <li className="mb-2"><Link to="/topics" className="text-teal hover:underline">محاور المحتوى</Link></li>
-          <li className="mb-2"><Link to="/service-areas" className="text-teal hover:underline">سايتوتك في السعودية</Link></li>
+          <li className="mb-2"><Link to="/حبوب-إجهاض-الحمل-في-السعودية" className="text-teal hover:underline">حبوب إجهاض الحمل في السعودية</Link></li>
+          <li className="mb-2"><Link to="/حبوب-سايتوتك-في-السعودية" className="text-teal hover:underline">حبوب سايتوتك في السعودية</Link></li>
           <li className="mb-2"><Link to="/blog" className="text-teal hover:underline">المقالات</Link></li>
           <li className="mb-2"><Link to="/contact" className="text-teal hover:underline">اتصل بنا</Link></li>
         </ul>
       </section>
+      </section>
       <section className="mt-10">
-        <h2 className="text-2xl font-bold text-teal">مجموعات المحتوى</h2>
+        <h2 className="text-2xl font-bold text-teal">الدول</h2>
+        <ul className="mt-3 columns-1 gap-6 sm:columns-2">
+          {countryPages.map((country) => (
+            <li key={country.path} className="mb-2"><Link to={country.path} className="text-teal hover:underline">{country.title}</Link></li>
+          ))}
+        </ul>
+      </section>
+      <section className="mt-10">
+        <h2 className="text-2xl font-bold text-teal">المدن السعودية</h2>
+        <ul className="mt-3 columns-1 gap-6 sm:columns-2 md:columns-3">
+          {saudiCityPages.map((city) => (
+            <li key={city.slug} className="mb-2"><Link to={`/سايتوتك-في-${city.city}`} className="text-teal hover:underline">سايتوتك في {city.city}</Link></li>
+          ))}
+        </ul>
+      </section>
+      <section className="mt-10">\n        <h2 className="text-2xl font-bold text-teal">مجموعات المحتوى</h2>
         <ul className="mt-3 grid gap-2 md:grid-cols-2">
           {clusters.map((cluster) => (
             <li key={cluster.id}>
