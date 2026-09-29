@@ -6,7 +6,6 @@
     <meta name="theme-color" content="#0f6b4a" />
     <meta name="whatsapp" content="00966530945626" />
     <link rel="icon" type="image/png" href="/images/logo.png" />
-    <link rel="preconnect" href="https://wa.me" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="https://saudiersaa.com/" />
     <meta property="og:type" content="website" />
@@ -19,12 +18,21 @@
     <meta name="twitter:title" content="سايتوتك في السعودية | معلومات حبوب سايتوتك وميزوبروستول" />
     <meta name="twitter:description" content="دليل سايتوتك في السعودية ومعلومات حبوب سايتوتك وميزوبروستول: تعريف الدواء، الاستخدامات الطبية، الأمان والتحذيرات، شروط الصرف النظامي، ومصادر صحية موثوقة." />
     <meta name="twitter:image" content="https://saudiersaa.com/images/saudiersaa-social-share.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
+    <!-- Non-blocking Arabic font: system fallback paints immediately; Google font enhances after load. -->
+    <link rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      crossorigin />
+    <link
       rel="stylesheet"
+      media="print"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      crossorigin
+      onload="this.media='all'"
     />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" />
+    </noscript>
     <title>سايتوتك في السعودية | معلومات حبوب سايتوتك وميزوبروستول</title>
     <meta
       name="description"

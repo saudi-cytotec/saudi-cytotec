@@ -5,6 +5,7 @@ import { CategoryCard } from "../components/CategoryCard";
 import { ContactCta } from "../components/ContactCta";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { CareReferral } from "../components/CareReferral";
+import { HomeNationalDirectory } from "../components/HomeNationalDirectory";
 import { ReferencesList } from "../components/ReferencesList";
 import { Wordmark } from "../components/Logo";
 import { LOGO_SRC } from "../components/Logo";
@@ -98,9 +99,9 @@ function HeroBrandPanel() {
               alt={HERO_BANNER_ALT}
               width={1536}
               height={1024}
-              loading="eager"
+              loading="lazy"
               decoding="async"
-              fetchPriority="high"
+              fetchPriority="low"
               className="max-h-[17rem] w-auto object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)] sm:max-h-[20rem]"
               onError={() => setMissing(true)}
             />
@@ -617,6 +618,8 @@ export function Home() {
           {HOME_SAUDI_CITY_PAGES.map((item) => <Link key={item.to} to={item.to} className="rounded-2xl border border-line bg-cream p-4 text-center font-bold text-brand-deep transition hover:border-brand/40 hover:bg-brand-soft">{item.label}</Link>)}
         </div>
       </section>
+
+      <HomeNationalDirectory />
 
       <ReferencesList ids={[...HOME_REFERENCE_IDS]} />
 
