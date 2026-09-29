@@ -3,6 +3,7 @@ import path from "path";
 import type { Plugin } from "vite";
 import { articles } from "../src/data/articles";
 import { staticPages } from "../src/data/pages";
+import { countryPages } from "../src/data/country";
 import { clusters, SITE } from "../src/data/site";
 import { saudiCityPages } from "../src/data/saudiCities";
 
@@ -99,7 +100,7 @@ export function emitSitemap(): Plugin {
         push({ loc: page.path, changefreq: "monthly", priority: page.path.startsWith("/medical") ? "0.9" : "0.8" });
       }
 
-      // Routable pages that are React components rather than StaticPage records.
+      // Country cornerstone pages are first-class routable pages.\n      for (const country of countryPages) {\n        push({ loc: country.path, changefreq: "monthly", priority: country.code === "sa" ? "1.0" : "0.8" });\n      }\n\n      // Routable pages that are React components rather than StaticPage records.
       // Listed explicitly so they can never silently drop out of the sitemap.
       for (const extra of EXTRA_ROUTES) push(extra);
 
@@ -111,7 +112,7 @@ export function emitSitemap(): Plugin {
       // Saudi city information pages are first-class routable pages and must
       // remain in the generated sitemap so URL parity and prerendering see them.
       for (const city of saudiCityPages) {
-        push({ loc: `/cytotec-${city.slug}`, changefreq: "monthly", priority: "0.8" });
+        push({ loc: `/سايتوتك-في-${city.city}`, changefreq: "monthly", priority: "0.8" });
       }
 
       push({ loc: "/blog", changefreq: "weekly", priority: "0.8" });
