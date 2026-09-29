@@ -39,7 +39,13 @@ export default function App() {
           <Route path="/topics" element={<TopicsPage />} />
           <Route path="/faq" element={<FaqHub />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
-          {saudiCityPages.map((city) => <Route key={city.slug} path={`/cytotec-${city.slug}`} element={<SaudiCityPage spec={getSaudiCitySpec(city.slug)!} />} />}
+          {saudiCityPages.map((city) => (
+            <Route
+              key={city.slug}
+              path={`/cytotec-${city.slug}`}
+              element={<SaudiCityPage spec={getSaudiCitySpec(city.slug)!} />}
+            />
+          ))}
           {staticPages
             .filter((page) => page.path !== "/faq" && !countryPagePaths.has(page.path))
             .map((page) => (
