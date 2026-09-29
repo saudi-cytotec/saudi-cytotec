@@ -45,8 +45,8 @@ import {
 import { SITE, clusters } from "../data/site";
 import type { Article } from "../types";
 
-const HERO_BANNER_SRC = "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp";
-const HERO_BANNER_ALT = "أدوية إجهاض الحمل في السعودية - سايتوتك وميزوبروستول ومعلومات طبية موثوقة";
+const HERO_BANNER_SRC = "/images/Bannerrr.png";
+const HERO_BANNER_ALT = "بانر الصفحة الرئيسية — معلومات طبية موثوقة عن صحة المرأة السعودية";
 
 const SA = HEALTH_LINES.find((c) => c.code === "sa");
 const SA_MOH = SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value ?? "937";
@@ -97,8 +97,8 @@ function HeroBrandPanel() {
             <img
               src={HERO_BANNER_SRC}
               alt={HERO_BANNER_ALT}
-              width={1732}
-              height={908}
+              width={1536}
+              height={1024}
               loading="lazy"
               decoding="async"
               fetchPriority="low"

@@ -33,7 +33,6 @@ const ROOT = path.resolve(__dirname, "..");
 const APPROVED = [
   "/images/logo.png",
   "/images/Bannerrr.png",
-  "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
   "/images/site-medical-banner.png",
   "/images/site-consultation-banner.png",
