@@ -9,7 +9,7 @@ import { h2, p, ul, warn, info, emergency, links } from "./types";
  */
 export const bahrain: CountrySpec = {
   code: "bh",
-  path: "/abortion-pills-bahrain",
+  path: "/حبوب-إجهاض-الحمل-في-البحرين",
   title: "حبوب إجهاض الحمل في البحرين",
   h1: "حبوب إجهاض الحمل في البحرين",
   tagline: "حبوب إجهاض الحمل في البحرين | سايتوتك وميزوبروستول وميفيبرستون",
