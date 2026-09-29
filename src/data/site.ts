@@ -25,15 +25,15 @@ export const mainNav: NavItem[] = [
   { to: "/", label: "الرئيسية" },
   { to: "/cytotec-saudi-arabia", label: "سايتوتك في السعودية" },
   { to: "/cytotec-nahdi-pharmacy", label: "سايتوتك صيدلية النهدي" },
-  { to: "/service-areas", label: "خدماتنا" },
+  { to: "/abortion-pills-saudi-arabia", label: "حبوب إجهاض الحمل" },
   { to: "/blog", label: "المقالات" },
-  { to: "/womens-health", label: "صحة المرأة" },
   { to: "/faq", label: "الأسئلة الشائعة" },
   { to: "/contact", label: "تواصل معنا" },
 ];
 
 export const moreNav: NavItem[] = [
-  { to: "/abortion-pills-saudi-arabia", label: "حبوب إجهاض الحمل في السعودية" },
+  { to: "/service-areas", label: "خدمات ومناطق السعودية" },
+  { to: "/womens-health", label: "صحة المرأة" },
   { to: "/misoprostol", label: "ميزوبروستول" },
   { to: "/medical-uses", label: "الاستخدامات الطبية" },
   { to: "/safety", label: "الأمان الدوائي" },
