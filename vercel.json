@@ -747,5 +747,10 @@
       "destination": "/blog/official-drug-leaflets",
       "statusCode": 301
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "VERCEL_FORCE_NO_BUILD_CACHE": "1"
+    }
+  }
 }
