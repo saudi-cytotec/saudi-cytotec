@@ -31,7 +31,6 @@ export function SitemapPage() {
           <li className="mb-2"><Link to="/contact" className="text-teal hover:underline">اتصل بنا</Link></li>
         </ul>
       </section>
-      </section>
       <section className="mt-10">
         <h2 className="text-2xl font-bold text-teal">الدول</h2>
         <ul className="mt-3 columns-1 gap-6 sm:columns-2">
@@ -48,7 +47,8 @@ export function SitemapPage() {
           ))}
         </ul>
       </section>
-      <section className="mt-10">\n        <h2 className="text-2xl font-bold text-teal">مجموعات المحتوى</h2>
+      <section className="mt-10">
+        <h2 className="text-2xl font-bold text-teal">مجموعات المحتوى</h2>
         <ul className="mt-3 grid gap-2 md:grid-cols-2">
           {clusters.map((cluster) => (
             <li key={cluster.id}>
