@@ -22,6 +22,7 @@ export interface MediaItem {
 export const APPROVED_IMAGE_FILES = [
   "/images/logo.png",
   "/images/Bannerrr.png",
+  "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
   "/images/site-medical-banner.png",
   "/images/site-consultation-banner.png",
@@ -36,6 +37,13 @@ export const approvedAssets: MediaItem[] = [
     width: 1536,
     height: 1024,
     role: "الشعار المعتمد — الهيدر والفوتر",
+  },
+  {
+    file: "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
+    alt: "أدوية إجهاض الحمل — سايتوتك وميزوبروستول 200 ومعلومات طبية موثوقة",
+    width: 1732,
+    height: 908,
+    role: "بانر الصفحة الرئيسية المعتمد",
   },
   {
     file: "/images/Bannerrr.png",

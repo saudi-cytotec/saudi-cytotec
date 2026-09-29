@@ -45,8 +45,8 @@ import {
 import { SITE, clusters } from "../data/site";
 import type { Article } from "../types";
 
-const HERO_BANNER_SRC = "/images/Bannerrr.png";
-const HERO_BANNER_ALT = "بانر الصفحة الرئيسية — معلومات طبية موثوقة عن صحة المرأة السعودية";
+const HERO_BANNER_SRC = "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp";
+const HERO_BANNER_ALT = "أدوية إجهاض الحمل — سايتوتك وميزوبروستول 200 ومعلومات طبية موثوقة";
 
 const SA = HEALTH_LINES.find((c) => c.code === "sa");
 const SA_MOH = SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value ?? "937";
