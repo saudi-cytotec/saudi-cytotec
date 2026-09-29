@@ -198,9 +198,7 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
   const badRefs = [];
   for (const { path: p, text } of sources) {
     for (const m of text.matchAll(ANY_IMG_PATH_RE)) {
-      const ref = m[1];
-      const norm = ref.startsWith("/") ? ref : "/" + ref;
-      const decoded = decodeURIComponent(norm);
+      const decoded = normalizeRef(m[1]);
       if (!isAllowedRef(decoded)) badRefs.push(`${path.relative(ROOT, p)}: ${decoded}`);
       else refs.add(decoded);
     }
