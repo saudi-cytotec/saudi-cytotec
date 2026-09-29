@@ -1,7 +1,6 @@
 import { countryPages } from "./country";
 import { emergency, h2, h3, info, p, ul, warn } from "../utils/content";
 import type { StaticPage } from "../types";
-import { saudiCytotecSeoPage } from "./saudiCytotecSeoPage";
 
 export const staticPages: StaticPage[] = [
   {
@@ -353,5 +352,4 @@ export const staticPages: StaticPage[] = [
     imageAlt: "بانر معتمد لمعلومات طبية موثوقة عن صحة المرأة",
     blocks: [],
   })),
-  saudiCytotecSeoPage,
 ];
