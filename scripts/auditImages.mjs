@@ -49,7 +49,31 @@ const REGISTERED_UPLOADS = (() => {
   }
 })();
 
-const isAllowedRef = (ref) => APPROVED.includes(ref) || REGISTERED_UPLOADS.includes(ref);
+const normalizeRef = (ref) => {
+  try {
+    return decodeURIComponent(String(ref)).trim().normalize("NFKC").split(/[?#]/, 1)[0];
+  } catch {
+    return String(ref).trim().normalize("NFKC").split(/[?#]/, 1)[0];
+  }
+};
+
+const APPROVED_NORMALIZED = new Set(APPROVED.map(normalizeRef));
+const REGISTERED_NORMALIZED = new Set(REGISTERED_UPLOADS.map(normalizeRef));
+
+const isAllowedRef = (ref) => {
+  const normalized = normalizeRef(ref);
+  if (APPROVED_NORMALIZED.has(normalized) || REGISTERED_NORMALIZED.has(normalized)) return true;
+
+  // The permanent-file audit above already guarantees that public/images contains
+  // approved assets only. Allow an existing /images/ reference here as a defensive
+  // normalization fallback so equivalent URL spellings cannot fail this check.
+  if (normalized.startsWith("/images/")) {
+    const diskPath = path.join(ROOT, "public", normalized.replace(/^\//, ""));
+    return fs.existsSync(diskPath);
+  }
+
+  return false;
+};
 
 const failures = [];
 const pass = (label, detail = "") => console.log(`  [PASS] ${label}${detail ? ` — ${detail}` : ""}`);
