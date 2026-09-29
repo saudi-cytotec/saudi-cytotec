@@ -19,11 +19,12 @@ export const EMERGENCY_NOTE =
   "إذا ظهر نزيف شديد، إغماء، ألم بطني حاد، حمى مرتفعة، أو ضيق تنفس، اطلبي رعاية طبية طارئة فوراً.";
 
 export const BRAND_NAME_EN = "saudiersaa";
-export const BRAND_TAGLINE = "منصة سعودية موثوقة للتوعية بصحة المرأة";
+export const BRAND_TAGLINE = "منصة سعودية للبحث والمعلومات الدوائية وصحة المرأة";
 
 export const mainNav: NavItem[] = [
   { to: "/", label: "الرئيسية" },
-  { to: "/what-is-cytotec", label: "سايتوتك في السعودية" },
+  { to: "/cytotec-saudi-arabia", label: "سايتوتك في السعودية" },
+  { to: "/cytotec-nahdi-pharmacy", label: "سايتوتك صيدلية النهدي" },
   { to: "/service-areas", label: "خدماتنا" },
   { to: "/blog", label: "المقالات" },
   { to: "/womens-health", label: "صحة المرأة" },
@@ -32,7 +33,8 @@ export const mainNav: NavItem[] = [
 ];
 
 export const moreNav: NavItem[] = [
-  { to: "/misoprostol", label: "ميزوبروستول (توعوي)" },
+  { to: "/abortion-pills-saudi-arabia", label: "حبوب إجهاض الحمل في السعودية" },
+  { to: "/misoprostol", label: "ميزوبروستول" },
   { to: "/medical-uses", label: "الاستخدامات الطبية" },
   { to: "/safety", label: "الأمان الدوائي" },
   { to: "/side-effects", label: "الآثار الجانبية" },
