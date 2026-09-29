@@ -1,8 +1,10 @@
 import { countryPages } from "./country";
 import { emergency, h2, h3, info, p, ul, warn } from "../utils/content";
 import type { StaticPage } from "../types";
+import { cytotecSaudiPage } from "./cytotecSaudiPage";
 
 export const staticPages: StaticPage[] = [
+  cytotecSaudiPage,
   {
     path: "/what-is-cytotec",
     title: "ما هو سايتوتك؟ معلومات توعوية",
