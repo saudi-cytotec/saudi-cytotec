@@ -22,6 +22,7 @@ export interface MediaItem {
 export const APPROVED_IMAGE_FILES = [
   "/images/logo.png",
   "/images/Bannerrr.png",
+  "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
   "/images/site-medical-banner.png",
   "/images/site-consultation-banner.png",
@@ -39,10 +40,17 @@ export const approvedAssets: MediaItem[] = [
   },
   {
     file: "/images/Bannerrr.png",
-    alt: "بانر الصفحة الرئيسية المعتمد — معلومات طبية موثوقة عن صحة المرأة",
+    alt: "بانر الصفحة الرئيسية السابق — معلومات طبية موثوقة عن صحة المرأة",
     width: 1536,
     height: 1024,
-    role: "صورة البطل في الصفحة الرئيسية (LCP)",
+    role: "أصل بصري معتمد محفوظ للتوافق",
+  },
+  {
+    file: "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
+    alt: "أدوية إجهاض الحمل في السعودية — سايتوتك وميزوبروستول ومعلومات طبية موثوقة",
+    width: 1732,
+    height: 908,
+    role: "صورة البطل الحالية في الصفحة الرئيسية (LCP)",
   },
   {
     file: "/images/saudiersaa-social-share.png",
