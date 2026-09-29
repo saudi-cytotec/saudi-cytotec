@@ -23,7 +23,8 @@ export const BRAND_TAGLINE = "منصة سعودية موثوقة للتوعية 
 
 export const mainNav: NavItem[] = [
   { to: "/", label: "الرئيسية" },
-  { to: "/what-is-cytotec", label: "سايتوتك في السعودية" },
+  { to: "/حبوب-إجهاض-الحمل-في-السعودية", label: "حبوب إجهاض الحمل في السعودية" },
+  { to: "/حبوب-سايتوتك-في-السعودية", label: "حبوب سايتوتك في السعودية" },
   { to: "/service-areas", label: "خدماتنا" },
   { to: "/blog", label: "المقالات" },
   { to: "/womens-health", label: "صحة المرأة" },
