@@ -9,7 +9,7 @@ import { h2, p, ul, warn, info, emergency, links } from "./types";
  */
 export const qatar: CountrySpec = {
   code: "qa",
-  path: "/abortion-pills-qatar",
+  path: "/حبوب-إجهاض-الحمل-في-قطر",
   title: "حبوب إجهاض الحمل في قطر",
   h1: "حبوب إجهاض الحمل في قطر",
   tagline: "حبوب إجهاض الحمل في قطر | سايتوتك وميزوبروستول وميفيبرستون",
