@@ -2,6 +2,7 @@ import { countryPages } from "./country";
 import { emergency, h2, h3, info, p, ul, warn } from "../utils/content";
 import type { StaticPage } from "../types";
 import { saudiCytotecSeoPage } from "./saudiCytotecSeoPage";
+import { buildCytotecDefinitionBlocks } from "./longFormContent";
 
 export const staticPages: StaticPage[] = [
   {
