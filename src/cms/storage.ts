@@ -4,7 +4,6 @@ import { selectableImagePaths } from "../data/media";
 import { defaultSettings, seedContentMap, staticManaged } from "./defaults";
 import { committedArticles } from "./contentSource";
 import { redirectRegistry } from "./registrySource";
-import { isActiveArticleSlug } from "../data/seoPolicy";
 
 const KEY = "saudiersaa-cms-v3";
 const MIGRATED_FROM = ["saudiersaa-cms-v2", "saudiersaa-cms-v1"];
@@ -49,7 +48,6 @@ function baseline(): ManagedArticle[] {
   // row keeps its id so an editor's local overlay continues to merge cleanly.
   const bySlug = new Map(staticManaged.map((item) => [item.slug, item]));
   for (const article of committedArticles) {
-    if (!isActiveArticleSlug(article.slug)) continue;
     const base = bySlug.get(article.slug);
     bySlug.set(article.slug, base ? { ...article, id: base.id } : article);
   }
