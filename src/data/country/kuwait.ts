@@ -10,7 +10,7 @@ import { h2, p, ul, warn, info, emergency, links } from "./types";
  */
 export const kuwait: CountrySpec = {
   code: "kw",
-  path: "/abortion-pills-kuwait",
+  path: "/حبوب-إجهاض-الحمل-في-الكويت",
   title: "حبوب إجهاض الحمل في الكويت",
   h1: "حبوب إجهاض الحمل في الكويت",
   tagline: "حبوب إجهاض الحمل في الكويت | سايتوتك وميزوبروستول وميفيبرستون",
