@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "updatedAt": "2026-09-14",
+  "version": 3,
+  "updatedAt": "2026-09-29",
   "wwwToApex": true,
   "rules": [
     {
@@ -905,6 +905,1147 @@
       "statusCode": 301,
       "reason": "Trailing-slash variant of merged article",
       "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/early-pregnancy-symptoms/",
+      "destination": "/early-pregnancy",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-misoprostol-saudi-arabia/",
+      "destination": "/misoprostol",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/الموقع-الرسمي-لحبوب-سايتوتك-في-السعود/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/المقالات/",
+      "destination": "/blog",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/period-calculator.html",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/اعراض-الحمل-عند-البنت-غير-المتزوجة/",
+      "destination": "/early-pregnancy",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/إجهاض-الحمل-في-السعودية/",
+      "destination": "/abortion-pills-saudi-arabia",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/حبوب-سايتوتك-الأصلية/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/سايتوتك-2/",
+      "destination": "/what-is-cytotec",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/سايتوتك_في_السعوديه-2/",
+      "destination": "/abortion-pills-saudi-arabia",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/هل-أنا-حامل-بعد-تأخر-الدورة-الشهرية-تأ/",
+      "destination": "/early-pregnancy",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/إخلاء-المسؤولية-الطبية/",
+      "destination": "/medical-disclaimer",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/pcos-takayus-al-mabayid.html",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/article-ectopic-pregnancy.html",
+      "destination": "/when-to-see-doctor",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/category-women-health.html",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/article-faq.html",
+      "destination": "/faq",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/takhar-aldawra.html",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/makhatir-hobob-elijhad.html",
+      "destination": "/safety",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/article-dosage-guide.html",
+      "destination": "/safety",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/article-safe-usage.html",
+      "destination": "/safety",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/alnazif-athnaa-alhaml.html",
+      "destination": "/blog/abnormal-bleeding",
+      "statusCode": 301,
+      "reason": "Legacy URL consolidated into the current Saudi-first information architecture.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/history-development-misoprostol",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/history-development-misoprostol/",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-pharmacologic-class",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-pharmacologic-class/",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-misoprostol-works-in-body",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-misoprostol-works-in-body/",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-other-brand-names",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-other-brand-names/",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-in-clinical-references",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/misoprostol-in-clinical-references/",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/key-facts-before-reading-cytotec",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/key-facts-before-reading-cytotec/",
+      "destination": "/blog/cluster/ma-huwa-saytotek",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/postpartum-hemorrhage-education",
+      "destination": "/blog/cluster/alestekhdamat-altebbiya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/postpartum-hemorrhage-education/",
+      "destination": "/blog/cluster/alestekhdamat-altebbiya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/off-label-use-meaning",
+      "destination": "/blog/cluster/alestekhdamat-altebbiya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/off-label-use-meaning/",
+      "destination": "/blog/cluster/alestekhdamat-altebbiya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/hospital-clinic-limits",
+      "destination": "/blog/cluster/alestekhdamat-altebbiya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/hospital-clinic-limits/",
+      "destination": "/blog/cluster/alestekhdamat-altebbiya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-not-home-treatment",
+      "destination": "/blog/cluster/alestekhdamat-altebbiya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-not-home-treatment/",
+      "destination": "/blog/cluster/alestekhdamat-altebbiya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-medical-supervision-required",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-medical-supervision-required/",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/risks-of-random-use",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/risks-of-random-use/",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/medicine-storage-home-safety",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/medicine-storage-home-safety/",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-to-read-package-insert",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/how-to-read-package-insert/",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/general-info-vs-personal-advice",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/general-info-vs-personal-advice/",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/unreliable-medicine-sources",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/unreliable-medicine-sources/",
+      "destination": "/blog/cluster/alaman-walthahdhirat",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/fever-and-chills",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/fever-and-chills/",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/nausea-and-vomiting",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/nausea-and-vomiting/",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/when-symptoms-are-emergencies",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/when-symptoms-are-emergencies/",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/gastrointestinal-effects",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/gastrointestinal-effects/",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/uterine-reproductive-effects",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/uterine-reproductive-effects/",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/what-to-do-if-side-effects",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/what-to-do-if-side-effects/",
+      "destination": "/blog/cluster/alathar-aljanibiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-contraindicated-in-pregnancy-ulcer-use",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-contraindicated-in-pregnancy-ulcer-use/",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/miscarriage-educational-overview",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/miscarriage-educational-overview/",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/bleeding-in-early-pregnancy",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/bleeding-in-early-pregnancy/",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/family-planning-education",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/family-planning-education/",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/education-vs-individual-treatment",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/education-vs-individual-treatment/",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-and-medicines-faq",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-and-medicines-faq/",
+      "destination": "/blog/cluster/alhaml-walsehha-alenjabiyya",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pelvic-pain-when-to-see-doctor",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pelvic-pain-when-to-see-doctor/",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/mental-and-reproductive-health",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/mental-and-reproductive-health/",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/routine-womens-screening",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/routine-womens-screening/",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reproductive-tract-infections-awareness",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reproductive-tract-infections-awareness/",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reproductive-age-preventive-care",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reproductive-age-preventive-care/",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/nutrition-hormonal-health",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/nutrition-hormonal-health/",
+      "destination": "/blog/cluster/sehhat-almarah",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/internet-not-a-doctor",
+      "destination": "/blog/cluster/alasila-alshaea",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/internet-not-a-doctor/",
+      "destination": "/blog/cluster/alasila-alshaea",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/brand-name-vs-active-ingredient",
+      "destination": "/blog/cluster/alasila-alshaea",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/brand-name-vs-active-ingredient/",
+      "destination": "/blog/cluster/alasila-alshaea",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/not-all-uses-are-alike",
+      "destination": "/blog/cluster/alasila-alshaea",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/not-all-uses-are-alike/",
+      "destination": "/blog/cluster/alasila-alshaea",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/mild-symptoms-not-always-safe",
+      "destination": "/blog/cluster/alasila-alshaea",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/mild-symptoms-not-always-safe/",
+      "destination": "/blog/cluster/alasila-alshaea",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/prostaglandin-allergy",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/prostaglandin-allergy/",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/heart-vascular-considerations",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/heart-vascular-considerations/",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/cytotec-alternatives-saudi",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/cytotec-alternatives-saudi/",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/breastfeeding-considerations",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/breastfeeding-considerations/",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-contraindication-ulcer-indication",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/pregnancy-contraindication-ulcer-indication/",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/discussing-medication-history",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/discussing-medication-history/",
+      "destination": "/blog/cluster/altadakholat-wamawane",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/dizziness-and-fainting",
+      "destination": "/blog/cluster/mata-murajaa-altabeeb",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/dizziness-and-fainting/",
+      "destination": "/blog/cluster/mata-murajaa-altabeeb",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/what-to-say-in-emergency",
+      "destination": "/blog/cluster/mata-murajaa-altabeeb",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/what-to-say-in-emergency/",
+      "destination": "/blog/cluster/mata-murajaa-altabeeb",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/follow-up-after-medical-care",
+      "destination": "/blog/cluster/mata-murajaa-altabeeb",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/follow-up-after-medical-care/",
+      "destination": "/blog/cluster/mata-murajaa-altabeeb",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/annoying-symptom-vs-emergency",
+      "destination": "/blog/cluster/mata-murajaa-altabeeb",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/annoying-symptom-vs-emergency/",
+      "destination": "/blog/cluster/mata-murajaa-altabeeb",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/danger-of-delaying-care",
+      "destination": "/blog/cluster/mata-murajaa-altabeeb",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/danger-of-delaying-care/",
+      "destination": "/blog/cluster/mata-murajaa-altabeeb",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/clinical-studies-vs-anecdotes",
+      "destination": "/blog/cluster/aladilla-walmasader",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/clinical-studies-vs-anecdotes/",
+      "destination": "/blog/cluster/aladilla-walmasader",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reading-a-paper-as-non-specialist",
+      "destination": "/blog/cluster/aladilla-walmasader",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/reading-a-paper-as-non-specialist/",
+      "destination": "/blog/cluster/aladilla-walmasader",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/limits-of-online-medical-info",
+      "destination": "/blog/cluster/aladilla-walmasader",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/limits-of-online-medical-info/",
+      "destination": "/blog/cluster/aladilla-walmasader",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/common-medical-terms-misoprostol",
+      "destination": "/blog/cluster/aladilla-walmasader",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/common-medical-terms-misoprostol/",
+      "destination": "/blog/cluster/aladilla-walmasader",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-medical-recommendations-change",
+      "destination": "/blog/cluster/aladilla-walmasader",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/blog/why-medical-recommendations-change/",
+      "destination": "/blog/cluster/aladilla-walmasader",
+      "statusCode": 301,
+      "reason": "Retired article consolidated into its relevant editorial cluster.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-riyadh",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-riyadh/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-jeddah",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-jeddah/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-makkah",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-makkah/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-medina",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-medina/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-dammam",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-dammam/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-khobar",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-khobar/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-abha",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-abha/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-tabuk",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-tabuk/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-jazan",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-jazan/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-najran",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-najran/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-buraydah",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-buraydah/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-taif",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/cytotec-taif/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Templated city page consolidated into the national Saudi care guide.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/abortion-pills-uae",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Country page retired because the public site is now Saudi-only.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/abortion-pills-uae/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Country page retired because the public site is now Saudi-only.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/abortion-pills-kuwait",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Country page retired because the public site is now Saudi-only.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/abortion-pills-kuwait/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Country page retired because the public site is now Saudi-only.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/abortion-pills-bahrain",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Country page retired because the public site is now Saudi-only.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/abortion-pills-bahrain/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Country page retired because the public site is now Saudi-only.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/abortion-pills-qatar",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Country page retired because the public site is now Saudi-only.",
+      "createdAt": "2026-09-29"
+    },
+    {
+      "source": "/abortion-pills-qatar/",
+      "destination": null,
+      "statusCode": 410,
+      "reason": "Country page retired because the public site is now Saudi-only.",
+      "createdAt": "2026-09-29"
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLayoutEffect, useLocation } from "react-router-dom";
 import { AdminApp } from "./admin/AdminApp";
 import { Layout } from "./components/Layout";
 import { countryPagePaths, countryPages } from "./data/country";
@@ -13,9 +13,7 @@ import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { FaqHub } from "./pages/FaqHub";
 import { SearchPage } from "./pages/SearchPage";
-import { SaudiCityPage, getSaudiCitySpec } from "./pages/SaudiCityPage";
 import { ServiceAreas } from "./pages/ServiceAreas";
-import { saudiCityPages } from "./data/saudiCities";
 import { SitemapPage } from "./pages/SitemapPage";
 import { StaticPage } from "./pages/StaticPage";
 import { TopicsPage } from "./pages/TopicsPage";
@@ -39,14 +37,7 @@ export default function App() {
           <Route path="/topics" element={<TopicsPage />} />
           <Route path="/faq" element={<FaqHub />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
-          {saudiCityPages.map((city) => (
-            <Route
-              key={city.slug}
-              path={`/cytotec-${city.slug}`}
-              element={<SaudiCityPage spec={getSaudiCitySpec(city.slug)!} />}
-            />
-          ))}
-          {staticPages
+{staticPages
             .filter((page) => page.path !== "/faq" && !countryPagePaths.has(page.path))
             .map((page) => (
               <Route key={page.path} path={page.path} element={<StaticPage page={page} />} />

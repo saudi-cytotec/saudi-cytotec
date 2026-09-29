@@ -4,7 +4,8 @@ import type { Plugin } from "vite";
 import { articles } from "../src/data/articles";
 import { staticPages } from "../src/data/pages";
 import { clusters, SITE } from "../src/data/site";
-import { saudiCityPages } from "../src/data/saudiCities";
+import { countryPages } from "../src/data/country";
+import { isActiveArticleSlug } from "../src/data/seoPolicy";
 
 /**
  * Automatic sitemap generation.
@@ -59,7 +60,7 @@ function readCommittedSlugs(): { slug: string; updatedAt?: string; noindex?: boo
     for (const file of files) {
       try {
         const parsed = JSON.parse(fs.readFileSync(path.join(PUBLISHED_DIR, file), "utf8"));
-        if (parsed && typeof parsed.slug === "string" && parsed.slug) {
+        if (parsed && typeof parsed.slug === "string" && parsed.slug && isActiveArticleSlug(parsed.slug)) {
           out.push({
             slug: parsed.slug,
             updatedAt: parsed.updatedAt,
@@ -108,13 +109,12 @@ export function emitSitemap(): Plugin {
         push({ loc: `/blog/cluster/${cluster.slug}`, changefreq: "weekly", priority: "0.7" });
       }
 
-      // Saudi city information pages are first-class routable pages and must
-      // remain in the generated sitemap so URL parity and prerendering see them.
-      for (const city of saudiCityPages) {
-        push({ loc: `/cytotec-${city.slug}`, changefreq: "monthly", priority: "0.8" });
+      // Only the Saudi country cornerstone is public/indexable.
+      for (const country of countryPages) {
+        push({ loc: country.path, changefreq: "monthly", priority: "0.9" });
       }
 
-      push({ loc: "/blog", changefreq: "weekly", priority: "0.8" });
+push({ loc: "/blog", changefreq: "weekly", priority: "0.8" });
 
       // Articles published through the CMS (committed JSON) come FIRST: a
       // committed file overrides its static twin in the bundle (see
@@ -136,6 +136,7 @@ export function emitSitemap(): Plugin {
 
       // Articles shipped in the bundle (static .ts files).
       for (const article of articles) {
+        if (!isActiveArticleSlug(article.slug)) continue;
         if (committedRows.has(article.slug)) continue;
         if (article.noindex) continue;
         push({

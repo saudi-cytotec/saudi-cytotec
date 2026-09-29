@@ -9,8 +9,9 @@ import { cluster07 } from "./cluster07";
 import { cluster08 } from "./cluster08";
 import { cluster09 } from "./cluster09";
 import { cluster10 } from "./cluster10";
+import { isActiveArticleSlug } from "../seoPolicy";
 
-export const articles: Article[] = [
+const ALL_ARTICLES: Article[] = [
   ...cluster01,
   ...cluster02,
   ...cluster03,
@@ -22,6 +23,8 @@ export const articles: Article[] = [
   ...cluster09,
   ...cluster10,
 ];
+
+export const articles: Article[] = ALL_ARTICLES.filter((article) => isActiveArticleSlug(article.slug));
 
 const bySlug = new Map(articles.map((article) => [article.slug, article]));
 

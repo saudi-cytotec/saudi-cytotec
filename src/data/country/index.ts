@@ -1,17 +1,12 @@
 import { saudi } from "./saudi";
-import { uae } from "./uae";
-import { kuwait } from "./kuwait";
-import { bahrain } from "./bahrain";
-import { qatar } from "./qatar";
 import type { CountrySpec } from "./types";
 
 /**
- * Country cornerstone pages, in canonical order. Each spec is fully authored
- * content (not a template), with country-specific regulatory framing, FAQs,
- * official sources and internal links. Nothing here is generated or copied
- * between countries beyond the shared helper builders.
+ * Public country scope is intentionally Saudi Arabia only.
+ * The other country source files remain in the repository for reference but
+ * are not routable or indexable in the deployed site.
  */
-export const countryPages: CountrySpec[] = [saudi, uae, kuwait, bahrain, qatar];
+export const countryPages: CountrySpec[] = [saudi];
 
 export const countryPageByPath = new Map<string, CountrySpec>(
   countryPages.map((spec) => [spec.path, spec]),
