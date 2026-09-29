@@ -48,6 +48,14 @@ const REGISTERED_UPLOADS = (() => {
   }
 })();
 
+const normalizeRef = (ref) => {
+  try {
+    return decodeURIComponent(String(ref)).trim().normalize("NFKC").split(/[?#]/, 1)[0];
+  } catch {
+    return String(ref).trim().normalize("NFKC").split(/[?#]/, 1)[0];
+  }
+};
+
 const isAllowedRef = (ref) => APPROVED.includes(ref) || REGISTERED_UPLOADS.includes(ref);
 
 const failures = [];
