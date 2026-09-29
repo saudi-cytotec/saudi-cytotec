@@ -6,7 +6,6 @@ import { PageHero } from "../components/PageHero";
 import { ReferencesList } from "../components/ReferencesList";
 import { JsonLd, Seo } from "../components/Seo";
 import { serviceAreaLinks } from "../data/serviceAreas";
-import { saudiCityPages } from "../data/saudiCities";
 import { SITE } from "../data/site";
 
 
