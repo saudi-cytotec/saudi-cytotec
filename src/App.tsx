@@ -16,7 +16,6 @@ import { SearchPage } from "./pages/SearchPage";
 import { SaudiCityPage, getSaudiCitySpec } from "./pages/SaudiCityPage";
 import { ServiceAreas } from "./pages/ServiceAreas";
 import { saudiCityPages } from "./data/saudiCities";
-import { saudiCytotecSeoPage } from "./data/saudiCytotecSeoPage";
 import { SitemapPage } from "./pages/SitemapPage";
 import { StaticPage } from "./pages/StaticPage";
 import { TopicsPage } from "./pages/TopicsPage";
@@ -40,7 +39,6 @@ export default function App() {
           <Route path="/topics" element={<TopicsPage />} />
           <Route path="/faq" element={<FaqHub />} />
           <Route path="/service-areas" element={<ServiceAreas />} />
-          <Route path="/cytotec-saudi-arabia" element={<StaticPage page={saudiCytotecSeoPage} />} />
           {saudiCityPages.map((city) => (
             <Route
               key={city.slug}
