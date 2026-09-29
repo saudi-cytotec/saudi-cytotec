@@ -9,7 +9,7 @@ import { h2, p, ul, warn, info, emergency, links } from "./types";
  */
 export const uae: CountrySpec = {
   code: "ae",
-  path: "/abortion-pills-uae",
+  path: "/حبوب-إجهاض-الحمل-في-الإمارات",
   title: "حبوب إجهاض الحمل في الإمارات",
   h1: "حبوب إجهاض الحمل في الإمارات",
   tagline: "حبوب إجهاض الحمل في الإمارات | سايتوتك وميزوبروستول وميفيبرستون",
