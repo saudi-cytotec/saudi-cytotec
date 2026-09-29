@@ -210,8 +210,7 @@ console.log("IMAGE ASSET AUDIT — saudiersaa.com\n");
   const addFile = (p) => {
     if (fs.existsSync(p)) sources.push({ path: p, text: fs.readFileSync(p, "utf8") });
   };
-  addFile(path.join(ROOT, "dist", "index.html"));
-  addFile(path.join(ROOT, "src", "data", "media.ts"));
+  // dist/index.html is generated output; source references are audited below.\n  // Auditing generated HTML here can reintroduce equivalent Vite URL spellings\n  // that are not part of the source asset policy.\n  addFile(path.join(ROOT, "src", "data", "media.ts"));
   for (const dir of ["src", "content", "public"]) {
     for (const f of walk(path.join(ROOT, dir))) {
       if (/\.(tsx?|jsx?|mjs|json|html|md)$/.test(f)) addFile(f);
