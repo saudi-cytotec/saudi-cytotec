@@ -112,7 +112,7 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
         title={spec.metaTitle}
         description={spec.metaDescription}
         path={spec.path}
-        image={BANNER_SRC}
+        image={spec.image ?? BANNER_SRC}
       />
       <JsonLd
         data={[
@@ -150,8 +150,8 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
         <span className="pointer-events-none absolute -bottom-20 -end-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
         <div className="relative flex min-h-[9rem] items-center justify-center">
           <img
-            src={BANNER_SRC}
-            alt={BANNER_ALT}
+            src={spec.image ?? BANNER_SRC}
+            alt={spec.imageAlt ?? BANNER_ALT}
             width={1536}
             height={1024}
             loading="eager"
