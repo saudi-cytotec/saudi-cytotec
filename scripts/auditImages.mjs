@@ -60,7 +60,7 @@ const normalizeRef = (ref) => {
   }
 };
 
-const isAllowedRef = (ref) => APPROVED.includes(ref) || REGISTERED_UPLOADS.includes(ref);
+const isAllowedRef = (ref) => APPROVED.some((approved) => normalizeRef(approved) === ref) || REGISTERED_UPLOADS.some((uploaded) => normalizeRef(uploaded) === ref);
 
 const failures = [];
 const pass = (label, detail = "") => console.log(`  [PASS] ${label}${detail ? ` — ${detail}` : ""}`);
