@@ -26,6 +26,9 @@ export const APPROVED_IMAGE_FILES = [
   "/images/saudiersaa-social-share.png",
   "/images/site-medical-banner.png",
   "/images/site-consultation-banner.png",
+  "/images/سايتوتك_في_السعودية_البحرين_الكويت_الامارات.webp",
+  "/images/سايتوتك_صيدلية_النهدي.webp",
+  "/images/حبوب-اجهاض-الحمل-في-السعودية.webp",
 ] as const;
 
 export const GLOBAL_SOCIAL_SHARE_IMAGE = "/images/saudiersaa-social-share.png" as const;
