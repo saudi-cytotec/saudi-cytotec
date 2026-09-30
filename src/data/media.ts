@@ -26,6 +26,9 @@ export const APPROVED_IMAGE_FILES = [
   "/images/saudiersaa-social-share.png",
   "/images/site-medical-banner.png",
   "/images/site-consultation-banner.png",
+  "/images/حبوب-اجهاض-الحمل-في-السعودية.webp",
+  "/images/سايتوتك_في_السعودية_البحرين_الكويت_الامارات.webp",
+  "/images/سايتوتك_صيدلية_النهدي.webp",
 ] as const;
 
 export const GLOBAL_SOCIAL_SHARE_IMAGE = "/images/saudiersaa-social-share.png" as const;
@@ -72,6 +75,27 @@ export const approvedAssets: MediaItem[] = [
     width: 0,
     height: 0,
     role: "بانر تواصل معتمد للموقع",
+  },
+  {
+    file: "/images/حبوب-اجهاض-الحمل-في-السعودية.webp",
+    alt: "حبوب إجهاض الحمل في السعودية",
+    width: 1280,
+    height: 671,
+    role: "صورة رئيسية لصفحة حبوب إجهاض الحمل في السعودية",
+  },
+  {
+    file: "/images/سايتوتك_في_السعودية_البحرين_الكويت_الامارات.webp",
+    alt: "سايتوتك في السعودية والبحرين والكويت والإمارات",
+    width: 1160,
+    height: 1355,
+    role: "صورة رئيسية لصفحة سايتوتك في السعودية",
+  },
+  {
+    file: "/images/سايتوتك_صيدلية_النهدي.webp",
+    alt: "سايتوتك في صيدلية النهدي",
+    width: 1160,
+    height: 1355,
+    role: "صورة رئيسية لصفحة سايتوتك صيدلية النهدي",
   },
 ];
 

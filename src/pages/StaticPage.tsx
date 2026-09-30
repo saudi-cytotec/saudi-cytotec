@@ -11,7 +11,13 @@ import type { StaticPage as StaticPageType } from "../types";
 export function StaticPage({ page }: { page: StaticPageType }) {
   return (
     <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
-      <Seo title={page.metaTitle} description={page.metaDescription} path={page.path} />
+      <Seo
+        title={page.metaTitle}
+        description={page.metaDescription}
+        path={page.path}
+        image={page.image}
+        imageAlt={page.imageAlt}
+      />
       <JsonLd
         data={[
           {
@@ -35,6 +41,20 @@ export function StaticPage({ page }: { page: StaticPageType }) {
         ]}
       />
       <PageHero crumbs={[{ name: page.title, path: page.path }]} title={page.h1} />
+      {page.image ? (
+        <figure className="max-w-5xl overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <img
+            src={page.image}
+            alt={page.imageAlt || page.h1}
+            title={page.imageAlt || page.h1}
+            width={page.imageWidth}
+            height={page.imageHeight}
+            loading="eager"
+            decoding="async"
+            className="h-auto w-full"
+          />
+        </figure>
+      ) : null}
       <div className="max-w-3xl">
         <DisclaimerBanner />
       </div>
