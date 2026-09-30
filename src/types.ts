@@ -90,6 +90,8 @@ export interface StaticPage {
   metaDescription: string;
   image?: string;
   imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   blocks: ContentBlock[];
 }
 
