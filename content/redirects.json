@@ -5,17 +5,17 @@
   "rules": [
     {
       "source": "/blog/cytotec-in-saudi-arabia/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Trailing-slash variant of the legacy Saudi blog URL now resolves to the single authoritative Saudi hub.",
-      "createdAt": "2026-08-30"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/blog/cytotec-in-saudi-arabia",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi blog URL now resolves to the single authoritative Saudi hub.",
-      "createdAt": "2026-08-30"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/https-saudiersaa-com-cytotec-saudi-arabia/",
@@ -40,10 +40,10 @@
     },
     {
       "source": "/سايتوتك_في_السعوديه/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سياسة-التحرير/",
@@ -138,38 +138,38 @@
     },
     {
       "source": "/سايتوتك-السعوديه/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك-السعوديه",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك-السعوديهجرعة",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query (mangled slug) now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك-في-السعودية/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك-في-السعودية",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك-في-الامارات/",
@@ -243,17 +243,17 @@
     },
     {
       "source": "/سايتوتك_في_السعودية/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك_في_السعودية-2/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy duplicate Saudi geographic query now maps to the Saudi hub.",
-      "createdAt": "2026-08-29"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/سايتوتك_في_الكويت/",
@@ -607,45 +607,45 @@
     },
     {
       "source": "/blog/cytotec-saudi-faq",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "City/doorway article cytotec-saudi-faq removed - repositioned to women's health platform, consolidated to /service-areas",
-      "createdAt": "2026-09-06"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/blog/cytotec-saudi-faq/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "City/doorway article cytotec-saudi-faq removed - repositioned to women's health platform, consolidated to /service-areas",
-      "createdAt": "2026-09-06"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/blog/cytotec-saudi-regions",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "City/doorway article cytotec-saudi-regions removed - repositioned to women's health platform, consolidated to /service-areas",
-      "createdAt": "2026-09-06"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/blog/cytotec-saudi-regions/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "City/doorway article cytotec-saudi-regions removed - repositioned to women's health platform, consolidated to /service-areas",
-      "createdAt": "2026-09-06"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/blog/cytotec-saudi-safety",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "City/doorway article cytotec-saudi-safety removed - repositioned to women's health platform, consolidated to /service-areas",
-      "createdAt": "2026-09-06"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/blog/cytotec-saudi-safety/",
-      "destination": "/service-areas",
+      "destination": "/cytotec-saudi-arabia",
       "statusCode": 301,
-      "reason": "City/doorway article cytotec-saudi-safety removed - repositioned to women's health platform, consolidated to /service-areas",
-      "createdAt": "2026-09-06"
+      "reason": "Legacy national Saudi Cytotec search URL mapped to the current Saudi commercial research pillar.",
+      "createdAt": "2026-09-30"
     },
     {
       "source": "/blog/cytotec-southern-region",
