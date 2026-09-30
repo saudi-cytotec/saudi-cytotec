@@ -11,7 +11,7 @@ import type { StaticPage as StaticPageType } from "../types";
 export function StaticPage({ page }: { page: StaticPageType }) {
   return (
     <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
-      <Seo title={page.metaTitle} description={page.metaDescription} path={page.path} />
+      <Seo title={page.metaTitle} description={page.metaDescription} path={page.path} image={page.image} />
       <JsonLd
         data={[
           {
