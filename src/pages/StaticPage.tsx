@@ -35,6 +35,19 @@ export function StaticPage({ page }: { page: StaticPageType }) {
         ]}
       />
       <PageHero crumbs={[{ name: page.title, path: page.path }]} title={page.h1} />
+      {page.image ? (
+        <figure className="max-w-4xl overflow-hidden rounded-[1.75rem] bg-brand-deep p-4 ring-1 ring-line/60 sm:p-6">
+          <img
+            src={page.image}
+            alt={page.imageAlt ?? page.h1}
+            width={1600}
+            height={900}
+            loading="eager"
+            decoding="async"
+            className="h-auto w-full rounded-2xl object-cover"
+          />
+        </figure>
+      ) : null}
       <div className="max-w-3xl">
         <DisclaimerBanner />
       </div>
