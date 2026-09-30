@@ -41,6 +41,11 @@ export interface CountrySpec {
   metaTitle: string;
   /** Unique meta description. */
   metaDescription: string;
+  /** Optional page-specific featured image. */
+  image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   /** Section 2 — short, direct answer shown right under the H1 area. */
   directAnswer: RichParagraph;
   /** Body blocks. Headings cover sections 3..11 (definition → regulatory). */

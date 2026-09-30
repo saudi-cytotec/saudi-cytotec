@@ -101,6 +101,11 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
     .map((slug) => articles.find((a) => a.slug === slug && !a.noindex))
     .filter((a): a is NonNullable<typeof a> => Boolean(a));
 
+  const bannerSrc = spec.image || BANNER_SRC;
+  const bannerAlt = spec.imageAlt || BANNER_ALT;
+  const bannerWidth = spec.imageWidth || 1536;
+  const bannerHeight = spec.imageHeight || 1024;
+
   const crumbs = [
     { name: "محاور المحتوى", path: "/topics" },
     { name: spec.title, path: spec.path },
@@ -112,7 +117,8 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
         title={spec.metaTitle}
         description={spec.metaDescription}
         path={spec.path}
-        image={BANNER_SRC}
+        image={bannerSrc}
+        imageAlt={bannerAlt}
       />
       <JsonLd
         data={[
@@ -150,10 +156,10 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
         <span className="pointer-events-none absolute -bottom-20 -end-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
         <div className="relative flex min-h-[9rem] items-center justify-center">
           <img
-            src={BANNER_SRC}
-            alt={BANNER_ALT}
-            width={1536}
-            height={1024}
+            src={bannerSrc}
+            alt={bannerAlt}
+            width={bannerWidth}
+            height={bannerHeight}
             loading="eager"
             decoding="async"
             className="max-h-[17rem] w-auto max-w-full rounded-2xl object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)]"
