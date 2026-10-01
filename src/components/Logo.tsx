@@ -24,7 +24,10 @@ export function Wordmark({ className = "", tone = "dark" }: { className?: string
 }
 
 /**
- * Approved logo lockup — renders the committed logo asset verbatim.
+ * Approved logo lockup.
+ * The heavy raster asset is kept for desktop branding, while mobile uses the
+ * lightweight typographic wordmark so the 1.65 MB logo does not block the
+ * initial mobile load.
  */
 export function BrandLogo({
   className = "h-14",
@@ -35,18 +38,23 @@ export function BrandLogo({
   plateClass?: string;
   tone?: "dark" | "light";
 }) {
-  void tone;
   return (
     <span className={`inline-flex overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
-      <img
-        src={LOGO_SRC}
-        alt={LOGO_ALT}
-        width={1254}
-        height={1254}
-        loading="eager"
-        decoding="async"
-        className="h-full w-auto object-contain"
-      />
+      <span className="sm:hidden px-3 py-2">
+        <Wordmark tone={tone === "light" ? "light" : "dark"} />
+      </span>
+      <span className="hidden h-full sm:inline-flex">
+        <img
+          src={LOGO_SRC}
+          alt={LOGO_ALT}
+          width={1254}
+          height={1254}
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+          className="h-full w-auto object-contain"
+        />
+      </span>
     </span>
   );
 }
