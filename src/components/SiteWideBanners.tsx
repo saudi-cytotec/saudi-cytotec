@@ -10,7 +10,7 @@ export function MedicalBanner() {
         className="group block overflow-hidden rounded-3xl border border-line bg-paper shadow-sm transition hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
         aria-label={`معلومات دوائية عن سايتوتك — واتساب ${WHATSAPP_NUMBER_RAW}`}>
         <img src={MEDICAL_BANNER_SRC} alt="معلومات توعوية عن سايتوتك وصحة المرأة السعودية"
-          width={1536} height={1024} loading="lazy" decoding="async" fetchPriority="low"
+          width={1160} height={1355} loading="eager" decoding="async" fetchPriority="high"
           className="mx-auto h-auto max-h-[360px] w-auto max-w-full object-contain" />
       </a>
     </section>
