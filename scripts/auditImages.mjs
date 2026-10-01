@@ -5,7 +5,7 @@
  *
  * Owner-approved policy (hard rules):
  *   1. The only PERMANENT assets under public/images/ are the owner-approved
- *      files (logo, homepage hero, article WhatsApp banner, medical banner, social share).
+ *      files (logo, homepage hero, social share).
  *      Admin-uploaded CMS media lives separately under public/media/ and is registered in
  *      content/media.json — every such file must be registered, and every
  *      registered file must exist.
@@ -35,8 +35,6 @@ const APPROVED = [
   "/images/Bannerrr.png",
   "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
-  "/images/site-medical-banner.png",
-  "/images/site-consultation-banner.png",
 ];
 
 /** Admin-uploaded CMS media: registered in content/media.json, served from /media/. */
