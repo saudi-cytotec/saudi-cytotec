@@ -24,8 +24,6 @@ export const APPROVED_IMAGE_FILES = [
   "/images/Bannerrr.png",
   "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
-  "/images/site-medical-banner.png",
-  "/images/site-consultation-banner.png",
 ] as const;
 
 export const GLOBAL_SOCIAL_SHARE_IMAGE = "/images/saudiersaa-social-share.png" as const;
@@ -58,20 +56,6 @@ export const approvedAssets: MediaItem[] = [
     width: 0,
     height: 0,
     role: "صورة مشاركة اجتماعية معتمدة — fallback للـOG/Twitter metadata فقط",
-  },
-  {
-    file: "/images/site-medical-banner.png",
-    alt: "بانر طبي توعوي عن سايتوتك وصحة المرأة السعودية",
-    width: 0,
-    height: 0,
-    role: "بانر طبي معتمد للموقع",
-  },
-  {
-    file: "/images/site-consultation-banner.png",
-    alt: "بانر استشارة سايتوتك ومعلومات صحة المرأة السعودية",
-    width: 0,
-    height: 0,
-    role: "بانر تواصل معتمد للموقع",
   },
 ];
 
