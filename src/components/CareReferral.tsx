@@ -1,4 +1,4 @@
-import { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
+import { Fragment } from "react";\nimport { EDITORIAL_EMAIL, HEALTH_LINES } from "../data/contact";
 
 /**
  * Replaces the former "ConsultCTA" / "WhatsAppFloat" components.

@@ -3,23 +3,36 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { countryPagePaths, countryPages } from "./data/country";
 import { staticPages } from "./data/pages";
-import { ArticlePage } from "./pages/ArticlePage";
-import { BlogIndex } from "./pages/BlogIndex";
-import { ClusterPage } from "./pages/ClusterPage";
-import { Contact } from "./pages/Contact";
-import { CountryCornerstonePage } from "./pages/CountryCornerstonePage";
+
+
+
+
+
 import { Home } from "./pages/Home";
-import { NotFound } from "./pages/NotFound";
-import { FaqHub } from "./pages/FaqHub";
-import { SearchPage } from "./pages/SearchPage";
-import { SaudiCityPage, getSaudiCitySpec } from "./pages/SaudiCityPage";
-import { ServiceAreas } from "./pages/ServiceAreas";
+
+
+
+import { getSaudiCitySpec } from "./pages/SaudiCityPage";
+
 import { saudiCityPages } from "./data/saudiCities";
-import { SitemapPage } from "./pages/SitemapPage";
-import { StaticPage } from "./pages/StaticPage";
-import { TopicsPage } from "./pages/TopicsPage";
+
+
+
 
 const AdminApp = lazy(() => import("./admin/AdminApp").then((module) => ({ default: module.AdminApp })));
+const ArticlePage = lazy(() => import("./pages/ArticlePage").then((m) => ({ default: m.ArticlePage })));
+const BlogIndex = lazy(() => import("./pages/BlogIndex").then((m) => ({ default: m.BlogIndex })));
+const ClusterPage = lazy(() => import("./pages/ClusterPage").then((m) => ({ default: m.ClusterPage })));
+const Contact = lazy(() => import("./pages/Contact").then((m) => ({ default: m.Contact })));
+const CountryCornerstonePage = lazy(() => import("./pages/CountryCornerstonePage").then((m) => ({ default: m.CountryCornerstonePage })));
+const NotFound = lazy(() => import("./pages/NotFound").then((m) => ({ default: m.NotFound })));
+const FaqHub = lazy(() => import("./pages/FaqHub").then((m) => ({ default: m.FaqHub })));
+const SearchPage = lazy(() => import("./pages/SearchPage").then((m) => ({ default: m.SearchPage })));
+const SaudiCityPage = lazy(() => import("./pages/SaudiCityPage").then((m) => ({ default: m.SaudiCityPage })));
+const ServiceAreas = lazy(() => import("./pages/ServiceAreas").then((m) => ({ default: m.ServiceAreas })));
+const SitemapPage = lazy(() => import("./pages/SitemapPage").then((m) => ({ default: m.SitemapPage })));
+const StaticPage = lazy(() => import("./pages/StaticPage").then((m) => ({ default: m.StaticPage })));
+const TopicsPage = lazy(() => import("./pages/TopicsPage").then((m) => ({ default: m.TopicsPage })));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -33,6 +46,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      <Suspense fallback={<div className="min-h-screen bg-cream" aria-hidden="true" />}>
       <Routes>
         <Route path="/admin/*" element={<Suspense fallback={<div className="grid min-h-screen place-items-center bg-cream text-brand-deep">جاري تحميل لوحة التحرير...</div>}><AdminApp /></Suspense>} />
         <Route element={<Layout />}>
@@ -64,6 +78,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+      </Suspense>
     </>
   );
 }

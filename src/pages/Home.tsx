@@ -404,7 +404,7 @@ export function Home() {
       <DisclaimerBanner />
 
       {/* ── 4. صفحات الدعم عن سايتوتك وميزوبروستول ───────────────────────── */}
-      <section aria-labelledby="support-pages-heading">
+      <section className="defer-render" aria-labelledby="support-pages-heading">
         <div className="mb-6">
           <h2 id="support-pages-heading" className={SECTION_HEADING}>سايتوتك وميزوبروستول: الصفحات المرجعية</h2>
           <span className="mt-3 block h-1 w-14 rounded-full bg-accent" aria-hidden="true" />
@@ -431,7 +431,7 @@ export function Home() {
       </section>
 
       {/* ── 5. لماذا Saudiersaa؟ ────────────────────────────────────────── */}
-      <section aria-labelledby="why-us-heading">
+      <section className="defer-render" aria-labelledby="why-us-heading">
         <div className="mb-6 text-center">
           <h2 id="why-us-heading" className={SECTION_HEADING}>لماذا Saudiersaa؟</h2>
           <span className="mx-auto mt-3 block h-1 w-16 rounded-full bg-accent" aria-hidden="true" />
@@ -462,7 +462,7 @@ export function Home() {
       </section>
 
       {/* ── 6. مناطق الخدمة + الأمان في سطور ────────────────────────────── */}
-      <section className="grid gap-6 lg:grid-cols-2">
+      <section className="defer-render" className="grid gap-6 lg:grid-cols-2">
         <div className="card-premium p-6">
           <h2 className="font-display text-xl font-extrabold text-brand-deep">مناطق الخدمة في المملكة</h2>
           <span className="mt-3 block h-1 w-14 rounded-full bg-accent" aria-hidden="true" />
@@ -509,7 +509,7 @@ export function Home() {
       </section>
 
       {/* ── 7. المقالات ─────────────────────────────────────────────────── */}
-      <section aria-labelledby="articles-heading" className="space-y-10">
+      <section className="defer-render" aria-labelledby="articles-heading" className="space-y-10">
         <h2 id="articles-heading" className="sr-only">المقالات الدوائية</h2>
         <div>
           <div className="mb-6 flex items-end justify-between gap-4">
@@ -545,7 +545,7 @@ export function Home() {
       </section>
 
       {/* ── 8. FAQ ──────────────────────────────────────────────────────── */}
-      <section aria-labelledby="faq-heading">
+      <section className="defer-render" aria-labelledby="faq-heading">
         <div className="mb-6">
           <h2 id="faq-heading" className={SECTION_HEADING}>أسئلة يتكرر طرحها</h2>
           <span className="mt-3 block h-1 w-14 rounded-full bg-accent" aria-hidden="true" />
@@ -578,7 +578,7 @@ export function Home() {
       </section>
 
       {/* ── روابط أساسية (crawl + internal authority) ───────────────────── */}
-      <section aria-labelledby="core-pages-heading" className="card-premium p-6">
+      <section className="defer-render" aria-labelledby="core-pages-heading" className="card-premium p-6">
         <h2 id="core-pages-heading" className="font-display text-lg font-extrabold text-brand-deep">
           روابط سريعة إلى الصفحات الأساسية
         </h2>
@@ -613,7 +613,7 @@ export function Home() {
       </section>
 
 
-      <section aria-labelledby="saudi-city-heading" className="card-premium p-6">
+      <section className="defer-render" aria-labelledby="saudi-city-heading" className="card-premium p-6">
         <div className="mb-5">
           <h2 id="saudi-city-heading" className={SECTION_HEADING}>سايتوتك في المدن السعودية</h2>
           <span className="mt-3 block h-1 w-14 rounded-full bg-accent" aria-hidden="true" />
@@ -624,11 +624,11 @@ export function Home() {
         </div>
       </section>
 
-      <HomeNationalDirectory />
+      <div className="defer-render"><HomeNationalDirectory /></div>
 
-      <ReferencesList ids={[...HOME_REFERENCE_IDS]} />
+      <div className="defer-render"><ReferencesList ids={[...HOME_REFERENCE_IDS]} /></div>
 
-      <CareReferral />
+      <div className="defer-render"><CareReferral /></div>
       <ContactCta topic="سايتوتك وصحة المرأة في السعودية" />
     </div>
   );

@@ -206,3 +206,10 @@ a {
 [class~="ring-[#16a34a]"] {
   --tw-ring-color: var(--color-brand) !important;
 }
+
+
+/* Performance: skip layout/paint work for long sections below the initial viewport. */
+.defer-render {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
