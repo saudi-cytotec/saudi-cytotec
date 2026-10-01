@@ -33,15 +33,15 @@ export function CareReferral({ compact = false }: { compact?: boolean }) {
               <span aria-hidden="true">{entry.flag}</span>
               {entry.country}
             </h3>
-            <dl className="mt-3 space-y-2">
+            <dl className="mt-3 grid gap-2">
               {entry.lines.map((line) => (
-                <div key={line.label} className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <>
                   <dt className="text-sm text-ink-soft">{line.label}</dt>
                   <dd dir="ltr" className="font-mono text-base font-bold text-accent">
                     {line.value}
+                    {line.note ? <span dir="rtl" className="mr-2 font-sans text-xs font-normal text-ink-soft">({line.note})</span> : null}
                   </dd>
-                  {line.note ? <span className="text-xs text-ink-soft">({line.note})</span> : null}
-                </div>
+                </>
               ))}
             </dl>
             <p className="mt-3 text-xs">
