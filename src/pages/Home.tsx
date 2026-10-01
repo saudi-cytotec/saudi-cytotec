@@ -94,17 +94,22 @@ function HeroBrandPanel() {
           {missing ? (
             <Wordmark tone="light" className="text-center" />
           ) : (
-            <img
-              src={HERO_BANNER_SRC}
-              alt={HERO_BANNER_ALT}
-              width={1732}
-              height={908}
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-              className="max-h-[17rem] w-auto object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)] sm:max-h-[20rem]"
-              onError={() => setMissing(true)}
-            />
+            <>
+              <div className="sm:hidden">
+                <Wordmark tone="light" className="text-center" />
+              </div>
+              <img
+                src={HERO_BANNER_SRC}
+                alt={HERO_BANNER_ALT}
+                width={1732}
+                height={908}
+                loading="lazy"
+                decoding="async"
+                fetchPriority="auto"
+                className="hidden max-h-[17rem] w-auto object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)] sm:block sm:max-h-[20rem]"
+                onError={() => setMissing(true)}
+              />
+            </>
           )}
         </div>
       </div>
