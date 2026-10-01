@@ -1,6 +1,5 @@
-import { useLayoutEffect } from "react";
+import { lazy, Suspense, useLayoutEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { AdminApp } from "./admin/AdminApp";
 import { Layout } from "./components/Layout";
 import { countryPagePaths, countryPages } from "./data/country";
 import { staticPages } from "./data/pages";
@@ -20,6 +19,8 @@ import { SitemapPage } from "./pages/SitemapPage";
 import { StaticPage } from "./pages/StaticPage";
 import { TopicsPage } from "./pages/TopicsPage";
 
+const AdminApp = lazy(() => import("./admin/AdminApp").then((module) => ({ default: module.AdminApp })));
+
 function ScrollToTop() {
   const { pathname } = useLocation();
   useLayoutEffect(() => {
@@ -33,7 +34,7 @@ export default function App() {
     <>
       <ScrollToTop />
       <Routes>
-        <Route path="/admin/*" element={<AdminApp />} />
+        <Route path="/admin/*" element={<Suspense fallback={<div className="grid min-h-screen place-items-center bg-cream text-brand-deep">جاري تحميل لوحة التحرير...</div>}><AdminApp /></Suspense>} />
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/topics" element={<TopicsPage />} />
