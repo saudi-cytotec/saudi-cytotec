@@ -187,29 +187,3 @@ a {
     transition-duration: 0.001ms !important;
   }
 }
-
-
-/* Accessibility: keep accent text and green CTA backgrounds above WCAG AA contrast. */
-.text-accent,
-[class~="hover:text-accent"]:hover {
-  color: var(--color-brand) !important;
-}
-
-[class~="bg-[#16a34a]"] {
-  background-color: var(--color-brand) !important;
-}
-
-[class~="hover:bg-[#15803d]"]:hover {
-  background-color: var(--color-brand-deep) !important;
-}
-
-[class~="ring-[#16a34a]"] {
-  --tw-ring-color: var(--color-brand) !important;
-}
-
-
-/* Performance: skip layout/paint work for long sections below the initial viewport. */
-.defer-render {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 900px;
-}

@@ -234,3 +234,8 @@ export const saudiCityPages: SaudiCitySpec[] = [
 export function getSaudiCitySpec(slug: string) {
   return saudiCityPages.find((item) => item.slug === slug);
 }
+
+
+export function getSaudiCitySpec(slug: string): SaudiCitySpec | undefined {
+  return saudiCityPages.find((city) => city.slug === slug);
+}

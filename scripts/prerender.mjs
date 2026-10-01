@@ -134,7 +134,7 @@ async function render(urlPath) {
   setGlobal("getComputedStyle", window.getComputedStyle.bind(window));
   setGlobal("requestAnimationFrame", (cb) => setTimeout(cb, 16));
   setGlobal("cancelAnimationFrame", (id) => clearTimeout(id));
-  window.fetch = () => Promise.reject(new TypeError("network disabled in prerender"));
+  window.fetch = async () => ({ ok: true, status: 200, headers: new Map(), text: async () => "", json: async () => ({}), arrayBuffer: async () => new ArrayBuffer(0) });
   global.fetch = window.fetch;
 
   await import(BUNDLE_IMPORT + "?u=" + encodeURIComponent(urlPath));

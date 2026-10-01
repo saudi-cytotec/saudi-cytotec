@@ -12,7 +12,7 @@ import { Home } from "./pages/Home";
 
 
 
-import { getSaudiCitySpec } from "./pages/SaudiCityPage";
+import { getSaudiCitySpec } from "./data/saudiCities";
 
 import { saudiCityPages } from "./data/saudiCities";
 
