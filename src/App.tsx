@@ -9,6 +9,7 @@ import { staticPages } from "./data/pages";
 
 
 import { Home } from "./pages/Home";
+import { AdminApp } from "./admin/AdminApp";
 import { ArticlePage } from "./pages/ArticlePage";
 import { BlogIndex } from "./pages/BlogIndex";
 import { ClusterPage } from "./pages/ClusterPage";
