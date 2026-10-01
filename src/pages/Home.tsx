@@ -462,7 +462,7 @@ export function Home() {
       </section>
 
       {/* ── 6. مناطق الخدمة + الأمان في سطور ────────────────────────────── */}
-      <section className="defer-render" className="grid gap-6 lg:grid-cols-2">
+      <section className="defer-render grid gap-6 lg:grid-cols-2">
         <div className="card-premium p-6">
           <h2 className="font-display text-xl font-extrabold text-brand-deep">مناطق الخدمة في المملكة</h2>
           <span className="mt-3 block h-1 w-14 rounded-full bg-accent" aria-hidden="true" />
@@ -509,7 +509,7 @@ export function Home() {
       </section>
 
       {/* ── 7. المقالات ─────────────────────────────────────────────────── */}
-      <section className="defer-render" aria-labelledby="articles-heading" className="space-y-10">
+      <section className="defer-render space-y-10" aria-labelledby="articles-heading">
         <h2 id="articles-heading" className="sr-only">المقالات الدوائية</h2>
         <div>
           <div className="mb-6 flex items-end justify-between gap-4">
@@ -578,7 +578,7 @@ export function Home() {
       </section>
 
       {/* ── روابط أساسية (crawl + internal authority) ───────────────────── */}
-      <section className="defer-render" aria-labelledby="core-pages-heading" className="card-premium p-6">
+      <section className="defer-render card-premium p-6" aria-labelledby="core-pages-heading">
         <h2 id="core-pages-heading" className="font-display text-lg font-extrabold text-brand-deep">
           روابط سريعة إلى الصفحات الأساسية
         </h2>
@@ -613,7 +613,7 @@ export function Home() {
       </section>
 
 
-      <section className="defer-render" aria-labelledby="saudi-city-heading" className="card-premium p-6">
+      <section className="defer-render card-premium p-6" aria-labelledby="saudi-city-heading">
         <div className="mb-5">
           <h2 id="saudi-city-heading" className={SECTION_HEADING}>سايتوتك في المدن السعودية</h2>
           <span className="mt-3 block h-1 w-14 rounded-full bg-accent" aria-hidden="true" />
