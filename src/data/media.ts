@@ -3,7 +3,7 @@ import mediaRegistry from "../../content/media.json";
 
 /**
  * Media registry - repositioned.
- * Permanent approved assets: logo, homepage banner, social-share, and the two approved site-wide banners.
+ * Permanent approved assets: logo, homepage banner, social-share image.
  * No legacy or auto-assigned article images are permitted.
  * No private WhatsApp funnel.
  */
