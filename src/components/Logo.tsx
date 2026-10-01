@@ -41,6 +41,8 @@ export function BrandLogo({
       <img
         src={LOGO_SRC}
         alt={LOGO_ALT}
+        width={1254}
+        height={1254}
         loading="eager"
         decoding="async"
         className="h-full w-auto object-contain"
