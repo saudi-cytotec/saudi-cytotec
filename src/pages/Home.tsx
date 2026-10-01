@@ -97,11 +97,11 @@ function HeroBrandPanel() {
             <img
               src={HERO_BANNER_SRC}
               alt={HERO_BANNER_ALT}
-              width={1536}
-              height={1024}
-              loading="lazy"
+              width={1732}
+              height={908}
+              loading="eager"
               decoding="async"
-              fetchPriority="low"
+              fetchPriority="high"
               className="max-h-[17rem] w-auto object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)] sm:max-h-[20rem]"
               onError={() => setMissing(true)}
             />
