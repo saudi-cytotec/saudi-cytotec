@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { lazy, Suspense, useLayoutEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { countryPagePaths, countryPages } from "./data/country";
@@ -9,7 +9,6 @@ import { staticPages } from "./data/pages";
 
 
 import { Home } from "./pages/Home";
-import { AdminApp } from "./admin/AdminApp";
 import { ArticlePage } from "./pages/ArticlePage";
 import { BlogIndex } from "./pages/BlogIndex";
 import { ClusterPage } from "./pages/ClusterPage";
@@ -23,6 +22,8 @@ import { ServiceAreas } from "./pages/ServiceAreas";
 import { SitemapPage } from "./pages/SitemapPage";
 import { StaticPage } from "./pages/StaticPage";
 import { TopicsPage } from "./pages/TopicsPage";
+
+const AdminApp = lazy(() => import("./admin/AdminApp").then((module) => ({ default: module.AdminApp })));
 
 
 
@@ -46,7 +47,7 @@ export default function App() {
     <>
       <ScrollToTop />
       <Routes>
-        <Route path="/admin/*" element={<AdminApp />} />
+        <Route path="/admin/*" element={<Suspense fallback={<div className="grid min-h-screen place-items-center bg-cream text-brand-deep">جاري تحميل لوحة التحرير...</div>}><AdminApp /></Suspense>} />
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/topics" element={<TopicsPage />} />
