@@ -31,8 +31,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 
 const APPROVED = [
-  "/images/logo.png",
-  "/images/logo.webp",
+  "/images/saudiersaa-logo.webp",
   "/images/Bannerrr.png",
   "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
@@ -56,7 +55,7 @@ const normalizeRef = (ref) => {
   }
 };
 
-const isAllowedRef = (ref) => APPROVED.includes(ref) || ref === "/images/logo.webp" || REGISTERED_UPLOADS.includes(ref);
+const isAllowedRef = (ref) => APPROVED.includes(ref) || ref === "/images/saudiersaa-logo.webp" || REGISTERED_UPLOADS.includes(ref);
 
 const failures = [];
 const pass = (label, detail = "") => console.log(`  [PASS] ${label}${detail ? ` — ${detail}` : ""}`);
