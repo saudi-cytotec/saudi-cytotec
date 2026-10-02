@@ -2,7 +2,7 @@
  * Brand logo — supplied Saudiersaa asset.
  * Optimized WebP for fast header/footer/favicons.
  */
-export const LOGO_SRC = "/images/saudiersaa-logo.webp";
+export const LOGO_SRC = "/images/logo.webp";
 export const LOGO_ALT = "شعار سايتوتك في السعودية";
 
 export function Wordmark({ className = "", tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
