@@ -308,7 +308,7 @@ export function Home() {
       </section>
 
       {/* ── 2. شريط الخدمات السريع ──────────────────────────────────────── */}
-      <section aria-label="الخدمات السريعة" className="rounded-[1.75rem] bg-brand-deep p-4 shadow-[0_20px_45px_-25px_rgb(10_74_51/0.7)] sm:p-5">
+      <section aria-label="الخدمات السريعة" className="defer-render rounded-[1.75rem] bg-brand-deep p-4 shadow-[0_20px_45px_-25px_rgb(10_74_51/0.7)] sm:p-5">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <Link to="/what-is-cytotec" className="group rounded-2xl bg-white/10 p-4 text-white ring-1 ring-white/10 transition hover:bg-white/15">
             <span className="text-xs font-bold text-white/70">دليل دوائي</span>
@@ -335,7 +335,7 @@ export function Home() {
 
 
       {/* ── 2. سايتوتك في السعودية ───────────────────────────────────────── */}
-      <section aria-labelledby="cytotec-section" className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+      <section className="defer-render grid gap-6 lg:grid-cols-[1.2fr_0.8fr]" aria-labelledby="cytotec-section">
         <div className="card-premium scroll-mt-32 p-6 md:p-7">
           <p className="text-[11px] font-bold uppercase tracking-wide text-accent">المنتج الدوائي</p>
           <h2 id="cytotec-section" className={SECTION_HEADING}>سايتوتك في السعودية</h2>
@@ -401,7 +401,7 @@ export function Home() {
         </div>
       </section>
 
-      <DisclaimerBanner />
+      <div className="defer-render"><DisclaimerBanner /></div>
 
       {/* ── 4. صفحات الدعم عن سايتوتك وميزوبروستول ───────────────────────── */}
       <section className="defer-render" aria-labelledby="support-pages-heading">
@@ -597,7 +597,7 @@ export function Home() {
       </section>
 
       {/* ── المحاور + المصادر + الرعاية ─────────────────────────────────── */}
-      <section>
+      <section className="defer-render">
         <div className="mb-6 text-center">
           <h2 className={SECTION_HEADING}>تصفحي المقالات حسب المحور</h2>
           <span className="mx-auto mt-3 block h-1 w-16 rounded-full bg-accent" aria-hidden="true" />
@@ -629,7 +629,7 @@ export function Home() {
       <div className="defer-render"><ReferencesList ids={[...HOME_REFERENCE_IDS]} /></div>
 
       <div className="defer-render"><CareReferral /></div>
-      <ContactCta topic="سايتوتك وصحة المرأة في السعودية" />
+      <div className="defer-render"><ContactCta topic="سايتوتك وصحة المرأة في السعودية" /></div>
     </div>
   );
 }
