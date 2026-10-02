@@ -29,13 +29,8 @@ export function BrandLogo({
   tone?: "dark" | "light";
 }) {
   return (
-    <span className={`inline-flex h-full w-24 shrink-0 overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
-      <span className="inline-flex h-full w-full items-center justify-center">
-        <picture>
-          <source srcSet="/images/logo.webp" type="image/webp" />
-          <img src={LOGO_SRC} alt={LOGO_ALT} width={240} height={160} decoding="async" fetchPriority="low" className="h-full w-full object-contain" />
-        </picture>
-      </span>
+    <span className={`inline-flex items-center justify-center px-3 ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
+      <Wordmark tone={tone} />
     </span>
   );
 }
