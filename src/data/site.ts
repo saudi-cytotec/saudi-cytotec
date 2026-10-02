@@ -1,7 +1,7 @@
 import type { Cluster, NavItem } from "../types";
 
 export const SITE = {
-  name: "سايتوتك في السعودية | وكيل فايزر",
+  name: "سايتوتك في السعودية",
   nameEn: "Saudi Women's Health - Saudiersaa",
   domain: "https://saudiersaa.com",
   locale: "ar-SA",
@@ -19,7 +19,7 @@ export const EMERGENCY_NOTE =
   "إذا ظهر نزيف شديد، إغماء، ألم بطني حاد، حمى مرتفعة، أو ضيق تنفس، اطلبي رعاية طبية طارئة فوراً.";
 
 export const BRAND_NAME_EN = "saudiersaa";
-export const BRAND_TAGLINE = "منصة سعودية موثوقة للتوعية بصحة المرأة";
+export const BRAND_TAGLINE = "دليل دوائي موثوق عن سايتوتك وميزوبروستول في السعودية";
 
 export const mainNav: NavItem[] = [
   { to: "/", label: "الرئيسية" },
