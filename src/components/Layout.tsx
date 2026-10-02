@@ -1,7 +1,11 @@
+import { lazy, Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { WhatsAppFloat } from "./WhatsAppContact";
+
+const DeferredFooter = lazy(() =>
+  import("./Footer").then((module) => ({ default: module.Footer })),
+);
 
 export function Layout() {
   return (
@@ -13,9 +17,11 @@ export function Layout() {
       <main id="content">
         <Outlet />
       </main>
-      <div className="defer-render">
-        <Footer />
-      </div>
+      <Suspense fallback={null}>
+        <div className="defer-render" data-deferred-footer="true">
+          <DeferredFooter />
+        </div>
+      </Suspense>
       <WhatsAppFloat />
     </>
   );
