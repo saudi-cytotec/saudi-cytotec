@@ -25,9 +25,8 @@ export function Wordmark({ className = "", tone = "dark" }: { className?: string
 
 /**
  * Approved logo lockup.
- * The heavy raster asset is kept for desktop branding, while mobile uses the
- * lightweight typographic wordmark so the 1.65 MB logo does not block the
- * initial mobile load.
+ * The approved raster asset is used directly across desktop and mobile so the
+ * actual brand logo remains visible in the header.
  */
 export function BrandLogo({
   className = "h-14",
@@ -40,19 +39,15 @@ export function BrandLogo({
 }) {
   return (
     <span className={`inline-flex overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
-      <span className="sm:hidden px-3 py-2">
-        <Wordmark tone={tone === "light" ? "light" : "dark"} />
-      </span>
-      <span className="hidden h-full sm:inline-flex">
+      <span className="inline-flex h-full w-full items-center justify-center">
         <img
           src={LOGO_SRC}
           alt={LOGO_ALT}
           width={1254}
           height={1254}
-          loading="lazy"
           decoding="async"
-          fetchPriority="low"
-          className="h-full w-auto object-contain"
+          fetchPriority="high"
+          className="h-full w-auto max-w-full object-contain"
         />
       </span>
     </span>
