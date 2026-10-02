@@ -294,6 +294,17 @@ async function main() {
       // the approved root metadata in index.html, while non-root routes
       // receive their route-specific Helmet/prerender SEO block below.
       let enhanced = urlPath === "/" ? ORIGINAL_SHELL : stripShellSeo(ORIGINAL_SHELL);
+
+      // The homepage keeps its approved static SEO shell, but it still needs
+      // the same prerender markers as every generated route.
+      if (urlPath === "/" && !enhanced.includes('name="prerender-path"')) {
+        enhanced = enhanced.replace(
+          "</head>",
+          '    <meta name="prerender" content="' + paths.length + '" />\n' +
+            '    <meta name="prerender-path" content="/" />\n' +
+            "  </head>",
+        );
+      }
       const headOk = Boolean(settled && head.title && head.canonical && head.description);
 
       if (urlPath !== "/" && headOk) {
