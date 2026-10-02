@@ -1,22 +1,9 @@
 /**
  * prerender — generate static HTML for every sitemap URL.
  *
- * Production rendering fix:
- *   - Reads public/sitemap.xml (129 canonical/indexable URLs) + the built
- *     assets bundle (dist/assets/ or dist/index.html).
- *   - Renders each URL in jsdom (same harness as verifyRendered) so the DOM
- *     is the fully-rendered React tree (post-hydration behavior) at that URL.
- *   - Writes dist/<path>/index.html for each route with:
- *       * the page's OWN <title>, meta description, canonical, robots meta,
- *         Open Graph / Twitter / article metas (extracted from the rendered
- *         head produced by react-helmet-async),
- *       * exactly ONE canonical link tag per page, pointing to the page's own URL,
- *       * exactly ONE meta description tag per page,
- *       * the rendered #root innerHTML (real per-page content, page-specific H1),
- *       * a <noscript> shell block removed (the prerendered #root replaces it),
- *       * markers: <meta name="prerender">, <meta name="prerender-path">,
- *         <meta name="whatsapp" content="00966530945626"> (from the shell).
- *   - Emits dist/404.html for true HTTP 404 handling on unknown URLs.
+ * Uses one jsdom/React runtime for the full route set. Importing the same
+ * bundle with a different query string per URL would duplicate the bundled
+ * React instance and can trigger React error #321.
  */
 
 import fs from "node:fs";
@@ -44,9 +31,7 @@ let bundlePath;
 const assetsDir = path.join(ROOT, "dist", "assets");
 if (fs.existsSync(assetsDir)) {
   const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
-  if (assetJs) {
-    bundlePath = path.join(assetsDir, assetJs);
-  }
+  if (assetJs) bundlePath = path.join(assetsDir, assetJs);
 }
 
 if (!bundlePath) {
@@ -67,19 +52,16 @@ if (!bundlePath) {
 const sitemapXml = fs.readFileSync(SITEMAP, "utf8");
 const sitemapUrls = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 
-// Convert absolute URLs to paths
 const paths = sitemapUrls
   .map((u) => {
     try {
-      const url = new URL(u);
-      return url.pathname;
+      return new URL(u).pathname;
     } catch {
       return null;
     }
   })
   .filter(Boolean);
 
-// Always include root and known public routes
 const extraPaths = ["/", "/topics", "/service-areas", "/contact", "/sitemap", "/faq", "/blog"];
 for (const p of extraPaths) {
   if (!paths.includes(p)) paths.push(p);
@@ -93,60 +75,71 @@ function pathToFileUrlSafe(file) {
 
 const BUNDLE_IMPORT = pathToFileUrlSafe(bundlePath);
 
-async function waitFor(fn, ms = 15000) {
-  const start = Date.now();
-  for (;;) {
-    try {
-      if (fn()) return true;
-    } catch {}
-    if (Date.now() - start > ms) return false;
-    await new Promise((r) => setTimeout(r, 150));
+const dom = new JSDOM(`<!doctype html><html><body><div id="root"></div></body></html>`, {
+  url: DOMAIN + (paths[0] || "/"),
+  pretendToBeVisual: true,
+  runScripts: "outside-only",
+});
+
+const { window } = dom;
+
+const setGlobal = (name, value) => {
+  try {
+    globalThis[name] = value;
+  } catch {
+    Object.defineProperty(globalThis, name, { value, configurable: true, writable: true });
+  }
+};
+
+for (const name of [
+  "window", "document", "navigator", "location", "history",
+  "localStorage", "sessionStorage",
+  "HTMLElement", "HTMLInputElement", "HTMLAnchorElement", "Element", "Node",
+  "DocumentFragment", "Text", "Comment",
+  "Event", "CustomEvent", "EventTarget", "MutationObserver",
+  "DOMParser", "MessageChannel", "URL", "URLSearchParams",
+  "getComputedStyle", "Image",
+]) {
+  if (window[name] !== undefined) setGlobal(name, window[name]);
+}
+
+setGlobal("getComputedStyle", window.getComputedStyle.bind(window));
+setGlobal("requestAnimationFrame", (cb) => setTimeout(cb, 16));
+setGlobal("cancelAnimationFrame", (id) => clearTimeout(id));
+
+window.fetch = async () => ({
+  ok: true,
+  status: 200,
+  headers: new Map(),
+  text: async () => "",
+  json: async () => ({}),
+  arrayBuffer: async () => new ArrayBuffer(0),
+});
+global.fetch = window.fetch;
+
+let bundleLoaded = false;
+
+async function ensureBundleLoaded() {
+  if (!bundleLoaded) {
+    await import(BUNDLE_IMPORT);
+    bundleLoaded = true;
   }
 }
 
 async function render(urlPath) {
-  const dom = new JSDOM(`<!doctype html><html><body><div id="root"></div></body></html>`, {
-    url: DOMAIN + urlPath,
-    pretendToBeVisual: true,
-    runScripts: "outside-only",
-  });
-  const { window } = dom;
+  const firstPath = paths[0] || "/";
+  window.history.replaceState({}, "", DOMAIN + urlPath);
+  await ensureBundleLoaded();
 
-  const setGlobal = (name, value) => {
-    try {
-      globalThis[name] = value;
-    } catch {
-      Object.defineProperty(globalThis, name, { value, configurable: true, writable: true });
-    }
-  };
-  const globals = [
-    "window", "document", "navigator", "location", "history",
-    "localStorage", "sessionStorage",
-    "HTMLElement", "HTMLInputElement", "HTMLAnchorElement", "Element", "Node",
-    "DocumentFragment", "Text", "Comment",
-    "Event", "CustomEvent", "EventTarget", "MutationObserver",
-    "DOMParser", "MessageChannel", "URL", "URLSearchParams",
-    "getComputedStyle", "Image",
-  ];
-  for (const name of globals) {
-    if (window[name] !== undefined) setGlobal(name, window[name]);
+  if (urlPath !== firstPath) {
+    window.dispatchEvent(new window.PopStateEvent("popstate"));
   }
-  setGlobal("getComputedStyle", window.getComputedStyle.bind(window));
-  setGlobal("requestAnimationFrame", (cb) => setTimeout(cb, 16));
-  setGlobal("cancelAnimationFrame", (id) => clearTimeout(id));
-  window.fetch = async () => ({ ok: true, status: 200, headers: new Map(), text: async () => "", json: async () => ({}), arrayBuffer: async () => new ArrayBuffer(0) });
-  global.fetch = window.fetch;
 
-  await import(BUNDLE_IMPORT + "?u=" + encodeURIComponent(urlPath));
-
-  // Settle only on STABLE rendered content. The catalog provider fills its
-  // state in a post-mount effect, so the first paint of an article URL can be
-  // the transient 404 fallback; capturing that would ship a wrong page.
-  // Requiring two identical snapshots 100ms apart rules the transient out; the hard cap prevents one slow route from stalling the whole production build.
   const doc0 = window.document;
   let stable = null;
   let settled = false;
   const start = Date.now();
+
   while (Date.now() - start < 5000) {
     const root = doc0.getElementById("root");
     const now = root ? root.innerHTML : "";
@@ -163,8 +156,6 @@ async function render(urlPath) {
   }
 
   const doc = window.document;
-
-  // Per-page head elements produced by react-helmet-async at this URL.
   const head = {
     title: doc.querySelector("title")?.outerHTML ?? "",
     description: doc.querySelector('meta[name="description"]')?.outerHTML ?? "",
@@ -177,9 +168,6 @@ async function render(urlPath) {
   };
 
   const bodyRoot = doc.getElementById("root") ? doc.getElementById("root").innerHTML : "";
-
-  window.close();
-
   return { head, bodyRoot, settled };
 }
 
@@ -187,13 +175,12 @@ function ensureDir(filePath) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 }
 
-/** Remove the generic homepage SEO elements from the shell head. */
 function stripShellSeo(shell) {
   let out = shell;
   out = out.replace(/<title>[\s\S]*?<\/title>\n?/gi, "");
-  out = out.replace(/<!--\s*Homepage SEO shell:[\s\S]*?-->\n?/gi, "");
+  out = out.replace(/<!--[\s\S]*?Homepage SEO shell:[\s\S]*?-->\n?/gi, "");
   out = out.replace(/<meta\s+name=["']prerender[^"']*["'][^>]*>\n?/gi, "");
-  out = out.replace(/<!--\s*Prerendered per-page SEO head:[\s\S]*?-->\n?/gi, "");
+  out = out.replace(/<!--[\s\S]*?Prerendered per-page SEO head:[\s\S]*?-->\n?/gi, "");
   out = out.replace(/<meta\s+name=["']description["'][^>]*>\n?/gi, "");
   out = out.replace(/<link\s+rel=["']canonical["'][^>]*>\n?/gi, "");
   out = out.replace(/<meta\s+name=["']robots["'][^>]*>\n?/gi, "");
@@ -203,7 +190,6 @@ function stripShellSeo(shell) {
   return out;
 }
 
-/** Build the per-page head block to inject before </head>. */
 function seoBlock(head, urlPath, total) {
   const lines = [`    <!-- Prerendered per-page SEO head: ${urlPath} -->`];
   if (head.title) lines.push(`    ${head.title}`);
@@ -223,76 +209,63 @@ async function main() {
   let renderedCount = 0;
   let fallbacks = 0;
   const failures = [];
-
   const ORIGINAL_SHELL = fs.readFileSync(DIST_HTML, "utf8");
 
   for (const urlPath of paths) {
     try {
       const { head, bodyRoot, settled } = await render(urlPath);
 
-      let outPath;
-      if (urlPath === "/" || urlPath === "") {
-        outPath = path.join(DIST_DIR, "index.html");
-      } else {
-        const clean = urlPath.replace(/\/$/, "");
-        outPath = path.join(DIST_DIR, clean, "index.html");
-      }
+      const outPath =
+        urlPath === "/" || urlPath === ""
+          ? path.join(DIST_DIR, "index.html")
+          : path.join(DIST_DIR, urlPath.replace(/\/$/, ""), "index.html");
 
       let enhanced = stripShellSeo(ORIGINAL_SHELL);
-
       const headOk = Boolean(settled && head.title && head.canonical && head.description);
 
       if (headOk) {
         enhanced = enhanced.replace("</head>", `${seoBlock(head, urlPath, paths.length)}\n  </head>`);
       } else {
-        enhanced = enhanced.replace("</head>", `  <meta name="prerender" content="${paths.length}" />\n  <meta name="prerender-path" content="${urlPath}" />\n  <meta name="prerender-fallback" content="no-head" />\n  </head>`);
+        enhanced = enhanced.replace(
+          "</head>",
+          `  <meta name="prerender" content="${paths.length}" />\n  <meta name="prerender-path" content="${urlPath}" />\n  <meta name="prerender-fallback" content="no-head" />\n  </head>`,
+        );
         if (settled) fallbacks++;
       }
 
       if (bodyRoot) {
         enhanced = enhanced.replace(
           /<div id="root">[\s\S]*?<\/div>\s*<!--/,
-          `<div id="root">${bodyRoot}</div>\n    <!--`
+          `<div id="root">${bodyRoot}</div>\n    <!--`,
         );
         if (!enhanced.includes(bodyRoot.slice(0, 50))) {
-          enhanced = enhanced.replace(
-            /<div id="root".*?<\/div>/s,
-            `<div id="root">${bodyRoot}</div>`
-          );
+          enhanced = enhanced.replace(/<div id="root".*?<\/div>/s, `<div id="root">${bodyRoot}</div>`);
         }
       }
 
       ensureDir(outPath);
       fs.writeFileSync(outPath, enhanced, "utf8");
       renderedCount++;
-      if (renderedCount % 20 === 0) {
-        console.log(`[prerender] ${renderedCount}/${paths.length} rendered`);
-      }
+      if (renderedCount % 20 === 0) console.log(`[prerender] ${renderedCount}/${paths.length} rendered`);
     } catch (err) {
       failures.push(`${urlPath}: ${err.message}`);
-      const clean = urlPath.replace(/\/$/, "");
-      const outPath = urlPath === "/" ? path.join(DIST_DIR, "index.html") : path.join(DIST_DIR, clean, "index.html");
+      const outPath =
+        urlPath === "/"
+          ? path.join(DIST_DIR, "index.html")
+          : path.join(DIST_DIR, urlPath.replace(/\/$/, ""), "index.html");
       ensureDir(outPath);
-      if (urlPath !== "/") {
-        fs.copyFileSync(DIST_HTML, outPath);
-      }
+      if (urlPath !== "/") fs.copyFileSync(DIST_HTML, outPath);
     }
   }
 
-  // Prerender 404 page for true HTTP 404 responses
   try {
     const { bodyRoot } = await render("/404");
     let notFoundShell = stripShellSeo(ORIGINAL_SHELL);
     notFoundShell = notFoundShell.replace(
       "</head>",
-      `    <title>الصفحة غير موجودة 404 | صحة المرأة السعودية</title>\n    <meta name="robots" content="noindex,nofollow">\n  </head>`
+      `    <title>الصفحة غير موجودة 404 | صحة المرأة السعودية</title>\n    <meta name="robots" content="noindex,nofollow">\n  </head>`,
     );
-    if (bodyRoot) {
-      notFoundShell = notFoundShell.replace(
-        /<div id="root".*?<\/div>/s,
-        `<div id="root">${bodyRoot}</div>`
-      );
-    }
+    if (bodyRoot) notFoundShell = notFoundShell.replace(/<div id="root".*?<\/div>/s, `<div id="root">${bodyRoot}</div>`);
     fs.writeFileSync(path.join(DIST_DIR, "404.html"), notFoundShell, "utf8");
     console.log("[prerender] wrote dist/404.html for true HTTP 404 responses");
   } catch (e) {
@@ -302,20 +275,27 @@ async function main() {
   let commit = "unknown";
   try {
     commit = execSync("git rev-parse --short=7 HEAD", { cwd: ROOT }).toString().trim();
-  } catch {
-    // no git context
-  }
+  } catch {}
 
-  const manifest = {
-    pages: paths.length,
-    whatsapp: "00966530945626",
-    identity: "green #0f6b4a",
-    commit,
-    generatedAt: new Date().toISOString(),
-  };
-  fs.writeFileSync(path.join(DIST_DIR, "prerender-manifest.json"), JSON.stringify(manifest, null, 2));
+  fs.writeFileSync(
+    path.join(DIST_DIR, "prerender-manifest.json"),
+    JSON.stringify(
+      {
+        pages: paths.length,
+        whatsapp: "00966530945626",
+        identity: "green #0f6b4a",
+        commit,
+        generatedAt: new Date().toISOString(),
+      },
+      null,
+      2,
+    ),
+  );
 
-  console.log(`[prerender] completed ${renderedCount}/${paths.length} pages — head-merged: ${renderedCount - fallbacks}, head fallbacks: ${fallbacks}, hard failures: ${failures.length}`);
+  window.close();
+  console.log(
+    `[prerender] completed ${renderedCount}/${paths.length} pages — head-merged: ${renderedCount - fallbacks}, head fallbacks: ${fallbacks}, hard failures: ${failures.length}`,
+  );
   if (failures.length) {
     console.error("[prerender] failures:");
     for (const f of failures) console.error(`  - ${f}`);
