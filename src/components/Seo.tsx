@@ -55,17 +55,11 @@ export function Seo({
   const socialImage = realImage || GLOBAL_SOCIAL_SHARE_IMAGE;
   const imageUrl = socialImage.startsWith("http") ? socialImage : `${SITE.domain}${socialImage}`;
   const cleanTitle = title.trim();
-  const hasBrand =
-    cleanTitle.includes("صحة المرأة السعودية") ||
-    cleanTitle.includes("سعودي إرساء") ||
-    cleanTitle.includes(SITE.nameEn) ||
-    cleanTitle.includes(SITE.name);
-  const fullTitle = absoluteTitle || hasBrand ? cleanTitle : `${cleanTitle} | صحة المرأة السعودية`;
-  const socialTitle = ogTitle
-    ? absoluteTitle || ogTitle.includes("صحة المرأة") || ogTitle.includes(SITE.name)
-      ? ogTitle.trim()
-      : `${ogTitle.trim()} | صحة المرأة السعودية`
-    : fullTitle;
+  // Titles are now explicit per page. Never append a legacy brand suffix.
+  // This prevents old "صحة المرأة السعودية" / "سعودي إرساء" tails from
+  // reappearing on pages that have already been migrated to the new brand.
+  const fullTitle = cleanTitle;
+  const socialTitle = ogTitle?.trim() || fullTitle;
   const socialDescription = ogDescription || description;
   return (
     <Helmet>
