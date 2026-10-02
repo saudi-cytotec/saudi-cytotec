@@ -17,13 +17,11 @@ const CountryCornerstonePage = lazy(() =>
 const NotFound = lazy(() => import("./pages/NotFound").then((m) => ({ default: m.NotFound })));
 const FaqHub = lazy(() => import("./pages/FaqHub").then((m) => ({ default: m.FaqHub })));
 const SearchPage = lazy(() => import("./pages/SearchPage").then((m) => ({ default: m.SearchPage })));
-const SaudiCityPage = lazy(() => import("./pages/SaudiCityPage").then((m) => ({ default: m.SaudiCityPage })));
 const ServiceAreas = lazy(() => import("./pages/ServiceAreas").then((m) => ({ default: m.ServiceAreas })));
 const SitemapPage = lazy(() => import("./pages/SitemapPage").then((m) => ({ default: m.SitemapPage })));
 const StaticPage = lazy(() => import("./pages/StaticPage").then((m) => ({ default: m.StaticPage })));
 const TopicsPage = lazy(() => import("./pages/TopicsPage").then((m) => ({ default: m.TopicsPage })));
 
-import { getSaudiCitySpec, saudiCityPages } from "./data/saudiCities";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -52,13 +50,6 @@ export default function App() {
             <Route path="/topics" element={<TopicsPage />} />
             <Route path="/faq" element={<FaqHub />} />
             <Route path="/service-areas" element={<ServiceAreas />} />
-            {saudiCityPages.map((city) => (
-              <Route
-                key={city.slug}
-                path={`/cytotec-${city.slug}`}
-                element={<SaudiCityPage spec={getSaudiCitySpec(city.slug)!} />}
-              />
-            ))}
             {staticPages
               .filter((page) => page.path !== "/faq" && !countryPagePaths.has(page.path))
               .map((page) => (
