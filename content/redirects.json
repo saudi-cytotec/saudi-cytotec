@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "updatedAt": "2026-09-14",
+  "version": 3,
+  "updatedAt": "2026-10-02",
   "wwwToApex": true,
   "rules": [
     {
@@ -19,9 +19,9 @@
     },
     {
       "source": "/cytotec-saudi-arabia/",
-      "destination": "/service-areas",
+      "destination": "/abortion-pills-saudi-arabia",
       "statusCode": 301,
-      "reason": "Legacy Saudi geographic query now maps to the Saudi hub.",
+      "reason": "Legacy Saudi geographic URL consolidated into the current Saudi pillar.",
       "createdAt": "2026-08-29"
     },
     {
@@ -905,6 +905,181 @@
       "statusCode": 301,
       "reason": "Trailing-slash variant of merged article",
       "createdAt": "2026-09-15"
+    },
+    {
+      "source": "/cytotec-saudi-arabia",
+      "destination": "/abortion-pills-saudi-arabia",
+      "statusCode": 301,
+      "reason": "Legacy Saudi geographic URL consolidated into the current Saudi pillar.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-riyadh",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-riyadh/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-jeddah",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-jeddah/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-makkah",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-makkah/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-medina",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-medina/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-dammam",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-dammam/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-khobar",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-khobar/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-abha",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-abha/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-tabuk",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-tabuk/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-jazan",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-jazan/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-najran",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-najran/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-buraydah",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-buraydah/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-taif",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-taif/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
+      "createdAt": "2026-10-02"
     }
   ]
 }
