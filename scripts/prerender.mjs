@@ -137,20 +137,30 @@ async function render(urlPath) {
 
   const doc0 = window.document;
   let stable = null;
+  let stableHead = null;
   let settled = false;
   const start = Date.now();
 
   while (Date.now() - start < 5000) {
     const root = doc0.getElementById("root");
     const now = root ? root.innerHTML : "";
+    const title = doc0.querySelector("title")?.textContent ?? "";
+    const description = doc0.querySelector('meta[name="description"]')?.getAttribute("content") ?? "";
+    const canonical = doc0.querySelector('link[rel="canonical"]')?.getAttribute("href") ?? "";
+    const ogTitle = doc0.querySelector('meta[property="og:title"]')?.getAttribute("content") ?? "";
+    const ogUrl = doc0.querySelector('meta[property="og:url"]')?.getAttribute("content") ?? "";
+    const headNow = [title, description, canonical, ogTitle, ogUrl].join("\u001f");
+
     if (now.length > 200) {
-      if (now === stable) {
+      if (now === stable && headNow === stableHead && title && canonical && description) {
         settled = true;
         break;
       }
       stable = now;
+      stableHead = headNow;
     } else {
       stable = null;
+      stableHead = null;
     }
     await new Promise((r) => setTimeout(r, 100));
   }
