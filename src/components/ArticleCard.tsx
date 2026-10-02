@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { Article } from "../types";
+import type { ArticleSummary } from "../data/articleIndex";
 import { getCluster } from "../utils/content";
 import { IconArrowLeft } from "./icons";
 
@@ -12,7 +12,7 @@ import { IconArrowLeft } from "./icons";
  * image box, no placeholder, no background-image fallback, no default, cluster
  * or generated substitute.
  */
-export function ArticleCard({ article }: { article: Article }) {
+export function ArticleCard({ article }: { article: ArticleSummary }) {
   const cluster = getCluster(article.cluster);
   const thumbnail = article.thumbnail?.trim() ? article.thumbnail.trim() : "";
 

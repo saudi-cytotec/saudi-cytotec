@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useCatalog } from "../cms/CatalogContext";
+import { publicArticles } from "../data/publicArticles";
 import { mapRegistry } from "../cms/registrySource";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { CategoryCard } from "../components/CategoryCard";
@@ -8,7 +8,7 @@ import { clusters } from "../data/site";
 import { clusterPath } from "../utils/content";
 
 export function TopicsPage() {
-  const { articles } = useCatalog();
+  const articles = publicArticles;
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       <Seo title="محاور المحتوى والموضوعات" description="مركز اكتشاف يربط محاور سايتوتك وميزوبروستول، الأمان، الحمل المبكر، صحة المرأة، الأسئلة، الموارد، والمناطق." path="/topics" />

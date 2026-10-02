@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useCatalog } from "../cms/CatalogContext";
+import { publicArticles, publicManagedArticles } from "../data/publicArticles";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { ContentBlocks } from "../components/ContentBlocks";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
@@ -13,7 +13,6 @@ import { clusterPath, getCluster, readingMinutes } from "../utils/content";
 import { CareReferral } from "../components/CareReferral";
 import { LOGO_SRC } from "../components/Logo";
 import { GLOBAL_SOCIAL_SHARE_IMAGE } from "../data/media";
-import type { ManagedArticle } from "../types";
 import { NotFound } from "./NotFound";
 
 function labelForTarget(path: string, articles: { slug: string; title: string }[]) {
@@ -29,9 +28,10 @@ function labelForTarget(path: string, articles: { slug: string; title: string }[
 
 export function ArticlePage() {
   const { slug } = useParams();
-  const { articles, managed } = useCatalog();
+  const articles = publicArticles;
+  const managed = publicManagedArticles;
   const article = articles.find((item) => item.slug === slug);
-  const managedArticle = managed.find((item) => item.slug === slug) as ManagedArticle | undefined;
+  const managedArticle = managed.find((item) => item.slug === slug);
   if (!article) return <NotFound />;
 
   const cluster = getCluster(article.cluster);

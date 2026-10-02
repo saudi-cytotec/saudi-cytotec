@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useCatalog } from "../cms/CatalogContext";
+import { publicArticles } from "../data/publicArticles";
 import { ArticleCard } from "../components/ArticleCard";
 import { clusterMeta } from "../components/CategoryCard";
 import { CareReferral } from "../components/CareReferral";
@@ -12,7 +12,7 @@ import { clusterPath } from "../utils/content";
 
 export function ClusterPage() {
   const { slug } = useParams();
-  const { articles } = useCatalog();
+  const articles = publicArticles;
   const cluster = clusters.find((item) => item.slug === slug);
   if (!cluster) {
     return (

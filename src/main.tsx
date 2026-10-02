@@ -3,7 +3,6 @@ import { createRoot, hydrateRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { CatalogProvider } from "./cms/CatalogContext";
 import "./index.css";
 
 const root = document.getElementById("root")!;
@@ -12,9 +11,7 @@ const app = (
   <StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-        <CatalogProvider>
-          <App />
-        </CatalogProvider>
+        <App />
       </BrowserRouter>
     </HelmetProvider>
   </StrictMode>

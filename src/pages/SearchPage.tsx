@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useCatalog } from "../cms/CatalogContext";
+import { publicArticles } from "../data/publicArticles";
 import { ArticleCard } from "../components/ArticleCard";
 import { CareReferral } from "../components/CareReferral";
 import { IconSearch } from "../components/icons";
@@ -8,7 +8,7 @@ import { PageHero } from "../components/PageHero";
 import { Seo } from "../components/Seo";
 
 export function SearchPage() {
-  const { articles } = useCatalog();
+  const articles = publicArticles;
   const [params, setParams] = useSearchParams();
   const [input, setInput] = useState(params.get("q") ?? "");
   const q = params.get("q")?.trim() ?? "";

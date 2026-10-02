@@ -1,6 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { useCatalog } from "../cms/CatalogContext";
+import { publicArticles } from "../data/publicArticles";
 import { CareReferral } from "../components/CareReferral";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
 import { PageHero } from "../components/PageHero";
@@ -95,7 +95,7 @@ function BodyBlock({ block }: { block: CountryBlock }) {
 }
 
 export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
-  const { articles } = useCatalog();
+  const articles = publicArticles;
   const faqs = spec.faqs ?? [];
   const related = spec.relatedSlugs
     .map((slug) => articles.find((a) => a.slug === slug && !a.noindex))

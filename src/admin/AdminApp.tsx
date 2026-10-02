@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, Navigate, Route, Routes } from "react-router-dom";
 import { Seo } from "../components/Seo";
+import { CatalogProvider } from "../cms/CatalogContext";
 import { loginRequest, logoutRequest, sessionCheck } from "./api";
 import { ArticlesScreen } from "./screens/ArticlesScreen";
 import { CategoriesScreen } from "./screens/CategoriesScreen";
@@ -68,7 +69,8 @@ export function AdminApp() {
   }
 
   return (
-    <div className="min-h-screen bg-cream text-ink" dir="rtl">
+    <CatalogProvider>
+      <div className="min-h-screen bg-cream text-ink" dir="rtl">
       <Seo title="لوحة التحرير" description="لوحة إدارة المحتوى الطبي التعليمي" path="/admin" noindex />
       <div className="grid min-h-screen lg:grid-cols-[280px_1fr]">
         <aside className="border-l border-line bg-brand-deep text-white">
@@ -141,7 +143,8 @@ export function AdminApp() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </CatalogProvider>
   );
 }
 

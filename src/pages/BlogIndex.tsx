@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { useCatalog } from "../cms/CatalogContext";
+import { publicArticles } from "../data/publicArticles";
 import { ArticleCard } from "../components/ArticleCard";
 import { CareReferral } from "../components/CareReferral";
 import { IconArrowLeft, IconSearch } from "../components/icons";
@@ -9,7 +9,7 @@ import { Seo } from "../components/Seo";
 import { clusters } from "../data/site";
 
 export function BlogIndex() {
-  const { articles } = useCatalog();
+  const articles = publicArticles;
   const [q, setQ] = useState("");
   const [activeCluster, setActiveCluster] = useState<string>("all");
 

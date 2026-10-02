@@ -25,7 +25,7 @@ import {
 } from "../components/icons";
 import { JsonLd, Seo } from "../components/Seo";
 import { WhatsAppIcon } from "../components/WhatsAppContact";
-import { useCatalog } from "../cms/CatalogContext";
+import { publicArticleIndex } from "../data/articleIndex";
 import { HEALTH_LINES } from "../data/contact";
 import { WHATSAPP_NUMBER_RAW, WHATSAPP_URL } from "../data/conversion";
 import {
@@ -42,7 +42,6 @@ import {
   type HomeService,
 } from "../data/home";
 import { SITE, clusters } from "../data/site";
-import type { Article } from "../types";
 
 const HERO_BANNER_SRC = "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp";
 const HERO_BANNER_ALT = "أدوية إجهاض الحمل — سايتوتك وميزوبروستول 200 ومعلومات طبية موثوقة";
@@ -140,7 +139,7 @@ function HeroWaves() {
 }
 
 export function Home() {
-  const { articles } = useCatalog();
+  const articles = publicArticleIndex;
   const publicArticles = articles.filter((article) => !article.noindex);
 
   const curated = HOME_FEATURED_SLUGS

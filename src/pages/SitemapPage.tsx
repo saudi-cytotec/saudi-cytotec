@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { useCatalog } from "../cms/CatalogContext";
+import { publicArticles } from "../data/publicArticles";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { Seo } from "../components/Seo";
 import { staticPages } from "../data/pages";
 import { clusters } from "../data/site";
 
 export function SitemapPage() {
-  const { articles } = useCatalog();
+  const articles = publicArticles;
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
       <Seo title="خريطة الموقع" description="قائمة صفحات الموقع التعليمية والمقالات والمجموعات." path="/sitemap" />
