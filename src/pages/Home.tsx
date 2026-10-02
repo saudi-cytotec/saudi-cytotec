@@ -7,12 +7,8 @@ import {
   IconBook,
   IconCross,
   IconHeartPulse,
-  IconHelp,
-  IconLandmark,
   IconPill,
-  IconShieldAlert,
   IconShieldCheck,
-  IconSiren,
   IconStethoscope,
   IconVenus,
 } from "../components/icons";
@@ -25,36 +21,12 @@ const HERO_BANNER_ALT = "أدوية إجهاض الحمل — سايتوتك و�
 
 const HomeDeferredSections = lazy(() => import("./HomeDeferredSections"));
 
-const SA = HEALTH_LINES.find((c) => c.code === "sa");
-const SA_MOH = SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value ?? "937";
-const SA_EMS = SA?.lines.find((l) => l.label.includes("الإسعاف"))?.value ?? "997";
-
 const HERO_TRUST = [
   { Icon: IconPill, label: "دواء بوصفة" },
   { Icon: IconShieldCheck, label: "امتثال نظامي" },
   { Icon: IconBook, label: "مصادر رسمية" },
   { Icon: IconStethoscope, label: "إشراف طبي" },
 ];
-
-/** Icon + hue per service key (presentation only; copy lives in data/home.ts). */
-const SERVICE_META: Record<HomeService["key"], { Icon: typeof IconPill; color: string }> = {
-  information: { Icon: IconBook, color: "text-sky" },
-  prescription: { Icon: IconShieldCheck, color: "text-brand" },
-  dispensing: { Icon: IconLandmark, color: "text-brand" },
-  safety: { Icon: IconShieldAlert, color: "text-warn" },
-  contact: { Icon: IconHelp, color: "text-accent" },
-};
-
-/** Red flags shown in a compact safety box (no dosing, no self-treatment steps). */
-const EMERGENCY_SIGNS = [
-  "نزيف غزير أو متزايد بسرعة.",
-  "إغماء أو دوخة شديدة أو عدم القدرة على الوقوف.",
-  "ألم بطني حاد مفاجئ، خاصة مع حمل معروف أو محتمل.",
-  "حمى مرتفعة مستمرة أو قشعريرة مع تدهور عام.",
-  "ضيق تنفس أو ألم صدر أو تورم في الوجه.",
-];
-
-const SECTION_HEADING = "font-display text-2xl font-extrabold text-brand-deep sm:text-[1.8rem]";
 
 function HeroBrandPanel() {
   const [missing, setMissing] = useState(false);
