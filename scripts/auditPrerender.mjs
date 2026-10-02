@@ -103,7 +103,10 @@ for (const p of allPaths) {
   if (isPlaceholderOnly) contentIssues++;
 
   // 3. exactly one h1
-  const h1Count = (h.match(/<h1[\s>]/g) || []).length;
+  // Ignore the fallback <noscript> document: it is intentionally present
+  // for no-JavaScript crawlers and should not count as a second rendered H1.
+  const renderedDocument = h.replace(/<noscript[\\s\\S]*?<\\/noscript>/gi, "");
+  const h1Count = (renderedDocument.match(/<h1[\s>]/g) || []).length;
   if (h1Count !== 1) h1Issues++;
 
   // 4. own title
