@@ -49,6 +49,29 @@ if (!bundlePath) {
   process.exit(1);
 }
 
+// Vite emits lazy chunks with browser-rooted /assets/ URLs. The prerenderer
+// executes the production entry through Node, so stage JS assets into a
+// temporary file:// tree and rewrite only that temporary copy. This keeps
+// client-side code splitting intact while allowing React.lazy routes to load
+// during prerender instead of timing out once per page.
+if (fs.existsSync(assetsDir)) {
+  const stagedRoot = fs.mkdtempSync(path.join(os.tmpdir(), "saudiersaa-prerender-assets-"));
+  const stagedAssets = path.join(stagedRoot, "assets");
+  fs.mkdirSync(stagedAssets, { recursive: true });
+  const assetsBaseUrl = pathToFileUrlSafe(stagedAssets).replace(/\/$/, "") + "/";
+
+  for (const file of fs.readdirSync(assetsDir).filter((name) => name.endsWith(".js"))) {
+    const sourcePath = path.join(assetsDir, file);
+    const stagedPath = path.join(stagedAssets, file);
+    const source = fs.readFileSync(sourcePath, "utf8");
+    const rewritten = source.replace(/(["'])\/assets\//g, `$1${assetsBaseUrl}`);
+    fs.writeFileSync(stagedPath, rewritten, "utf8");
+  }
+
+  const stagedEntry = path.join(stagedAssets, path.basename(bundlePath));
+  if (fs.existsSync(stagedEntry)) bundlePath = stagedEntry;
+}
+
 const sitemapXml = fs.readFileSync(SITEMAP, "utf8");
 const sitemapUrls = [...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 
@@ -141,7 +164,7 @@ async function render(urlPath) {
   let settled = false;
   const start = Date.now();
 
-  while (Date.now() - start < 5000) {
+  while (Date.now() - start < 3000) {
     const root = doc0.getElementById("root");
     const now = root ? root.innerHTML : "";
     const title = doc0.querySelector("title")?.textContent ?? "";
