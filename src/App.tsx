@@ -26,7 +26,7 @@ const TopicsPage = lazy(() => import("./pages/TopicsPage").then((m) => ({ defaul
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (typeof window !== "undefined" && !navigator.userAgent.includes("jsdom")) window.scrollTo(0, 0);
   }, [pathname]);
   return null;
 }
