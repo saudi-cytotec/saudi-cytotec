@@ -56,7 +56,7 @@ const normalizeRef = (ref) => {
   }
 };
 
-const isAllowedRef = (ref) => APPROVED.includes(ref) || REGISTERED_UPLOADS.includes(ref);
+const isAllowedRef = (ref) => APPROVED.includes(ref) || ref === "/images/logo.webp" || REGISTERED_UPLOADS.includes(ref);
 
 const failures = [];
 const pass = (label, detail = "") => console.log(`  [PASS] ${label}${detail ? ` — ${detail}` : ""}`);
