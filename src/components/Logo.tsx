@@ -33,7 +33,7 @@ export function BrandLogo({
       <span className="inline-flex h-full w-full items-center justify-center">
         <picture>
           <source srcSet="/images/logo.webp" type="image/webp" />
-          <img src={LOGO_SRC} alt={LOGO_ALT} width={1536} height={1024} decoding="async" fetchPriority="low" className="h-full w-auto max-w-full object-contain" />
+          <img src={LOGO_SRC} alt={LOGO_ALT} width={240} height={160} decoding="async" fetchPriority="low" className="h-full w-auto max-w-full object-contain" />
         </picture>
       </span>
     </span>
