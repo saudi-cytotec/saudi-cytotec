@@ -14,8 +14,6 @@ interface CatalogValue {
   recordNotFound: (path: string) => void; markNotFoundHandled: (path: string, handledBy: string) => void;
 }
 const CatalogContext = createContext<CatalogValue | null>(null);
-const EMPTY: CmsState = { articles: [], map: [], settings: defaultSettings, redirectRules: null, notFoundLog: [] };
-
 export function CatalogProvider({ children }: { children: ReactNode }) {
   // Match the prerendered catalog on the first client render to prevent
   // hydrateRoot from throwing away the static HTML and delaying LCP.
