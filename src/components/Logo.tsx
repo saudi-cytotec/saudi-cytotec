@@ -1,8 +1,8 @@
 /**
- * Brand logo — approved 2026 asset.
- * Lightweight website asset: /images/cytotec-saudi-logo-web.svg
+ * Brand logo — supplied Saudiersaa asset.
+ * Optimized WebP for fast header/footer/favicons.
  */
-export const LOGO_SRC = "/images/cytotec-saudi-logo-web.svg";
+export const LOGO_SRC = "/images/saudiersaa-logo.webp";
 export const LOGO_ALT = "شعار سايتوتك في السعودية";
 
 export function Wordmark({ className = "", tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
@@ -31,18 +31,15 @@ export function BrandLogo({
   return (
     <span className={`inline-flex overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
       <span className="inline-flex h-full w-full items-center justify-center">
-        <picture>
-          <source srcSet={LOGO_SRC} type="image/svg+xml" />
-          <img
-            src={LOGO_SRC}
-            alt={LOGO_ALT}
-            width={128}
-            height={128}
-            decoding="async"
-            fetchPriority="high"
-            className="h-full w-auto max-w-full object-contain"
-          />
-        </picture>
+        <img
+          src={LOGO_SRC}
+          alt={LOGO_ALT}
+          width={192}
+          height={192}
+          decoding="async"
+          fetchPriority="high"
+          className="h-full w-auto max-w-full object-contain"
+        />
       </span>
     </span>
   );
