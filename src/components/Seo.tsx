@@ -55,9 +55,7 @@ export function Seo({
   const socialImage = realImage || GLOBAL_SOCIAL_SHARE_IMAGE;
   const imageUrl = socialImage.startsWith("http") ? socialImage : `${SITE.domain}${socialImage}`;
   const cleanTitle = title.trim();
-  // Titles are now explicit per page. Never append a legacy brand suffix.
-  // This prevents old "صحة المرأة السعودية" / "سعودي إرساء" tails from
-  // reappearing on pages that have already been migrated to the new brand.
+  // Titles are explicit per page. No automatic legacy suffix is appended.
   const fullTitle = cleanTitle;
   const socialTitle = ogTitle?.trim() || fullTitle;
   const socialDescription = ogDescription || description;
