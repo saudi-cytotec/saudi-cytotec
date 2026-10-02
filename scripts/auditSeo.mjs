@@ -190,18 +190,20 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   );
 }
 
-// 7. Bundle SEO shell (static shell + runtime emission in bundle)
+// 7. Bundle SEO shell (static shell + prerendered homepage + runtime emission)
 {
   const html = fs.readFileSync(DIST, "utf8");
   const hasTitle = /<title>[^<]+<\/title>/.test(html);
-  const hasCanonical = /<link rel="canonical" href="https:\/\/saudiersaa.com\/"\s*\/?>/.test(html);
+  const hasCanonical = /<link rel="canonical" href="https:\/\/saudiersaa\.com\/"\s*\/>/.test(html);
   const hasRobots = /<meta name="robots" content="index,follow/.test(html);
   const hasBuildMarker = /<meta name="build" content="saudiersaa:[^"]+">/.test(html);
-  // Per-page description/title/robots/canonical are injected at runtime by the
-  // Seo component (Helmet); verify the emission code ships in the bundle.
+  const hasPrerenderedHomepageSeo =
+    html.includes("<!-- Prerendered per-page SEO head: / -->") &&
+    hasTitle && hasCanonical && hasRobots;
+  const shellSeoReady = (hasTitle && hasCanonical && hasRobots) || hasPrerenderedHomepageSeo;
   const seo = fs.readFileSync(path.join(ROOT, "src", "components", "Seo.tsx"), "utf8");
   const runtimeMeta = seo.includes("description") && seo.includes("robots") && seo.includes("canonical") && seo.includes("og:title");
-  report("Bundle shell", hasTitle && hasCanonical && hasRobots && hasBuildMarker && runtimeMeta, `shell title/canonical/robots/build-marker ${hasTitle && hasCanonical && hasRobots && hasBuildMarker ? "present" : "MISSING"}; runtime meta ${runtimeMeta ? "present" : "MISSING"}`);
+  report("Bundle shell", shellSeoReady && hasBuildMarker && runtimeMeta, `homepage SEO ${shellSeoReady ? "present" : "MISSING"}; build-marker ${hasBuildMarker ? "present" : "MISSING"}; runtime meta ${runtimeMeta ? "present" : "MISSING"}`);
 }
 
 // 8. Internal links from article data
@@ -263,8 +265,7 @@ console.log("SEO AUDIT — saudiersaa.com\n");
 // contextual images. Admin uploads live under /media/, not /images/, and are
 // covered by scripts/auditImages.mjs against content/media.json.
 const APPROVED_ASSETS = new Set([
-  "/images/logo.png",
-  "/images/logo.webp",
+  "/images/saudiersaa-logo.webp",
   "/images/Bannerrr.png",
   "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
