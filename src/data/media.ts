@@ -31,7 +31,7 @@ export const GLOBAL_SOCIAL_SHARE_IMAGE = "/images/saudiersaa-social-share.png" a
 export const approvedAssets: MediaItem[] = [
   {
     file: "/images/logo.png",
-    alt: "شعار سعودي إرساء — صحة المرأة السعودية",
+    alt: "شعار سايتوتك في السعودية — دليل دوائي موثوق",
     width: 1536,
     height: 1024,
     role: "الشعار المعتمد — الهيدر والفوتر",
@@ -45,14 +45,14 @@ export const approvedAssets: MediaItem[] = [
   },
   {
     file: "/images/Bannerrr.png",
-    alt: "بانر الصفحة الرئيسية السابق — معلومات طبية موثوقة عن صحة المرأة",
+    alt: "بانر محفوظ للتوافق — معلومات دوائية موثوقة",
     width: 1536,
     height: 1024,
     role: "أصل بصري معتمد محفوظ للتوافق",
   },
   {
     file: "/images/saudiersaa-social-share.png",
-    alt: "صحة المرأة السعودية — معلومات طبية توعوية",
+    alt: "سايتوتك في السعودية — معلومات دوائية توعوية",
     width: 0,
     height: 0,
     role: "صورة مشاركة اجتماعية معتمدة — fallback للـOG/Twitter metadata فقط",
