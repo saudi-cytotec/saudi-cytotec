@@ -9,7 +9,7 @@
     "dev:api": "node scripts/devApi.mjs",
     "test:ui": "node scripts/uiRenderTest.mjs && node scripts/uiFlowTest.mjs",
     "test:cms": "node scripts/cmsWorkflowTest.mjs",
-    "prebuild": "node scripts/emitRedirects.mjs && node scripts/emitStrategyMd.mjs && npx --yes sharp-cli@6.1.0 --input public/images/logo.png --output public/images --format webp --quality 75 resize 240 160",
+    "prebuild": "node scripts/emitRedirects.mjs && node scripts/emitStrategyMd.mjs",
     "build": "vite build",
     "postbuild": "node scripts/urlParity.mjs && node scripts/prerender.mjs && node scripts/stampBuild.mjs && node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs && node scripts/auditImages.mjs && node scripts/auditArchitecture.mjs && node scripts/auditPrerender.mjs && node scripts/auditWhatsApp.mjs && node scripts/auditGreenIdentity.mjs",
     "prerender": "node scripts/prerender.mjs",
