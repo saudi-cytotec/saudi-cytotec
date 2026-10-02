@@ -21,6 +21,8 @@ import { SITE } from "../data/site";
 
 const HERO_BANNER_SRC = "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp";
 const HERO_BANNER_ALT = "أدوية إجهاض الحمل — سايتوتك وميزوبروستول 200 ومعلومات طبية موثوقة";
+const HERO_TRANSPARENT_PIXEL =
+  "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 
 const HomeDeferredSections = lazy(() => import("./HomeDeferredSections"));
 
@@ -44,8 +46,8 @@ function HeroBrandPanel() {
       <HexBadge className="absolute -bottom-8 start-10 hidden text-white/80 lg:grid" Icon={IconHeartPulse} />
 
       <div className="relative overflow-hidden rounded-[1.75rem] bg-brand-deep p-8 shadow-[0_28px_60px_-24px_rgb(10_74_51/0.55)] ring-1 ring-white/10 sm:p-10">
-        <span className="pointer-events-none absolute -top-16 -start-16 h-56 w-56 rounded-full bg-sky/25 blur-3xl" aria-hidden="true" />
-        <span className="pointer-events-none absolute -bottom-20 -end-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
+        <span className="hero-decor-blur pointer-events-none absolute -top-16 -start-16 h-56 w-56 rounded-full bg-sky/25 blur-3xl" aria-hidden="true" />
+        <span className="hero-decor-blur pointer-events-none absolute -bottom-20 -end-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
         <div className="relative flex min-h-[16rem] items-center justify-center sm:min-h-[19rem]">
           {missing ? (
             <Wordmark tone="light" className="text-center" />
@@ -54,17 +56,21 @@ function HeroBrandPanel() {
               <div className="sm:hidden">
                 <Wordmark tone="light" className="text-center" />
               </div>
-              <img
-                src={HERO_BANNER_SRC}
-                alt={HERO_BANNER_ALT}
-                width={1732}
-                height={908}
-                loading="lazy"
-                decoding="async"
-                fetchPriority="auto"
-                className="hidden max-h-[17rem] w-auto object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)] sm:block sm:max-h-[20rem]"
-                onError={() => setMissing(true)}
-              />
+              <picture>
+                <source media="(min-width: 640px)" srcSet={HERO_BANNER_SRC} />
+                <img
+                  src={HERO_TRANSPARENT_PIXEL}
+                  alt=""
+                  width={1732}
+                  height={908}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  aria-hidden="true"
+                  className="hidden max-h-[17rem] w-auto object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)] sm:block sm:max-h-[20rem]"
+                  onError={() => setMissing(true)}
+                />
+              </picture>
             </>
           )}
         </div>
@@ -168,7 +174,7 @@ export function Home() {
 
       {/* ── 1. HERO ──────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#f2faf6] via-[#e6f4ec] to-[#d5ebde] ring-1 ring-line/60">
-        <div className="pointer-events-none absolute -top-24 -end-24 h-80 w-80 rounded-full bg-sky/10 blur-3xl" aria-hidden="true" />
+        <div className="hero-decor-blur pointer-events-none absolute -top-24 -end-24 h-80 w-80 rounded-full bg-sky/10 blur-3xl" aria-hidden="true" />
         <div className="relative grid items-center gap-10 px-6 pb-20 pt-10 sm:px-10 sm:pt-14 lg:grid-cols-2 lg:gap-8 lg:px-12">
           <div>
             <p className="inline-flex items-center rounded-full bg-white/80 px-3.5 py-1.5 text-xs font-bold text-brand ring-1 ring-line/70">

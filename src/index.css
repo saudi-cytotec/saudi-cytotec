@@ -13,6 +13,11 @@
 
 .defer-render { content-visibility: auto; contain-intrinsic-size: 720px; }
 
+@media (max-width: 767px) {
+  .backdrop-blur-sm { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .hero-decor-blur { display: none !important; }
+}
+
 html { scroll-behavior: smooth; }
 html, body, #root { min-height: 100%; }
 body { margin: 0; background: var(--color-cream); color: var(--color-ink); font-family: var(--font-sans); font-size: 17px; line-height: 1.9; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }

@@ -13,7 +13,9 @@ export function Layout() {
       <main id="content">
         <Outlet />
       </main>
-      <Footer />
+      <div className="defer-render">
+        <Footer />
+      </div>
       <WhatsAppFloat />
     </>
   );
