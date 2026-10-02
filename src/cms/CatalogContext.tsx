@@ -34,7 +34,11 @@ const EMPTY: CmsState = {
 };
 
 export function CatalogProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<CmsState>(EMPTY);
+  // Start from the same bundled baseline used by prerendering.
+  // Initialising with EMPTY causes the browser's first render to differ from
+  // the prerendered HTML, which triggers React hydration error #418 and forces
+  // an expensive client re-render on the homepage.
+  const [state, setState] = useState<CmsState>(() => emptyState());
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
