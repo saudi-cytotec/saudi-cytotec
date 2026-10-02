@@ -2,6 +2,7 @@
  * Brand logo — approved 2026 asset.
  * Canonical file: /images/logo.png
  */
+
 export const LOGO_SRC = "/images/logo.png";
 export const LOGO_ALT = "شعار سايتوتك في السعودية | وكيل Pfizer الرسمي";
 
@@ -21,16 +22,20 @@ export function Wordmark({ className = "", tone = "dark" }: { className?: string
 
 export function BrandLogo({
   className = "h-14",
-  plateClass = "rounded-xl",
-  tone = "dark",
 }: {
   className?: string;
   plateClass?: string;
   tone?: "dark" | "light";
 }) {
   return (
-    <span className={`inline-flex items-center justify-center px-3 ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
-      <Wordmark tone={tone} />
-    </span>
+    <img
+      src={LOGO_SRC}
+      alt={LOGO_ALT}
+      className={`block w-auto object-contain ${className}`}
+      width="320"
+      height="96"
+      loading="eager"
+      decoding="async"
+    />
   );
 }
