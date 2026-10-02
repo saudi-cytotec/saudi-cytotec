@@ -32,7 +32,7 @@ export function BrandLogo({
     <span className={`inline-flex overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
       <span className="inline-flex h-full w-full items-center justify-center">
         <picture>
-          <source srcSet="/images/logo.webp" type="image/webp" />
+          <source srcSet={LOGO_SRC} type="image/svg+xml" />
           <img
             src={LOGO_SRC}
             alt={LOGO_ALT}
