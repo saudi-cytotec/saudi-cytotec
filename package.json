@@ -3,15 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "engines": {
-    "node": "20.x || 22.x"
-  },
+  "engines": { "node": "20.x || 22.x" },
   "scripts": {
     "dev": "vite",
     "dev:api": "node scripts/devApi.mjs",
     "test:ui": "node scripts/uiRenderTest.mjs && node scripts/uiFlowTest.mjs",
     "test:cms": "node scripts/cmsWorkflowTest.mjs",
-    "prebuild": "node scripts/emitRedirects.mjs && node scripts/emitStrategyMd.mjs",
+    "prebuild": "node scripts/emitRedirects.mjs && node scripts/emitStrategyMd.mjs && npx --yes sharp-cli@6.1.0 --input public/images/logo.png --output public/images --format webp --quality 85 resize 320 213",
     "build": "vite build",
     "postbuild": "node scripts/stampBuild.mjs && node scripts/urlParity.mjs && node scripts/prerender.mjs && node scripts/auditSeo.mjs && node scripts/auditIndexability.mjs && node scripts/auditImages.mjs && node scripts/auditArchitecture.mjs && node scripts/auditPrerender.mjs && node scripts/auditWhatsApp.mjs && node scripts/auditGreenIdentity.mjs",
     "prerender": "node scripts/prerender.mjs",
@@ -22,23 +20,10 @@
     "verify": "node scripts/verifyRendered.mjs"
   },
   "dependencies": {
-    "clsx": "2.1.1",
-    "react": "19.2.6",
-    "react-dom": "19.2.6",
-    "react-helmet-async": "^3.0.0",
-    "react-router-dom": "^7.18.2",
-    "tailwind-merge": "3.4.0"
+    "clsx": "2.1.1", "react": "19.2.6", "react-dom": "19.2.6", "react-helmet-async": "^3.0.0", "react-router-dom": "^7.18.2", "tailwind-merge": "3.4.0"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "4.1.17",
-    "@types/node": "22.19.17",
-    "@types/react": "19.2.7",
-    "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "5.1.1",
-    "jsdom": "^30.0.1",
-    "tailwindcss": "4.1.17",
-    "typescript": "5.9.3",
-    "vite": "7.3.2",
-    "vite-plugin-singlefile": "2.3.0"
+    "@tailwindcss/vite": "4.1.17", "@types/node": "22.19.17", "@types/react": "19.2.7", "@types/react-dom": "19.2.3", "@vitejs/plugin-react": "5.1.1",
+    "jsdom": "^30.0.1", "tailwindcss": "4.1.17", "typescript": "5.9.3", "vite": "7.3.2", "vite-plugin-singlefile": "2.3.0"
   }
 }

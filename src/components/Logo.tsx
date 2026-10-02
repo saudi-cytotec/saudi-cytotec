@@ -5,10 +5,6 @@
 export const LOGO_SRC = "/images/logo.png";
 export const LOGO_ALT = "شعار سايتوتك في السعودية | وكيل Pfizer الرسمي";
 
-/**
- * Typographic wordmark used on the homepage hero brand panel and footer
- * branding contexts where the logo mark sits alongside text lockups.
- */
 export function Wordmark({ className = "", tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
   return (
     <span className={`leading-none ${className}`}>
@@ -23,11 +19,6 @@ export function Wordmark({ className = "", tone = "dark" }: { className?: string
   );
 }
 
-/**
- * Approved logo lockup.
- * The approved raster asset is used directly across desktop and mobile so the
- * actual brand logo remains visible in the header.
- */
 export function BrandLogo({
   className = "h-14",
   plateClass = "rounded-xl",
@@ -40,15 +31,10 @@ export function BrandLogo({
   return (
     <span className={`inline-flex overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
       <span className="inline-flex h-full w-full items-center justify-center">
-        <img
-          src={LOGO_SRC}
-          alt={LOGO_ALT}
-          width={1254}
-          height={1254}
-          decoding="async"
-          fetchPriority="high"
-          className="h-full w-auto max-w-full object-contain"
-        />
+        <picture>
+          <source srcSet="/images/logo.webp" type="image/webp" />
+          <img src={LOGO_SRC} alt={LOGO_ALT} width={1536} height={1024} decoding="async" fetchPriority="low" className="h-full w-auto max-w-full object-contain" />
+        </picture>
       </span>
     </span>
   );

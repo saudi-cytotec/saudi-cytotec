@@ -4,186 +4,33 @@
   --font-sans: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Tahoma, sans-serif;
   --font-display: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Tahoma, sans-serif;
   --font-article: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Tahoma, sans-serif;
-
-  /* ── Canonical brand tokens: Green Medical Identity ─────────────────
-     Production-approved green identity for Saudiersaa:
-     deep forest green as primary institutional colour, emerald accent
-     for CTAs, white surfaces, and soft mint backgrounds for a clean,
-     trustworthy medical look. This replaces the previous navy/red
-     scheme per 8ac2a34 (green identity + WhatsApp + prerender). */
-  --color-brand: #0f6b4a;         /* primary green (buttons, links, headings) */
-  --color-brand-deep: #0a4a33;    /* top bar / footer / dark surfaces         */
-  --color-brand-soft: #e6f4ec;    /* green-tinted surfaces                    */
-  --color-sky: #15803d;           /* secondary green (logo, icons)            */
-  --color-sky-soft: #dcfce7;      /* green-tinted surfaces                    */
-
-  --color-accent: #16a34a;        /* emerald — WhatsApp CTA / highlights      */
-  --color-accent-deep: #15803d;   /* green hover state                        */
-  --color-accent-soft: #f0fdf4;   /* green-tinted surfaces                    */
-
-  /* ── Warning / danger (safety surfaces only — never branding) ───────── */
-  --color-warn: #b7791f;          /* amber for medical caution callouts   */
-  --color-warn-soft: #fdf3e2;     /* amber-tinted surface                 */
-  --color-clay: #c03221;          /* emergency red (danger)               */
-
-  /* ── Ink / neutrals (green clinical) ────────────────────────────────── */
-  --color-ink: #14261f;
-  --color-ink-soft: #4a6359;
-  --color-cream: #f4f8f5;         /* page background: soft mint white     */
-  --color-paper: #ffffff;         /* cards & surfaces                     */
-  --color-line: #d1e3d9;          /* borders — green tint                 */
-  --color-sand: #e2ebe6;          /* hover fills, muted chips             */
-
-  /* ── Legacy aliases ───────────────────────────────────────────────────
-     Older components use teal/sage/gold names; they resolve to the
-     approved green palette so the whole site re-skins consistently. */
-  --color-teal: var(--color-brand);
-  --color-teal-deep: var(--color-brand-deep);
-  --color-sage: #2f7d62;
-  --color-gold: var(--color-accent);
+  --color-brand: #0f6b4a; --color-brand-deep: #0a4a33; --color-brand-soft: #e6f4ec;
+  --color-sky: #15803d; --color-sky-soft: #dcfce7; --color-accent: #16a34a; --color-accent-deep: #15803d; --color-accent-soft: #f0fdf4;
+  --color-warn: #b7791f; --color-warn-soft: #fdf3e2; --color-clay: #c03221;
+  --color-ink: #14261f; --color-ink-soft: #4a6359; --color-cream: #f4f8f5; --color-paper: #ffffff; --color-line: #d1e3d9; --color-sand: #e2ebe6;
+  --color-teal: var(--color-brand); --color-teal-deep: var(--color-brand-deep); --color-sage: #2f7d62; --color-gold: var(--color-accent);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+.defer-render { content-visibility: auto; contain-intrinsic-size: 720px; }
 
-html,
-body,
-#root {
-  min-height: 100%;
-}
-
-body {
-  margin: 0;
-  background: var(--color-cream);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.9;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-@media (min-width: 768px) {
-  body {
-    font-size: 18px;
-  }
-}
-
-::selection {
-  background: var(--color-brand-soft);
-  color: var(--color-brand-deep);
-}
-
-a {
-  color: inherit;
-}
-
-/* Visible keyboard focus for every interactive element (a11y). */
-:where(a, button, input, textarea, select, summary):focus-visible {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-/* Premium display headings (Cairo) used by hero + section titles. */
-.font-display {
-  font-family: var(--font-display);
-  letter-spacing: -0.01em;
-}
-
-/* Light premium card base used across the redesign. */
-.card-premium {
-  background: var(--color-paper);
-  border: 1px solid var(--color-line);
-  border-radius: 1.25rem;
-  box-shadow:
-    0 1px 2px rgb(10 74 51 / 0.04),
-    0 8px 24px -12px rgb(10 74 51 / 0.12);
-}
-
-.article-prose {
-  font-family: var(--font-article);
-  font-size: 1.0625rem;
-  max-width: 40rem;
-  word-spacing: 0.02em;
-}
-
-@media (min-width: 768px) {
-  .article-prose {
-    font-size: 1.125rem;
-  }
-}
-
-.article-prose p {
-  margin: 0 0 1.2rem;
-  line-height: 2.15;
-}
-
-.article-prose h2 {
-  margin: 2.4rem 0 0.9rem;
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
-  line-height: 1.5;
-  color: var(--color-brand-deep);
-  font-weight: 700;
-  scroll-margin-top: 6rem;
-}
-
-.article-prose h3 {
-  margin: 1.7rem 0 0.7rem;
-  font-family: var(--font-display);
-  font-size: clamp(1.12rem, 2vw, 1.28rem);
-  line-height: 1.55;
-  color: var(--color-brand);
-  font-weight: 700;
-  scroll-margin-top: 6rem;
-}
-
-.article-prose ul {
-  margin: 0 0 1.2rem;
-  padding-inline-start: 1.25rem;
-}
-
-.article-prose li {
-  margin-bottom: 0.5rem;
-  line-height: 2.05;
-}
-
-.article-prose a {
-  color: var(--color-brand);
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--color-accent) 55%, transparent);
-  text-underline-offset: 3px;
-}
-
-.article-prose a:hover {
-  color: var(--color-accent);
-}
-
-.skip-link {
-  position: absolute;
-  inset-inline-start: 1rem;
-  top: -3rem;
-  z-index: 80;
-  border-radius: 999px;
-  background: var(--color-brand);
-  color: white;
-  padding: 0.6rem 1rem;
-}
-
-.skip-link:focus {
-  top: 0.75rem;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
-  }
-}
+html { scroll-behavior: smooth; }
+html, body, #root { min-height: 100%; }
+body { margin: 0; background: var(--color-cream); color: var(--color-ink); font-family: var(--font-sans); font-size: 17px; line-height: 1.9; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+@media (min-width: 768px) { body { font-size: 18px; } }
+::selection { background: var(--color-brand-soft); color: var(--color-brand-deep); }
+a { color: inherit; }
+:where(a, button, input, textarea, select, summary):focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; border-radius: 4px; }
+.font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+.card-premium { background: var(--color-paper); border: 1px solid var(--color-line); border-radius: 1.25rem; box-shadow: 0 1px 2px rgb(10 74 51 / 0.04), 0 8px 24px -12px rgb(10 74 51 / 0.12); }
+.article-prose { font-family: var(--font-article); font-size: 1.0625rem; max-width: 40rem; word-spacing: 0.02em; }
+@media (min-width: 768px) { .article-prose { font-size: 1.125rem; } }
+.article-prose p { margin: 0 0 1.2rem; line-height: 2.15; }
+.article-prose h2 { margin: 2.4rem 0 0.9rem; font-family: var(--font-display); font-size: clamp(1.35rem, 2.4vw, 1.75rem); line-height: 1.5; color: var(--color-brand-deep); font-weight: 700; scroll-margin-top: 6rem; }
+.article-prose h3 { margin: 1.7rem 0 0.7rem; font-family: var(--font-display); font-size: clamp(1.12rem, 2vw, 1.28rem); line-height: 1.55; color: var(--color-brand); font-weight: 700; scroll-margin-top: 6rem; }
+.article-prose ul { margin: 0 0 1.2rem; padding-inline-start: 1.25rem; }
+.article-prose li { margin-bottom: 0.5rem; line-height: 2.05; }
+.article-prose a { color: var(--color-brand); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--color-accent) 55%, transparent); text-underline-offset: 3px; }
+.article-prose a:hover { color: var(--color-accent); }
+.skip-link { position: absolute; inset-inline-start: 1rem; top: -3rem; z-index: 80; border-radius: 999px; background: var(--color-brand); color: white; padding: 0.6rem 1rem; }
+.skip-link:focus { top: 0.75rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; } }

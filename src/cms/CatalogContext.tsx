@@ -6,128 +6,56 @@ import { defaultSettings } from "./defaults";
 import { effectiveRedirectRules, loadState, saveState, type CmsState } from "./storage";
 
 interface CatalogValue {
-  articles: Article[];
-  managed: ManagedArticle[];
-  map: ContentMapItem[];
-  settings: SiteSettings;
-  redirectRules: RedirectRule[];
-  notFoundLog: NotFoundEntry[];
-  ready: boolean;
-  upsertArticle: (article: ManagedArticle) => void;
-  removeArticle: (id: string) => void;
-  setMap: (items: ContentMapItem[]) => void;
-  upsertMapItem: (item: ContentMapItem) => void;
-  setSettings: (settings: SiteSettings) => void;
-  setRedirectRules: (rules: RedirectRule[]) => void;
-  recordNotFound: (path: string) => void;
-  markNotFoundHandled: (path: string, handledBy: string) => void;
+  articles: Article[]; managed: ManagedArticle[]; map: ContentMapItem[]; settings: SiteSettings;
+  redirectRules: RedirectRule[]; notFoundLog: NotFoundEntry[]; ready: boolean;
+  upsertArticle: (article: ManagedArticle) => void; removeArticle: (id: string) => void;
+  setMap: (items: ContentMapItem[]) => void; upsertMapItem: (item: ContentMapItem) => void;
+  setSettings: (settings: SiteSettings) => void; setRedirectRules: (rules: RedirectRule[]) => void;
+  recordNotFound: (path: string) => void; markNotFoundHandled: (path: string, handledBy: string) => void;
 }
-
 const CatalogContext = createContext<CatalogValue | null>(null);
-
-const EMPTY: CmsState = {
-  articles: [],
-  map: [],
-  settings: defaultSettings,
-  redirectRules: null,
-  notFoundLog: [],
-};
+const EMPTY: CmsState = { articles: [], map: [], settings: defaultSettings, redirectRules: null, notFoundLog: [] };
 
 export function CatalogProvider({ children }: { children: ReactNode }) {
-  // Start from the same bundled baseline used by prerendering.
-  // Initialising with EMPTY causes the browser's first render to differ from
-  // the prerendered HTML, which triggers React hydration error #418 and forces
-  // an expensive client re-render on the homepage.
-  const [state, setState] = useState<CmsState>(() => emptyState());
+  // Match the prerendered catalog on the first client render to prevent
+  // hydrateRoot from throwing away the static HTML and delaying LCP.
+  const [state, setState] = useState<CmsState>(() => loadState());
   const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    setState(loadState());
-    setReady(true);
-  }, []);
-
-  useEffect(() => {
-    if (ready) saveState(state);
-  }, [state, ready]);
+  useEffect(() => { setState(loadState()); setReady(true); }, []);
+  useEffect(() => { if (ready) saveState(state); }, [state, ready]);
 
   const value = useMemo<CatalogValue>(() => {
-    // Case-insensitive on purpose: the content-map vocabulary uses "PUBLISHED"
-    // while the catalog uses "published". A published article must never be
-    // silently dropped from the public catalog because of a casing difference —
-    // that would render its URL as a noindex 404 fallback in production.
-    // Only genuinely published articles reach the public catalog. Drafts,
-    // review and archived rows stay out of the rendered site. There is no
-    // scheduled state: nothing schedules or promotes articles.
-    const published = state.articles.filter(
-      (item) => String(item.status).toLowerCase() === "published",
-    );
+    const published = state.articles.filter((item) => String(item.status).toLowerCase() === "published");
     return {
-      // The public catalog carries EXACTLY the images the administrator
-      // selected. Stale overlay values pointing at deleted legacy assets are
-      // resolved to "no image"; nothing is ever substituted with a default,
-      // cluster or generated image.
       articles: published.map((item) => sanitizeArticleImages(item, selectableImagePaths)),
-      managed: state.articles,
-      map: state.map,
-      settings: state.settings,
-      redirectRules: effectiveRedirectRules(state),
-      notFoundLog: state.notFoundLog,
-      ready,
-      upsertArticle: (article) => {
-        setState((current) => {
-          const exists = current.articles.some((item) => item.id === article.id);
-          return {
-            ...current,
-            articles: exists
-              ? current.articles.map((item) => (item.id === article.id ? article : item))
-              : [article, ...current.articles],
-          };
-        });
-      },
-      removeArticle: (id) => {
-        setState((current) => ({
-          ...current,
-          articles: current.articles.filter((item) => item.id !== id || item.source === "static"),
-        }));
-      },
+      managed: state.articles, map: state.map, settings: state.settings,
+      redirectRules: effectiveRedirectRules(state), notFoundLog: state.notFoundLog, ready,
+      upsertArticle: (article) => setState((current) => {
+        const exists = current.articles.some((item) => item.id === article.id);
+        return { ...current, articles: exists ? current.articles.map((item) => item.id === article.id ? article : item) : [article, ...current.articles] };
+      }),
+      removeArticle: (id) => setState((current) => ({ ...current, articles: current.articles.filter((item) => item.id !== id || item.source === "static") })),
       setMap: (items) => setState((current) => ({ ...current, map: items })),
-      upsertMapItem: (item) => {
-        setState((current) => {
-          const exists = current.map.some((row) => row.id === item.id);
-          return {
-            ...current,
-            map: exists ? current.map.map((row) => (row.id === item.id ? item : row)) : [item, ...current.map],
-          };
-        });
-      },
+      upsertMapItem: (item) => setState((current) => {
+        const exists = current.map.some((row) => row.id === item.id);
+        return { ...current, map: exists ? current.map.map((row) => row.id === item.id ? item : row) : [item, ...current.map] };
+      }),
       setSettings: (settings) => setState((current) => ({ ...current, settings })),
       setRedirectRules: (rules) => setState((current) => ({ ...current, redirectRules: rules })),
-      recordNotFound: (path) =>
-        setState((current) => {
-          const log = [...current.notFoundLog];
-          const existing = log.find((entry) => entry.path === path);
-          const now = new Date().toISOString().slice(0, 10);
-          if (existing) {
-            existing.count += 1;
-            existing.lastSeen = now;
-          } else {
-            log.unshift({ path, firstSeen: now, lastSeen: now, count: 1, handled: false });
-          }
-          return { ...current, notFoundLog: log.slice(0, 200) };
-        }),
-      markNotFoundHandled: (path, handledBy) =>
-        setState((current) => ({
-          ...current,
-          notFoundLog: current.notFoundLog.map((entry) =>
-            entry.path === path ? { ...entry, handled: true, handledBy } : entry,
-          ),
-        })),
+      recordNotFound: (path) => setState((current) => {
+        const log = [...current.notFoundLog], existing = log.find((entry) => entry.path === path);
+        const now = new Date().toISOString().slice(0, 10);
+        if (existing) { existing.count += 1; existing.lastSeen = now; }
+        else log.unshift({ path, firstSeen: now, lastSeen: now, count: 1, handled: false });
+        return { ...current, notFoundLog: log.slice(0, 200) };
+      }),
+      markNotFoundHandled: (path, handledBy) => setState((current) => ({
+        ...current, notFoundLog: current.notFoundLog.map((entry) => entry.path === path ? { ...entry, handled: true, handledBy } : entry),
+      })),
     };
   }, [state, ready]);
-
   return <CatalogContext.Provider value={value}>{children}</CatalogContext.Provider>;
 }
-
 export function useCatalog() {
   const value = useContext(CatalogContext);
   if (!value) throw new Error("CatalogProvider missing");
