@@ -159,14 +159,19 @@ async function render(urlPath) {
   }
 
   const doc0 = window.document;
-  let stable = null;
   let stableHead = null;
+  let stableRootLength = 0;
+  let stablePasses = 0;
   let settled = false;
   const start = Date.now();
 
-  while (Date.now() - start < 3000) {
+  // Route changes can trigger small React DOM mutations that make a full
+  // innerHTML equality check never settle. For prerendering we only need the
+  // route-specific SEO head and a non-trivial rendered root to be stable for
+  // two consecutive polls. This avoids spending the full timeout on every URL.
+  while (Date.now() - start < 2000) {
     const root = doc0.getElementById("root");
-    const now = root ? root.innerHTML : "";
+    const rootLength = root?.innerHTML.length ?? 0;
     const title = doc0.querySelector("title")?.textContent ?? "";
     const description = doc0.querySelector('meta[name="description"]')?.getAttribute("content") ?? "";
     const canonical = doc0.querySelector('link[rel="canonical"]')?.getAttribute("href") ?? "";
@@ -175,25 +180,32 @@ async function render(urlPath) {
     const headNow = [title, description, canonical, ogTitle, ogUrl].join("\u001f");
 
     const expectedCanonical = `${DOMAIN}${urlPath === "/" ? "/" : urlPath.replace(/\/$/, "")}`;
+    const routeHeadReady =
+      rootLength > 200 &&
+      title &&
+      description &&
+      canonical === expectedCanonical &&
+      ogUrl === expectedCanonical;
 
-    if (now.length > 200) {
-      if (
-        now === stable &&
-        headNow === stableHead &&
-        title &&
-        canonical === expectedCanonical &&
-        description &&
-        ogUrl === expectedCanonical
-      ) {
+    if (routeHeadReady) {
+      if (headNow === stableHead && Math.abs(rootLength - stableRootLength) < 256) {
+        stablePasses += 1;
+      } else {
+        stableHead = headNow;
+        stableRootLength = rootLength;
+        stablePasses = 1;
+      }
+
+      if (stablePasses >= 2) {
         settled = true;
         break;
       }
-      stable = now;
-      stableHead = headNow;
     } else {
-      stable = null;
       stableHead = null;
+      stableRootLength = 0;
+      stablePasses = 0;
     }
+
     await new Promise((r) => setTimeout(r, 100));
   }
 
