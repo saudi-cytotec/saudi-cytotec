@@ -2,7 +2,7 @@ import type { Cluster, NavItem } from "../types";
 
 export const SITE = {
   name: "سايتوتك في السعودية | وكيل Pfizer الرسمي",
-  nameEn: "Saudi Women's Health - Saudiersaa",
+  nameEn: "Cytotec Saudi Arabia - Saudiersaa",
   domain: "https://saudiersaa.com",
   locale: "ar-SA",
   language: "ar",
