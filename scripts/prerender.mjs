@@ -151,8 +151,17 @@ async function render(urlPath) {
     const ogUrl = doc0.querySelector('meta[property="og:url"]')?.getAttribute("content") ?? "";
     const headNow = [title, description, canonical, ogTitle, ogUrl].join("\u001f");
 
+    const expectedCanonical = `${DOMAIN}${urlPath === "/" ? "/" : urlPath.replace(/\/$/, "")}`;
+
     if (now.length > 200) {
-      if (now === stable && headNow === stableHead && title && canonical && description) {
+      if (
+        now === stable &&
+        headNow === stableHead &&
+        title &&
+        canonical === expectedCanonical &&
+        description &&
+        ogUrl === expectedCanonical
+      ) {
         settled = true;
         break;
       }
