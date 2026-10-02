@@ -6,7 +6,6 @@ import { PageHero } from "../components/PageHero";
 import { ReferencesList } from "../components/ReferencesList";
 import { JsonLd, Seo } from "../components/Seo";
 import { serviceAreaLinks } from "../data/serviceAreas";
-import { saudiCityPages } from "../data/saudiCities";
 import { SITE } from "../data/site";
 
 
@@ -217,43 +216,6 @@ export function ServiceAreas() {
         </div>
       </section>
 
-
-      <section className="card-premium p-6">
-        <h2 className="font-display text-2xl font-extrabold text-brand-deep">سايتوتك حسب المدينة</h2>
-        <p className="mt-3 max-w-4xl text-sm leading-8 text-ink-soft">أدلة محلية تغطي أسئلة البحث عن سايتوتك وميزوبروستول في المدن السعودية الرئيسية، مع معلومات طبية وتنظيمية ومصادر رسمية. لا تعني صفحة المدينة توفر دواء معيناً في صيدلية بعينها.</p>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          {[["/cytotec-riyadh","سايتوتك الرياض"],["/cytotec-jeddah","سايتوتك جدة"],["/cytotec-makkah","سايتوتك مكة المكرمة"],["/cytotec-medina","سايتوتك المدينة المنورة"],["/cytotec-dammam","سايتوتك الدمام"]].map(([to,label]) => <Link key={to} to={to} className="rounded-2xl border border-line bg-cream p-4 font-bold text-brand-deep transition hover:bg-brand-soft">{label}</Link>)}
-        </div>
-      </section>
-
-      <section className="card-premium p-6">
-        <h2 className="font-display text-2xl font-extrabold text-brand-deep">أدلة المدن المنشورة</h2>
-        <p className="mt-3 max-w-4xl text-sm leading-8 text-ink-soft">
-          أطلقنا أدلة محلية للمدن التي يتوفر لها محتوى مستقل في الموقع. كل دليل يشرح السياق المحلي دون افتراض توفر دواء
-          أو وجود فرع أو علاقة تجارية، ويربط إلى المصادر الطبية والتنظيمية ذات الصلة.
-        </p>
-        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          {saudiCityPages.map((city) => (
-            <Link key={city.slug} to={`/cytotec-${city.slug}`} className="rounded-2xl border border-line bg-cream p-4 font-bold text-brand-deep transition hover:bg-brand-soft">
-              سايتوتك في {city.city}
-            </Link>
-          ))}
-        </div>
-        <div className="mt-5 grid gap-3 md:grid-cols-3">
-          <Link to="/abortion-pills-saudi-arabia" className="rounded-2xl bg-cream p-4 hover:bg-brand-soft">
-            <strong className="text-brand-deep">المعلومات الوطنية</strong>
-            <p className="mt-1 text-sm leading-7 text-ink-soft">المرجع الوطني للمعلومات الدوائية والسياق التنظيمي.</p>
-          </Link>
-          <Link to="/medical-sources" className="rounded-2xl bg-cream p-4 hover:bg-brand-soft">
-            <strong className="text-brand-deep">المصادر الطبية</strong>
-            <p className="mt-1 text-sm leading-7 text-ink-soft">النشرات والجهات التنظيمية التي نعتمد عليها.</p>
-          </Link>
-          <Link to="/safety" className="rounded-2xl bg-cream p-4 hover:bg-brand-soft">
-            <strong className="text-brand-deep">الأمان والتحذيرات</strong>
-            <p className="mt-1 text-sm leading-7 text-ink-soft">معلومات السلامة وحدود المعلومات العامة.</p>
-          </Link>
-        </div>
-      </section>
 
       <section className="card-premium p-6">
         <h2 className="font-display text-2xl font-extrabold text-brand-deep">أدلة أدوية إجهاض الحمل حسب الدولة</h2>
