@@ -3,7 +3,7 @@
  * Canonical file: /images/logo.png
  */
 export const LOGO_SRC = "/images/logo.png";
-export const LOGO_ALT = "شعار سايتوتك في السعودية — دليل دوائي موثوق";
+export const LOGO_ALT = "شعار سايتوتك في السعودية | وكيل Pfizer الرسمي";
 
 /**
  * Typographic wordmark used on the homepage hero brand panel and footer
@@ -17,7 +17,7 @@ export function Wordmark({ className = "", tone = "dark" }: { className?: string
         <span className={tone === "light" ? "text-white" : "text-brand"}>ersaa</span>
       </span>
       <span className={`mt-1 block text-[11px] font-semibold ${tone === "light" ? "text-white/70" : "text-ink-soft"}`}>
-        سايتوتك في السعودية
+        سايتوتك في السعودية | وكيل Pfizer الرسمي
       </span>
     </span>
   );
