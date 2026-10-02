@@ -4,7 +4,6 @@ import type { Plugin } from "vite";
 import { articles } from "../src/data/articles";
 import { staticPages } from "../src/data/pages";
 import { clusters, SITE } from "../src/data/site";
-import { saudiCityPages } from "../src/data/saudiCities";
 
 /**
  * Automatic sitemap generation.
@@ -108,12 +107,8 @@ export function emitSitemap(): Plugin {
         push({ loc: `/blog/cluster/${cluster.slug}`, changefreq: "weekly", priority: "0.7" });
       }
 
-      // Saudi city information pages are first-class routable pages and must
-      // remain in the generated sitemap so URL parity and prerendering see them.
-      for (const city of saudiCityPages) {
-        push({ loc: `/cytotec-${city.slug}`, changefreq: "monthly", priority: "0.8" });
-      }
-
+      // City doorway URLs are intentionally excluded from the sitemap. They
+      // are legacy SEO routes consolidated into the single Saudi care hub.
       push({ loc: "/blog", changefreq: "weekly", priority: "0.8" });
 
       // Articles published through the CMS (committed JSON) come FIRST: a
