@@ -32,6 +32,7 @@ const ROOT = path.resolve(__dirname, "..");
 
 const APPROVED = [
   "/images/logo.png",
+  "/images/logo.webp",
   "/images/Bannerrr.png",
   "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",

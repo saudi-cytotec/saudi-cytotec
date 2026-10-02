@@ -21,6 +21,7 @@ export interface MediaItem {
 
 export const APPROVED_IMAGE_FILES = [
   "/images/logo.png",
+  "/images/logo.webp",
   "/images/Bannerrr.png",
   "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
@@ -35,6 +36,13 @@ export const approvedAssets: MediaItem[] = [
     width: 1536,
     height: 1024,
     role: "الشعار المعتمد — الهيدر والفوتر",
+  },
+  {
+    file: "/images/logo.webp",
+    alt: "شعار سايتوتك في السعودية — نسخة WebP محسّنة للأداء",
+    width: 320,
+    height: 213,
+    role: "نسخة WebP محسّنة للأداء — الهيدر",
   },
   {
     file: "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",

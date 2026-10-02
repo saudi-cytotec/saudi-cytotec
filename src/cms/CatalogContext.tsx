@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import type { Article, ContentMapItem, ManagedArticle, NotFoundEntry, RedirectRule, SiteSettings } from "../types";
 import { sanitizeArticleImages } from "../utils/images";
 import { selectableImagePaths } from "../data/media";
-import { defaultSettings } from "./defaults";
 import { effectiveRedirectRules, loadState, saveState, type CmsState } from "./storage";
 
 interface CatalogValue {
