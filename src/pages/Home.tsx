@@ -13,6 +13,9 @@ import {
   IconVenus,
 } from "../components/icons";
 import { JsonLd, Seo } from "../components/Seo";
+import { WhatsAppIcon } from "../components/WhatsAppContact";
+import { HEALTH_LINES } from "../data/contact";
+import { WHATSAPP_NUMBER_RAW, WHATSAPP_URL } from "../data/conversion";
 import { HOME_SEO } from "../data/home";
 import { SITE } from "../data/site";
 
@@ -20,6 +23,10 @@ const HERO_BANNER_SRC = "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misop
 const HERO_BANNER_ALT = "أدوية إجهاض الحمل — سايتوتك وميزوبروستول 200 ومعلومات طبية موثوقة";
 
 const HomeDeferredSections = lazy(() => import("./HomeDeferredSections"));
+
+const SA = HEALTH_LINES.find((c) => c.code === "sa");
+const SA_MOH = SA?.lines.find((l) => l.label.includes("وزارة الصحة"))?.value ?? "937";
+const SA_EMS = SA?.lines.find((l) => l.label.includes("الإسعاف"))?.value ?? "997";
 
 const HERO_TRUST = [
   { Icon: IconPill, label: "دواء بوصفة" },
@@ -90,8 +97,6 @@ function HeroWaves() {
 }
 
 export function Home() {
-
-
   const [h1Primary, h1Secondary] = HOME_SEO.h1.split(" | ");
 
   return (
@@ -243,22 +248,7 @@ export function Home() {
         <HeroWaves />
       </section>
 
-      {/* ── 2. شريط الخدمات السريع ──────────────────────────────────────── */}
-      <section aria-label="الخدمات السريعة" className="defer-render rounded-[1.75rem] bg-brand-deep p-4 shadow-[0_20px_45px_-25px_rgb(10_74_51/0.7)] sm:p-5">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <Link to="/what-is-cytotec" className="group rounded-2xl bg-white/10 p-4 text-white ring-1 ring-white/10 transition hover:bg-white/15">
-            <span className="text-xs font-bold text-white/70">دليل دوائي</span>
-            <span className="mt-1 block font-display text-base font-extrabold">سايتوتك في السعودية</span>
-            <span className="mt-2 block text-xs leading-5 text-white/75">تعريف ومعلومات وتحذيرات موثوقة</span>
-          </Link>
-          <Link to="/misoprostol" className="group rounded-2xl bg-white/10 p-4 text-white ring-1 ring-white/10 transition hover:bg-white/15">
-            <span className="text-xs font-bold text-white/70">المادة الفعالة</span>
-            <span className="mt-1 block font-display text-base font-extrabold">ميزوبروستول</span>
-            <span className="mt-2 block text-xs leading-5 text-white/75">الاستخدامات الطبية وإرشادات الأمان</span>
-          </Link>
-          <Link to="/safety" className="group rounded-2xl bg-white/10 p-4 text-white ring-1 ring-white/10 transition hover:bg-white/15">
-            <span className="text-xs font-bold text-white/70">الأمان</span>
-            <span className="mt-1 block font-display text-base font-extrabold">السل      <Suspense fallback={null}>
+      <Suspense fallback={null}>
         <HomeDeferredSections />
       </Suspense>
     </div>
