@@ -1,5 +1,4 @@
 import type { ManagedArticle } from "../types";
-import { articles as staticArticles } from "./articles";
 import { staticManaged } from "../cms/defaults";
 import { committedArticles } from "../cms/contentSource";
 

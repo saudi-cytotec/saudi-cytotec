@@ -2,7 +2,7 @@ import type { Article } from "../types";
 
 export type ArticleSummary = Pick<
   Article,
-  "slug" | "title" | "h1" | "metaTitle" | "metaDescription" | "cluster" | "excerpt" | "publishedAt" | "updatedAt" | "related"
+  "slug" | "title" | "h1" | "metaTitle" | "metaDescription" | "cluster" | "excerpt" | "publishedAt" | "updatedAt" | "related" | "thumbnail" | "thumbnailAlt"
 > & { noindex?: boolean };
 
 export const articleIndex: ArticleSummary[] = [
