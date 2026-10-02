@@ -277,12 +277,15 @@ async function main() {
           ? path.join(DIST_DIR, "index.html")
           : path.join(DIST_DIR, urlPath.replace(/\/$/, ""), "index.html");
 
-      let enhanced = stripShellSeo(ORIGINAL_SHELL);
+      // Keep the homepage's explicit static SEO shell intact. It is already
+      // the approved root metadata in index.html, while non-root routes
+      // receive their route-specific Helmet/prerender SEO block below.
+      let enhanced = urlPath === "/" ? ORIGINAL_SHELL : stripShellSeo(ORIGINAL_SHELL);
       const headOk = Boolean(settled && head.title && head.canonical && head.description);
 
-      if (headOk) {
+      if (urlPath !== "/" && headOk) {
         enhanced = enhanced.replace("</head>", `${seoBlock(head, urlPath, paths.length)}\n  </head>`);
-      } else {
+      } else if (urlPath !== "/") {
         enhanced = enhanced.replace(
           "</head>",
           `  <meta name="prerender" content="${paths.length}" />\n  <meta name="prerender-path" content="${urlPath}" />\n  <meta name="prerender-fallback" content="no-head" />\n  </head>`,
