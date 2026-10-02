@@ -264,6 +264,7 @@ console.log("SEO AUDIT — saudiersaa.com\n");
 // covered by scripts/auditImages.mjs against content/media.json.
 const APPROVED_ASSETS = new Set([
   "/images/logo.png",
+  "/images/logo.webp",
   "/images/Bannerrr.png",
   "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
