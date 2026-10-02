@@ -30,8 +30,21 @@ const html = fs.readFileSync(DIST_HTML, "utf8");
 let bundlePath;
 const assetsDir = path.join(ROOT, "dist", "assets");
 if (fs.existsSync(assetsDir)) {
-  const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
-  if (assetJs) bundlePath = path.join(assetsDir, assetJs);
+  // Use the exact production entry referenced by Vite in dist/index.html.
+  // Do not guess by filename: this build can contain more than one
+  // index-*.js chunk, and choosing the wrong one leaves React.lazy routes
+  // suspended during prerender.
+  const entrySrc = html.match(/<script[^>]+type=["']module["'][^>]+src=["']([^"']+\.js)["'][^>]*>/i)?.[1]
+    ?? html.match(/<script[^>]+src=["']([^"']+\.js)["'][^>]+type=["']module["'][^>]*>/i)?.[1];
+  if (entrySrc?.startsWith("/assets/")) {
+    const candidate = path.join(ROOT, "dist", entrySrc.slice("/".length));
+    if (fs.existsSync(candidate)) bundlePath = candidate;
+  }
+
+  if (!bundlePath) {
+    const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
+    if (assetJs) bundlePath = path.join(assetsDir, assetJs);
+  }
 }
 
 if (!bundlePath) {
