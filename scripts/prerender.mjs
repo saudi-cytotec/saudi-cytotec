@@ -171,7 +171,8 @@ async function render(urlPath) {
   // two consecutive polls. This avoids spending the full timeout on every URL.
   while (Date.now() - start < 2000) {
     const root = doc0.getElementById("root");
-    const rootLength = root?.innerHTML.length ?? 0;
+    const rootHtml = root?.innerHTML ?? "";
+    const rootLength = rootHtml.length;
     const title = doc0.querySelector("title")?.textContent ?? "";
     const description = doc0.querySelector('meta[name="description"]')?.getAttribute("content") ?? "";
     const canonical = doc0.querySelector('link[rel="canonical"]')?.getAttribute("href") ?? "";
@@ -180,8 +181,10 @@ async function render(urlPath) {
     const headNow = [title, description, canonical, ogTitle, ogUrl].join("\u001f");
 
     const expectedCanonical = `${DOMAIN}${urlPath === "/" ? "/" : urlPath.replace(/\/$/, "")}`;
+    const footerReady = rootHtml.includes("<footer");
     const routeHeadReady =
       rootLength > 200 &&
+      footerReady &&
       title &&
       description &&
       canonical === expectedCanonical &&
