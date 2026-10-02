@@ -1,7 +1,7 @@
 import type { Cluster, NavItem } from "../types";
 
 export const SITE = {
-  name: "سايتوتك في السعودية - صحة المرأة السعودية",
+  name: "سايتوتك في السعودية | وكيل فايزر",
   nameEn: "Saudi Women's Health - Saudiersaa",
   domain: "https://saudiersaa.com",
   locale: "ar-SA",
