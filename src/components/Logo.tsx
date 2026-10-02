@@ -1,9 +1,9 @@
 /**
  * Brand logo — approved 2026 asset.
- * Canonical file: /images/logo.png
+ * Lightweight website asset: /images/cytotec-saudi-logo-web.svg
  */
-export const LOGO_SRC = "/images/logo.png";
-export const LOGO_ALT = "شعار سايتوتك في السعودية | وكيل Pfizer الرسمي";
+export const LOGO_SRC = "/images/cytotec-saudi-logo-web.svg";
+export const LOGO_ALT = "شعار سايتوتك في السعودية";
 
 export function Wordmark({ className = "", tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
   return (
@@ -36,8 +36,8 @@ export function BrandLogo({
           <img
             src={LOGO_SRC}
             alt={LOGO_ALT}
-            width={1536}
-            height={1024}
+            width={128}
+            height={128}
             decoding="async"
             fetchPriority="high"
             className="h-full w-auto max-w-full object-contain"
