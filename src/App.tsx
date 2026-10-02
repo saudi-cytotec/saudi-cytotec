@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useLayoutEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { countryPagePaths, countryPages } from "./data/country";
@@ -36,7 +36,7 @@ import { saudiCityPages } from "./data/saudiCities";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
