@@ -48,7 +48,7 @@ function HeroBrandPanel() {
       <div className="relative overflow-hidden rounded-[1.75rem] bg-brand-deep p-8 shadow-[0_28px_60px_-24px_rgb(10_74_51/0.55)] ring-1 ring-white/10 sm:p-10">
         <span className="hero-decor-blur pointer-events-none absolute -top-16 -start-16 h-56 w-56 rounded-full bg-sky/25 blur-3xl" aria-hidden="true" />
         <span className="hero-decor-blur pointer-events-none absolute -bottom-20 -end-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
-        <div className="relative flex min-h-[16rem] items-center justify-center sm:min-h-[19rem]">
+        <div className="relative flex min-h-[16rem] w-full items-center justify-center sm:min-h-[19rem]">
           {missing ? (
             <Wordmark tone="light" className="text-center" />
           ) : (
@@ -67,7 +67,7 @@ function HeroBrandPanel() {
                   decoding="async"
                   fetchPriority="high"
                   aria-hidden="true"
-                  className="hidden max-h-[17rem] w-auto object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)] sm:block sm:max-h-[20rem]"
+                  className="hidden h-auto max-h-[17rem] w-full max-w-[800px] object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)] sm:block sm:max-h-[20rem]"
                   onError={() => setMissing(true)}
                 />
               </picture>
