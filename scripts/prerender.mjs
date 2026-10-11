@@ -30,10 +30,17 @@ const html = fs.readFileSync(DIST_HTML, "utf8");
 let bundlePath;
 const assetsDir = path.join(ROOT, "dist", "assets");
 if (fs.existsSync(assetsDir)) {
-  const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
-  if (assetJs) bundlePath = path.join(assetsDir, assetJs);
+  // Resolve the actual Vite entry from the built HTML, not a similarly named lazy chunk.
+  const entryMatch = html.match(/src="\\/assets\\/([^"]+\\.js)"/);
+  if (entryMatch) {
+    const candidate = path.join(assetsDir, path.basename(entryMatch[1]));
+    if (fs.existsSync(candidate)) bundlePath = candidate;
+  }
+  if (!bundlePath) {
+    const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
+    if (assetJs) bundlePath = path.join(assetsDir, assetJs);
+  }
 }
-
 if (!bundlePath) {
   const chunks = [...html.matchAll(/<script type="module"[^>]*>([\s\S]*?)<\/script>/g)]
     .map((m) => m[1])

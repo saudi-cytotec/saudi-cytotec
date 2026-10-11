@@ -35,6 +35,9 @@ const APPROVED = [
   "/images/Bannerrr.png",
   "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
+  "/images/حبوب-اجهاض-الحمل-في-السعودية.webp",
+  "/images/حبوب-اجهاض-الحمل-سايتوتك-في-البحرين.webp",
+  "/images/سايتوتك-في-البحرين-الامارات-الكويت-السعودية.webp",
 ];
 
 /** Admin-uploaded CMS media: registered in content/media.json, served from /media/. */

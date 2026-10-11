@@ -19,8 +19,8 @@ import { WHATSAPP_NUMBER_RAW, WHATSAPP_URL } from "../data/conversion";
 import { HOME_SEO } from "../data/home";
 import { SITE } from "../data/site";
 
-const HERO_BANNER_SRC = "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp";
-const HERO_BANNER_ALT = "أدوية إجهاض الحمل — سايتوتك وميزوبروستول 200 ومعلومات طبية موثوقة";
+const HERO_BANNER_SRC = "/images/حبوب-اجهاض-الحمل-في-السعودية.webp";
+const HERO_BANNER_ALT = "حبوب إجهاض الحمل سايتوتك في السعودية — معلومات دوائية وتوعية صحية";
 const HERO_TRANSPARENT_PIXEL =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 
