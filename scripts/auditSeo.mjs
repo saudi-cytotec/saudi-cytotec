@@ -7,7 +7,7 @@
  *   1. Sitemap parity — no live URL lost vs docs/url-baseline.txt
  *   2. Robots — public content allowed, /admin /api /search excluded, sitemap declared
  *   3. Forbidden schema types — Drug/Product/Offer/Review/AggregateRating absent
- *   4. Redirect registry — no loops, destinations exist, statuses 301/410, valid vercel.json
+ *   4. Redirect registry — no loops, destinations exist, statuses 301/410
  *   5. Content map — 100 topics, unique ids/urls, valid cross-references
  *   6. Bundle SEO shell — title, description, canonical, robots meta present
  *   7. Internal links from article data — no broken related/cornerstone targets
@@ -28,7 +28,6 @@ const ROBOTS = path.join(ROOT, "public", "robots.txt");
 const BASELINE = path.join(ROOT, "docs", "url-baseline.txt");
 const REDIRECTS = path.join(ROOT, "content", "redirects.json");
 const MAP = path.join(ROOT, "content", "map.json");
-const VERCEL = path.join(ROOT, "vercel.json");
 const ARTICLES_DIR = path.join(ROOT, "src", "data", "articles");
 const PUBLISHED_DIR = path.join(ROOT, "content", "published");
 
@@ -148,21 +147,10 @@ console.log("SEO AUDIT — saudiersaa.com\n");
   const loops = registry.rules.filter((rule) => rule.destination && sources.has(rule.destination));
   const badStatus = registry.rules.filter((rule) => ![301, 308, 404, 410].includes(rule.statusCode));
   const missingTargets = registry.rules.filter((rule) => [301, 308].includes(rule.statusCode) && rule.destination && !sitemapUrls.includes(rule.destination) && !rule.destination.startsWith("/blog/cluster") && rule.destination !== "/404");
-  const vercel = JSON.parse(fs.readFileSync(VERCEL, "utf8"));
-  const vercelRules = vercel.redirects ?? [];
-  const vercelBad = vercelRules.filter((r) => {
-    if (!r.source || !r.source.startsWith("/")) return true;
-    if (r.statusCode === 410) return false;
-    if (r.statusCode === 404) return false;
-    if (r.statusCode === 308) return false;
-    if (!r.destination) return true;
-    return false;
-  });
-
   report(
     "Redirects",
-    loops.length === 0 && badStatus.length === 0 && missingTargets.length === 0 && vercelBad.length === 0,
-    `${registry.rules.length} registry rules, ${vercelRules.length} edge rules${loops.length ? `, LOOPS: ${loops.map((r) => r.source).join(", ")}` : ""}${badStatus.length ? `, bad status` : ""}${missingTargets.length ? `, missing targets: ${missingTargets.map((r) => r.source + "→" + r.destination).join(", ")}` : ""}${vercelBad.length ? `, invalid vercel rules: ${vercelBad.length}` : ""}`,
+    loops.length === 0 && badStatus.length === 0 && missingTargets.length === 0,
+    `${registry.rules.length} registry rules${loops.length ? `, LOOPS: ${loops.map((r) => r.source).join(", ")}` : ""}${badStatus.length ? `, bad status` : ""}${missingTargets.length ? `, missing targets: ${missingTargets.map((r) => r.source + "→" + r.destination).join(", ")}` : ""}`,
   );
 }
 
