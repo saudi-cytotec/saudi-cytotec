@@ -22,16 +22,16 @@ import type { CountryBlock, CountrySpec } from "../data/country/types";
 const DEFAULT_BANNER_SRC = "/images/Bannerrr.png";
 const COUNTRY_BANNERS: Record<CountrySpec["code"], { src: string; alt: string }> = {
   sa: {
-    src: "/images/سايتوتك-في-البحرين-الامارات-الكويت-السعودية.webp",
-    alt: "معلومات توعوية عن سايتوتك وصحة المرأة في السعودية ودول الخليج",
+    src: DEFAULT_BANNER_SRC,
+    alt: "سعودي إرساء - منصة للتوعية بصحة المرأة في السعودية",
   },
   ae: {
-    src: "/images/سايتوتك-في-البحرين-الامارات-الكويت-السعودية.webp",
-    alt: "معلومات توعوية عن سايتوتك وصحة المرأة في الإمارات ودول الخليج",
+    src: DEFAULT_BANNER_SRC,
+    alt: "سعودي إرساء - منصة للتوعية بصحة المرأة في الإمارات",
   },
   kw: {
-    src: "/images/سايتوتك-في-البحرين-الامارات-الكويت-السعودية.webp",
-    alt: "معلومات توعوية عن سايتوتك وصحة المرأة في الكويت ودول الخليج",
+    src: DEFAULT_BANNER_SRC,
+    alt: "سعودي إرساء - منصة للتوعية بصحة المرأة في الكويت",
   },
   bh: {
     src: "/images/حبوب-اجهاض-الحمل-سايتوتك-في-البحرين.webp",
@@ -190,6 +190,20 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
           <Paragraph text={spec.directAnswer} />
         </div>
       </section>
+
+      {(["sa", "ae", "kw", "bh"] as const).includes(spec.code as "sa" | "ae" | "kw" | "bh") ? (
+        <figure className="max-w-3xl overflow-hidden rounded-3xl border border-line bg-paper p-3" data-image-role="country-article-image">
+          <img
+            src="/images/سايتوتك-في-البحرين-الامارات-الكويت-السعودية.webp"
+            alt={`معلومات توعوية عن صحة المرأة والأدوية في ${spec.countryName} ودول الخليج`}
+            width={800}
+            height={800}
+            loading="lazy"
+            decoding="async"
+            className="mx-auto max-h-[24rem] w-auto max-w-full rounded-2xl object-contain"
+          />
+        </figure>
+      ) : null}
 
       <div className="max-w-3xl">
         <DisclaimerBanner />
