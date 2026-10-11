@@ -181,10 +181,13 @@ async function render(urlPath) {
     const headNow = [title, description, canonical, ogTitle, ogUrl].join("\u001f");
 
     const expectedCanonical = `${DOMAIN}${urlPath === "/" ? "/" : urlPath.replace(/\/$/, "")}`;
-    const footerReady = rootHtml.includes("<footer");
+    // Do not require a literal <footer>: several valid routes render a
+    // different semantic footer structure. Wait for substantial route content
+    // and route-specific metadata so the prerender audit never accepts only
+    // the initial loading shell.
     const routeHeadReady =
-      rootLength > 200 &&
-      footerReady &&
+      rootLength > 1500 &&
+      !(rootHtml.includes("جاري تحميل المحتوى") && rootLength < 3000) &&
       title &&
       description &&
       canonical === expectedCanonical &&
