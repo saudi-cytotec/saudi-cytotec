@@ -229,15 +229,15 @@ async function render(urlPath) {
 }
 
 function replaceRootContent(documentHtml, bodyRoot) {
-  const opening = /<div\\s+id=["']root["'][^>]*>/i.exec(documentHtml);
+  const opening = /<div\s+id=["']root["'][^>]*>/i.exec(documentHtml);
   if (!opening) return documentHtml;
   const contentStart = opening.index + opening[0].length;
-  const tags = /<\\/?div\\b[^>]*>/gi;
+  const tags = /<\/?div\b[^>]*>/gi;
   tags.lastIndex = contentStart;
   let depth = 1, match;
   while ((match = tags.exec(documentHtml))) {
-    if (/^<\\s*div\\b/i.test(match[0]) && !/\\/>$/.test(match[0])) depth++;
-    else if (/^<\\s*\\/\\s*div\\b/i.test(match[0])) {
+    if (/^<\s*div\b/i.test(match[0]) && !/\/>$/.test(match[0])) depth++;
+    else if (/^<\s*\/\s*div\b/i.test(match[0])) {
       depth--;
       if (depth === 0) return documentHtml.slice(0, contentStart) + bodyRoot + documentHtml.slice(match.index);
     }
