@@ -21,9 +21,6 @@ import { SITE } from "../data/site";
 
 const HERO_BANNER_SRC = "/images/حبوب-اجهاض-الحمل-في-السعودية.webp";
 const HERO_BANNER_ALT = "حبوب إجهاض الحمل سايتوتك في السعودية — معلومات دوائية وتوعية صحية";
-const HERO_TRANSPARENT_PIXEL =
-  "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-
 const HomeDeferredSections = lazy(() => import("./HomeDeferredSections"));
 
 const SA = HEALTH_LINES.find((c) => c.code === "sa");
@@ -53,24 +50,17 @@ function HeroBrandPanel() {
             <Wordmark tone="light" className="text-center" />
           ) : (
             <>
-              <div className="sm:hidden">
-                <Wordmark tone="light" className="text-center" />
-              </div>
-              <picture>
-                <source media="(min-width: 640px)" srcSet={HERO_BANNER_SRC} />
-                <img
-                  src={HERO_TRANSPARENT_PIXEL}
-                  alt=""
-                  width={1732}
-                  height={908}
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                  aria-hidden="true"
-                  className="hidden max-h-[17rem] w-auto object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)] sm:block sm:max-h-[20rem]"
-                  onError={() => setMissing(true)}
-                />
-              </picture>
+              <img
+                src={HERO_BANNER_SRC}
+                alt={HERO_BANNER_ALT}
+                width={1732}
+                height={908}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                className="max-h-[17rem] max-w-full object-contain drop-shadow-[0_18px_35px_rgb(0_0_0/0.45)] sm:max-h-[20rem]"
+                onError={() => setMissing(true)}
+              />
             </>
           )}
         </div>
