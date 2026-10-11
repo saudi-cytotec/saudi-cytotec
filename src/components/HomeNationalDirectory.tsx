@@ -153,14 +153,18 @@ export function HomeNationalDirectory() {
             الخريطة التالية خريطة جغرافية عامة للتصفح وليست قاعدة مخزون دوائي. استخدميها لفهم موقع المناطق والمدن، ثم تحققي من المنشأة الصحية أو الصيدلية عبر المصادر الرسمية.
           </p>
         </div>
-        <div className="h-[420px] border-y border-line bg-cream">
-          <iframe
-            title="خريطة المملكة العربية السعودية"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=34.4%2C15.2%2C56.8%2C32.4&layer=mapnik"
-            className="h-full w-full border-0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+        <div className="border-y border-line bg-cream px-6 py-5">
+          <p className="text-sm leading-7 text-ink-soft">
+            أزلنا عرض الخريطة المضمّنة لتجنّب ظهور إطار محظور أو معطوب. يمكنك فتح خريطة المملكة في نافذة مستقلة، مع بقاء دليل المناطق والمدن أدناه.
+          </p>
+          <a
+            href="https://www.openstreetmap.org/#map=5/24.0/45.0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex rounded-2xl bg-brand px-5 py-3 text-sm font-bold text-white transition hover:bg-brand-deep"
+          >
+            فتح خريطة المملكة ←
+          </a>
         </div>
         <div className="flex flex-wrap gap-2 p-5">
           {REGIONS.map((region) => <span key={region.name} className="rounded-full bg-brand-soft px-3 py-1.5 text-xs font-bold text-brand-deep">{region.name.replace("منطقة ","")}</span>)}
