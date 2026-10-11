@@ -30,8 +30,18 @@ const html = fs.readFileSync(DIST_HTML, "utf8");
 let bundlePath;
 const assetsDir = path.join(ROOT, "dist", "assets");
 if (fs.existsSync(assetsDir)) {
-  const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
-  if (assetJs) bundlePath = path.join(assetsDir, assetJs);
+  // Use the exact entry module referenced by Vite's built HTML. Do not guess
+  // from filenames: split chunks such as AdminApp/index-* are not app entrypoints.
+  const entryMatch = html.match(/<script\\b[^>]*type=["']module["'][^>]*src=["']\\/assets\\/([^"']+\\.js)["'][^>]*>/i)
+    || html.match(/<script\\b[^>]*src=["']\\/assets\\/([^"']+\\.js)["'][^>]*type=["']module["'][^>]*>/i);
+  if (entryMatch) {
+    const candidate = path.join(assetsDir, path.basename(entryMatch[1]));
+    if (fs.existsSync(candidate)) bundlePath = candidate;
+  }
+  if (!bundlePath) {
+    const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
+    if (assetJs) bundlePath = path.join(assetsDir, assetJs);
+  }
 }
 
 if (!bundlePath) {
