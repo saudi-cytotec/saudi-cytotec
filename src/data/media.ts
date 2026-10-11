@@ -23,6 +23,9 @@ export const APPROVED_IMAGE_FILES = [
   "/images/Bannerrr.png",
   "/images/adwiyat-ijhad-alhaml-saudi-arabia-cytotec-misoprostol.webp",
   "/images/saudiersaa-social-share.png",
+  "/images/حبوب-اجهاض-الحمل-في-السعودية.webp",
+  "/images/حبوب-اجهاض-الحمل-سايتوتك-في-البحرين.webp",
+  "/images/سايتوتك-في-البحرين-الامارات-الكويت-السعودية.webp",
 ] as const;
 
 export const GLOBAL_SOCIAL_SHARE_IMAGE = "/images/saudiersaa-social-share.png" as const;
@@ -48,6 +51,27 @@ export const approvedAssets: MediaItem[] = [
     width: 0,
     height: 0,
     role: "صورة مشاركة اجتماعية معتمدة — fallback للـOG/Twitter metadata فقط",
+  },
+  {
+    file: "/images/حبوب-اجهاض-الحمل-في-السعودية.webp",
+    alt: "حبوب إجهاض الحمل سايتوتك في السعودية — معلومات دوائية وتوعية صحية",
+    width: 1981,
+    height: 793,
+    role: "بانر الصفحة الرئيسية",
+  },
+  {
+    file: "/images/حبوب-اجهاض-الحمل-سايتوتك-في-البحرين.webp",
+    alt: "معلومات توعوية عن سايتوتك وصحة المرأة في البحرين",
+    width: 0,
+    height: 0,
+    role: "بانر صفحة البحرين",
+  },
+  {
+    file: "/images/سايتوتك-في-البحرين-الامارات-الكويت-السعودية.webp",
+    alt: "معلومات توعوية عن صحة المرأة والأدوية في دول الخليج",
+    width: 800,
+    height: 800,
+    role: "صورة داخل صفحات أدلة الدول الأربع",
   },
 ];
 
