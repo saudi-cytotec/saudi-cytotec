@@ -19,8 +19,29 @@ import type { CountryBlock, CountrySpec } from "../data/country/types";
  * country in src/data/country/*.ts and is deliberately NOT a template.
  */
 
-const BANNER_SRC = "/images/Bannerrr.png";
-const BANNER_ALT = "سعودي إرساء - منصة سعودية موثوقة للتوعية بصحة المرأة";
+const DEFAULT_BANNER_SRC = "/images/Bannerrr.png";
+const COUNTRY_BANNERS: Record<CountrySpec["code"], { src: string; alt: string }> = {
+  sa: {
+    src: "/images/سايتوتك-في-البحرين-الامارات-الكويت-السعودية.webp",
+    alt: "معلومات توعوية عن سايتوتك وصحة المرأة في السعودية ودول الخليج",
+  },
+  ae: {
+    src: "/images/سايتوتك-في-البحرين-الامارات-الكويت-السعودية.webp",
+    alt: "معلومات توعوية عن سايتوتك وصحة المرأة في الإمارات ودول الخليج",
+  },
+  kw: {
+    src: "/images/سايتوتك-في-البحرين-الامارات-الكويت-السعودية.webp",
+    alt: "معلومات توعوية عن سايتوتك وصحة المرأة في الكويت ودول الخليج",
+  },
+  bh: {
+    src: "/images/حبوب-اجهاض-الحمل-سايتوتك-في-البحرين.webp",
+    alt: "معلومات توعوية عن سايتوتك وصحة المرأة في البحرين",
+  },
+  qa: {
+    src: DEFAULT_BANNER_SRC,
+    alt: "سعودي إرساء - منصة للتوعية بصحة المرأة",
+  },
+};
 
 /** [[label|/path]] → <Link>, everything else stays text. */
 function richText(text: string): ReactNode[] {
@@ -105,6 +126,7 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
     { name: "محاور المحتوى", path: "/topics" },
     { name: spec.title, path: spec.path },
   ];
+  const banner = COUNTRY_BANNERS[spec.code];
 
   return (
     <div className="mx-auto max-w-7xl space-y-8 px-4 py-8">
@@ -112,7 +134,7 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
         title={spec.metaTitle}
         description={spec.metaDescription}
         path={spec.path}
-        image={BANNER_SRC}
+        image={banner.src}
       />
       <JsonLd
         data={[
@@ -150,8 +172,8 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
         <span className="pointer-events-none absolute -bottom-20 -end-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
         <div className="relative flex min-h-[9rem] items-center justify-center">
           <img
-            src={BANNER_SRC}
-            alt={BANNER_ALT}
+            src={banner.src}
+            alt={banner.alt}
             width={1536}
             height={1024}
             loading="eager"
