@@ -228,6 +228,23 @@ async function render(urlPath) {
   return { head, bodyRoot, settled };
 }
 
+function replaceRootContent(documentHtml, bodyRoot) {
+  const opening = /<div\\s+id=["']root["'][^>]*>/i.exec(documentHtml);
+  if (!opening) return documentHtml;
+  const contentStart = opening.index + opening[0].length;
+  const tags = /<\\/?div\\b[^>]*>/gi;
+  tags.lastIndex = contentStart;
+  let depth = 1, match;
+  while ((match = tags.exec(documentHtml))) {
+    if (/^<\\s*div\\b/i.test(match[0]) && !/\\/>$/.test(match[0])) depth++;
+    else if (/^<\\s*\\/\\s*div\\b/i.test(match[0])) {
+      depth--;
+      if (depth === 0) return documentHtml.slice(0, contentStart) + bodyRoot + documentHtml.slice(match.index);
+    }
+  }
+  return documentHtml;
+}
+
 function ensureDir(filePath) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
 }
@@ -293,15 +310,7 @@ async function main() {
         if (settled) fallbacks++;
       }
 
-      if (bodyRoot) {
-        enhanced = enhanced.replace(
-          /<div id="root">[\s\S]*?<\/div>\s*<!--/,
-          `<div id="root">${bodyRoot}</div>\n    <!--`,
-        );
-        if (!enhanced.includes(bodyRoot.slice(0, 50))) {
-          enhanced = enhanced.replace(/<div id="root".*?<\/div>/s, `<div id="root">${bodyRoot}</div>`);
-        }
-      }
+      if (bodyRoot) enhanced = replaceRootContent(enhanced, bodyRoot);
 
       ensureDir(outPath);
       fs.writeFileSync(outPath, enhanced, "utf8");
@@ -325,7 +334,7 @@ async function main() {
       "</head>",
       `    <title>الصفحة غير موجودة 404 | صحة المرأة السعودية</title>\n    <meta name="robots" content="noindex,nofollow">\n  </head>`,
     );
-    if (bodyRoot) notFoundShell = notFoundShell.replace(/<div id="root".*?<\/div>/s, `<div id="root">${bodyRoot}</div>`);
+    if (bodyRoot) notFoundShell = replaceRootContent(notFoundShell, bodyRoot);
     fs.writeFileSync(path.join(DIST_DIR, "404.html"), notFoundShell, "utf8");
     console.log("[prerender] wrote dist/404.html for true HTTP 404 responses");
   } catch (e) {
