@@ -32,8 +32,8 @@ const assetsDir = path.join(ROOT, "dist", "assets");
 // Use the exact entry script referenced by Vite's built HTML. Selecting the
 // first filename beginning with "index-" is unsafe because code-split chunks
 // can share that prefix and would leave React routes unmounted in prerender.
-const entryScript = html.match(/<script\\b[^>]*type=["']module["'][^>]*src=["']\\/assets\\/([^"']+\\.js)["'][^>]*><\\/script>/i)
-  || html.match(/<script\\b[^>]*src=["']\\/assets\\/([^"']+\\.js)["'][^>]*type=["']module["'][^>]*><\\/script>/i);
+const entryScript = html.match(/<script\b[^>]*type=["']module["'][^>]*src=["']\/assets\/([^"']+\.js)["'][^>]*><\/script>/i)
+  || html.match(/<script\b[^>]*src=["']\/assets\/([^"']+\.js)["'][^>]*type=["']module["'][^>]*><\/script>/i);
 if (entryScript && fs.existsSync(assetsDir)) {
   const candidate = path.join(assetsDir, entryScript[1]);
   if (fs.existsSync(candidate)) bundlePath = candidate;
