@@ -308,6 +308,12 @@ async function main() {
       let enhanced = urlPath === "/" ? ORIGINAL_SHELL : stripShellSeo(ORIGINAL_SHELL);
       const headOk = Boolean(settled && head.title && head.canonical && head.description);
 
+      // The homepage keeps its approved static SEO shell, but it must carry
+      // the same prerender proof markers as every other generated route.
+      if (urlPath === "/" && !enhanced.includes('name="prerender-path"')) {
+        enhanced = enhanced.replace("</head>", `    <meta name="prerender" content="${paths.length}" />\n    <meta name="prerender-path" content="/" />\n  </head>`);
+      }
+
       if (urlPath !== "/" && headOk) {
         enhanced = enhanced.replace("</head>", `${seoBlock(head, urlPath, paths.length)}\n  </head>`);
       } else if (urlPath !== "/") {
