@@ -30,11 +30,13 @@ const html = fs.readFileSync(DIST_HTML, "utf8");
 let bundlePath;
 const assetsDir = path.join(ROOT, "dist", "assets");
 if (fs.existsSync(assetsDir)) {
-  // Resolve the actual Vite entry from the built HTML, not a similarly named lazy chunk.
-  const entryMatch = html.match(/src="\\/assets\\/([^"]+\\.js)"/);
-  if (entryMatch) {
-    const candidate = path.join(assetsDir, path.basename(entryMatch[1]));
-    if (fs.existsSync(candidate)) bundlePath = candidate;
+  // Match the script src with plain string parsing to avoid regex escaping errors.
+  const srcMatch = html.match(/src="([^"]+\\.js)"/);
+  if (srcMatch) {
+    const assetUrl = srcMatch[1];
+    const assetName = assetUrl.split("/").pop();
+    const candidate = assetName ? path.join(assetsDir, assetName) : "";
+    if (candidate && fs.existsSync(candidate)) bundlePath = candidate;
   }
   if (!bundlePath) {
     const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
