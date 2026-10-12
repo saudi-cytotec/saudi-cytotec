@@ -1,8 +1,9 @@
 import { StrictMode } from "react";
-import { createRoot, hydrateRoot } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import "./index.css";
 
 const root = document.getElementById("root")!;
 
@@ -16,10 +17,8 @@ const app = (
   </StrictMode>
 );
 
-// Production pages are prerendered with the complete React tree.
-// Reuse that HTML instead of clearing it and rendering the Home again.
-if (root.hasChildNodes()) {
-  hydrateRoot(root, app);
-} else {
-  createRoot(root).render(app);
-}
+// Cloudflare's prerender script builds the initial HTML by rendering the app
+// in JSDOM; it is not ReactDOMServer output, so it must not be hydrated.
+// Mount React normally to avoid hydration error #418. The prerendered HTML
+// remains available in the delivered document until the client app mounts.
+createRoot(root).render(app);
