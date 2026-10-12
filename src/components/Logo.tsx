@@ -1,8 +1,8 @@
 /**
  * Brand logo — supplied Saudiersaa asset.
- * Optimized WebP for fast header/footer/favicons.
+ * Original supplied logo asset, restored for the Cloudflare migration.
  */
-export const LOGO_SRC = "/images/saudiersaa-logo.webp";
+export const LOGO_SRC = "/images/%D9%84%D9%88%D8%AC%D9%88.png";
 export const LOGO_ALT = "شعار سايتوتك في السعودية";
 
 export function Wordmark({ className = "", tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
