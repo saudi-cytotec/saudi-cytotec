@@ -19,8 +19,15 @@ import type { CountryBlock, CountrySpec } from "../data/country/types";
  * country in src/data/country/*.ts and is deliberately NOT a template.
  */
 
-const BANNER_SRC = "/images/Bannerrr.png";
-const BANNER_ALT = "سعودي إرساء - منصة سعودية موثوقة للتوعية بصحة المرأة";
+const DEFAULT_BANNER_SRC = "/images/Bannerrr.png";
+const COUNTRY_BANNERS: Record<CountrySpec["code"], { src: string; alt: string }> = {
+  sa: { src: "/media/abortion-pills-saudi-arabia.webp", alt: "بانر توعوي عن صحة المرأة في السعودية" },
+  ae: { src: DEFAULT_BANNER_SRC, alt: "معلومات توعوية عن صحة المرأة في الإمارات" },
+  kw: { src: DEFAULT_BANNER_SRC, alt: "معلومات توعوية عن صحة المرأة في الكويت" },
+  bh: { src: "/media/abortion-pills-bahrain.webp", alt: "بانر توعوي عن صحة المرأة في البحرين" },
+  qa: { src: DEFAULT_BANNER_SRC, alt: "معلومات توعوية عن صحة المرأة في قطر" },
+};
+const GULF_IMAGE_SRC = "/media/gulf-womens-health.webp";
 
 /** [[label|/path]] → <Link>, everything else stays text. */
 function richText(text: string): ReactNode[] {
@@ -96,6 +103,7 @@ function BodyBlock({ block }: { block: CountryBlock }) {
 
 export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
   const articles = publicArticles;
+  const countryBanner = COUNTRY_BANNERS[spec.code] ?? { src: DEFAULT_BANNER_SRC, alt: "معلومات توعوية عن صحة المرأة" };
   const faqs = spec.faqs ?? [];
   const related = spec.relatedSlugs
     .map((slug) => articles.find((a) => a.slug === slug && !a.noindex))
@@ -112,7 +120,7 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
         title={spec.metaTitle}
         description={spec.metaDescription}
         path={spec.path}
-        image={BANNER_SRC}
+        image={countryBanner.src}
       />
       <JsonLd
         data={[
@@ -150,8 +158,8 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
         <span className="pointer-events-none absolute -bottom-20 -end-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" aria-hidden="true" />
         <div className="relative flex min-h-[9rem] items-center justify-center">
           <img
-            src={BANNER_SRC}
-            alt={BANNER_ALT}
+            src={countryBanner.src}
+            alt={countryBanner.alt}
             width={1536}
             height={1024}
             loading="eager"
@@ -160,6 +168,20 @@ export function CountryCornerstonePage({ spec }: { spec: CountrySpec }) {
           />
         </div>
       </figure>
+
+      {(["sa", "ae", "kw", "bh"] as const).includes(spec.code as "sa" | "ae" | "kw" | "bh") ? (
+        <figure className="max-w-3xl overflow-hidden rounded-3xl border border-line bg-paper p-3" data-image-role="country-article-image">
+          <img
+            src={GULF_IMAGE_SRC}
+            alt={`معلومات توعوية عن صحة المرأة والأدوية في ${spec.countryName} ودول الخليج`}
+            width={800}
+            height={800}
+            loading="lazy"
+            decoding="async"
+            className="mx-auto max-h-[24rem] w-auto max-w-full rounded-2xl object-contain"
+          />
+        </figure>
+      ) : null}
 
       {/* Short, direct answer (section 2 of the layout). */}
       <section className="card-premium max-w-3xl p-6">
