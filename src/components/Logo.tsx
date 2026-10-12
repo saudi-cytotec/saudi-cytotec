@@ -13,14 +13,14 @@ export function Wordmark({ className = "", tone = "dark" }: { className?: string
         <span className={tone === "light" ? "text-white" : "text-brand"}>ersaa</span>
       </span>
       <span className={`mt-1 block text-[11px] font-semibold ${tone === "light" ? "text-white/70" : "text-ink-soft"}`}>
-        سايتوتك في السعودية | وكيل Pfizer الرسمي
+        معلومات دوائية موثوقة | سايتوتك في السعودية
       </span>
     </span>
   );
 }
 
 export function BrandLogo({
-  className = "h-14",
+  className = "h-14 w-14",
   plateClass = "rounded-xl",
   tone = "dark",
 }: {
@@ -38,7 +38,7 @@ export function BrandLogo({
           height={192}
           decoding="async"
           fetchPriority="high"
-          className="h-full w-auto max-w-full object-contain"
+          className="h-full w-full object-contain"
         />
       </span>
     </span>

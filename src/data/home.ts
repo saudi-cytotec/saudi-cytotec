@@ -22,9 +22,9 @@
 
 export const HOME_SEO = {
   /** Rendered <title> and og:title — the approved homepage title. */
-  title: "سايتوتك في السعودية | وكيل Pfizer الرسمي",
+  title: "سايتوتك في السعودية | معلومات دوائية موثوقة",
   /** Visible <h1> — identical to the title by editorial decision. */
-  h1: "سايتوتك في السعودية | وكيل Pfizer الرسمي",
+  h1: "سايتوتك في السعودية | معلومات دوائية موثوقة",
   /** Meta description: one natural mention of each core term. */
   description:
     "دليل توعوي عن حبوب إجهاض الحمل في السعودية ومعلومات سايتوتك وميزوبروستول وميفيبرستون: التعريف، الأمان والتحذيرات، الصرف النظامي، ومصادر صحية موثوقة.",
