@@ -24,6 +24,30 @@
       "height": 0,
       "uploadedAt": "2026-10-12",
       "bytes": 0
+    },
+    {
+      "file": "/media/original-logo.png",
+      "alt": "ملف الشعار الأصلي المحفوظ",
+      "width": 0,
+      "height": 0,
+      "uploadedAt": "2026-10-12",
+      "bytes": 0
+    },
+    {
+      "file": "/media/site-consultation-banner.png",
+      "alt": "بانر الاستشارة المحفوظ",
+      "width": 0,
+      "height": 0,
+      "uploadedAt": "2026-10-12",
+      "bytes": 0
+    },
+    {
+      "file": "/media/site-medical-banner.png",
+      "alt": "البانر الطبي المحفوظ",
+      "width": 0,
+      "height": 0,
+      "uploadedAt": "2026-10-12",
+      "bytes": 0
     }
   ]
 }
