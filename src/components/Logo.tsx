@@ -1,6 +1,6 @@
 /**
  * Brand logo — supplied Saudiersaa asset.
- * Original supplied logo asset, restored for the Cloudflare migration.
+ * Keep the logo at its natural aspect ratio to avoid cropping it into a blank-looking square.
  */
 export const LOGO_SRC = "/images/saudiersaa-logo.webp";
 export const LOGO_ALT = "شعار سايتوتك في السعودية";
@@ -20,7 +20,7 @@ export function Wordmark({ className = "", tone = "dark" }: { className?: string
 }
 
 export function BrandLogo({
-  className = "h-14 w-14",
+  className = "h-14",
   plateClass = "rounded-xl",
   tone = "dark",
 }: {
@@ -29,7 +29,7 @@ export function BrandLogo({
   tone?: "dark" | "light";
 }) {
   return (
-    <span className={`inline-flex overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
+    <span className={`inline-flex shrink-0 overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
       <span className="inline-flex h-full w-full items-center justify-center">
         <img
           src={LOGO_SRC}
@@ -38,7 +38,7 @@ export function BrandLogo({
           height={192}
           decoding="async"
           fetchPriority="high"
-          className="h-full w-full object-contain"
+          className="h-full w-auto max-w-full object-contain"
         />
       </span>
     </span>
