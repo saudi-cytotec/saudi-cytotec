@@ -1,6 +1,6 @@
 /**
- * Brand logo — supplied Saudiersaa asset.
- * Keep the logo at its natural aspect ratio to avoid cropping it into a blank-looking square.
+ * Brand logo. The current WebP asset renders as a solid green tile in the live preview,
+ * so use a clear text fallback instead of showing a blank square.
  */
 export const LOGO_SRC = "/images/saudiersaa-logo.webp";
 export const LOGO_ALT = "شعار سايتوتك في السعودية";
@@ -29,17 +29,13 @@ export function BrandLogo({
   tone?: "dark" | "light";
 }) {
   return (
-    <span className={`inline-flex shrink-0 overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
-      <span className="inline-flex h-full w-full items-center justify-center">
-        <img
-          src={LOGO_SRC}
-          alt={LOGO_ALT}
-          width={192}
-          height={192}
-          decoding="async"
-          fetchPriority="high"
-          className="h-full w-auto max-w-full object-contain"
-        />
+    <span
+      role="img"
+      aria-label={LOGO_ALT}
+      className={`inline-flex shrink-0 items-center justify-center overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}
+    >
+      <span dir="ltr" className="font-display text-[1.35rem] font-black tracking-[-0.08em] text-white">
+        <span className="text-accent">s</span>r
       </span>
     </span>
   );
