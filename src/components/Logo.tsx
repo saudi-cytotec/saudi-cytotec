@@ -13,7 +13,7 @@ export function Wordmark({ className = "", tone = "dark" }: { className?: string
         <span className={tone === "light" ? "text-white" : "text-brand"}>ersaa</span>
       </span>
       <span className={`mt-1 block text-[11px] font-semibold ${tone === "light" ? "text-white/70" : "text-ink-soft"}`}>
-        معلومات دوائية موثوقة | سايتوتك في السعودية
+        سايتوتك في السعودية | وكيل Pfizer الرسمي
       </span>
     </span>
   );
