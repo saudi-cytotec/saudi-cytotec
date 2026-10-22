@@ -1,11 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArticleCard } from "../components/ArticleCard";
-import { CategoryCard } from "../components/CategoryCard";
-import { ContactCta } from "../components/ContactCta";
 import { DisclaimerBanner } from "../components/DisclaimerBanner";
-import { CareReferral } from "../components/CareReferral";
-import { HomeNationalDirectory } from "../components/HomeNationalDirectory";
-import { ReferencesList } from "../components/ReferencesList";
 import {
   IconArrowLeft,
   IconBook,
@@ -22,18 +17,13 @@ import { publicArticleIndex } from "../data/articleIndex";
 import { HEALTH_LINES } from "../data/contact";
 import { WHATSAPP_NUMBER_RAW, WHATSAPP_URL } from "../data/conversion";
 import {
-  HOME_CORE_PAGES,
   HOME_CYTOTEC_INTRO,
   HOME_FAQS,
   HOME_FEATURED_SLUGS,
   HOME_QUICK_FACTS,
-  HOME_REFERENCE_IDS,
   HOME_SERVICES,
-  HOME_SUPPORT_PAGES,
-  HOME_VALUE,
   type HomeService,
 } from "../data/home";
-import { clusters } from "../data/site";
 
 const publicArticles = publicArticleIndex.filter((article) => !article.noindex);
 
@@ -169,64 +159,6 @@ export default function HomeDeferredSections() {
 
       <div className="defer-render"><DisclaimerBanner /></div>
 
-      {/* ── 4. صفحات الدعم عن سايتوتك وميزوبروستول ───────────────────────── */}
-      <section className="defer-render" aria-labelledby="support-pages-heading">
-        <div className="mb-6">
-          <h2 id="support-pages-heading" className={SECTION_HEADING}>سايتوتك وميزوبروستول: الصفحات المرجعية</h2>
-          <span className="mt-3 block h-1 w-14 rounded-full bg-accent" aria-hidden="true" />
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-ink-soft">
-            هذه الصفحات تشرح الدواء والمادة الفعالة والاستخدامات الطبية والأمان والآثار الجانبية بالتفصيل، وهي مرجعك قبل
-            أي استفسار أو زيارة طبية.
-          </p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {HOME_SUPPORT_PAGES.map((page) => (
-            <Link
-              key={page.to}
-              to={page.to}
-              className="group flex flex-col rounded-2xl border border-line bg-cream/60 p-4 transition hover:border-brand/40 hover:bg-brand-soft/70"
-            >
-              <span className="flex items-center gap-2 text-sm font-bold text-brand-deep transition group-hover:text-brand">
-                <IconArrowLeft className="h-4 w-4 shrink-0 text-accent" />
-                {page.label}
-              </span>
-              <span className="mt-1.5 text-xs leading-6 text-ink-soft">{page.note}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ── 5. لماذا Saudiersaa؟ ────────────────────────────────────────── */}
-      <section className="defer-render" aria-labelledby="why-us-heading">
-        <div className="mb-6 text-center">
-          <h2 id="why-us-heading" className={SECTION_HEADING}>لماذا Saudiersaa؟</h2>
-          <span className="mx-auto mt-3 block h-1 w-16 rounded-full bg-accent" aria-hidden="true" />
-        </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {HOME_VALUE.map(({ title, text, to, label }) => (
-            <article key={title} className="card-premium flex flex-col p-5">
-              <h3 className="font-display text-base font-bold leading-7 text-brand-deep">{title}</h3>
-              <p className="mt-2 flex-1 text-sm leading-7 text-ink-soft">{text}</p>
-              <Link to={to} className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-brand transition hover:text-accent">
-                {label}
-                <IconArrowLeft className="h-3.5 w-3.5" />
-              </Link>
-            </article>
-          ))}
-          <article className="card-premium flex flex-col justify-center gap-3 bg-brand-soft/50 p-5 text-center">
-            <span className="mx-auto grid h-11 w-11 place-items-center rounded-2xl bg-white text-accent ring-1 ring-line">
-              <IconSiren className="h-5 w-5" />
-            </span>
-            <p className="text-sm font-bold text-brand-deep">حالة عاجلة؟</p>
-            <p className="text-xs leading-6 text-ink-soft">
-              الإسعاف{" "}
-              <span dir="ltr" className="font-mono font-bold text-brand-deep">{SA_EMS}</span> · وزارة الصحة{" "}
-              <span dir="ltr" className="font-mono font-bold text-brand-deep">{SA_MOH}</span>
-            </p>
-          </article>
-        </div>
-      </section>
-
       {/* ── 6. مناطق الخدمة + الأمان في سطور ────────────────────────────── */}
       <section className="defer-render grid gap-6 lg:grid-cols-2">
         <div className="card-premium p-6">
@@ -342,48 +274,6 @@ export default function HomeDeferredSections() {
           </Link>
         </p>
       </section>
-
-      {/* ── روابط أساسية (crawl + internal authority) ───────────────────── */}
-      <section className="defer-render card-premium p-6" aria-labelledby="core-pages-heading">
-        <h2 id="core-pages-heading" className="font-display text-lg font-extrabold text-brand-deep">
-          روابط سريعة إلى الصفحات الأساسية
-        </h2>
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {HOME_CORE_PAGES.map((page) => (
-            <li key={page.to}>
-              <Link
-                to={page.to}
-                className="inline-flex rounded-full border border-line bg-cream px-3.5 py-1.5 text-xs font-semibold text-brand-deep transition hover:border-brand/40 hover:bg-brand-soft"
-              >
-                {page.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* ── المحاور + المصادر + الرعاية ─────────────────────────────────── */}
-      <section className="defer-render">
-        <div className="mb-6 text-center">
-          <h2 className={SECTION_HEADING}>تصفحي المقالات حسب المحور</h2>
-          <span className="mx-auto mt-3 block h-1 w-16 rounded-full bg-accent" aria-hidden="true" />
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-ink-soft">
-            محتوى دوائي وتعليمي مصنّف حسب المحور، موحّد لكل مناطق المملكة دون صفحات مدن مكررة.
-          </p>
-        </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-5">
-          {clusters.map((cluster) => (
-            <CategoryCard key={cluster.id} cluster={cluster} count={publicArticles.filter((a) => a.cluster === cluster.id).length} />
-          ))}
-        </div>
-      </section>
-
-      <div className="defer-render"><HomeNationalDirectory /></div>
-
-      <div className="defer-render"><ReferencesList ids={[...HOME_REFERENCE_IDS]} /></div>
-
-      <div className="defer-render"><CareReferral /></div>
-      <div className="defer-render"><ContactCta topic="سايتوتك والمعلومات الدوائية في السعودية" /></div>
 
     </>
   );

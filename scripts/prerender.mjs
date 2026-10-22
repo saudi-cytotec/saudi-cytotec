@@ -30,10 +30,19 @@ const html = fs.readFileSync(DIST_HTML, "utf8");
 let bundlePath;
 const assetsDir = path.join(ROOT, "dist", "assets");
 if (fs.existsSync(assetsDir)) {
-  const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
-  if (assetJs) bundlePath = path.join(assetsDir, assetJs);
+  // Match the script src with plain string parsing to avoid regex escaping errors.
+  const srcMatch = html.match(/src="([^"]+\\.js)"/);
+  if (srcMatch) {
+    const assetUrl = srcMatch[1];
+    const assetName = assetUrl.split("/").pop();
+    const candidate = assetName ? path.join(assetsDir, assetName) : "";
+    if (candidate && fs.existsSync(candidate)) bundlePath = candidate;
+  }
+  if (!bundlePath) {
+    const assetJs = fs.readdirSync(assetsDir).find((f) => f.endsWith(".js") && (f.startsWith("index-") || f.startsWith("index.")));
+    if (assetJs) bundlePath = path.join(assetsDir, assetJs);
+  }
 }
-
 if (!bundlePath) {
   const chunks = [...html.matchAll(/<script type="module"[^>]*>([\s\S]*?)<\/script>/g)]
     .map((m) => m[1])
