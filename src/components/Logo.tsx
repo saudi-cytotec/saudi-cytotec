@@ -1,6 +1,8 @@
+import { useState } from "react";
+
 /**
  * Brand logo — supplied Saudiersaa asset.
- * Optimized WebP for fast header/footer/favicons.
+ * A text wordmark remains visible if the image cannot be loaded.
  */
 export const LOGO_SRC = "/images/saudiersaa-logo.webp";
 export const LOGO_ALT = "شعار سايتوتك في السعودية";
@@ -13,7 +15,7 @@ export function Wordmark({ className = "", tone = "dark" }: { className?: string
         <span className={tone === "light" ? "text-white" : "text-brand"}>ersaa</span>
       </span>
       <span className={`mt-1 block text-[11px] font-semibold ${tone === "light" ? "text-white/70" : "text-ink-soft"}`}>
-        سايتوتك في السعودية | وكيل Pfizer الرسمي
+        سايتوتك في السعودية
       </span>
     </span>
   );
@@ -28,9 +30,15 @@ export function BrandLogo({
   plateClass?: string;
   tone?: "dark" | "light";
 }) {
+  const [imageFailed, setImageFailed] = useState(false);
+
   return (
-    <span className={`inline-flex overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
-      <span className="inline-flex h-full w-full items-center justify-center">
+    <span className={`inline-flex min-w-[3.5rem] items-center justify-center overflow-hidden ${plateClass} bg-brand-deep ring-1 ring-white/15 ${className}`}>
+      {imageFailed ? (
+        <span className="px-3 py-2 text-center">
+          <Wordmark tone={tone} />
+        </span>
+      ) : (
         <img
           src={LOGO_SRC}
           alt={LOGO_ALT}
@@ -38,9 +46,10 @@ export function BrandLogo({
           height={192}
           decoding="async"
           fetchPriority="high"
+          onError={() => setImageFailed(true)}
           className="h-full w-auto max-w-full object-contain"
         />
-      </span>
+      )}
     </span>
   );
 }
