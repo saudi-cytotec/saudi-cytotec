@@ -871,6 +871,56 @@
       "source": "/cytotec-taif/",
       "destination": "/service-areas",
       "statusCode": 301
+    },
+    {
+      "source": "/cytotec-medical-verification",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-medical-verification/",
+      "destination": "/service-areas",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-vs-misoprostol",
+      "destination": "/blog/difference-cytotec-misoprostol",
+      "statusCode": 301
+    },
+    {
+      "source": "/cytotec-vs-misoprostol/",
+      "destination": "/blog/difference-cytotec-misoprostol",
+      "statusCode": 301
+    },
+    {
+      "source": "/fertility-and-future-pregnancy",
+      "destination": "/womens-health",
+      "statusCode": 301
+    },
+    {
+      "source": "/fertility-and-future-pregnancy/",
+      "destination": "/womens-health",
+      "statusCode": 301
+    },
+    {
+      "source": "/ectopic-pregnancy-signs",
+      "destination": "/when-to-see-doctor",
+      "statusCode": 301
+    },
+    {
+      "source": "/ectopic-pregnancy-signs/",
+      "destination": "/when-to-see-doctor",
+      "statusCode": 301
+    },
+    {
+      "source": "/%D9%83%D9%8A%D9%81%D9%8A%D9%87-%D8%AD%D8%B3%D8%A7%D8%A8-%D9%85%D9%88%D8%B9%D8%AF-%D8%A7%D9%84%D8%AA%D8%A8%D9%88%D9%8A%D8%B6",
+      "destination": "/womens-health",
+      "statusCode": 301
+    },
+    {
+      "source": "/%D8%A7%D9%84%D8%AD%D9%85%D9%84-%D8%AE%D8%A7%D8%B1%D8%AC-%D8%A7%D9%84%D8%B1%D8%AD%D9%85-%D9%88%D8%A7%D9%84%D8%B9%D9%88%D8%A7%D9%85%D9%84-%D8%A7%D9%84%D9%85%D8%A4%D8%AF%D9%8A%D8%A9-%D9%84%D8%B0%D9%84%D9%83",
+      "destination": "/when-to-see-doctor",
+      "statusCode": 301
     }
   ],
   "build": {
