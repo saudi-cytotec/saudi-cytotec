@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "updatedAt": "2026-10-02",
+  "updatedAt": "2026-10-31",
   "wwwToApex": true,
   "rules": [
     {
@@ -1080,6 +1080,76 @@
       "statusCode": 301,
       "reason": "Legacy city doorway URL retired; consolidated into the single Saudi care-access hub.",
       "createdAt": "2026-10-02"
+    },
+    {
+      "source": "/cytotec-medical-verification",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "City medical-verification landing page consolidated into the Saudi care-access guide.",
+      "createdAt": "2026-10-31"
+    },
+    {
+      "source": "/cytotec-medical-verification/",
+      "destination": "/service-areas",
+      "statusCode": 301,
+      "reason": "Trailing-slash variant of the city medical-verification landing page.",
+      "createdAt": "2026-10-31"
+    },
+    {
+      "source": "/cytotec-vs-misoprostol",
+      "destination": "/blog/difference-cytotec-misoprostol",
+      "statusCode": 301,
+      "reason": "Comparison alias resolves to the existing canonical comparison article.",
+      "createdAt": "2026-10-31"
+    },
+    {
+      "source": "/cytotec-vs-misoprostol/",
+      "destination": "/blog/difference-cytotec-misoprostol",
+      "statusCode": 301,
+      "reason": "Trailing-slash comparison alias resolves to the existing canonical comparison article.",
+      "createdAt": "2026-10-31"
+    },
+    {
+      "source": "/fertility-and-future-pregnancy",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Fertility and future-pregnancy legacy topic consolidated into the women's-health hub.",
+      "createdAt": "2026-10-31"
+    },
+    {
+      "source": "/fertility-and-future-pregnancy/",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "Trailing-slash fertility and future-pregnancy alias.",
+      "createdAt": "2026-10-31"
+    },
+    {
+      "source": "/ectopic-pregnancy-signs",
+      "destination": "/when-to-see-doctor",
+      "statusCode": 301,
+      "reason": "Ectopic-pregnancy warning-sign alias resolves to the emergency guidance page.",
+      "createdAt": "2026-10-31"
+    },
+    {
+      "source": "/ectopic-pregnancy-signs/",
+      "destination": "/when-to-see-doctor",
+      "statusCode": 301,
+      "reason": "Trailing-slash ectopic-pregnancy warning-sign alias.",
+      "createdAt": "2026-10-31"
+    },
+    {
+      "source": "/كيفيه-حساب-موعد-التبويض",
+      "destination": "/womens-health",
+      "statusCode": 301,
+      "reason": "No-trailing-slash variant of the legacy fertility article.",
+      "createdAt": "2026-10-31"
+    },
+    {
+      "source": "/الحمل-خارج-الرحم-والعوامل-المؤدية-لذلك",
+      "destination": "/when-to-see-doctor",
+      "statusCode": 301,
+      "reason": "No-trailing-slash variant of the legacy ectopic-pregnancy article.",
+      "createdAt": "2026-10-31"
     }
   ]
 }
