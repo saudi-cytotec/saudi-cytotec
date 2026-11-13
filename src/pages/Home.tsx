@@ -254,6 +254,18 @@ export function Home() {
         <HeroWaves />
       </section>
 
+
+      <section className="rounded-3xl border border-line bg-white p-6 shadow-sm md:p-8" aria-labelledby="related-womens-health-guide">
+        <p className="text-xs font-extrabold text-accent">قراءة إضافية لصحة المرأة</p>
+        <h2 id="related-womens-health-guide" className="mt-2 text-xl font-extrabold text-brand-deep md:text-2xl">دليل مستقل للحمل وأعراضه واختباراته</h2>
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-ink-soft">
+          إلى جانب المعلومات الدوائية في هذا الموقع، يمكن قراءة دليل SehaHer حول الحمل المبكر وتوقيت اختبار الحمل وتأخر الدورة. هذا رابط إلى منصة تثقيفية مستقلة، ولا يعني اعتمادًا طبيًا متبادلًا أو أن محتوى أي منصة يغني عن تقييم مقدم رعاية مرخّص.
+        </p>
+        <a href="https://sehaher.com/pregnancy/" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center rounded-full bg-brand px-5 py-3 text-sm font-bold text-white transition hover:bg-brand-deep">
+          قراءة دليل الحمل في SehaHer ←
+        </a>
+      </section>
+
       <Suspense fallback={null}>
         <HomeDeferredSections />
       </Suspense>
