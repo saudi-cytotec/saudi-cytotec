@@ -189,7 +189,7 @@ export function Home() {
                 </>
               ) : null}
             </h1>
-            <p className="mt-5 max-w-xl text-[1.05rem] leading-9 text-ink-soft">
+            <p data-home-lcp="true" className="mt-5 max-w-xl text-[1.05rem] leading-9 text-ink-soft" style={{ fontFamily: "Tahoma, Arial, sans-serif", fontSize: "17px", lineHeight: 1.9, color: "#4a6359" }}>
               منصة سعودية للخدمات والمعلومات الدوائية المرتبطة بصحة المرأة. هنا تجدين دليلاً موثّقاً عن دواء سايتوتك
               ومادته الفعالة ميزوبروستول، وشروط الصرف بالوصفة الطبية، وقنوات الرعاية النظامية في المملكة — مع استفسارات
               مباشرة عبر قناة التواصل.
